@@ -1,0 +1,56 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:react/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
+    "google",
+    "plugin:prettier/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react", "@typescript-eslint", "prettier"],
+  "rules": {
+    "prettier/prettier": "off",
+    "no-unused-vars": "warn",
+    "no-var": "error",
+    "react/react-in-jsx-scope": 0,
+    "quotes": [
+      2,
+      "double",
+      {
+        "avoidEscape": true
+      }
+    ],
+    "linebreak-style": "error",
+    "object-curly-spacing": "off",
+    "spaced-comment": "off",
+    "import/default": "off",
+    "import/no-named-as-default-member": "off",
+    "import/namespace": "off",
+    "import/no-named-as-default": "off",
+    "import/no-unresolved": "off",
+    "@typescript-eslint/no-var-requires": "warn",
+    "require-jsdoc": "off",
+    "prefer-const": "off",
+    "react/jsx-no-comment-textnodes": "off",
+    "react/display-name": "off",
+    "react/prop-types": "off",
+    "@typescript-eslint/no-non-null-assertion": "warn",
+    "new-cap": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "guard-for-in": "off"
+  }
+}
