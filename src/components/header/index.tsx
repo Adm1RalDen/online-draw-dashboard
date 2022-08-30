@@ -1,13 +1,15 @@
-import { BurgerMenu } from "components/burger-menu";
 import { useSocket } from "hooks/useSocket";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { logoutAction } from "store/slices/user.slice";
 import { useAppDispatch } from "store/store";
+
+import { BurgerMenu } from "components/burger-menu";
+
 import { Container } from "../container/styles";
 import { LINKS } from "./const";
 import {
-  HeaderComponent,
   BurgerWrapper,
+  HeaderComponent,
   HeaderNavigation,
   HeaderUserBlock,
 } from "./styles";

@@ -1,16 +1,17 @@
-import { Navigate, useRoutes } from "react-router-dom";
+import { WsContext } from "context/ws.context";
 import { AuthPage } from "pages/auth/index";
+import { PrivateRoom } from "pages/confirmAccessPage";
+import { HomePage } from "pages/home";
+import { LayoutComponent } from "pages/layout";
+import { NotFoundPage } from "pages/notfoundPage";
+import { OnlineDrawPage } from "pages/onlineDrawPage";
+import { OnlineCanvas } from "pages/onlineDrawPage/canvas";
+import { ServerErrorPage } from "pages/serverErrorPage";
 import { UserCabinet } from "pages/userCabinet";
+import { Navigate, useRoutes } from "react-router-dom";
 import { userInfoSelector } from "store/selectors/user.selector";
 import { useAppSelector } from "store/store";
-import { LayoutComponent } from "pages/layout";
-import { OnlineCanvas } from "pages/onlineDrawPage/canvas";
-import { PrivateRoom } from "pages/confirmAccessPage";
-import { ServerErrorPage } from "pages/serverErrorPage";
-import { NotFoundPage } from "pages/notfoundPage";
-import { HomePage } from "pages/home";
-import { OnlineDrawPage } from "pages/onlineDrawPage";
-import { WsContext } from "context/ws.context";
+
 import { socket } from "./utils/socket";
 
 const setRoutes = (isAuth: boolean) =>

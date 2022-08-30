@@ -13,6 +13,7 @@
 Welcome to my new project Draw online. This project was designed for users which like drawing. They can pass authorization, registration, create rooms and enter in rooms, and the main they can draw online with other users.
 
 ### Instructions
+
 - Download or clone this project
 - Open this project in your IDE
 - In terminal enter **npm install**
@@ -21,10 +22,10 @@ Welcome to my new project Draw online. This project was designed for users which
 - This project work in 3000 port
 
 ### Commands
-| Command        |  Appointment                       |
-|----------------|------------------------------------|
-| npm run dev    |  start development mode            |
-| npm run build  |  start production mode             |
-| npm run lint   |  start eslint                      |
-| npm run format |  start fix problems related eslint |
 
+| Command        | Appointment                       |
+| -------------- | --------------------------------- |
+| npm run dev    | start development mode            |
+| npm run build  | start production mode             |
+| npm run lint   | start eslint                      |
+| npm run format | start fix problems related eslint |

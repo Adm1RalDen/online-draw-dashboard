@@ -1,8 +1,10 @@
-import { Loader } from "components/loaders/loader";
 import { useEffect, useState } from "react";
-import { Router } from "./router";
 import { useAppDispatch } from "store/store";
 import { AuthorizedThunk } from "store/thunks/user/authorization.thunk";
+
+import { Loader } from "components/loaders/loader";
+
+import { Router } from "./router";
 
 export const App = () => {
   const dispatch = useAppDispatch();

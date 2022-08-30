@@ -1,7 +1,8 @@
 import { useSocket } from "hooks/useSocket";
 import { FC, useState } from "react";
 import { ActiveRoom } from "types/rooms";
-import { RoomCard, CardSettings } from "./styles";
+
+import { CardSettings, RoomCard } from "./styles";
 import { UpdateCard } from "./update";
 
 type Props = {

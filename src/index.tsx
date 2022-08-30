@@ -1,13 +1,14 @@
-import { App } from "./app";
 import { createRoot } from "react-dom/client";
-import { GlobalStyles } from "styles/global";
+import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import { ThemeProvider } from "styled-components";
-import { themes } from "styles/themes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Provider } from "react-redux";
 import { store } from "store/store";
+import { ThemeProvider } from "styled-components";
+import { GlobalStyles } from "styles/global";
+import { themes } from "styles/themes";
+
+import { App } from "./app";
 
 const container = document.getElementById("root");
 const root = createRoot(container as HTMLDivElement);

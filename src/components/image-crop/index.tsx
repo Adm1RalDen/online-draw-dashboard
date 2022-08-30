@@ -1,6 +1,7 @@
 import { FC, useState } from "react";
 import Avatar from "react-avatar-edit";
 import { EncodeBase64 } from "utils/encodeBase64";
+
 import { AvatarEditWrapper } from "./styles";
 import { ImageCropProps } from "./types";
 

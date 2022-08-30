@@ -1,6 +1,7 @@
+import { NavigateFunction } from "react-router-dom";
 import { toastSuccess } from "services/toast.service";
 import { Socket } from "socket.io-client";
-import { NavigateFunction } from "react-router-dom";
+
 import {
   Circle,
   Eraser,

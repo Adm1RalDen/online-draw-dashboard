@@ -1,4 +1,5 @@
 import { Socket } from "socket.io-client";
+
 import { Tool } from "./tool.class";
 
 export class Eraser extends Tool {

@@ -1,18 +1,20 @@
 import { useFormik } from "formik";
+import { userInfoSelector } from "store/selectors/user.selector";
+import { useAppDispatch, useAppSelector } from "store/store";
+import { UserLoginFormData } from "types";
+import { Portal } from "utils/portal";
+
+import { Button } from "components/button/styles";
+import { Input } from "components/input";
+import { Loader } from "components/loaders/loader";
+
 import { Form, FormWrapper, Title } from "../styles";
 import {
-  initialValues,
-  validationSchema,
-  onSubmit,
   AuthorizationFileds,
+  initialValues,
+  onSubmit,
+  validationSchema,
 } from "./const";
-import { Button } from "components/button/styles";
-import { Portal } from "utils/portal";
-import { Loader } from "components/loaders/loader";
-import { Input } from "components/input";
-import { useAppDispatch, useAppSelector } from "store/store";
-import { userInfoSelector } from "store/selectors/user.selector";
-import { UserLoginFormData } from "types";
 
 export const LoginComponent = () => {
   const { isLoading } = useAppSelector(userInfoSelector);

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { NotFoundPageWrapper, NotFoundPageContent } from "./styles";
+
+import { NotFoundPageContent, NotFoundPageWrapper } from "./styles";
 
 export const NotFoundPage = () => (
   <NotFoundPageWrapper>

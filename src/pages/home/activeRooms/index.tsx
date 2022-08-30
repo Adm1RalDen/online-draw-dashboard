@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { ActiveRoom } from "types/rooms";
+
 import { Room } from "./styles";
 
 type ActiveRoomsProps = {

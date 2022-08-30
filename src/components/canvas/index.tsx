@@ -1,4 +1,5 @@
 import { useContext } from "react";
+
 import { PaintContext } from "../../context/paintContext";
 import { CanvasWrapper } from "./styles";
 

@@ -1,19 +1,21 @@
 import { useFormik } from "formik";
-import { Form, FormWrapper, Title } from "../styles";
-import {
-  initialValues,
-  validationSchema,
-  onSubmit,
-  RegistrationFileds,
-  SetTypesFields,
-} from "./const";
+import { userInfoSelector } from "store/selectors/user.selector";
+import { useAppDispatch, useAppSelector } from "store/store";
+import { UserRegistrationData } from "types";
+import { Portal } from "utils/portal";
+
 import { Button } from "components/button/styles";
 import { Input } from "components/input";
-import { useAppDispatch, useAppSelector } from "store/store";
-import { Portal } from "utils/portal";
 import { Loader } from "components/loaders/loader";
-import { userInfoSelector } from "store/selectors/user.selector";
-import { UserRegistrationData } from "types";
+
+import { Form, FormWrapper, Title } from "../styles";
+import {
+  RegistrationFileds,
+  SetTypesFields,
+  initialValues,
+  onSubmit,
+  validationSchema,
+} from "./const";
 
 export const RegistrationComponent = () => {
   const dispatch = useAppDispatch();

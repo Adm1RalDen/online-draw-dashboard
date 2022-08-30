@@ -1,4 +1,4 @@
-import { toast, ToastOptions } from "react-toastify";
+import { ToastOptions, toast } from "react-toastify";
 
 const settings: Pick<ToastOptions, "autoClose" | "hideProgressBar"> = {
   hideProgressBar: true,

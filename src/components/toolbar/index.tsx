@@ -4,8 +4,9 @@ import { useParams } from "react-router-dom";
 import { userDataSelector } from "store/selectors/user.selector";
 import { useAppSelector } from "store/store";
 import { ToolsTypes } from "types/canvas";
+
 import { PaintContext } from "../../context/paintContext";
-import { StyledToolbar, ToolButton, LeaveButton } from "./styles";
+import { LeaveButton, StyledToolbar, ToolButton } from "./styles";
 
 export const Toolbar = () => {
   const {

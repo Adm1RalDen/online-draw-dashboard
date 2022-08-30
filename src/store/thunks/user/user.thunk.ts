@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { USER_REDUCER } from "store/const";
 import { getProfile } from "api/user/getProfile";
 import { updateUser } from "api/user/update";
 import { AxiosError } from "axios";
+import { USER_REDUCER } from "store/const";
 import { logoutAction } from "store/slices/user.slice";
 
 export const getUserProfileThunk = createAsyncThunk(

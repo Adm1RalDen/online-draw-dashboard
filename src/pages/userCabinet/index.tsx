@@ -1,22 +1,24 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { userInfoSelector } from "store/selectors/user.selector";
+import { useAppSelector } from "store/store";
+
 import { Button } from "components/button/styles";
 import { Container } from "components/container/styles";
-import { useState } from "react";
-import {
-  UserCabinetSection,
-  AvatarWrapper,
-  Wrapper,
-  UserInfo,
-  Biography,
-  UserInfoWrapper,
-  Avatar,
-  ImagesWrapper,
-  ButtonWrapper,
-} from "./styles";
-import { useAppSelector } from "store/store";
-import { userInfoSelector } from "store/selectors/user.selector";
-import { UpdateUserModal } from "./updateUserModal";
 import { HtmlText } from "components/htmlText";
-import { useNavigate } from "react-router-dom";
+
+import {
+  Avatar,
+  AvatarWrapper,
+  Biography,
+  ButtonWrapper,
+  ImagesWrapper,
+  UserCabinetSection,
+  UserInfo,
+  UserInfoWrapper,
+  Wrapper,
+} from "./styles";
+import { UpdateUserModal } from "./updateUserModal";
 
 export const UserCabinet = () => {
   const navigate = useNavigate();

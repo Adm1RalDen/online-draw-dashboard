@@ -1,23 +1,25 @@
+import { useFormik } from "formik";
+import { ChangeEvent, FC, useState } from "react";
+import { useAppDispatch } from "store/store";
+import { Heading3 } from "styles/typography/styles";
+import { Portal } from "utils/portal";
+
 import { Button } from "components/button/styles";
 import { ImageCrop } from "components/image-crop";
 import { Input } from "components/input";
 import { TextEditor } from "components/textEditor";
-import { useFormik } from "formik";
-import { ChangeEvent, FC, useState } from "react";
-import { useAppDispatch } from "store/store";
-import { Portal } from "utils/portal";
+
 import {
   filterFields,
-  setInitialValues,
-  validationSchema,
   onSubmit,
+  setInitialValues,
   setInputTypes,
+  validationSchema,
 } from "../const";
-import { UserForm, ButtonWrapper, AvatarWrapper } from "./styles";
-import { UserCabinetTypes } from "../types";
-import { UpdateUserModalTypes } from "./types";
-import { Heading3 } from "styles/typography/styles";
 import { UserRadioButtons } from "../radioButtons";
+import { UserCabinetTypes } from "../types";
+import { AvatarWrapper, ButtonWrapper, UserForm } from "./styles";
+import { UpdateUserModalTypes } from "./types";
 
 export const UpdateUserModal: FC<UpdateUserModalTypes> = ({
   userData,

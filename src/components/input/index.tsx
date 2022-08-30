@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { FunctionWithParams } from "types";
-import { InputWrapper, ErrorSpan } from "./styles";
+
+import { ErrorSpan, InputWrapper } from "./styles";
 
 type InputProps = {
   margin?: string;

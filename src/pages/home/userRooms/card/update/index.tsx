@@ -5,10 +5,11 @@ import { Socket } from "socket.io-client";
 import { FunctionWithParams } from "types";
 import { ActiveRoom } from "types/rooms";
 import { Portal } from "utils/portal";
+
 import {
-  UpdateModalWrapper,
-  UpdateModalForm,
   UpdateModalButtonsWrapper,
+  UpdateModalForm,
+  UpdateModalWrapper,
 } from "./styles";
 
 type Props = {

@@ -1,11 +1,13 @@
 import { nanoid } from "@reduxjs/toolkit";
-import { LittleLoader } from "components/loaders/littleLoader";
 import { useSocket } from "hooks/useSocket";
 import { useEffect, useRef, useState } from "react";
 import { userInfoSelector } from "store/selectors/user.selector";
 import { useAppSelector } from "store/store";
+
+import { LittleLoader } from "components/loaders/littleLoader";
+
 import { ChatMessage } from "../types";
-import { SetConnectionChat, ClearConnectionChat, CHAT_MESSAGE } from "./const";
+import { CHAT_MESSAGE, ClearConnectionChat, SetConnectionChat } from "./const";
 import { ChatWrapper, Message, MessagesWrapper } from "./styles";
 
 export const Chat = () => {

@@ -1,6 +1,7 @@
 import { Socket } from "socket.io-client";
 import { FunctionWithParams } from "types";
 import * as yup from "yup";
+
 import { EnterInRoomType } from "../types";
 
 const initialValues = {

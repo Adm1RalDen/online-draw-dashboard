@@ -1,8 +1,8 @@
 import { NavigateFunction } from "react-router-dom";
-import { Socket } from "socket.io-client";
 import { toastError } from "services/toast.service";
-import { ActiveRoom } from "types/rooms";
+import { Socket } from "socket.io-client";
 import { FunctionWithParams } from "types";
+import { ActiveRoom } from "types/rooms";
 
 export const GET_ROOM = "GET_ROOM";
 export const GET_ROOMS = "GET_ROOMS";

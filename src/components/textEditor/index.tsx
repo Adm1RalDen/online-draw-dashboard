@@ -1,8 +1,8 @@
-import { EditorState, convertToRaw, ContentState } from "draft-js";
-import { Editor } from "react-draft-wysiwyg";
+import { ContentState, EditorState, convertToRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
 import htmlToDraft from "html-to-draftjs";
 import { FC, useState } from "react";
+import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import styled from "styled-components";
 import { FunctionWithParams } from "types";

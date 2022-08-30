@@ -1,10 +1,11 @@
-import { defaultUserData, userInitialState, USER_REDUCER } from "../const";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { SavedUserObject } from "types";
-import { updateUserProfileBuilder } from "store/builders/updateUserProfileBuilder";
-import { userRegistrationBuilder } from "store/builders/userRegistrationBuilder";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { authorizedBuilder } from "store/builders/authorizedBuilder";
+import { updateUserProfileBuilder } from "store/builders/updateUserProfileBuilder";
 import { userLoginBuilder } from "store/builders/userLoginBuilder";
+import { userRegistrationBuilder } from "store/builders/userRegistrationBuilder";
+import { SavedUserObject } from "types";
+
+import { USER_REDUCER, defaultUserData, userInitialState } from "../const";
 
 export const UserSlice = createSlice({
   name: USER_REDUCER,

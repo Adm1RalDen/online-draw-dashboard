@@ -1,13 +1,15 @@
 import { useFormik } from "formik";
+import { useSocket } from "hooks/useSocket";
+import { FC } from "react";
+import { userDataSelector } from "store/selectors/user.selector";
+import { useAppSelector } from "store/store";
+import { FunctionWithParams } from "types";
+
+import { ErrorOutput } from "components/errorOutput";
+
+import { Loader } from "../../../components/loaders/loader";
 import { RoomWrapper } from "../styles";
 import { initialValues, onSubmit, validationSchema } from "./const";
-import { FC } from "react";
-import { Loader } from "../../../components/loaders/loader";
-import { useAppSelector } from "store/store";
-import { ErrorOutput } from "components/errorOutput";
-import { useSocket } from "hooks/useSocket";
-import { userDataSelector } from "store/selectors/user.selector";
-import { FunctionWithParams } from "types";
 
 type ComponentProps = {
   isLoading: boolean;

@@ -6,6 +6,7 @@ import {
 import { AuthorizedUser } from "types";
 import { createBlobFile } from "utils/encodeBase64";
 import * as yup from "yup";
+
 import { InitialStateTypes, UserCabinetTypes } from "./types";
 
 export const MALE = "male";

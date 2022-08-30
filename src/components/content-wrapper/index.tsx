@@ -1,6 +1,8 @@
+import { useOutlet } from "react-router-dom";
+
 import { FooterComponent } from "components/footer";
 import { Header } from "components/header";
-import { useOutlet } from "react-router-dom";
+
 import { Wrapper } from "./styles";
 
 export const ContentWrapper = () => {

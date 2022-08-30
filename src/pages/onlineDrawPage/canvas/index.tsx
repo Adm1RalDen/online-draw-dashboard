@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { userDataSelector } from "store/selectors/user.selector";
 import { useAppSelector } from "store/store";
+
 import { Canvas } from "../../../components/canvas";
 import { SettingsBar } from "../../../components/settings";
 import { Toolbar } from "../../../components/toolbar";

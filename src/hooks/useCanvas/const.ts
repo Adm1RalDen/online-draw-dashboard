@@ -1,9 +1,10 @@
 import { Socket } from "socket.io-client";
-import { Line } from "./../../canvas_classes/line.class";
-import { Eraser } from "./../../canvas_classes/eraser.class";
+
 import { Circle } from "./../../canvas_classes/circle.class";
-import { Square } from "./../../canvas_classes/square.class";
+import { Eraser } from "./../../canvas_classes/eraser.class";
+import { Line } from "./../../canvas_classes/line.class";
 import { Pen } from "./../../canvas_classes/pen.class";
+import { Square } from "./../../canvas_classes/square.class";
 
 type Props = {
   tool: string;

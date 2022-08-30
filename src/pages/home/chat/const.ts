@@ -1,5 +1,6 @@
 import { Socket } from "socket.io-client";
 import { FunctionWithParams } from "types";
+
 import { ChatMessage } from "../types";
 
 export const GET_CHAT = "GET_CHAT";

@@ -1,13 +1,14 @@
 import { ChangeEvent, FC, useRef, useState } from "react";
 import { FunctionWithParams } from "types";
+
 import {
+  CloseDiv,
   ContentWrapper,
   FileInputStyled,
   FileName,
   LoadButton,
   SpanWrapper,
   Wrapper,
-  CloseDiv,
 } from "./styles";
 
 type FileInputProps = {
