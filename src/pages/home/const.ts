@@ -4,15 +4,18 @@ import { Socket } from "socket.io-client";
 import { FunctionWithParams } from "types";
 import { ActiveRoom } from "types/rooms";
 
+export const CREATE_ROOM = "CREATE";
 export const GET_ROOM = "GET_ROOM";
 export const GET_ROOMS = "GET_ROOMS";
 export const CREATE_ERROR = "CREATE_ERROR";
 export const CREATE_SUCCESS = "CREATE_SUCCESS";
+export const JOIN_ROOM = "JOIN";
 export const JOIN_SUCCESS = "JOIN_SUCCESS";
 export const JOIN_ERROR = "JOIN_ERROR";
 export const CASE_EXIT = "CASE_EXIT";
 export const GET_USER_ROOMS = "GET_USER_ROOMS";
 export const DELETE_USER_ROOM_ERROR = "ERROR_DELETE_USER_ROOM";
+const DRAW_URL = "/draw_online";
 
 type Props = {
   setActiveRooms: FunctionWithParams<ActiveRoom[]>;
@@ -28,7 +31,7 @@ const accessPermitted = (
   setIsLoading: FunctionWithParams<boolean>
 ) => {
   setIsLoading(false);
-  navigate(`/draw_online/${id}`);
+  navigate(`${DRAW_URL}/${id}`);
 };
 const accessUnPermitted = (
   error: string,
