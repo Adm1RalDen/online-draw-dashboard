@@ -1,4 +1,5 @@
 import { nanoid } from "@reduxjs/toolkit";
+import { CHAT_MESSAGE_SOCKET } from "const/sockets";
 import { useSocket } from "hooks/useSocket";
 import { useEffect, useRef, useState } from "react";
 import { userInfoSelector } from "store/selectors/user.selector";
@@ -7,7 +8,7 @@ import { useAppSelector } from "store/store";
 import { LittleLoader } from "components/loaders/littleLoader";
 
 import { ChatMessage } from "../types";
-import { CHAT_MESSAGE, ClearConnectionChat, SetConnectionChat } from "./const";
+import { ClearConnectionChat, SetConnectionChat } from "./const";
 import { ChatWrapper, Message, MessagesWrapper } from "./styles";
 
 export const Chat = () => {
@@ -42,7 +43,7 @@ export const Chat = () => {
 
   const handleSendMessage = () => {
     if (inputRef.current?.value) {
-      socket.emit(CHAT_MESSAGE, {
+      socket.emit(CHAT_MESSAGE_SOCKET, {
         userId: data.id,
         name: data.name,
         message: inputRef.current.value,

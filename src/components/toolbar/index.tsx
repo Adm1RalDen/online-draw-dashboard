@@ -1,3 +1,4 @@
+import { EXIT_SOCKET } from "const/sockets";
 import { useSocket } from "hooks/useSocket";
 import { MouseEvent, useContext } from "react";
 import { useParams } from "react-router-dom";
@@ -30,7 +31,7 @@ export const Toolbar = () => {
   };
 
   const handleExitFromRoom = () => {
-    socket.emit("EXIT", {
+    socket.emit(EXIT_SOCKET, {
       roomId,
       userId: id,
     });

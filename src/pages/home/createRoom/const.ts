@@ -1,8 +1,8 @@
+import { CREATE_ROOM_SOCKET, GET_USER_ROOMS_SOCKET } from "const/sockets";
 import { Socket } from "socket.io-client";
 import { FunctionWithParams } from "types";
 import * as yup from "yup";
 
-import { CREATE_ROOM, GET_USER_ROOMS } from "../const";
 import { CreateRoom } from "../types";
 
 const initialValues = {
@@ -19,7 +19,7 @@ const onSubmit = async (
   socket: Socket<any, any>
 ) => {
   setIsLoading(true);
-  socket.emit(CREATE_ROOM, data);
-  socket.emit(GET_USER_ROOMS, { userId: data.userId });
+  socket.emit(CREATE_ROOM_SOCKET, data);
+  socket.emit(GET_USER_ROOMS_SOCKET, { userId: data.userId });
 };
 export { initialValues, validationSchema, onSubmit };

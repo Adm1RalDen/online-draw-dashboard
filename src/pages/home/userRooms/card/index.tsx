@@ -1,3 +1,4 @@
+import { DELETE_USER_ROOM_SOCKET, JOIN_SOCKET } from "const/sockets";
 import { useSocket } from "hooks/useSocket";
 import { FC, useState } from "react";
 import { ActiveRoom } from "types/rooms";
@@ -17,14 +18,14 @@ export const UserRoomCard: FC<Props> = ({ room, userId, userName }) => {
   const { socket } = useSocket();
 
   const handleDeleteRoom = () => {
-    socket.emit("DELETE_USER_ROOM", {
+    socket.emit(DELETE_USER_ROOM_SOCKET, {
       userId,
       roomId: room._id,
       roomPassword: room.roomPassword,
     });
   };
   const handleJoinRoom = () => {
-    socket.emit("JOIN", {
+    socket.emit(JOIN_SOCKET, {
       userId,
       userName,
       roomId: room._id,

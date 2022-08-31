@@ -1,3 +1,5 @@
+import { JOIN_SOCKET } from "const/sockets";
+import { HOME_URL } from "const/urls";
 import { useSocket } from "hooks/useSocket";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -25,7 +27,7 @@ export const PrivateRoom = () => {
   const handleEnter = async () => {
     if (roomId) {
       setIsLoading(true);
-      socket.emit("JOIN", {
+      socket.emit(JOIN_SOCKET, {
         roomId,
         roomPassword,
         userId: user.id,
@@ -52,7 +54,7 @@ export const PrivateRoom = () => {
             </div>
             <div>
               <button onClick={handleEnter}>enter</button>
-              <button onClick={() => navigate("/")}>back</button>
+              <button onClick={() => navigate(HOME_URL)}>back</button>
             </div>
           </>
         )}

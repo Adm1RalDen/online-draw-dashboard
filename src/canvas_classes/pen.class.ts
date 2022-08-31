@@ -1,3 +1,4 @@
+import { DRAW_SOCKET, FINISH_DRAW_SOCKET } from "const/sockets";
 import { Socket } from "socket.io-client";
 
 import { Tool } from "./tool.class";
@@ -22,7 +23,7 @@ export class Pen extends Tool {
 
   private onMouseUp(e: MouseEvent) {
     this.mouseDown = false;
-    this.socket.emit("FINISH_DRAW", {
+    this.socket.emit(FINISH_DRAW_SOCKET, {
       roomId: this.id,
     });
   }
@@ -36,7 +37,7 @@ export class Pen extends Tool {
 
   private onMouseMove(e: MouseEvent) {
     if (this.mouseDown && this.ctx) {
-      this.socket.emit("DRAW", {
+      this.socket.emit(DRAW_SOCKET, {
         tool: "pen",
         roomId: this.id,
         x: e.offsetX,

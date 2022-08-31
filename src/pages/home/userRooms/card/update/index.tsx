@@ -1,3 +1,4 @@
+import { UPDATE_USER_ROOM_SOCKET } from "const/sockets";
 import { useFormik } from "formik";
 import { useSocket } from "hooks/useSocket";
 import { FC } from "react";
@@ -43,7 +44,11 @@ export const UpdateCard: FC<Props> = ({ room, setEditMode, userId }) => {
           return acum;
         }, {});
 
-      socket.emit("UPDATE_USER_ROOM", { ...res, roomId: room._id, userId });
+      socket.emit(UPDATE_USER_ROOM_SOCKET, {
+        ...res,
+        roomId: room._id,
+        userId,
+      });
       setEditMode(false);
     },
   });

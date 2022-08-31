@@ -1,3 +1,10 @@
+import {
+  CASE_EXIT_SOCKET,
+  CONNECTION_DRAW_SOCKET,
+  DRAW_SOCKET,
+  FINISH_DRAW_SOCKET,
+} from "const/sockets";
+import { HOME_URL } from "const/urls";
 import { NavigateFunction } from "react-router-dom";
 import { toastSuccess } from "services/toast.service";
 import { Socket } from "socket.io-client";
@@ -9,11 +16,6 @@ import {
   Pen,
   Square,
 } from "../../../canvas_classes/index";
-
-export const CONNECTION_DRAW = "CONNECTION_DRAW";
-export const FINISH_DRAW = "FINISH_DRAW";
-export const CASE_EXIT = "CASE_EXIT";
-export const DRAW = "DRAW";
 
 type Props = {
   socket: Socket<any, any>;
@@ -32,21 +34,20 @@ type Props = {
 export const SetDrawConnection = (data: Props) => {
   const { canvasRef, name, navigate, roomId, socket } = data;
 
-  socket.emit(CONNECTION_DRAW, { userName: name, roomId });
-  socket.on(CONNECTION_DRAW, (data: string) => {
+  socket.emit(CONNECTION_DRAW_SOCKET, { userName: name, roomId });
+  socket.on(CONNECTION_DRAW_SOCKET, (data: string) => {
     toastSuccess(data + " joined");
   });
 
-  socket.on(FINISH_DRAW, () => {
+  socket.on(FINISH_DRAW_SOCKET, () => {
     const ctx = canvasRef.current?.getContext("2d");
     ctx?.beginPath();
   });
-  socket.on(CASE_EXIT, () => {
-    navigate("/");
+  socket.on(CASE_EXIT_SOCKET, () => {
+    navigate(HOME_URL);
   });
 
-  socket.on(DRAW, (data: any) => {
-    console.log("DRAW");
+  socket.on(DRAW_SOCKET, (data: any) => {
     if (canvasRef.current) {
       const ctx = canvasRef.current?.getContext("2d");
       switch (data.tool) {
@@ -100,7 +101,7 @@ export const SetDrawConnection = (data: Props) => {
 };
 
 export const ClearDrawConnection = (socket: Socket<any, any>) => {
-  socket.off(CONNECTION_DRAW);
-  socket.off(FINISH_DRAW);
-  socket.off(CASE_EXIT);
+  socket.off(CONNECTION_DRAW_SOCKET);
+  socket.off(FINISH_DRAW_SOCKET);
+  socket.off(CASE_EXIT_SOCKET);
 };
