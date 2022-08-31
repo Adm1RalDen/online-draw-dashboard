@@ -7,7 +7,6 @@ import { UserLogoutThunk } from "store/thunks/user/authorization.thunk";
 import { ActiveRoom } from "types/rooms";
 
 import { Button } from "components/button/styles";
-import { Loader } from "components/loaders/loader";
 
 import { ActiveRooms } from "./activeRooms";
 import { Chat } from "./chat";
@@ -27,10 +26,9 @@ import { UserRooms } from "./userRooms";
 
 export const HomePage = () => {
   const { id, name } = useAppSelector(userDataSelector);
-  const [loading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [activeRooms, setActiveRooms] = useState<ActiveRoom[]>([]);
   const [userRooms, setUserRooms] = useState<ActiveRoom[]>([]);
-
   const dispatch = useAppDispatch();
   const { socket } = useSocket();
   const navigate = useNavigate();
@@ -39,14 +37,13 @@ export const HomePage = () => {
     SetRoomsConnection({
       navigate,
       setActiveRooms,
+      setIsLoading,
       socket,
       setUserRooms,
       userId: id,
     });
     return () => ClearRoomsConnection(socket);
   }, []);
-
-  if (loading) return <Loader position="absolute" />;
 
   return (
     <HomePageSection>
@@ -63,10 +60,13 @@ export const HomePage = () => {
 
         <Wrapper>
           <CreateRoomComponent
-            isLoading={loading}
+            isLoading={isLoading}
             setIsLoading={setIsLoading}
           />
-          <EnterInRoomComponent />
+          <EnterInRoomComponent
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
+          />
         </Wrapper>
 
         <UserRooms userRooms={userRooms} userId={id} userName={name} />

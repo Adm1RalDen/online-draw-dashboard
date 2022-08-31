@@ -18,20 +18,47 @@ type Props = {
   setActiveRooms: FunctionWithParams<ActiveRoom[]>;
   setUserRooms: FunctionWithParams<ActiveRoom[]>;
   navigate: NavigateFunction;
+  setIsLoading: FunctionWithParams<boolean>;
   socket: Socket<any, any>;
   userId: string;
 };
+const accessPermitted = (
+  id: string,
+  navigate: NavigateFunction,
+  setIsLoading: FunctionWithParams<boolean>
+) => {
+  setIsLoading(false);
+  navigate(`/draw_online/${id}`);
+};
+const accessUnPermitted = (
+  error: string,
+  setIsLoading: FunctionWithParams<boolean>
+) => {
+  setIsLoading(false);
+  toastError(error);
+};
 
 export const SetRoomsConnection = (data: Props) => {
-  const { socket, setActiveRooms, navigate, setUserRooms, userId } = data;
+  const {
+    socket,
+    setActiveRooms,
+    navigate,
+    setUserRooms,
+    userId,
+    setIsLoading,
+  } = data;
+
   socket.emit(GET_ROOMS);
   socket.emit(GET_USER_ROOMS, { userId });
-
   socket.on(GET_ROOMS, (data: ActiveRoom[]) => setActiveRooms(data));
-  socket.on(CREATE_SUCCESS, (id: string) => navigate(`/draw_online/${id}`));
-  socket.on(CREATE_ERROR, (e: string) => toastError(e));
-  socket.on(JOIN_SUCCESS, (id: string) => navigate(`/draw_online/${id}`));
-  socket.on(JOIN_ERROR, (data: string) => toastError(data));
+  socket.on(CREATE_SUCCESS, (id: string) =>
+    accessPermitted(id, navigate, setIsLoading)
+  );
+  socket.on(CREATE_ERROR, (e: string) => accessUnPermitted(e, setIsLoading));
+  socket.on(JOIN_SUCCESS, (id: string) =>
+    accessPermitted(id, navigate, setIsLoading)
+  );
+  socket.on(JOIN_ERROR, (e: string) => accessUnPermitted(e, setIsLoading));
   socket.on(GET_USER_ROOMS, (data: ActiveRoom[]) => setUserRooms(data));
   socket.on(DELETE_USER_ROOM_ERROR, (error: string) => toastError(error));
 };

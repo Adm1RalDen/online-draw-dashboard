@@ -19,7 +19,6 @@ const onSubmit = async (
 ) => {
   setIsLoading(true);
   socket.emit("JOIN", data);
-  setIsLoading(false);
 };
 
 export { initialValues, onSubmit, validationSchema };
