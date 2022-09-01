@@ -2,10 +2,13 @@ import {
   CREATE_ERROR_SOCKET,
   CREATE_SUCCESS_SOCKET,
   DELETE_USER_ROOM_ERROR_SOCKET,
+  DELETE_USER_ROOM_SUCCESS_SOCKET,
   GET_ROOMS_SOCKET,
   GET_USER_ROOMS_SOCKET,
-  JOIN_ERROR_SOCKET,
-  JOIN_SUCCESS_SOCKET,
+  JOIN_ROOM_ERROR_SOCKET,
+  JOIN_ROOM_SUCCESS_SOCKET,
+  UPDATE_USER_ROOM_ERROR_SOCKET,
+  UPDATE_USER_ROOM_SUCCESS_SOCKET,
 } from "const/sockets";
 import { DRAW_ONLINE_URL } from "const/urls";
 import { NavigateFunction } from "react-router-dom";
@@ -47,34 +50,50 @@ export const SetRoomsConnection = (data: Props) => {
     userId,
     setIsLoading,
   } = data;
-
   socket.emit(GET_ROOMS_SOCKET);
   socket.emit(GET_USER_ROOMS_SOCKET, { userId });
+
   socket.on(GET_ROOMS_SOCKET, (data: ActiveRoom[]) => setActiveRooms(data));
+
   socket.on(CREATE_SUCCESS_SOCKET, (id: string) =>
     accessPermitted(id, navigate, setIsLoading)
   );
   socket.on(CREATE_ERROR_SOCKET, (e: string) =>
     accessUnPermitted(e, setIsLoading)
   );
-  socket.on(JOIN_SUCCESS_SOCKET, (id: string) =>
-    accessPermitted(id, navigate, setIsLoading)
-  );
-  socket.on(JOIN_ERROR_SOCKET, (e: string) =>
-    accessUnPermitted(e, setIsLoading)
-  );
+  socket.on(JOIN_ROOM_SUCCESS_SOCKET, (id: string) => {
+    accessPermitted(id, navigate, setIsLoading);
+  });
+  socket.on(JOIN_ROOM_ERROR_SOCKET, (e: string) => {
+    accessUnPermitted(e, setIsLoading);
+  });
   socket.on(GET_USER_ROOMS_SOCKET, (data: ActiveRoom[]) => setUserRooms(data));
-  socket.on(DELETE_USER_ROOM_ERROR_SOCKET, (error: string) =>
-    toastError(error)
-  );
+
+  socket.on(DELETE_USER_ROOM_ERROR_SOCKET, (error: string) => {
+    setIsLoading(false);
+    toastError(error);
+  });
+  socket.on(DELETE_USER_ROOM_SUCCESS_SOCKET, () => {
+    setIsLoading(false);
+  });
+  socket.on(UPDATE_USER_ROOM_SUCCESS_SOCKET, () => {
+    setIsLoading(false);
+  });
+  socket.on(UPDATE_USER_ROOM_ERROR_SOCKET, (error: string) => {
+    toastError(error);
+    setIsLoading(false);
+  });
 };
 
 export const ClearRoomsConnection = (socket: Socket<any, any>) => {
   socket.off(GET_ROOMS_SOCKET);
   socket.off(CREATE_SUCCESS_SOCKET);
   socket.off(CREATE_ERROR_SOCKET);
-  socket.off(JOIN_SUCCESS_SOCKET);
-  socket.off(JOIN_ERROR_SOCKET);
+  socket.off(JOIN_ROOM_SUCCESS_SOCKET);
+  socket.off(JOIN_ROOM_ERROR_SOCKET);
   socket.off(GET_USER_ROOMS_SOCKET);
   socket.off(DELETE_USER_ROOM_ERROR_SOCKET);
+  socket.off(DELETE_USER_ROOM_SUCCESS_SOCKET);
+  socket.off(UPDATE_USER_ROOM_SUCCESS_SOCKET);
+  socket.off(UPDATE_USER_ROOM_ERROR_SOCKET);
 };

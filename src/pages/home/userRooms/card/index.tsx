@@ -1,31 +1,44 @@
-import { DELETE_USER_ROOM_SOCKET, JOIN_SOCKET } from "const/sockets";
+import { DELETE_USER_ROOM_SOCKET, JOIN_ROOM_SOCKET } from "const/sockets";
 import { useSocket } from "hooks/useSocket";
 import { FC, useState } from "react";
 import { ActiveRoom } from "types/rooms";
 
-import { CardSettings, RoomCard } from "./styles";
+import { CardSettings, CardSettingsButton, RoomCard } from "./styles";
 import { UpdateCard } from "./update";
 
 type Props = {
   room: ActiveRoom;
   userId: string;
   userName: string;
+  isLoading: boolean;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const UserRoomCard: FC<Props> = ({ room, userId, userName }) => {
+export const UserRoomCard: FC<Props> = ({
+  room,
+  userId,
+  userName,
+  isLoading,
+  setIsLoading,
+}) => {
   const [active, setActive] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const { socket } = useSocket();
 
+  const handleEditMode = () => setEditMode((prev) => !prev);
+  const handleActiveMode = () => setActive((prev) => !prev);
   const handleDeleteRoom = () => {
+    setIsLoading(true);
     socket.emit(DELETE_USER_ROOM_SOCKET, {
       userId,
       roomId: room._id,
       roomPassword: room.roomPassword,
     });
   };
+
   const handleJoinRoom = () => {
-    socket.emit(JOIN_SOCKET, {
+    setIsLoading(true);
+    socket.emit(JOIN_ROOM_SOCKET, {
       userId,
       userName,
       roomId: room._id,
@@ -47,12 +60,24 @@ export const UserRoomCard: FC<Props> = ({ room, userId, userName }) => {
       </p>
       {active && (
         <CardSettings>
-          <li onClick={() => setEditMode(!editMode)}>edit</li>
-          <li onClick={handleDeleteRoom}>delete</li>
-          <li onClick={handleJoinRoom}>join</li>
+          <li>
+            <CardSettingsButton disabled={isLoading} onClick={handleEditMode}>
+              edit
+            </CardSettingsButton>
+          </li>
+          <li>
+            <CardSettingsButton disabled={isLoading} onClick={handleDeleteRoom}>
+              delete
+            </CardSettingsButton>
+          </li>
+          <li>
+            <CardSettingsButton disabled={isLoading} onClick={handleJoinRoom}>
+              join
+            </CardSettingsButton>
+          </li>
         </CardSettings>
       )}
-      <span onClick={() => setActive(!active)}>
+      <span onClick={handleActiveMode}>
         {!active ? (
           <img src="/assets/dots.png" alt="edit" width={30} height={30} />
         ) : (
@@ -62,10 +87,10 @@ export const UserRoomCard: FC<Props> = ({ room, userId, userName }) => {
 
       {editMode && (
         <UpdateCard
-          socket={socket}
           room={room}
           userId={userId}
           setEditMode={setEditMode}
+          setIsLoading={setIsLoading}
         />
       )}
     </RoomCard>

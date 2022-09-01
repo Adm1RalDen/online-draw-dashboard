@@ -5,8 +5,10 @@ import { userDataSelector } from "store/selectors/user.selector";
 import { useAppDispatch, useAppSelector } from "store/store";
 import { UserLogoutThunk } from "store/thunks/user/authorization.thunk";
 import { ActiveRoom } from "types/rooms";
+import { Portal } from "utils/portal";
 
 import { Button } from "components/button/styles";
+import { Loader } from "components/loaders/loader";
 
 import { ActiveRooms } from "./activeRooms";
 import { Chat } from "./chat";
@@ -38,44 +40,58 @@ export const HomePage = () => {
       navigate,
       setActiveRooms,
       setIsLoading,
-      socket,
       setUserRooms,
+      socket,
       userId: id,
     });
     return () => ClearRoomsConnection(socket);
   }, []);
 
   return (
-    <HomePageSection>
-      <HomePageWrapper>
-        <HomeHeader>
-          <HomeCabinet />
-          <Button onClick={() => UserLogoutThunk(dispatch)}>logout</Button>
-        </HomeHeader>
+    <>
+      <HomePageSection>
+        <HomePageWrapper>
+          <HomeHeader>
+            <HomeCabinet />
+            <Button onClick={() => UserLogoutThunk(dispatch)}>logout</Button>
+          </HomeHeader>
 
-        <ActiveRoomsWrapper>
-          <h3>Active rooms</h3>
-          <ActiveRooms activeRooms={activeRooms} userId={id} />
-        </ActiveRoomsWrapper>
+          <ActiveRoomsWrapper>
+            <h3>Active rooms</h3>
+            <ActiveRooms activeRooms={activeRooms} userId={id} />
+          </ActiveRoomsWrapper>
 
-        <Wrapper>
-          <CreateRoomComponent
+          <Wrapper>
+            <CreateRoomComponent
+              isLoading={isLoading}
+              setIsLoading={setIsLoading}
+            />
+            <EnterInRoomComponent
+              isLoading={isLoading}
+              setIsLoading={setIsLoading}
+            />
+          </Wrapper>
+
+          <UserRooms
+            userRooms={userRooms}
+            userId={id}
+            userName={name}
             isLoading={isLoading}
             setIsLoading={setIsLoading}
           />
-          <EnterInRoomComponent
-            isLoading={isLoading}
-            setIsLoading={setIsLoading}
-          />
-        </Wrapper>
 
-        <UserRooms userRooms={userRooms} userId={id} userName={name} />
+          <ChatWrapper>
+            <h3>Chat</h3>
+            <Chat />
+          </ChatWrapper>
+        </HomePageWrapper>
+      </HomePageSection>
 
-        <ChatWrapper>
-          <h3>Chat</h3>
-          <Chat />
-        </ChatWrapper>
-      </HomePageWrapper>
-    </HomePageSection>
+      {isLoading && (
+        <Portal>
+          <Loader color="white" />
+        </Portal>
+      )}
+    </>
   );
 };

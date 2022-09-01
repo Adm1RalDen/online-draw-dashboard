@@ -1,4 +1,4 @@
-import { JOIN_SOCKET } from "const/sockets";
+import { JOIN_ROOM_SOCKET } from "const/sockets";
 import { HOME_URL } from "const/urls";
 import { useSocket } from "hooks/useSocket";
 import { useEffect, useState } from "react";
@@ -27,7 +27,7 @@ export const PrivateRoom = () => {
   const handleEnter = async () => {
     if (roomId) {
       setIsLoading(true);
-      socket.emit(JOIN_SOCKET, {
+      socket.emit(JOIN_ROOM_SOCKET, {
         roomId,
         roomPassword,
         userId: user.id,

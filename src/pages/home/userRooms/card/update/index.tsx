@@ -2,7 +2,6 @@ import { UPDATE_USER_ROOM_SOCKET } from "const/sockets";
 import { useFormik } from "formik";
 import { useSocket } from "hooks/useSocket";
 import { FC } from "react";
-import { Socket } from "socket.io-client";
 import { FunctionWithParams } from "types";
 import { ActiveRoom } from "types/rooms";
 import { Portal } from "utils/portal";
@@ -14,10 +13,10 @@ import {
 } from "./styles";
 
 type Props = {
-  socket: Socket<any, any>;
   room: ActiveRoom;
-  setEditMode: FunctionWithParams<boolean>;
   userId: string;
+  setEditMode: FunctionWithParams<boolean>;
+  setIsLoading: FunctionWithParams<boolean>;
 };
 
 enum Updatekeys {
@@ -26,7 +25,12 @@ enum Updatekeys {
   roomPassword = "roomPassword",
 }
 
-export const UpdateCard: FC<Props> = ({ room, setEditMode, userId }) => {
+export const UpdateCard: FC<Props> = ({
+  room,
+  setEditMode,
+  userId,
+  setIsLoading,
+}) => {
   const { socket } = useSocket();
   const formik = useFormik({
     initialValues: {
@@ -36,6 +40,7 @@ export const UpdateCard: FC<Props> = ({ room, setEditMode, userId }) => {
     },
     enableReinitialize: true,
     onSubmit: (data) => {
+      setIsLoading(true);
       const keys = Object.keys(data) as Updatekeys[];
       const res = keys
         .filter((key) => data[key] !== room[key])
