@@ -1,5 +1,24 @@
 import styled from "styled-components";
 
+const SubmitButton = styled.button`
+  width: 200px;
+  height: 40px;
+  margin-top: 10px;
+  background-color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  color: black;
+  transition: 0.3s;
+
+  &:disabled {
+    background-color: #839191;
+    color: #000;
+    cursor: not-allowed;
+  }
+`;
+
 const HomePageSection = styled.section`
   min-height: 100vh;
   background-color: #183333;
@@ -87,16 +106,6 @@ const RoomWrapper = styled.div`
     height: 30px;
     margin-top: 10px;
   }
-  & > form > button {
-    width: 200px;
-    height: 30px;
-    margin-top: 10px;
-    background-color: white;
-    cursor: pointer;
-    outline: none;
-    border: none;
-    color: black;
-  }
 `;
 
 export {
@@ -107,4 +116,5 @@ export {
   Wrapper,
   RoomWrapper,
   HomeHeader,
+  SubmitButton,
 };

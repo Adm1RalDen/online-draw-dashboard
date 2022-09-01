@@ -7,8 +7,7 @@ import { FunctionWithParams } from "types";
 
 import { ErrorOutput } from "components/errorOutput";
 
-import { Loader } from "../../../components/loaders/loader";
-import { RoomWrapper } from "../styles";
+import { RoomWrapper, SubmitButton } from "../styles";
 import { initialValues, onSubmit, validationSchema } from "./const";
 
 type ComponentProps = {
@@ -34,7 +33,6 @@ export const CreateRoomComponent: FC<ComponentProps> = ({
       ),
   });
 
-  if (isLoading) return <Loader position="absolute" />;
   return (
     <RoomWrapper>
       <h3>Create room</h3>
@@ -47,6 +45,7 @@ export const CreateRoomComponent: FC<ComponentProps> = ({
             value={formik.values.roomName}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
+            disabled={isLoading}
           />
           {formik.errors.roomName && formik.touched.roomName && (
             <ErrorOutput>{formik.errors.roomName}</ErrorOutput>
@@ -60,9 +59,12 @@ export const CreateRoomComponent: FC<ComponentProps> = ({
             value={formik.values.roomPassword}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
+            disabled={isLoading}
           />
         </div>
-        <button type="submit">Create room</button>
+        <SubmitButton type="submit" disabled={isLoading || !formik.dirty}>
+          Create room
+        </SubmitButton>
       </form>
     </RoomWrapper>
   );

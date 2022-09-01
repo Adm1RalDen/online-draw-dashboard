@@ -3,6 +3,7 @@ import styled from "styled-components";
 type Props = {
   active: boolean;
 };
+
 const CardSettings = styled.ul`
   position: absolute;
   top: 10px;
@@ -12,14 +13,6 @@ const CardSettings = styled.ul`
   background-color: #000;
   color: #fff;
   padding: 5px;
-
-  & > li {
-    padding: 5px;
-    &:hover {
-      background: #fff;
-      color: #000;
-    }
-  }
 `;
 
 const RoomCard = styled.div<Props>`
@@ -51,4 +44,14 @@ const RoomCard = styled.div<Props>`
   cursor: pointer;
 `;
 
-export { RoomCard, CardSettings };
+const CardSettingsButton = styled.button`
+  width: 100%;
+  height: 30px;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+`;
+
+export { RoomCard, CardSettings, CardSettingsButton };

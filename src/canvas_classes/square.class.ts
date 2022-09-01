@@ -1,3 +1,4 @@
+import { DRAW_SOCKET } from "const/sockets";
 import { Socket } from "socket.io-client";
 
 import { Tool } from "./tool.class";
@@ -51,7 +52,7 @@ export class Square extends Tool {
   private onMouseUp(e: MouseEvent) {
     this.mouseDown = false;
     if (this.ctx) {
-      this.socket.emit("DRAW", {
+      this.socket.emit(DRAW_SOCKET, {
         tool: "square",
         roomId: this.id,
         x1: this.x1,

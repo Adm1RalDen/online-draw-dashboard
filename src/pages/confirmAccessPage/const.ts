@@ -1,4 +1,8 @@
-import { JOIN_ERROR, JOIN_SUCCESS } from "pages/home/const";
+import {
+  JOIN_ROOM_ERROR_SOCKET,
+  JOIN_ROOM_SUCCESS_SOCKET,
+} from "const/sockets";
+import { DRAW_ONLINE_URL } from "const/urls";
 import { NavigateFunction } from "react-router-dom";
 import { toastError } from "services/toast.service";
 import { Socket } from "socket.io-client";
@@ -13,18 +17,18 @@ type Props = {
 export const SetAccessPageConnection = (data: Props) => {
   const { navigate, setIsLoading, socket } = data;
 
-  socket.on(JOIN_SUCCESS, (id: string) => {
-    navigate(`/draw_online/${id}`);
+  socket.on(JOIN_ROOM_SUCCESS_SOCKET, (id: string) => {
+    navigate(`${DRAW_ONLINE_URL}/${id}`);
     setIsLoading(false);
   });
 
-  socket.on(JOIN_ERROR, (e: string) => {
+  socket.on(JOIN_ROOM_ERROR_SOCKET, (e: string) => {
     setIsLoading(false);
     toastError(e);
   });
 };
 
 export const ClearAccessPageConnection = (socket: Socket<any, any>) => {
-  socket.off(JOIN_SUCCESS);
-  socket.off(JOIN_ERROR);
+  socket.off(JOIN_ROOM_SUCCESS_SOCKET);
+  socket.off(JOIN_ROOM_ERROR_SOCKET);
 };

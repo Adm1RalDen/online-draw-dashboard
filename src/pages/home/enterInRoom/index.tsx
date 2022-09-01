@@ -1,20 +1,26 @@
 import { useFormik } from "formik";
 import { useSocket } from "hooks/useSocket";
-import { useState } from "react";
+import { FC } from "react";
 import { userInfoSelector } from "store/selectors/user.selector";
 import { useAppSelector } from "store/store";
+import { FunctionWithParams } from "types";
 
 import { ErrorOutput } from "components/errorOutput";
-import { LittleLoader } from "components/loaders/littleLoader";
 
-import { RoomWrapper } from "../styles";
+import { RoomWrapper, SubmitButton } from "../styles";
 import { initialValues, onSubmit, validationSchema } from "./const";
 
-export const EnterInRoomComponent = () => {
+type Props = {
+  isLoading: boolean;
+  setIsLoading: FunctionWithParams<boolean>;
+};
+
+export const EnterInRoomComponent: FC<Props> = ({
+  isLoading,
+  setIsLoading,
+}) => {
   const { socket } = useSocket();
   const user = useAppSelector(userInfoSelector);
-  const [isLoading, setIsLoading] = useState(false);
-
   const formik = useFormik({
     initialValues,
     validationSchema,
@@ -55,10 +61,9 @@ export const EnterInRoomComponent = () => {
             disabled={isLoading}
           />
         </div>
-        <button type="submit" disabled={isLoading}>
+        <SubmitButton type="submit" disabled={isLoading || !formik.dirty}>
           Enter in room
-        </button>
-        {isLoading && <LittleLoader />}
+        </SubmitButton>
       </form>
     </RoomWrapper>
   );

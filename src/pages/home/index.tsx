@@ -5,6 +5,7 @@ import { userDataSelector } from "store/selectors/user.selector";
 import { useAppDispatch, useAppSelector } from "store/store";
 import { UserLogoutThunk } from "store/thunks/user/authorization.thunk";
 import { ActiveRoom } from "types/rooms";
+import { Portal } from "utils/portal";
 
 import { Button } from "components/button/styles";
 import { Loader } from "components/loaders/loader";
@@ -27,10 +28,9 @@ import { UserRooms } from "./userRooms";
 
 export const HomePage = () => {
   const { id, name } = useAppSelector(userDataSelector);
-  const [loading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [activeRooms, setActiveRooms] = useState<ActiveRoom[]>([]);
   const [userRooms, setUserRooms] = useState<ActiveRoom[]>([]);
-
   const dispatch = useAppDispatch();
   const { socket } = useSocket();
   const navigate = useNavigate();
@@ -39,43 +39,59 @@ export const HomePage = () => {
     SetRoomsConnection({
       navigate,
       setActiveRooms,
-      socket,
+      setIsLoading,
       setUserRooms,
+      socket,
       userId: id,
     });
     return () => ClearRoomsConnection(socket);
   }, []);
 
-  if (loading) return <Loader position="absolute" />;
-
   return (
-    <HomePageSection>
-      <HomePageWrapper>
-        <HomeHeader>
-          <HomeCabinet />
-          <Button onClick={() => UserLogoutThunk(dispatch)}>logout</Button>
-        </HomeHeader>
+    <>
+      <HomePageSection>
+        <HomePageWrapper>
+          <HomeHeader>
+            <HomeCabinet />
+            <Button onClick={() => UserLogoutThunk(dispatch)}>logout</Button>
+          </HomeHeader>
 
-        <ActiveRoomsWrapper>
-          <h3>Active rooms</h3>
-          <ActiveRooms activeRooms={activeRooms} userId={id} />
-        </ActiveRoomsWrapper>
+          <ActiveRoomsWrapper>
+            <h3>Active rooms</h3>
+            <ActiveRooms activeRooms={activeRooms} userId={id} />
+          </ActiveRoomsWrapper>
 
-        <Wrapper>
-          <CreateRoomComponent
-            isLoading={loading}
+          <Wrapper>
+            <CreateRoomComponent
+              isLoading={isLoading}
+              setIsLoading={setIsLoading}
+            />
+            <EnterInRoomComponent
+              isLoading={isLoading}
+              setIsLoading={setIsLoading}
+            />
+          </Wrapper>
+
+          <UserRooms
+            userRooms={userRooms}
+            userId={id}
+            userName={name}
+            isLoading={isLoading}
             setIsLoading={setIsLoading}
           />
-          <EnterInRoomComponent />
-        </Wrapper>
 
-        <UserRooms userRooms={userRooms} userId={id} userName={name} />
+          <ChatWrapper>
+            <h3>Chat</h3>
+            <Chat />
+          </ChatWrapper>
+        </HomePageWrapper>
+      </HomePageSection>
 
-        <ChatWrapper>
-          <h3>Chat</h3>
-          <Chat />
-        </ChatWrapper>
-      </HomePageWrapper>
-    </HomePageSection>
+      {isLoading && (
+        <Portal>
+          <Loader color="white" />
+        </Portal>
+      )}
+    </>
   );
 };

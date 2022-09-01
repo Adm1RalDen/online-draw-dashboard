@@ -1,3 +1,4 @@
+import { HOME_URL } from "const/urls";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { userInfoSelector } from "store/selectors/user.selector";
@@ -101,7 +102,7 @@ export const UserCabinet = () => {
                 <Button onClick={handleEdit} color="#fff">
                   Edit
                 </Button>
-                <Button onClick={() => navigate("/")} color="#fff">
+                <Button onClick={() => navigate(HOME_URL)} color="#fff">
                   Back
                 </Button>
               </ButtonWrapper>

@@ -1,3 +1,4 @@
+import { CREATE_ROOM_SOCKET, GET_USER_ROOMS_SOCKET } from "const/sockets";
 import { Socket } from "socket.io-client";
 import { FunctionWithParams } from "types";
 import * as yup from "yup";
@@ -18,8 +19,7 @@ const onSubmit = async (
   socket: Socket<any, any>
 ) => {
   setIsLoading(true);
-  socket.emit("CREATE", data);
-  socket.emit("GET_USER_ROOMS", { userId: data.userId });
-  setIsLoading(false);
+  socket.emit(CREATE_ROOM_SOCKET, data);
+  socket.emit(GET_USER_ROOMS_SOCKET, { userId: data.userId });
 };
 export { initialValues, validationSchema, onSubmit };

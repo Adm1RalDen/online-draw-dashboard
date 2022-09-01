@@ -1,3 +1,4 @@
+import { JOIN_ROOM_SOCKET } from "const/sockets";
 import { Socket } from "socket.io-client";
 import { FunctionWithParams } from "types";
 import * as yup from "yup";
@@ -18,8 +19,7 @@ const onSubmit = async (
   setIsLoading: FunctionWithParams<boolean>
 ) => {
   setIsLoading(true);
-  socket.emit("JOIN", data);
-  setIsLoading(false);
+  socket.emit(JOIN_ROOM_SOCKET, data);
 };
 
 export { initialValues, onSubmit, validationSchema };

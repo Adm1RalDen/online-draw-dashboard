@@ -1,3 +1,4 @@
+import { DRAW_SOCKET } from "const/sockets";
 import { Socket } from "socket.io-client";
 
 import { Tool } from "./tool.class";
@@ -30,7 +31,7 @@ export class Eraser extends Tool {
 
   private onMouseMove(e: MouseEvent) {
     if (this.ctx && this.mouseDown) {
-      this.socket.emit("DRAW", {
+      this.socket.emit(DRAW_SOCKET, {
         tool: "eraser",
         roomId: this.id,
         x1: this.x1,
