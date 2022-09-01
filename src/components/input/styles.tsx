@@ -81,8 +81,8 @@ const InputWrapper = styled.div<InputWrapperProps>`
     position: absolute;
     top: 19px;
     left: 5px;
-    font-size: 12px;
-    color: ${(p) => p.theme.colors.light_gray};
+    font-size: 14px;
+    color: #888;
 
     ${(p) =>
       p.hasValue &&

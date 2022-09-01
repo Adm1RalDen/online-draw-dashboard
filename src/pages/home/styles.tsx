@@ -1,20 +1,20 @@
 import styled from "styled-components";
 
 const SubmitButton = styled.button`
-  width: 200px;
+  width: 150px;
   height: 40px;
+  font-weight: 300;
   margin-top: 10px;
-  background-color: white;
+  background-color: #009cc3;
   border-radius: 5px;
+  color: #fff;
   cursor: pointer;
   outline: none;
   border: none;
-  color: black;
   transition: 0.3s;
 
   &:disabled {
-    background-color: #839191;
-    color: #000;
+    background-color: #00596f;
     &:disabled {
       cursor: not-allowed;
     }
@@ -47,7 +47,7 @@ const HomePageWrapper = styled.div`
 const HomeHeader = styled.header`
   grid-area: header;
   box-shadow: 0px 0px 2px 1px #6b9080;
-  background-color: #c3e2dd;
+  background-color: #016a84;
   padding: 5px;
   border-radius: 10px;
   display: flex;
@@ -68,12 +68,23 @@ const ActiveRoomsWrapper = styled.div`
   grid-area: activeRooms;
   overflow: auto;
   box-shadow: 0px 0px 2px 1px #6b9080;
-  background-color: #c3e2dd;
   padding: 10px;
+  background-color: #016a84;
 
-  & > h3 {
-    color: #000000;
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #0092b6;
+    border-radius: 30px;
+  }
+
+  & > h3,
+  p {
+    color: #ffffff;
     font-weight: 400;
+  }
+  & > h3 {
     font-size: 22px;
     margin-bottom: 15px;
   }
@@ -82,7 +93,7 @@ const ActiveRoomsWrapper = styled.div`
 const Wrapper = styled.div`
   grid-area: wrapper;
   padding: 20px;
-  box-shadow: 0px 0px 2px 1px #6b9080;
+  box-shadow: 0px 0px 2px 1px #0092b6;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -94,10 +105,6 @@ const Wrapper = styled.div`
 const ChatWrapper = styled(ActiveRoomsWrapper)`
   grid-area: chat;
   background-color: #016a84;
-
-  & > h3 {
-    color: #fff;
-  }
 `;
 
 const RoomWrapper = styled.div`
@@ -110,8 +117,11 @@ const RoomWrapper = styled.div`
   }
   & > form > div > input {
     width: 100%;
-    height: 30px;
-    margin-top: 10px;
+    height: 35px;
+    margin-top: 5px;
+    padding: 0px 10px;
+    border-radius: 5px;
+    background-color: #ffffff;
   }
 `;
 

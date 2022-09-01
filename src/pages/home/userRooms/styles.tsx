@@ -3,8 +3,16 @@ import styled from "styled-components";
 const UserRoomsWrapper = styled.div`
   grid-area: myRooms;
   padding: 20px;
-  box-shadow: 0px 0px 2px 1px #6b9080;
+  box-shadow: 0px 0px 2px 1px #0092b6;
   overflow: auto;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #0092b6;
+    border-radius: 30px;
+  }
 
   & > h3 {
     color: #ffffff;

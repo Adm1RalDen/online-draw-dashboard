@@ -1,10 +1,12 @@
 import styled from "styled-components";
 
 const Room = styled.div`
-  color: #000000;
+  color: #ffffff;
   padding: 10px 10px 10px 20px;
-  border: 2px solid #000000;
+  background-color: #0092b6;
+  box-shadow: 1px 2px 3px 2px #005b71;
   text-align: center;
+  border-radius: 5px;
   margin-top: 10px;
   display: flex;
   align-items: center;
