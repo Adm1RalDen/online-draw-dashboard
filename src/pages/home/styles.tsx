@@ -15,7 +15,9 @@ const SubmitButton = styled.button`
   &:disabled {
     background-color: #839191;
     color: #000;
-    cursor: not-allowed;
+    &:disabled {
+      cursor: not-allowed;
+    }
   }
 `;
 
@@ -91,6 +93,11 @@ const Wrapper = styled.div`
 
 const ChatWrapper = styled(ActiveRoomsWrapper)`
   grid-area: chat;
+  background-color: #016a84;
+
+  & > h3 {
+    color: #fff;
+  }
 `;
 
 const RoomWrapper = styled.div`

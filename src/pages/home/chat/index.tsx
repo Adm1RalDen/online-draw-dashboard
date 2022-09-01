@@ -9,7 +9,13 @@ import { LittleLoader } from "components/loaders/littleLoader";
 
 import { ChatMessage } from "../types";
 import { ClearConnectionChat, SetConnectionChat } from "./const";
-import { ChatWrapper, Message, MessagesWrapper } from "./styles";
+import {
+  ChatWrapper,
+  Message,
+  MessageInput,
+  MessagesWrapper,
+  SendMessageButton,
+} from "./styles";
 
 export const Chat = () => {
   const { socket } = useSocket();
@@ -83,10 +89,13 @@ export const Chat = () => {
         )}
       </div>
       <div>
-        <input type="text" ref={inputRef} />
-        <button onClick={handleSendMessage} disabled={messageLoading}>
+        <MessageInput type="text" ref={inputRef} />
+        <SendMessageButton
+          onClick={handleSendMessage}
+          disabled={messageLoading}
+        >
           send
-        </button>
+        </SendMessageButton>
       </div>
     </ChatWrapper>
   );

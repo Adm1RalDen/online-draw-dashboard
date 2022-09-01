@@ -14,7 +14,16 @@ const ChatWrapper = styled.div`
     background-color: #183333;
     border-radius: 5px;
     padding: 10px;
+
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: #0092b6;
+      border-radius: 30px;
+    }
   }
+
   & > div:last-child {
     margin-top: 5px;
     border-radius: 5px;
@@ -22,21 +31,32 @@ const ChatWrapper = styled.div`
     display: flex;
     align-items: center;
     padding: 0px 10px;
+  }
+`;
 
-    & > input {
-      flex-grow: 1;
-      height: 30px;
-      border-radius: 5px;
-      border-top-right-radius: 0px;
-      border-bottom-right-radius: 0px;
-    }
-    & > button {
-      width: 50px;
-      height: 30px;
-      border-top-right-radius: 5px;
-      border-bottom-right-radius: 5px;
-      cursor: pointer;
-    }
+const MessageInput = styled.input`
+  flex-grow: 1;
+  height: 30px;
+  border-radius: 5px;
+  padding: 0px 10px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border: 1px solid #fff;
+`;
+
+const SendMessageButton = styled.button`
+  width: 60px;
+  height: 30px;
+  color: #fff;
+  font-weight: 300;
+  border: 1px solid #fff;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s all;
+  background-color: #027490;
+  &:hover {
+    background-color: #02596e;
   }
 `;
 
@@ -54,6 +74,7 @@ const MessagesWrapper = styled.div`
     object-fit: cover;
   }
 `;
+
 const Message = styled.div<WrapperProps>`
   flex-grow: 1;
   padding: 5px;
@@ -61,6 +82,7 @@ const Message = styled.div<WrapperProps>`
   border-radius: 10px;
 
   & > h4 {
+    font-weight: 400;
     color: #ffc628;
   }
   & > p {
@@ -71,4 +93,10 @@ const Message = styled.div<WrapperProps>`
   }
 `;
 
-export { Message, MessagesWrapper, ChatWrapper };
+export {
+  Message,
+  MessagesWrapper,
+  ChatWrapper,
+  SendMessageButton,
+  MessageInput,
+};
