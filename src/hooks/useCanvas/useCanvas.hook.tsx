@@ -1,7 +1,10 @@
 import { useSocket } from "hooks/useSocket";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { userDataSelector } from "store/selectors/user.selector";
+import {
+  userDataSelector,
+  userInfoSelector,
+} from "store/selectors/user.selector";
 import { useAppSelector } from "store/store";
 import { ToolsTypes } from "types/canvas";
 
@@ -25,7 +28,7 @@ export const useCanvas = () => {
   const [snapshotIndex, setSnapshotIndex] = useState(-1);
   const { socket } = useSocket();
   const { roomId } = useParams<ParamsProps>();
-  const { name } = useAppSelector(userDataSelector);
+  const { name, id } = useAppSelector(userDataSelector);
 
   useEffect(() => {
     canvasRef.current.width = setCanvasWidth();
@@ -40,6 +43,7 @@ export const useCanvas = () => {
     });
     handleSetTool({ canvasRef, roomId: roomId!, socket, tool });
     SetDrawConnection({
+      userId: id,
       socket,
       canvasRef,
       roomId: roomId || "",

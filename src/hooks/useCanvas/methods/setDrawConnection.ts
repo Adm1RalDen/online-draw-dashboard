@@ -19,9 +19,10 @@ import {
 
 type Props = {
   socket: Socket<any, any>;
-  canvasRef: any;
+  canvasRef: React.MutableRefObject<HTMLCanvasElement>;
   roomId: string;
   name: string;
+  userId: string;
   setSnapshotList: React.Dispatch<React.SetStateAction<string[]>>;
   navigate: NavigateFunction;
   fillStyle: string;
@@ -32,7 +33,26 @@ type Props = {
   snapshotIndex: number;
 };
 export const SetDrawConnection = (data: Props) => {
-  const { canvasRef, name, navigate, roomId, socket } = data;
+  const { canvasRef, name, navigate, roomId, socket, userId } = data;
+  socket.emit("GET_SNAPSHOT", { roomId, userId, socketId: socket.id });
+  socket.on("SEND_SNAPSHOT", (ownerId: string, recipient: string) => {
+    if (canvasRef && ownerId === userId) {
+      const img = canvasRef.current.toDataURL();
+      socket.emit("SEND_SNAPSHOT", { img, recipient });
+    }
+  });
+
+  socket.on("SET_SNAPSHOT", (img: string) => {
+    const ctx = canvasRef.current.getContext("2d");
+    if (ctx) {
+      let image = new Image();
+      image.src = img;
+      image.onload = () => {
+        ctx.drawImage(image, 0, 0, ctx.canvas.width, ctx.canvas.height);
+        socket.emit("");
+      };
+    }
+  });
 
   socket.emit(CONNECTION_DRAW_SOCKET, { userName: name, roomId });
   socket.on(CONNECTION_DRAW_SOCKET, (data: string) => {
@@ -49,52 +69,66 @@ export const SetDrawConnection = (data: Props) => {
 
   socket.on(DRAW_SOCKET, (data: any) => {
     if (canvasRef.current) {
-      const ctx = canvasRef.current?.getContext("2d");
-      switch (data.tool) {
-        case "pen":
-          Pen.drawOnline(ctx, data.x, data.y, data.strokeStyle, data.lineWidth);
-          break;
-        case "square":
-          Square.drawOnline(
-            ctx,
-            data.x1,
-            data.y1,
-            data.width,
-            data.height,
-            data.fillStyle,
-            data.strokeStyle,
-            data.lineWidth
-          );
-          break;
-        case "circle":
-          Circle.drawOnline(
-            ctx,
-            data.x1,
-            data.y1,
-            data.a,
-            data.b,
-            data.fillStyle,
-            data.strokeStyle,
-            data.lineWidth
-          );
-          break;
-        case "eraser":
-          Eraser.draw(ctx, data.x1, data.y1);
-          break;
-        case "line":
-          Line.drawOnline(
-            ctx,
-            data.x1,
-            data.y1,
-            data.x2,
-            data.y2,
-            data.strokeStyle,
-            data.lineWidth
-          );
-          break;
-        default:
-          Pen.drawOnline(ctx, data.x, data.y, data.strokeStyle, data.lineWidth);
-          break;
+      const ctx = canvasRef.current.getContext("2d");
+      if (ctx) {
+        switch (data.tool) {
+          case "pen":
+            Pen.drawOnline(
+              ctx,
+              data.x,
+              data.y,
+              data.strokeStyle,
+              data.lineWidth
+            );
+            break;
+          case "square":
+            Square.drawOnline(
+              ctx,
+              data.x1,
+              data.y1,
+              data.width,
+              data.height,
+              data.fillStyle,
+              data.strokeStyle,
+              data.lineWidth
+            );
+            break;
+          case "circle":
+            Circle.drawOnline(
+              ctx,
+              data.x1,
+              data.y1,
+              data.a,
+              data.b,
+              data.fillStyle,
+              data.strokeStyle,
+              data.lineWidth
+            );
+            break;
+          case "eraser":
+            Eraser.draw(ctx, data.x1, data.y1);
+            break;
+          case "line":
+            Line.drawOnline(
+              ctx,
+              data.x1,
+              data.y1,
+              data.x2,
+              data.y2,
+              data.strokeStyle,
+              data.lineWidth
+            );
+            break;
+          default:
+            Pen.drawOnline(
+              ctx,
+              data.x,
+              data.y,
+              data.strokeStyle,
+              data.lineWidth
+            );
+            break;
+        }
       }
     }
   });
