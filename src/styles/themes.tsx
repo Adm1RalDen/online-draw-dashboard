@@ -26,4 +26,8 @@ export const themes = {
   shadows: {
     buttonFocus: "box-shadow: 0px 0px 10px 2px #0040ff",
   },
+
+  border: {
+    gray: "#d5d5d5c8",
+  },
 };

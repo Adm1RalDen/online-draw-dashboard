@@ -4,7 +4,7 @@ export const Button = styled.button`
   width: 150px;
   padding: 10px;
   background-color: ${(p) => p.theme.colors.aqua};
-  font-weight: 300;
+  font-weight: 400;
   color: ${(p) => p.theme.colors.white};
   border-radius: 5px;
   transition: all 0.3s ease-in;
@@ -16,7 +16,7 @@ export const Button = styled.button`
     cursor: no-drop;
   }
 
-  &:not([disabled]):hover {
+  &:hover {
     background-color: ${(p) => p.theme.colors.lightAqua};
   }
 `;

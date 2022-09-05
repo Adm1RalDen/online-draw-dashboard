@@ -6,11 +6,17 @@ import { useNavigate, useParams } from "react-router-dom";
 import { userDataSelector } from "store/selectors/user.selector";
 import { useAppSelector } from "store/store";
 
-import { Button } from "components/button/styles";
+import { Input } from "components/input/styles";
 import { Loader } from "components/loaders/loader";
 
 import { ClearAccessPageConnection, SetAccessPageConnection } from "./const";
-import { ConfirmAccessPage, ConfirmAccessPageMain } from "./styles";
+import {
+  ConfirmAccessPage,
+  ConfirmAccessPageButton,
+  ConfirmAccessPageButtonsWrapper,
+  ConfirmAccessPageInputWrapper,
+  ConfirmAccessPageMain,
+} from "./styles";
 
 export const PrivateRoom = () => {
   const [roomPassword, setPassword] = useState("");
@@ -44,19 +50,23 @@ export const PrivateRoom = () => {
           <Loader position="absolute" color="white" />
         ) : (
           <>
-            <div>
+            <ConfirmAccessPageInputWrapper>
               <p>Please confirm room password</p>
-              <input
+              <Input
                 type="password"
                 placeholder="Room password"
                 value={roomPassword}
                 onChange={(e) => setPassword(e.target.value)}
               />
-            </div>
-            <div>
-              <Button onClick={handleEnter}>enter</Button>
-              <Button onClick={() => navigate(HOME_URL)}>back</Button>
-            </div>
+            </ConfirmAccessPageInputWrapper>
+            <ConfirmAccessPageButtonsWrapper>
+              <ConfirmAccessPageButton onClick={handleEnter}>
+                Enter
+              </ConfirmAccessPageButton>
+              <ConfirmAccessPageButton onClick={() => navigate(HOME_URL)}>
+                Back
+              </ConfirmAccessPageButton>
+            </ConfirmAccessPageButtonsWrapper>
           </>
         )}
       </ConfirmAccessPageMain>
