@@ -12,6 +12,7 @@ export const themes = {
     gray: "#64646445",
     darkBlue: "#1176e2",
     greenBackground: "#183333",
+    greenLiteBackground: "#2d6969",
     aqua: "#016a84",
     lightAqua: "#009cc3",
     darkAqua: "#00596f",

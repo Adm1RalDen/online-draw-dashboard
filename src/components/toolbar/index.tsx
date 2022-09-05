@@ -7,7 +7,13 @@ import { useAppSelector } from "store/store";
 import { ToolsTypes } from "types/canvas";
 
 import { PaintContext } from "../../context/paintContext";
-import { LeaveButton, StyledToolbar, ToolButton } from "./styles";
+import {
+  DrawToolsWrapper,
+  LeaveButton,
+  SnapshotButtonsWrapper,
+  StyledToolbar,
+  ToolButton,
+} from "./styles";
 
 export const Toolbar = () => {
   const {
@@ -51,7 +57,7 @@ export const Toolbar = () => {
 
   return (
     <StyledToolbar>
-      <div onClickCapture={handleChangeTool}>
+      <DrawToolsWrapper onClickCapture={handleChangeTool}>
         <ToolButton
           img="../assets/pen.png"
           data-tool="pen"
@@ -82,14 +88,14 @@ export const Toolbar = () => {
           name="color"
           onChange={(e) => changeFillStyle(e.target.value)}
         />
-      </div>
+      </DrawToolsWrapper>
 
-      <div>
+      <SnapshotButtonsWrapper>
         <ToolButton img="../assets/right-arrow.png" onClick={handleReset} />
         <ToolButton img="../assets/right-arrow.png" onClick={handleRedo} />
         <ToolButton img="../assets/diskette.png" onClick={handleSavePhoto} />
-        <LeaveButton onClick={handleExitFromRoom}>leave</LeaveButton>
-      </div>
+        <LeaveButton onClick={handleExitFromRoom}>Leave</LeaveButton>
+      </SnapshotButtonsWrapper>
     </StyledToolbar>
   );
 };

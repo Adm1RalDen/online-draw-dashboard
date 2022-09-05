@@ -10,6 +10,7 @@ export const SettingsBar = () => {
       <div>
         <label htmlFor="borderSize">Border size</label>
         <input
+          min={1}
           type="number"
           id="borderSize"
           name="borderSize"
