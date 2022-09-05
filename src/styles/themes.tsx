@@ -19,6 +19,7 @@ export const themes = {
     darkAqua: "#00596f",
     aquaMiddle: "#0092b6",
     aquaGreen: "#3f6d78",
+    middleGray: "#bcbcbc",
   },
 
   breakPoints: {
