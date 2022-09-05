@@ -72,7 +72,7 @@ const ActiveRoomsWrapper = styled(StyledScroll)`
 const Wrapper = styled.div`
   grid-area: wrapper;
   padding: 20px;
-  box-shadow: 0px 0px 2px 1px ${({ theme }) => theme.colors.lightAqua};
+  box-shadow: 0px 0px 2px 1px ${({ theme }) => theme.colors.aqua};
   display: flex;
   flex-direction: column;
   gap: 20px;

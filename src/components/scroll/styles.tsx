@@ -5,7 +5,7 @@ export const StyledScroll = styled.div`
     width: 5px;
   }
   &::-webkit-scrollbar-thumb {
-    background-color: #0092b6;
+    background-color: ${({ theme }) => theme.colors.aquaMiddle};
     border-radius: 30px;
   }
 `;

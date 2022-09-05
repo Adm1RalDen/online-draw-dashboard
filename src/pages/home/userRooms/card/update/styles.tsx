@@ -33,28 +33,19 @@ const UpdateModalButtonsWrapper = styled.div`
   margin-top: 10px;
 
   & > button {
-    border-radius: 5px;
-    color: ${({ theme }) => theme.colors.white};
-    cursor: pointer;
     flex-basis: 50%;
-    height: 30px;
-    transition: all 0.3s;
-
-    &:focus {
-      box-shadow: 0px 0px 2px 5px ${({ theme }) => theme.colors.blue};
-    }
   }
 
   & > button:first-child {
-    background-color: #006900;
+    background-color: ${({ theme }) => theme.colors.darkGreen};
     &:hover {
-      background-color: #00cf00;
+      background-color: ${({ theme }) => theme.colors.green};
     }
   }
   & > button:last-child {
-    background-color: #930202;
+    background-color: ${({ theme }) => theme.colors.darkRed};
     &:hover {
-      background-color: #ed1b1b;
+      background-color: ${({ theme }) => theme.colors.red};
     }
   }
 `;

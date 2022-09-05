@@ -8,6 +8,7 @@ export const themes = {
     link: "#6363fa",
     gold: "#ffc800",
     green: "#00be03",
+    darkGreen: "#006900",
     light_gray: "#d6d6d6",
     blue: "#0a87e1",
     gray: "#64646445",
@@ -20,6 +21,8 @@ export const themes = {
     aquaMiddle: "#0092b6",
     aquaGreen: "#3f6d78",
     middleGray: "#bcbcbc",
+    red: "#ed1b1b",
+    darkRed: "#930202",
   },
 
   breakPoints: {
