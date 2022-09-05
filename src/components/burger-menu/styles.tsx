@@ -86,7 +86,7 @@ const NavigationMenu = styled.nav<Props>`
 
     & > a {
       color: Gold;
-      font-size: 20px;
+      font-size: ${({ theme }) => theme.fontSizes.middle};
       font-weight: 400;
     }
   }

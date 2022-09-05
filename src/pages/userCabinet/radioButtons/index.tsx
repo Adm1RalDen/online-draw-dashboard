@@ -3,7 +3,7 @@ import { Heading4 } from "styles/typography/styles";
 import { FunctionWithParams } from "types";
 
 import { FileInput } from "components/fileInput";
-import { Input } from "components/input/styles";
+import { Input } from "components/input";
 import { RadioButtons } from "components/radioButton";
 
 import { MALE, WOMAN } from "../const";
@@ -34,7 +34,7 @@ export const UserRadioButtons: FC<Props> = ({
         <Input
           key="color"
           name="color"
-          type={"color"}
+          type="color"
           value={formik.values.color}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}

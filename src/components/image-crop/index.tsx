@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import Avatar from "react-avatar-edit";
 import { EncodeBase64 } from "utils/encodeBase64";
 
-import { Button } from "components/button/styles";
+import { Button } from "components/button";
 
 import { AvatarEditWrapper } from "./styles";
 import { ImageCropProps } from "./types";

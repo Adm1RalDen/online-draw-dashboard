@@ -81,7 +81,7 @@ const InputWrapper = styled.div<InputWrapperProps>`
     position: absolute;
     top: 19px;
     left: 5px;
-    font-size: 14px;
+    font-size: ${({ theme }) => theme.fontSizes.small};
     color: #888;
 
     ${(p) =>

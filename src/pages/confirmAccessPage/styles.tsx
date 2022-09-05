@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { Button } from "components/button/styles";
+import { Button } from "components/button";
 import { FlexContainer } from "components/flex-container/styles";
 
 const ConfirmAccessPage = styled(FlexContainer)`
@@ -21,7 +21,7 @@ const ConfirmAccessPageButton = styled(Button)`
 
 const ConfirmAccessPageInputWrapper = styled.div`
   & > p {
-    font-size: 20px;
+    font-size: ${({ theme }) => theme.fontSizes.middle};
     text-align: center;
     color: ${({ theme }) => theme.colors.white};
     margin: 15px 0px;

@@ -6,7 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { userDataSelector } from "store/selectors/user.selector";
 import { useAppSelector } from "store/store";
 
-import { Input } from "components/input/styles";
+import { Input } from "components/input";
 import { Loader } from "components/loaders/loader";
 
 import { ClearAccessPageConnection, SetAccessPageConnection } from "./const";

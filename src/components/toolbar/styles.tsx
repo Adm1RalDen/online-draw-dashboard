@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-import { Button } from "components/button/styles";
+import { Button } from "components/button";
 import { FlexContainer } from "components/flex-container/styles";
 
 type ToolButtonProps = {

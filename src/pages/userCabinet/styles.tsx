@@ -50,7 +50,7 @@ const AvatarWrapper = styled.div`
 
   & > div:last-child {
     padding-top: 40px;
-    font-size: 22px;
+    font-size: ${({ theme }) => theme.fontSizes.middleUp};
     filter: invert(1);
     font-weight: 400;
   }
@@ -96,7 +96,7 @@ const UserInfo = styled.div`
       display: inline-block;
       min-width: 100px;
       font-weight: 400;
-      font-size: 18px;
+      font-size: ${({ theme }) => theme.fontSizes.smallUp};
     }
   }
 `;
@@ -114,7 +114,7 @@ const Biography = styled.div`
 
   & > p {
     min-width: 100px;
-    font-size: 18px;
+    font-size: ${({ theme }) => theme.fontSizes.smallUp};
     padding: 10px 5px 10px 0px;
   }
 `;

@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { Heading1, Heading2 } from "styles/typography/styles";
 
-import { Button } from "components/button/styles";
-import { Container as DefaultContainer } from "components/container/styles";
+import { Button } from "components/button";
+import { Container as DefaultContainer } from "components/container";
 
 const AuthButton = styled(Button)`
   width: 100%;
@@ -46,7 +46,7 @@ const Title = styled(Heading2)`
 `;
 
 const Logo = styled(Heading1)`
-  font-size: 40px;
+  font-size: ${({ theme }) => theme.fontSizes.large};
   color: ${({ theme }) => theme.colors.white};
 `;
 

@@ -39,4 +39,13 @@ export const themes = {
     gray: "#d5d5d5c8",
     liteGreen: "#6b9080",
   },
+
+  fontSizes: {
+    small: "15px",
+    smallUp: "18px",
+    middle: "20px",
+    middleUp: "22px",
+    big: "30px",
+    large: "40px",
+  },
 };

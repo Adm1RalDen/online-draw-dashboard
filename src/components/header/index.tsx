@@ -1,12 +1,13 @@
+import { CABINET_URL } from "const/urls";
 import { useSocket } from "hooks/useSocket";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { logoutAction } from "store/slices/user.slice";
 import { useAppDispatch } from "store/store";
 
 import { BurgerMenu } from "components/burger-menu";
-import { Button } from "components/button/styles";
+import { Button } from "components/button";
 
-import { Container } from "../container/styles";
+import { Container } from "../container";
 import { LINKS } from "./const";
 import {
   BurgerWrapper,
@@ -43,7 +44,7 @@ export const Header = () => {
         </HeaderNavigation>
 
         <HeaderUserBlock>
-          {pathname !== "/cabinet" && <Link to="/cabinet">My Cabinet</Link>}
+          {pathname !== CABINET_URL && <Link to={CABINET_URL}>My Cabinet</Link>}
           <Button onClick={handleLeave}>logout</Button>
         </HeaderUserBlock>
       </Container>

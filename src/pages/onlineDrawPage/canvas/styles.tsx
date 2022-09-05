@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { Container } from "components/container/styles";
+import { Container } from "components/container";
 
 const CanvasSection = styled.section`
   padding-top: 10px;

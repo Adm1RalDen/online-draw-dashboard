@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { userInfoSelector } from "store/selectors/user.selector";
 import { useAppSelector } from "store/store";
 
-import { Button } from "components/button/styles";
-import { Container } from "components/container/styles";
+import { Button } from "components/button";
+import { Container } from "components/container";
 import { HtmlText } from "components/htmlText";
 
 import {
@@ -26,6 +26,9 @@ export const UserCabinet = () => {
   const [editMode, setEditMode] = useState(false);
   const { data, isLoading } = useAppSelector(userInfoSelector);
   const handleEdit = () => setEditMode(!editMode);
+  const handleNavigate = () => {
+    navigate(HOME_URL);
+  };
 
   return (
     <UserCabinetSection>
@@ -100,7 +103,7 @@ export const UserCabinet = () => {
 
               <ButtonWrapper>
                 <Button onClick={handleEdit}>Edit</Button>
-                <Button onClick={() => navigate(HOME_URL)}>Back</Button>
+                <Button onClick={handleNavigate}>Back</Button>
               </ButtonWrapper>
             </Wrapper>
           </>

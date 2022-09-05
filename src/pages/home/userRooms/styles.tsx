@@ -9,7 +9,7 @@ const UserRoomsWrapper = styled.div`
   & > h3 {
     color: ${({ theme }) => theme.colors.white};
     font-weight: 400;
-    font-size: 22px;
+    font-size: ${({ theme }) => theme.fontSizes.middleUp};
     margin-bottom: 15px;
   }
 `;

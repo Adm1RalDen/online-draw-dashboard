@@ -3,10 +3,10 @@ import { useSocket } from "hooks/useSocket";
 import { FC } from "react";
 import { userDataSelector } from "store/selectors/user.selector";
 import { useAppSelector } from "store/store";
+import { Heading3 } from "styles/typography/styles";
 import { FunctionWithParams } from "types";
 
 import { ErrorOutput } from "components/errorOutput";
-import { Form } from "components/form/styles";
 
 import { RoomInput, RoomWrapper, SubmitButton } from "../styles";
 import { initialValues, onSubmit, validationSchema } from "./const";
@@ -36,8 +36,8 @@ export const CreateRoomComponent: FC<ComponentProps> = ({
 
   return (
     <RoomWrapper>
-      <h3>Create room</h3>
-      <Form onSubmit={formik.handleSubmit}>
+      <Heading3>Create room</Heading3>
+      <form onSubmit={formik.handleSubmit}>
         <div>
           <RoomInput
             type="text"
@@ -66,7 +66,7 @@ export const CreateRoomComponent: FC<ComponentProps> = ({
         <SubmitButton type="submit" disabled={isLoading || !formik.dirty}>
           Create room
         </SubmitButton>
-      </Form>
+      </form>
     </RoomWrapper>
   );
 };

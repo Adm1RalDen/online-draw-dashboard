@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-import { Button } from "components/button/styles";
-import { Input } from "components/input/styles";
+import { Button } from "components/button";
+import { Input } from "components/input";
 import { StyledScroll } from "components/scroll/styles";
 
 const SubmitButton = styled(Button)`
@@ -64,7 +64,7 @@ const ActiveRoomsWrapper = styled(StyledScroll)`
     font-weight: 400;
   }
   & > h3 {
-    font-size: 22px;
+    font-size: ${({ theme }) => theme.fontSizes.middleUp};
     margin-bottom: 15px;
   }
 `;
@@ -89,10 +89,12 @@ const ChatWrapper = styled(ActiveRoomsWrapper)`
 
 const RoomWrapper = styled.div`
   border-radius: 10px;
-
+  & > form {
+    padding-top: 5px;
+  }
   & > h3 {
     font-weight: 400;
-    font-size: 22px;
+    font-size: ${({ theme }) => theme.fontSizes.middleUp};
     color: ${({ theme }) => theme.colors.white};
   }
 `;
@@ -100,7 +102,7 @@ const RoomWrapper = styled.div`
 const RoomInput = styled(Input)`
   width: 100%;
   height: 35px;
-  margin-top: 2px;
+  margin-top: 5px;
 `;
 
 export {

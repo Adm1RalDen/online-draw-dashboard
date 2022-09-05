@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { Input } from "components/input/styles";
+import { Input } from "components/input";
 
 const UpdateModalWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.white};

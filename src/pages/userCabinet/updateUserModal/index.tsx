@@ -4,9 +4,9 @@ import { useAppDispatch } from "store/store";
 import { Heading3 } from "styles/typography/styles";
 import { Portal } from "utils/portal";
 
-import { Button } from "components/button/styles";
+import { Button } from "components/button";
 import { ImageCrop } from "components/image-crop";
-import { Input } from "components/input/styles";
+import { Input } from "components/input";
 import { TextEditor } from "components/textEditor";
 
 import {
@@ -102,7 +102,7 @@ export const UpdateUserModal: FC<UpdateUserModalTypes> = ({
         />
 
         <ButtonWrapper>
-          <Button type="submit">Save</Button>{" "}
+          <Button type="submit">Save</Button>
           <Button type="submit" onClick={handleEdit}>
             Cancel
           </Button>

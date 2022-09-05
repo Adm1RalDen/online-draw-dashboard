@@ -8,11 +8,11 @@ const NotFoundPageWrapper = styled(FlexContainer)`
 
 const NotFoundPageContent = styled.div`
   & > p {
-    font-size: 30px;
+    font-size: ${({ theme }) => theme.fontSizes.big};
     margin-bottom: 5px;
   }
   & > a {
-    font-size: 20px;
+    font-size: ${({ theme }) => theme.fontSizes.middle};
   }
 `;
 

@@ -1,4 +1,4 @@
-import { Container } from "../container/styles";
+import { Container } from "../container";
 import { Footer } from "./styles";
 
 export const FooterComponent = () => {

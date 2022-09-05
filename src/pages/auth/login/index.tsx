@@ -4,7 +4,6 @@ import { useAppDispatch, useAppSelector } from "store/store";
 import { UserLoginFormData } from "types";
 import { Portal } from "utils/portal";
 
-import { Form } from "components/form/styles";
 import { InputAnimation } from "components/input-animation";
 import { Loader } from "components/loaders/loader";
 
@@ -29,7 +28,7 @@ export const LoginComponent = () => {
     <>
       <FormWrapper>
         <Title>Login</Title>
-        <Form onSubmit={formik.handleSubmit}>
+        <form onSubmit={formik.handleSubmit}>
           {AuthorizationFileds.map((field) => (
             <InputAnimation
               key={field}
@@ -52,7 +51,7 @@ export const LoginComponent = () => {
           <AuthButton disabled={!formik.isValid || !formik.dirty || isLoading}>
             Send
           </AuthButton>
-        </Form>
+        </form>
       </FormWrapper>
 
       {isLoading && (

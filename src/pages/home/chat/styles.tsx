@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { Input } from "components/input/styles";
+import { Input } from "components/input";
 import { StyledScroll } from "components/scroll/styles";
 
 type WrapperProps = {
