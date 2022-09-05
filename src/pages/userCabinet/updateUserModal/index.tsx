@@ -6,7 +6,7 @@ import { Portal } from "utils/portal";
 
 import { Button } from "components/button/styles";
 import { ImageCrop } from "components/image-crop";
-import { Input } from "components/input";
+import { Input } from "components/input/styles";
 import { TextEditor } from "components/textEditor";
 
 import {
@@ -84,7 +84,6 @@ export const UpdateUserModal: FC<UpdateUserModalTypes> = ({
         {userFields.map(([key]: [keyof UserCabinetTypes, string]) => (
           <Input
             key={key}
-            label={key}
             name={key}
             type={setInputTypes(key)}
             value={formik.values[key]}
@@ -103,15 +102,8 @@ export const UpdateUserModal: FC<UpdateUserModalTypes> = ({
         />
 
         <ButtonWrapper>
-          <Button type="submit" color="#fff">
-            Save
-          </Button>{" "}
-          <Button
-            type="submit"
-            color="#fff"
-            onClick={handleEdit}
-            background="red"
-          >
+          <Button type="submit">Save</Button>{" "}
+          <Button type="submit" onClick={handleEdit}>
             Cancel
           </Button>
         </ButtonWrapper>

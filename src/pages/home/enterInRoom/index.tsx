@@ -6,6 +6,7 @@ import { useAppSelector } from "store/store";
 import { FunctionWithParams } from "types";
 
 import { ErrorOutput } from "components/errorOutput";
+import { Form } from "components/form/styles";
 
 import { RoomWrapper, SubmitButton } from "../styles";
 import { initialValues, onSubmit, validationSchema } from "./const";
@@ -35,7 +36,7 @@ export const EnterInRoomComponent: FC<Props> = ({
   return (
     <RoomWrapper>
       <h3>Join to room</h3>
-      <form onSubmit={formik.handleSubmit}>
+      <Form onSubmit={formik.handleSubmit}>
         <div>
           <input
             type="text"
@@ -64,7 +65,7 @@ export const EnterInRoomComponent: FC<Props> = ({
         <SubmitButton type="submit" disabled={isLoading || !formik.dirty}>
           Enter in room
         </SubmitButton>
-      </form>
+      </Form>
     </RoomWrapper>
   );
 };

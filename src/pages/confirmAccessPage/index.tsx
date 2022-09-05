@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { userDataSelector } from "store/selectors/user.selector";
 import { useAppSelector } from "store/store";
 
+import { Button } from "components/button/styles";
 import { Loader } from "components/loaders/loader";
 
 import { ClearAccessPageConnection, SetAccessPageConnection } from "./const";
@@ -53,8 +54,8 @@ export const PrivateRoom = () => {
               />
             </div>
             <div>
-              <button onClick={handleEnter}>enter</button>
-              <button onClick={() => navigate(HOME_URL)}>back</button>
+              <Button onClick={handleEnter}>enter</Button>
+              <Button onClick={() => navigate(HOME_URL)}>back</Button>
             </div>
           </>
         )}

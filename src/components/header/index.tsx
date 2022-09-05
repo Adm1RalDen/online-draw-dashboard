@@ -4,6 +4,7 @@ import { logoutAction } from "store/slices/user.slice";
 import { useAppDispatch } from "store/store";
 
 import { BurgerMenu } from "components/burger-menu";
+import { Button } from "components/button/styles";
 
 import { Container } from "../container/styles";
 import { LINKS } from "./const";
@@ -43,7 +44,7 @@ export const Header = () => {
 
         <HeaderUserBlock>
           {pathname !== "/cabinet" && <Link to="/cabinet">My Cabinet</Link>}
-          <button onClick={handleLeave}>logout</button>
+          <Button onClick={handleLeave}>logout</Button>
         </HeaderUserBlock>
       </Container>
     </HeaderComponent>

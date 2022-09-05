@@ -1,17 +1,11 @@
 import styled from "styled-components";
 
-const SubmitButton = styled.button`
-  width: 150px;
-  height: 40px;
-  font-weight: 300;
+import { Button } from "components/button/styles";
+
+const SubmitButton = styled(Button)`
   margin-top: 10px;
-  background-color: #009cc3;
-  border-radius: 5px;
-  color: #fff;
-  cursor: pointer;
   outline: none;
   border: none;
-  transition: 0.3s;
 
   &:disabled {
     background-color: #00596f;
@@ -53,15 +47,6 @@ const HomeHeader = styled.header`
   display: flex;
   align-items: center;
   justify-content: right;
-
-  & > button {
-    background-color: #183333;
-    color: #fff;
-
-    &:hover:not([disabled]) {
-      background-color: #457353;
-    }
-  }
 `;
 
 const ActiveRoomsWrapper = styled.div`

@@ -40,10 +40,6 @@ const HeaderNavigation = styled.nav`
 
 const HeaderUserBlock = styled.div`
   display: flex;
-
-  & > button {
-    display: inline-block;
-  }
 `;
 
 export { HeaderComponent, BurgerWrapper, HeaderNavigation, HeaderUserBlock };

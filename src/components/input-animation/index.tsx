@@ -16,7 +16,7 @@ type InputProps = {
   disabled?: boolean;
 };
 
-export const Input: FC<InputProps> = ({ label, ...rest }) => {
+export const InputAnimation: FC<InputProps> = ({ label, ...rest }) => {
   return (
     <InputWrapper
       isError={!!rest.error}

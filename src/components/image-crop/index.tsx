@@ -2,6 +2,8 @@ import { FC, useState } from "react";
 import Avatar from "react-avatar-edit";
 import { EncodeBase64 } from "utils/encodeBase64";
 
+import { Button } from "components/button/styles";
+
 import { AvatarEditWrapper } from "./styles";
 import { ImageCropProps } from "./types";
 
@@ -54,12 +56,12 @@ export const ImageCrop: FC<ImageCropProps> = ({
             onFileLoad={onFileLoad}
           />
           <div>
-            <button onClick={onSave} type="button">
+            <Button onClick={onSave} type="button">
               save
-            </button>
-            <button onClick={() => setEditMode(false)} type="button">
+            </Button>
+            <Button onClick={() => setEditMode(false)} type="button">
               cancel
-            </button>
+            </Button>
           </div>
         </>
       ) : (
@@ -71,9 +73,9 @@ export const ImageCrop: FC<ImageCropProps> = ({
             className="image_default_styles"
           />
           <div>
-            <button onClick={() => setEditMode(true)} type="button">
+            <Button onClick={() => setEditMode(true)} type="button">
               edit
-            </button>
+            </Button>
           </div>
         </div>
       )}

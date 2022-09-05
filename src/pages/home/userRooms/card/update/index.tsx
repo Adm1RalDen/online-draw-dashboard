@@ -6,6 +6,8 @@ import { FunctionWithParams } from "types";
 import { ActiveRoom } from "types/rooms";
 import { Portal } from "utils/portal";
 
+import { Button } from "components/button/styles";
+
 import {
   UpdateModalButtonsWrapper,
   UpdateModalForm,
@@ -91,8 +93,8 @@ export const UpdateCard: FC<Props> = ({
             />
           </div>
           <UpdateModalButtonsWrapper>
-            <button type="submit">save</button>
-            <button onClick={() => setEditMode(false)}>cancel</button>
+            <Button type="submit">save</Button>
+            <Button onClick={() => setEditMode(false)}>cancel</Button>
           </UpdateModalButtonsWrapper>
         </UpdateModalForm>
       </UpdateModalWrapper>

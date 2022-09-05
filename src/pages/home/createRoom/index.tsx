@@ -5,7 +5,9 @@ import { userDataSelector } from "store/selectors/user.selector";
 import { useAppSelector } from "store/store";
 import { FunctionWithParams } from "types";
 
+import { Button } from "components/button/styles";
 import { ErrorOutput } from "components/errorOutput";
+import { Form } from "components/form/styles";
 
 import { RoomWrapper, SubmitButton } from "../styles";
 import { initialValues, onSubmit, validationSchema } from "./const";
@@ -36,7 +38,7 @@ export const CreateRoomComponent: FC<ComponentProps> = ({
   return (
     <RoomWrapper>
       <h3>Create room</h3>
-      <form onSubmit={formik.handleSubmit}>
+      <Form onSubmit={formik.handleSubmit}>
         <div>
           <input
             type="text"
@@ -65,7 +67,7 @@ export const CreateRoomComponent: FC<ComponentProps> = ({
         <SubmitButton type="submit" disabled={isLoading || !formik.dirty}>
           Create room
         </SubmitButton>
-      </form>
+      </Form>
     </RoomWrapper>
   );
 };

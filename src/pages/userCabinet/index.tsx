@@ -99,12 +99,8 @@ export const UserCabinet = () => {
               </UserInfoWrapper>
 
               <ButtonWrapper>
-                <Button onClick={handleEdit} color="#fff">
-                  Edit
-                </Button>
-                <Button onClick={() => navigate(HOME_URL)} color="#fff">
-                  Back
-                </Button>
+                <Button onClick={handleEdit}>Edit</Button>
+                <Button onClick={() => navigate(HOME_URL)}>Back</Button>
               </ButtonWrapper>
             </Wrapper>
           </>
