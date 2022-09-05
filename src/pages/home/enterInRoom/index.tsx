@@ -8,7 +8,7 @@ import { FunctionWithParams } from "types";
 import { ErrorOutput } from "components/errorOutput";
 import { Form } from "components/form/styles";
 
-import { RoomWrapper, SubmitButton } from "../styles";
+import { RoomInput, RoomWrapper, SubmitButton } from "../styles";
 import { initialValues, onSubmit, validationSchema } from "./const";
 
 type Props = {
@@ -38,7 +38,7 @@ export const EnterInRoomComponent: FC<Props> = ({
       <h3>Join to room</h3>
       <Form onSubmit={formik.handleSubmit}>
         <div>
-          <input
+          <RoomInput
             type="text"
             name="roomId"
             placeholder="Room id"
@@ -52,7 +52,7 @@ export const EnterInRoomComponent: FC<Props> = ({
           )}
         </div>
         <div>
-          <input
+          <RoomInput
             type="password"
             name="roomPassword"
             placeholder="Room password"

@@ -7,6 +7,7 @@ export const themes = {
     black: "#000",
     link: "#6363fa",
     gold: "#ffc800",
+    green: "#00be03",
     light_gray: "#d6d6d6",
     blue: "#0a87e1",
     gray: "#64646445",
@@ -16,6 +17,8 @@ export const themes = {
     aqua: "#016a84",
     lightAqua: "#009cc3",
     darkAqua: "#00596f",
+    aquaMiddle: "#0092b6",
+    aquaGreen: "#3f6d78",
   },
 
   breakPoints: {
@@ -30,5 +33,6 @@ export const themes = {
 
   border: {
     gray: "#d5d5d5c8",
+    liteGreen: "#6b9080",
   },
 };

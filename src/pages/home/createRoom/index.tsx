@@ -5,11 +5,10 @@ import { userDataSelector } from "store/selectors/user.selector";
 import { useAppSelector } from "store/store";
 import { FunctionWithParams } from "types";
 
-import { Button } from "components/button/styles";
 import { ErrorOutput } from "components/errorOutput";
 import { Form } from "components/form/styles";
 
-import { RoomWrapper, SubmitButton } from "../styles";
+import { RoomInput, RoomWrapper, SubmitButton } from "../styles";
 import { initialValues, onSubmit, validationSchema } from "./const";
 
 type ComponentProps = {
@@ -40,7 +39,7 @@ export const CreateRoomComponent: FC<ComponentProps> = ({
       <h3>Create room</h3>
       <Form onSubmit={formik.handleSubmit}>
         <div>
-          <input
+          <RoomInput
             type="text"
             name="roomName"
             placeholder="Room name"
@@ -54,7 +53,7 @@ export const CreateRoomComponent: FC<ComponentProps> = ({
           )}
         </div>
         <div>
-          <input
+          <RoomInput
             type="password"
             name="roomPassword"
             placeholder="Room password"

@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
 const UpdateModalWrapper = styled.div`
-  background-color: #fff;
-
+  background-color: ${({ theme }) => theme.colors.white};
   padding: 10px;
   width: 350px;
   height: 250px;
@@ -35,14 +34,14 @@ const UpdateModalButtonsWrapper = styled.div`
 
   & > button {
     border-radius: 5px;
-    color: #fff;
+    color: ${({ theme }) => theme.colors.white};
     cursor: pointer;
     flex-basis: 50%;
     height: 30px;
     transition: all 0.3s;
 
     &:focus {
-      box-shadow: 0px 0px 2px 5px #1692ff;
+      box-shadow: 0px 0px 2px 5px ${({ theme }) => theme.colors.blue};
     }
   }
 
