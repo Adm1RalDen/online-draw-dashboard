@@ -7,10 +7,13 @@ import { ActiveRoom } from "types/rooms";
 import { Portal } from "utils/portal";
 
 import { Button } from "components/button/styles";
+import { Input } from "components/input/styles";
 
 import {
   UpdateModalButtonsWrapper,
+  UpdateModalCheckbox,
   UpdateModalForm,
+  UpdateModalInput,
   UpdateModalWrapper,
 } from "./styles";
 
@@ -66,7 +69,7 @@ export const UpdateCard: FC<Props> = ({
         <UpdateModalForm onSubmit={formik.handleSubmit}>
           <div>
             <label>Room name</label>
-            <input
+            <UpdateModalInput
               type="text"
               name="roomName"
               value={formik.values.roomName}
@@ -75,7 +78,7 @@ export const UpdateCard: FC<Props> = ({
             />
 
             <label>Room password</label>
-            <input
+            <UpdateModalInput
               type="text"
               name="roomPassword"
               value={formik.values.roomPassword}
@@ -84,7 +87,7 @@ export const UpdateCard: FC<Props> = ({
             />
 
             <label>Show</label>
-            <input
+            <UpdateModalCheckbox
               type="checkbox"
               name="isShow"
               checked={!!formik.values.isShow}
