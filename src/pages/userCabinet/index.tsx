@@ -7,6 +7,7 @@ import { useAppSelector } from "store/store";
 import { Button } from "components/button";
 import { Container } from "components/container";
 import { HtmlText } from "components/htmlText";
+import { Loader } from "components/loaders/loader";
 
 import {
   Avatar,
@@ -34,7 +35,7 @@ export const UserCabinet = () => {
     <UserCabinetSection>
       <Container>
         {isLoading ? (
-          <h1 style={{ textAlign: "center" }}>Loading...</h1>
+          <Loader position="absolute" />
         ) : (
           <>
             <Wrapper>
@@ -69,7 +70,7 @@ export const UserCabinet = () => {
                     <span>City</span> {data.city}
                   </div>
                   <div>
-                    <span>Color</span>{" "}
+                    <span>Color</span>
                     <span
                       style={{
                         display: "inline-block",

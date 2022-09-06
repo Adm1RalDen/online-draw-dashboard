@@ -3,7 +3,6 @@ import { getProfile } from "api/user/getProfile";
 import { updateUser } from "api/user/update";
 import { AxiosError } from "axios";
 import { USER_REDUCER } from "store/const";
-import { logoutAction } from "store/slices/user.slice";
 
 export const getUserProfileThunk = createAsyncThunk(
   `${USER_REDUCER}/profile-thunk`,
@@ -15,16 +14,12 @@ export const getUserProfileThunk = createAsyncThunk(
 
 export const updateUserProfileThunk = createAsyncThunk(
   `${USER_REDUCER}/update-profile-thunk`,
-  async (data: any, { rejectWithValue, dispatch }) => {
+  async (data: FormData, { rejectWithValue }) => {
     try {
       const response = await updateUser(data);
       return response.data;
     } catch (e) {
       if (e instanceof AxiosError) {
-        if (e.response?.status === 401) {
-          dispatch(logoutAction());
-          return rejectWithValue("User is not authorized");
-        }
         return rejectWithValue("Error");
       }
       return rejectWithValue("Error");

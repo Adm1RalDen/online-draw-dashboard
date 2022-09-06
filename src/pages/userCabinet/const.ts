@@ -25,7 +25,7 @@ const setInitialValues = (data: AuthorizedUser): InitialStateTypes => ({
   name: data.name,
   country: data.country,
   city: data.city,
-  age: data.age || "",
+  age: data.age,
   color: data.color,
   gender: data.gender,
   date: data.date,
@@ -86,6 +86,11 @@ const onSubmit = async (
     return chenchedData[key] !== original[key];
   });
 
+  if (!filteredKeys.length) {
+    handleEdit();
+    return;
+  }
+
   const isAvatar = filteredKeys.includes("avatar");
 
   if (isAvatar) {
@@ -105,9 +110,9 @@ const onSubmit = async (
   formData.append("id", original.id);
 
   handleEdit();
-  dispatch(updateUserProfileThunk(formData)).then(() =>
-    dispatch(getUserProfileThunk(original.id))
-  );
+  dispatch(updateUserProfileThunk(formData)).then(() => {
+    dispatch(getUserProfileThunk(original.id));
+  });
 };
 export {
   setInitialValues,
