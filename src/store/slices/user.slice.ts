@@ -1,5 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { authorizedBuilder } from "store/builders/authorizedBuilder";
+import { getUserProfileBuilder } from "store/builders/getUserProfileBuilder";
 import { updateUserProfileBuilder } from "store/builders/updateUserProfileBuilder";
 import { userLoginBuilder } from "store/builders/userLoginBuilder";
 import { userRegistrationBuilder } from "store/builders/userRegistrationBuilder";
@@ -30,6 +31,7 @@ export const UserSlice = createSlice({
   },
 
   extraReducers: (builder) => {
+    getUserProfileBuilder(builder);
     userLoginBuilder(builder);
     updateUserProfileBuilder(builder);
     userRegistrationBuilder(builder);

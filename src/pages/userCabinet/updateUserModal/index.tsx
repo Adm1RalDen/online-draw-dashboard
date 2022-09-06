@@ -85,6 +85,7 @@ export const UpdateUserModal: FC<UpdateUserModalTypes> = ({
           <Input
             key={key}
             name={key}
+            placeholder={key}
             type={setInputTypes(key)}
             value={formik.values[key]}
             onChange={formik.handleChange}
@@ -100,12 +101,9 @@ export const UpdateUserModal: FC<UpdateUserModalTypes> = ({
           onChange={setBiography}
           value={biography}
         />
-
         <ButtonWrapper>
           <Button type="submit">Save</Button>
-          <Button type="submit" onClick={handleEdit}>
-            Cancel
-          </Button>
+          <Button onClick={handleEdit}>Cancel</Button>
         </ButtonWrapper>
       </UserForm>
     </Portal>

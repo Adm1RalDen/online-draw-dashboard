@@ -85,20 +85,38 @@ const UserInfo = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+`;
 
-  & > div {
-    width: 100%;
+const InfoWrapper = styled.div`
+  width: 100%;
+  font-weight: 400;
+  padding: 10px 10px;
+  border-bottom: 2px solid ${(p) => p.theme.colors.light_gray};
+
+  & > p {
+    font-size: 18px;
+    display: inline-block;
+    min-width: 100px;
     font-weight: 400;
-    padding: 10px 10px;
-    border-bottom: 2px solid ${(p) => p.theme.colors.light_gray};
+    font-size: ${({ theme }) => theme.fontSizes.smallUp};
 
     & > span {
-      display: inline-block;
-      min-width: 100px;
-      font-weight: 400;
-      font-size: ${({ theme }) => theme.fontSizes.smallUp};
+      margin-left: 5px;
+      font-weight: 300;
     }
   }
+`;
+
+type Props = {
+  color: string;
+};
+
+const ColorSpan = styled.span<Props>`
+  display: inline-block;
+  background: ${(p) => p.color || "transparent"};
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
 `;
 
 const Biography = styled.div`
@@ -141,4 +159,6 @@ export {
   Avatar,
   AvatarWrapper,
   ButtonWrapper,
+  InfoWrapper,
+  ColorSpan,
 };
