@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { FlexContainer } from "components/flex-container/styles";
+import { FlexContainer } from "components/flex-container";
 
 const ServerErrorPageWrapper = styled(FlexContainer)`
   height: 100vh;

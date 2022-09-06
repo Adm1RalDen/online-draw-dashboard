@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import { Button } from "components/button";
-import { FlexContainer } from "components/flex-container/styles";
+import { FlexContainer } from "components/flex-container";
 
 const ConfirmAccessPage = styled(FlexContainer)`
   height: 100vh;

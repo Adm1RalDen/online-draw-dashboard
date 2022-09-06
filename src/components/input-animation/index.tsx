@@ -1,6 +1,8 @@
 import { FC } from "react";
 import { FunctionWithParams } from "types";
 
+import { Input } from "components/input";
+
 import { ErrorSpan, InputWrapper } from "./styles";
 
 type InputProps = {
@@ -23,9 +25,9 @@ export const InputAnimation: FC<InputProps> = ({ label, ...rest }) => {
       hasValue={!!rest.value}
       margin={rest.margin}
     >
-      <input {...rest} type={rest.type} />
+      <Input {...rest} type={rest.type} />
       <label>{label}</label>
-      {!!rest.error && <ErrorSpan title={rest.error}></ErrorSpan>}
+      {rest.error && <ErrorSpan title={rest.error}></ErrorSpan>}
     </InputWrapper>
   );
 };

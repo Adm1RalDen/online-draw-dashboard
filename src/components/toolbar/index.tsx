@@ -6,6 +6,8 @@ import { userDataSelector } from "store/selectors/user.selector";
 import { useAppSelector } from "store/store";
 import { ToolsTypes } from "types/canvas";
 
+import { Input } from "components/input";
+
 import { PaintContext } from "../../context/paintContext";
 import {
   DrawToolsWrapper,
@@ -27,6 +29,9 @@ export const Toolbar = () => {
   const { roomId } = useParams();
   const { id } = useAppSelector(userDataSelector);
   const { socket } = useSocket();
+
+  const handleChangeFillStyle = (e: React.ChangeEvent<HTMLInputElement>) =>
+    changeFillStyle(e.target.value);
 
   const handleChangeTool = (e: MouseEvent) => {
     if ((e.target as HTMLElement).tagName === "BUTTON") {
@@ -83,11 +88,7 @@ export const Toolbar = () => {
           data-tool="line"
           active={tool === "line"}
         />
-        <input
-          type="color"
-          name="color"
-          onChange={(e) => changeFillStyle(e.target.value)}
-        />
+        <Input type="color" name="color" onChange={handleChangeFillStyle} />
       </DrawToolsWrapper>
 
       <SnapshotButtonsWrapper>

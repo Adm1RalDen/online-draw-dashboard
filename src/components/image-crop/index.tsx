@@ -40,6 +40,8 @@ export const ImageCrop: FC<ImageCropProps> = ({
       setEditingImage(res);
     });
   };
+  const handleEditModeOff = () => setEditMode(false);
+  const handleEditModeOn = () => setEditMode(true);
 
   return (
     <AvatarEditWrapper>
@@ -59,7 +61,7 @@ export const ImageCrop: FC<ImageCropProps> = ({
             <Button onClick={onSave} type="button">
               save
             </Button>
-            <Button onClick={() => setEditMode(false)} type="button">
+            <Button onClick={handleEditModeOff} type="button">
               cancel
             </Button>
           </div>
@@ -73,7 +75,7 @@ export const ImageCrop: FC<ImageCropProps> = ({
             className="image_default_styles"
           />
           <div>
-            <Button onClick={() => setEditMode(true)} type="button">
+            <Button onClick={handleEditModeOn} type="button">
               edit
             </Button>
           </div>
