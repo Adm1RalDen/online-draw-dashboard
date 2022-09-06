@@ -39,19 +39,22 @@ const validationSchema = yup.object().shape({
   date: yup.date(),
 });
 
+const inputKeys = [
+  "id",
+  "role",
+  "email",
+  "biography",
+  "avatar",
+  "backgroundFon",
+  "gender",
+  "color",
+];
+
 const filterFields = (
   userFields: AuthorizedUser
 ): [keyof Omit<UserCabinetTypes, "gender" | "color">, string][] => {
   const res = Object.entries(userFields).filter(
-    ([key]) =>
-      key !== "id" &&
-      key !== "role" &&
-      key !== "email" &&
-      key !== "biography" &&
-      key !== "avatar" &&
-      key !== "backgroundFon" &&
-      key !== "gender" &&
-      key !== "color"
+    ([key]) => !inputKeys.includes(key)
   ) as [keyof Omit<UserCabinetTypes, "gender" | "color">, string][];
   return res;
 };
@@ -79,35 +82,35 @@ const onSubmit = async (
     AuthorizedUser,
     "role" | "email"
   >)[];
+
   const filteredKeys = keys.filter((key) => {
     return chenchedData[key] !== original[key];
   });
 
-  if (!filteredKeys.length) {
-    return handleEdit();
+  if (filteredKeys.length) {
+    const formData = new FormData();
+    const isAvatar = filteredKeys.includes("avatar");
+
+    if (isAvatar) {
+      const file = await createBlobFile(
+        chenchedData.avatar,
+        "image",
+        "image/png"
+      );
+      formData.append("avatar", file);
+    }
+
+    filteredKeys.map((key: keyof Omit<AuthorizedUser, "role" | "email">) => {
+      if (key === "avatar") return;
+      formData.append(key, chenchedData[key]);
+    });
+
+    formData.append("id", original.id);
+
+    dispatch(updateUserProfileThunk(formData));
   }
 
-  const formData = new FormData();
-  const isAvatar = filteredKeys.includes("avatar");
-
-  if (isAvatar) {
-    const file = await createBlobFile(
-      chenchedData.avatar,
-      "image",
-      "image/png"
-    );
-    formData.append("avatar", file);
-  }
-
-  filteredKeys.map((key: keyof Omit<AuthorizedUser, "role" | "email">) => {
-    if (key === "avatar") return;
-    formData.append(key, chenchedData[key]);
-  });
-
-  formData.append("id", original.id);
-
-  dispatch(updateUserProfileThunk(formData));
-  return handleEdit();
+  handleEdit();
 };
 export {
   setInitialValues,
