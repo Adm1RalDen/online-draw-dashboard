@@ -1,8 +1,5 @@
 import { AppDispatch } from "store/store";
-import {
-  getUserProfileThunk,
-  updateUserProfileThunk,
-} from "store/thunks/user/user.thunk";
+import { updateUserProfileThunk } from "store/thunks/user/user.thunk";
 import { AuthorizedUser } from "types";
 import { createBlobFile } from "utils/encodeBase64";
 import * as yup from "yup";
@@ -11,6 +8,7 @@ import { InitialStateTypes, UserCabinetTypes } from "./types";
 
 export const MALE = "male";
 export const WOMAN = "woman";
+
 const defaultUserValues = {
   name: "",
   country: "",
@@ -25,7 +23,7 @@ const setInitialValues = (data: AuthorizedUser): InitialStateTypes => ({
   name: data.name,
   country: data.country,
   city: data.city,
-  age: data.age || "",
+  age: data.age,
   color: data.color,
   gender: data.gender,
   date: data.date,
@@ -41,19 +39,22 @@ const validationSchema = yup.object().shape({
   date: yup.date(),
 });
 
+const inputKeys = [
+  "id",
+  "role",
+  "email",
+  "biography",
+  "avatar",
+  "backgroundFon",
+  "gender",
+  "color",
+];
+
 const filterFields = (
   userFields: AuthorizedUser
 ): [keyof Omit<UserCabinetTypes, "gender" | "color">, string][] => {
   const res = Object.entries(userFields).filter(
-    ([key]) =>
-      key !== "id" &&
-      key !== "role" &&
-      key !== "email" &&
-      key !== "biography" &&
-      key !== "avatar" &&
-      key !== "backgroundFon" &&
-      key !== "gender" &&
-      key !== "color"
+    ([key]) => !inputKeys.includes(key)
   ) as [keyof Omit<UserCabinetTypes, "gender" | "color">, string][];
   return res;
 };
@@ -81,33 +82,35 @@ const onSubmit = async (
     AuthorizedUser,
     "role" | "email"
   >)[];
-  const formData = new FormData();
+
   const filteredKeys = keys.filter((key) => {
     return chenchedData[key] !== original[key];
   });
 
-  const isAvatar = filteredKeys.includes("avatar");
+  if (filteredKeys.length) {
+    const formData = new FormData();
+    const isAvatar = filteredKeys.includes("avatar");
 
-  if (isAvatar) {
-    const file = await createBlobFile(
-      chenchedData.avatar,
-      "image",
-      "image/png"
-    );
-    formData.append("avatar", file);
+    if (isAvatar) {
+      const file = await createBlobFile(
+        chenchedData.avatar,
+        "image",
+        "image/png"
+      );
+      formData.append("avatar", file);
+    }
+
+    filteredKeys.map((key: keyof Omit<AuthorizedUser, "role" | "email">) => {
+      if (key === "avatar") return;
+      formData.append(key, chenchedData[key]);
+    });
+
+    formData.append("id", original.id);
+
+    dispatch(updateUserProfileThunk(formData));
   }
 
-  filteredKeys.map((key: keyof Omit<AuthorizedUser, "role" | "email">) => {
-    if (key === "avatar") return;
-    formData.append(key, chenchedData[key]);
-  });
-
-  formData.append("id", original.id);
-
   handleEdit();
-  dispatch(updateUserProfileThunk(formData)).then(() =>
-    dispatch(getUserProfileThunk(original.id))
-  );
 };
 export {
   setInitialValues,
