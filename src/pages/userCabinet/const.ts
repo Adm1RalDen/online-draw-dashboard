@@ -1,8 +1,5 @@
 import { AppDispatch } from "store/store";
-import {
-  getUserProfileThunk,
-  updateUserProfileThunk,
-} from "store/thunks/user/user.thunk";
+import { updateUserProfileThunk } from "store/thunks/user/user.thunk";
 import { AuthorizedUser } from "types";
 import { createBlobFile } from "utils/encodeBase64";
 import * as yup from "yup";
@@ -11,6 +8,7 @@ import { InitialStateTypes, UserCabinetTypes } from "./types";
 
 export const MALE = "male";
 export const WOMAN = "woman";
+
 const defaultUserValues = {
   name: "",
   country: "",
@@ -81,16 +79,15 @@ const onSubmit = async (
     AuthorizedUser,
     "role" | "email"
   >)[];
-  const formData = new FormData();
   const filteredKeys = keys.filter((key) => {
     return chenchedData[key] !== original[key];
   });
 
   if (!filteredKeys.length) {
-    handleEdit();
-    return;
+    return handleEdit();
   }
 
+  const formData = new FormData();
   const isAvatar = filteredKeys.includes("avatar");
 
   if (isAvatar) {
@@ -109,10 +106,8 @@ const onSubmit = async (
 
   formData.append("id", original.id);
 
-  handleEdit();
-  dispatch(updateUserProfileThunk(formData)).then(() => {
-    dispatch(getUserProfileThunk(original.id));
-  });
+  dispatch(updateUserProfileThunk(formData));
+  return handleEdit();
 };
 export {
   setInitialValues,
