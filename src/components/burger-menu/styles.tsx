@@ -1,10 +1,10 @@
-import styled, { css, keyframes } from "styled-components";
+import styled, { css, keyframes } from 'styled-components'
 
 type Props = {
-  isOpen: boolean;
-};
+  isOpen: boolean
+}
 
-const BurgerWrapper = styled.div``;
+const BurgerWrapper = styled.div``
 
 const Burger = styled.div<Props>`
   width: 25px;
@@ -16,11 +16,11 @@ const Burger = styled.div<Props>`
   &::before,
   ::after,
   & > span {
-    content: "";
+    content: '';
     position: absolute;
     width: 100%;
     height: 2px;
-    background-color: ${(p) => (p.isOpen ? "#000" : "#fff")};
+    background-color: ${(p) => (p.isOpen ? '#000' : '#fff')};
     transition: all 0.3s;
   }
 
@@ -50,7 +50,7 @@ const Burger = styled.div<Props>`
         transform: rotate(-45deg);
       }
     `}
-`;
+`
 
 const animationMenu = keyframes`
   0%{
@@ -59,7 +59,7 @@ const animationMenu = keyframes`
   100%{
     transform: translateX(0);
   }
-`;
+`
 const NavigationMenu = styled.nav<Props>`
   width: 100%;
   padding-top: 50px;
@@ -90,6 +90,6 @@ const NavigationMenu = styled.nav<Props>`
       font-weight: 400;
     }
   }
-`;
+`
 
-export { Burger, BurgerWrapper, NavigationMenu };
+export { Burger, BurgerWrapper, NavigationMenu }

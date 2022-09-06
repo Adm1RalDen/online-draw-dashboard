@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes } from 'styled-components'
 
 const spanAnimation = keyframes`
   0%{
@@ -10,19 +10,19 @@ const spanAnimation = keyframes`
     transform: translateX(10px);
     height: 100%;
   }
-`;
+`
 
 const ContentWrapper = styled.div`
   max-width: 100%;
   height: 45px;
   position: relative;
-`;
+`
 
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-`;
+`
 
 const SpanWrapper = styled.div`
   max-width: 200px;
@@ -33,14 +33,14 @@ const SpanWrapper = styled.div`
   border: 4px solid ${(p) => p.theme.colors.darkBlue};
   padding: 10px;
   animation: ${spanAnimation} 0.5s linear forwards;
-`;
+`
 
 const FileName = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
   width: 100%;
-`;
+`
 
 const CloseDiv = styled.div`
   position: absolute;
@@ -56,14 +56,14 @@ const CloseDiv = styled.div`
   justify-content: center;
   border: 2px solid ${(p) => p.theme.colors.darkBlue};
   cursor: pointer;
-`;
+`
 const FileInputStyled = styled.input`
   position: absolute;
   display: block;
   top: 0;
   width: 0;
   height: 0;
-`;
+`
 
 const LoadButton = styled.button`
   max-width: 200px;
@@ -85,14 +85,6 @@ const LoadButton = styled.button`
   &:hover {
     background-color: ${(p) => p.theme.colors.darkBlue};
   }
-`;
+`
 
-export {
-  ContentWrapper,
-  Wrapper,
-  LoadButton,
-  SpanWrapper,
-  FileName,
-  FileInputStyled,
-  CloseDiv,
-};
+export { ContentWrapper, Wrapper, LoadButton, SpanWrapper, FileName, FileInputStyled, CloseDiv }

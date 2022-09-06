@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const StyledSettings = styled.div`
   grid-area: settings;
@@ -14,6 +14,6 @@ const StyledSettings = styled.div`
     align-items: center;
     gap: 10px;
   }
-`;
+`
 
-export { StyledSettings };
+export { StyledSettings }

@@ -1,24 +1,24 @@
-import { useSocket } from "hooks/useSocket";
-import { FC, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { userDataSelector } from "store/selectors/user.selector";
-import { useAppSelector } from "store/store";
+import { useSocket } from 'hooks/useSocket'
+import { FC, useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import { userDataSelector } from 'store/selectors/user.selector'
+import { useAppSelector } from 'store/store'
 
-import { Loader } from "components/loaders/loader";
+import { Loader } from 'components/loaders/loader'
 
-import { checkUserInRoom } from "./const";
+import { checkUserInRoom } from './const'
 
 type ParamsProps = {
-  roomId: string;
-};
+  roomId: string
+}
 
 export const OnlineDrawPage: FC<any> = ({ children }) => {
-  const user = useAppSelector(userDataSelector);
-  const { roomId } = useParams<ParamsProps>();
-  const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
-  const [access, setAccess] = useState(false);
-  const { socket } = useSocket();
+  const user = useAppSelector(userDataSelector)
+  const { roomId } = useParams<ParamsProps>()
+  const navigate = useNavigate()
+  const [isLoading, setIsLoading] = useState(false)
+  const [access, setAccess] = useState(false)
+  const { socket } = useSocket()
 
   useEffect(() => {
     checkUserInRoom({
@@ -27,12 +27,12 @@ export const OnlineDrawPage: FC<any> = ({ children }) => {
       setIsLoading,
       userId: user.id,
       setAccess,
-      socket,
-    });
-  }, []);
+      socket
+    })
+  }, [])
 
-  if (isLoading) return <Loader position="absolute" />;
-  if (!access) return null;
+  if (isLoading) return <Loader position='absolute' />
+  if (!access) return null
 
-  return children;
-};
+  return children
+}

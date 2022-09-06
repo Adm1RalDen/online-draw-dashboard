@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components'
 
 const StyledToolbar = styled.div`
   grid-area: toolbar;
@@ -21,12 +21,12 @@ const StyledToolbar = styled.div`
       margin-top: 5px;
     }
   }
-`;
+`
 
 type ToolButtonProps = {
-  img: string;
-  active?: boolean;
-};
+  img: string
+  active?: boolean
+}
 
 const ToolButton = styled.button<ToolButtonProps>`
   display: inline-block;
@@ -52,7 +52,7 @@ const ToolButton = styled.button<ToolButtonProps>`
       background-position: center center;
       background-repeat: no-repeat;
     `}
-`;
+`
 
 const LeaveButton = styled.button`
   width: 100px;
@@ -71,6 +71,6 @@ const LeaveButton = styled.button`
   &:focus {
     ${(p) => p.theme.shadows.buttonFocus}
   }
-`;
+`
 
-export { ToolButton, StyledToolbar, LeaveButton };
+export { ToolButton, StyledToolbar, LeaveButton }

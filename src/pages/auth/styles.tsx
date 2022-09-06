@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const AuthSection = styled.section`
   min-height: 100vh;
@@ -6,14 +6,14 @@ const AuthSection = styled.section`
   align-items: center;
   justify-content: center;
   background-color: #4361ee;
-`;
+`
 const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: auto minmax(300px, 500px);
   gap: 50px;
-`;
+`
 
 const Wrapper = styled.div`
   width: 100%;
@@ -24,12 +24,12 @@ const Wrapper = styled.div`
   border: 4px solid #fff;
   box-shadow: 0px 0px 2px 0px #989898;
   padding: 20px;
-`;
+`
 
 const Title = styled.h2`
   color: #ffffff;
   font-weight: 400;
-`;
+`
 const Logo = styled.h1`
   font-weight: 400;
   font-size: 40px;
@@ -37,7 +37,7 @@ const Logo = styled.h1`
   color: #fff;
   display: flex;
   align-items: center;
-`;
+`
 const FormWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -56,7 +56,7 @@ const FormWrapper = styled.div`
       border-color: ${(p) => p.theme.colors.link};
     }
   }
-`;
-const Form = styled.form``;
+`
+const Form = styled.form``
 
-export { AuthSection, Form, FormWrapper, Container, Logo, Wrapper, Title };
+export { AuthSection, Form, FormWrapper, Container, Logo, Wrapper, Title }

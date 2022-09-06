@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const ConfirmAccessPage = styled.div`
   height: 100vh;
@@ -6,7 +6,7 @@ const ConfirmAccessPage = styled.div`
   align-items: center;
   justify-content: center;
   background-color: #121212;
-`;
+`
 
 const ConfirmAccessPageMain = styled.div`
   border: 2px solid #d5d5d5c8;
@@ -55,6 +55,6 @@ const ConfirmAccessPageMain = styled.div`
       }
     }
   }
-`;
+`
 
-export { ConfirmAccessPage, ConfirmAccessPageMain };
+export { ConfirmAccessPage, ConfirmAccessPageMain }

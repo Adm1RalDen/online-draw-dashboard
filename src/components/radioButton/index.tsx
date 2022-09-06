@@ -1,21 +1,16 @@
-import { ChangeEvent, FC } from "react";
-import { FunctionWithParams } from "types";
+import { ChangeEvent, FC } from 'react'
+import { FunctionWithParams } from 'types'
 
-import { Input, InputWrapper, Label, Span, Wrapper } from "./styles";
+import { Input, InputWrapper, Label, Span, Wrapper } from './styles'
 
 type RadioButtonTypes = {
-  defaultValue: string;
-  values: string[];
-  name: string;
-  onChange: FunctionWithParams<ChangeEvent<HTMLInputElement>>;
-};
+  defaultValue: string
+  values: string[]
+  name: string
+  onChange: FunctionWithParams<ChangeEvent<HTMLInputElement>>
+}
 
-export const RadioButtons: FC<RadioButtonTypes> = ({
-  defaultValue,
-  name,
-  onChange,
-  values,
-}) => {
+export const RadioButtons: FC<RadioButtonTypes> = ({ defaultValue, name, onChange, values }) => {
   return (
     <InputWrapper>
       {values.map((value) => (
@@ -23,7 +18,7 @@ export const RadioButtons: FC<RadioButtonTypes> = ({
           <Label htmlFor={`radio_color_${value}`}>
             {value}
             <Input
-              type="radio"
+              type='radio'
               id={`radio_color_${value}`}
               name={name}
               value={value}
@@ -35,5 +30,5 @@ export const RadioButtons: FC<RadioButtonTypes> = ({
         </Wrapper>
       ))}
     </InputWrapper>
-  );
-};
+  )
+}

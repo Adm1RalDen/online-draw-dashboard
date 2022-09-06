@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const Wrapper = styled.div`
   display: grid;
@@ -7,5 +7,5 @@ const Wrapper = styled.div`
   grid-gap: 10px;
   align-items: stretch;
   background-color: ${(p) => p.theme.colors.light_gray};
-`;
-export { Wrapper };
+`
+export { Wrapper }

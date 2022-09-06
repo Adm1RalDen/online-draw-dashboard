@@ -1,11 +1,11 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const UserCabinetSection = styled.section`
   & > div {
     max-width: 1200px;
     padding: 5px;
   }
-`;
+`
 
 const Wrapper = styled.div`
   width: 100%;
@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   grid-template: 350px minmax(100px, auto) auto / minmax(100px, 350px) 1fr;
   gap: 30px;
   font-family: Roboto;
-`;
+`
 
 // ------------------1----------------------
 const ImagesWrapper = styled.div`
@@ -39,7 +39,7 @@ const ImagesWrapper = styled.div`
       transform: scale(110%);
     }
   }
-`;
+`
 
 const AvatarWrapper = styled.div`
   position: absolute;
@@ -59,7 +59,7 @@ const AvatarWrapper = styled.div`
     filter: invert(1);
     font-weight: 400;
   }
-`;
+`
 
 const Avatar = styled.div`
   width: 120px;
@@ -75,8 +75,8 @@ const Avatar = styled.div`
     object-fit: cover;
     box-shadow: 0px 0px 5px 1px black;
   }
-`;
-//---------------------2--------------------------
+`
+// ---------------------2--------------------------
 
 const UserInfoWrapper = styled.div`
   grid-column: 1/3;
@@ -84,7 +84,7 @@ const UserInfoWrapper = styled.div`
   display: grid;
   grid-template: minmax(150px, auto) minmax(50px, auto) / 1fr;
   box-shadow: 2px 2px 10px 1px #bcbcbc;
-`;
+`
 
 const UserInfo = styled.div`
   display: grid;
@@ -94,7 +94,7 @@ const UserInfo = styled.div`
 
   & > div {
     width: 100%;
-    font-family: "Roboto";
+    font-family: 'Roboto';
     font-weight: 400;
     padding: 10px 10px;
     border-bottom: 2px solid ${(p) => p.theme.colors.light_gray};
@@ -106,11 +106,11 @@ const UserInfo = styled.div`
       font-size: 18px;
     }
   }
-`;
+`
 
 const Biography = styled.div`
   background-color: #fff;
-  font-family: "Roboto";
+  font-family: 'Roboto';
   font-weight: 600;
   padding: 5px 10px;
   border-bottom-left-radius: 10px;
@@ -125,8 +125,8 @@ const Biography = styled.div`
     font-size: 18px;
     padding: 10px 5px 10px 0px;
   }
-`;
-//---------------------3--------------------------------
+`
+// ---------------------3--------------------------------
 
 const ButtonWrapper = styled.div`
   box-shadow: 2px 2px 10px 1px #bcbcbc;
@@ -138,7 +138,7 @@ const ButtonWrapper = styled.div`
   & > button {
     width: 100px;
   }
-`;
+`
 
 export {
   UserCabinetSection,
@@ -149,5 +149,5 @@ export {
   UserInfoWrapper,
   Avatar,
   AvatarWrapper,
-  ButtonWrapper,
-};
+  ButtonWrapper
+}

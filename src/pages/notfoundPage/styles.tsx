@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const NotFoundPageWrapper = styled.div`
   width: 100vw;
@@ -6,7 +6,7 @@ const NotFoundPageWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`;
+`
 const NotFoundPageContent = styled.div`
   & > p {
     font-size: 30px;
@@ -19,6 +19,6 @@ const NotFoundPageContent = styled.div`
     text-decoration: none;
     font-size: 20px;
   }
-`;
+`
 
-export { NotFoundPageWrapper, NotFoundPageContent };
+export { NotFoundPageWrapper, NotFoundPageContent }

@@ -1,9 +1,9 @@
-import { FC } from "react";
-import styled, { css, keyframes } from "styled-components";
+import { FC } from 'react'
+import styled, { css, keyframes } from 'styled-components'
 
 type LoaderProps = {
-  position?: "absolute" | "fixed";
-};
+  position?: 'absolute' | 'fixed'
+}
 const ldsRing = keyframes`
   0% {
     transform: rotate(0deg);
@@ -11,7 +11,7 @@ const ldsRing = keyframes`
   100% {
     transform: rotate(360deg);
   }
-`;
+`
 const LoaderWrapper = styled.div<LoaderProps>`
   width: 100%;
   height: 100%;
@@ -20,12 +20,12 @@ const LoaderWrapper = styled.div<LoaderProps>`
   justify-content: center;
 
   ${(p) =>
-    p.position === "fixed" &&
+    p.position === 'fixed' &&
     css`
       position: fixed;
     `}
   ${(p) =>
-    p.position === "absolute" &&
+    p.position === 'absolute' &&
     css`
       position: absolute;
       top: 0;
@@ -65,7 +65,7 @@ const LoaderWrapper = styled.div<LoaderProps>`
       animation-delay: -0.15s;
     }
   }
-`;
+`
 export const LittleLoader: FC<LoaderProps> = ({ position }) => {
   return (
     <LoaderWrapper position={position}>
@@ -76,5 +76,5 @@ export const LittleLoader: FC<LoaderProps> = ({ position }) => {
         <div />
       </div>
     </LoaderWrapper>
-  );
-};
+  )
+}

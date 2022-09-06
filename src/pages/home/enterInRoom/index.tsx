@@ -1,36 +1,29 @@
-import { useFormik } from "formik";
-import { useSocket } from "hooks/useSocket";
-import { FC } from "react";
-import { userInfoSelector } from "store/selectors/user.selector";
-import { useAppSelector } from "store/store";
-import { FunctionWithParams } from "types";
+import { useFormik } from 'formik'
+import { useSocket } from 'hooks/useSocket'
+import { FC } from 'react'
+import { userInfoSelector } from 'store/selectors/user.selector'
+import { useAppSelector } from 'store/store'
+import { FunctionWithParams } from 'types'
 
-import { ErrorOutput } from "components/errorOutput";
+import { ErrorOutput } from 'components/errorOutput'
 
-import { RoomWrapper, SubmitButton } from "../styles";
-import { initialValues, onSubmit, validationSchema } from "./const";
+import { RoomWrapper, SubmitButton } from '../styles'
+import { initialValues, onSubmit, validationSchema } from './const'
 
 type Props = {
-  isLoading: boolean;
-  setIsLoading: FunctionWithParams<boolean>;
-};
+  isLoading: boolean
+  setIsLoading: FunctionWithParams<boolean>
+}
 
-export const EnterInRoomComponent: FC<Props> = ({
-  isLoading,
-  setIsLoading,
-}) => {
-  const { socket } = useSocket();
-  const user = useAppSelector(userInfoSelector);
+export const EnterInRoomComponent: FC<Props> = ({ isLoading, setIsLoading }) => {
+  const { socket } = useSocket()
+  const user = useAppSelector(userInfoSelector)
   const formik = useFormik({
     initialValues,
     validationSchema,
     onSubmit: (data) =>
-      onSubmit(
-        { ...data, userId: user.data.id, userName: user.data.name },
-        socket,
-        setIsLoading
-      ),
-  });
+      onSubmit({ ...data, userId: user.data.id, userName: user.data.name }, socket, setIsLoading)
+  })
 
   return (
     <RoomWrapper>
@@ -38,9 +31,9 @@ export const EnterInRoomComponent: FC<Props> = ({
       <form onSubmit={formik.handleSubmit}>
         <div>
           <input
-            type="text"
-            name="roomId"
-            placeholder="Room id"
+            type='text'
+            name='roomId'
+            placeholder='Room id'
             value={formik.values.roomId}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -52,19 +45,19 @@ export const EnterInRoomComponent: FC<Props> = ({
         </div>
         <div>
           <input
-            type="password"
-            name="roomPassword"
-            placeholder="Room password"
+            type='password'
+            name='roomPassword'
+            placeholder='Room password'
             value={formik.values.roomPassword}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             disabled={isLoading}
           />
         </div>
-        <SubmitButton type="submit" disabled={isLoading || !formik.dirty}>
+        <SubmitButton type='submit' disabled={isLoading || !formik.dirty}>
           Enter in room
         </SubmitButton>
       </form>
     </RoomWrapper>
-  );
-};
+  )
+}

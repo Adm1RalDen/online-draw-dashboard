@@ -1,19 +1,19 @@
-import { useEffect, useState } from "react";
-import { useAppDispatch } from "store/store";
-import { AuthorizedThunk } from "store/thunks/user/authorization.thunk";
+import { useEffect, useState } from 'react'
+import { useAppDispatch } from 'store/store'
+import { AuthorizedThunk } from 'store/thunks/user/authorization.thunk'
 
-import { Loader } from "components/loaders/loader";
+import { Loader } from 'components/loaders/loader'
 
-import { Router } from "./router";
+import { Router } from './router'
 
 export const App = () => {
-  const dispatch = useAppDispatch();
-  const [isReady, setIsReady] = useState(false);
+  const dispatch = useAppDispatch()
+  const [isReady, setIsReady] = useState(false)
 
   useEffect(() => {
-    dispatch(AuthorizedThunk()).finally(() => setIsReady(true));
-  }, []);
+    dispatch(AuthorizedThunk()).finally(() => setIsReady(true))
+  }, [])
 
-  if (!isReady) return <Loader position="absolute" />;
-  return <Router />;
-};
+  if (!isReady) return <Loader position='absolute' />
+  return <Router />
+}

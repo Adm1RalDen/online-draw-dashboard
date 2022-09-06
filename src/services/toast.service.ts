@@ -1,10 +1,10 @@
-import { ToastOptions, toast } from "react-toastify";
+import { ToastOptions, toast } from 'react-toastify'
 
-const settings: Pick<ToastOptions, "autoClose" | "hideProgressBar"> = {
+const settings: Pick<ToastOptions, 'autoClose' | 'hideProgressBar'> = {
   hideProgressBar: true,
-  autoClose: false,
-};
+  autoClose: false
+}
 
-export const toastError = (str: string) => toast.error(str, settings);
-export const toastSuccess = (str: string) => toast.success(str, settings);
-export const toastWarn = (str: string) => toast.warn(str, settings);
+export const toastError = (str: string) => toast.error(str, settings)
+export const toastSuccess = (str: string) => toast.success(str, settings)
+export const toastWarn = (str: string) => toast.warn(str, settings)

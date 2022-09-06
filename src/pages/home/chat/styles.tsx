@@ -1,8 +1,8 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 type WrapperProps = {
-  myMessage: boolean;
-};
+  myMessage: boolean
+}
 const ChatWrapper = styled.div`
   height: calc(100% - 50px);
   display: grid;
@@ -38,7 +38,7 @@ const ChatWrapper = styled.div`
       cursor: pointer;
     }
   }
-`;
+`
 
 const MessagesWrapper = styled.div`
   display: flex;
@@ -53,11 +53,11 @@ const MessagesWrapper = styled.div`
     height: 30px;
     object-fit: cover;
   }
-`;
+`
 const Message = styled.div<WrapperProps>`
   flex-grow: 1;
   padding: 5px;
-  background-color: ${(p) => (p.myMessage ? "#0092b6" : "#3f6d78")};
+  background-color: ${(p) => (p.myMessage ? '#0092b6' : '#3f6d78')};
   border-radius: 10px;
 
   & > h4 {
@@ -69,6 +69,6 @@ const Message = styled.div<WrapperProps>`
     color: #fff;
     word-break: break-all;
   }
-`;
+`
 
-export { Message, MessagesWrapper, ChatWrapper };
+export { Message, MessagesWrapper, ChatWrapper }

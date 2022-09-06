@@ -1,24 +1,18 @@
-import { FC } from "react";
-import { ActiveRoom } from "types/rooms";
+import { FC } from 'react'
+import { ActiveRoom } from 'types/rooms'
 
-import { UserRoomCard } from "./card";
-import { UserCardsWrapper, UserRoomsWrapper } from "./styles";
+import { UserRoomCard } from './card'
+import { UserCardsWrapper, UserRoomsWrapper } from './styles'
 
 type Props = {
-  userRooms: ActiveRoom[];
-  userId: string;
-  userName: string;
-  isLoading: boolean;
-  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
-};
+  userRooms: ActiveRoom[]
+  userId: string
+  userName: string
+  isLoading: boolean
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
+}
 
-export const UserRooms: FC<Props> = ({
-  userRooms,
-  userId,
-  userName,
-  isLoading,
-  setIsLoading,
-}) => {
+export const UserRooms: FC<Props> = ({ userRooms, userId, userName, isLoading, setIsLoading }) => {
   return (
     <UserRoomsWrapper>
       <h3>Your Rooms</h3>
@@ -35,5 +29,5 @@ export const UserRooms: FC<Props> = ({
         ))}
       </UserCardsWrapper>
     </UserRoomsWrapper>
-  );
-};
+  )
+}

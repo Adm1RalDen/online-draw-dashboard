@@ -1,6 +1,6 @@
-import { ReactNode } from "react";
-import { createPortal } from "react-dom";
-import styled from "styled-components";
+import { ReactNode } from 'react'
+import { createPortal } from 'react-dom'
+import styled from 'styled-components'
 
 const ChildrenWrapper = styled.div`
   position: fixed;
@@ -13,14 +13,14 @@ const ChildrenWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`;
+`
 
 type Props = {
-  children?: ReactNode;
-};
+  children?: ReactNode
+}
 export const Portal = ({ children = null }: Props) => {
   return createPortal(
     <ChildrenWrapper>{children}</ChildrenWrapper>,
-    document.getElementById("modal") as HTMLDivElement
-  );
-};
+    document.getElementById('modal') as HTMLDivElement
+  )
+}

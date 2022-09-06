@@ -1,50 +1,44 @@
-import { DELETE_USER_ROOM_SOCKET, JOIN_ROOM_SOCKET } from "const/sockets";
-import { useSocket } from "hooks/useSocket";
-import { FC, useState } from "react";
-import { ActiveRoom } from "types/rooms";
+import { DELETE_USER_ROOM_SOCKET, JOIN_ROOM_SOCKET } from 'const/sockets'
+import { useSocket } from 'hooks/useSocket'
+import { FC, useState } from 'react'
+import { ActiveRoom } from 'types/rooms'
 
-import { CardSettings, CardSettingsButton, RoomCard } from "./styles";
-import { UpdateCard } from "./update";
+import { CardSettings, CardSettingsButton, RoomCard } from './styles'
+import { UpdateCard } from './update'
 
 type Props = {
-  room: ActiveRoom;
-  userId: string;
-  userName: string;
-  isLoading: boolean;
-  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
-};
+  room: ActiveRoom
+  userId: string
+  userName: string
+  isLoading: boolean
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
+}
 
-export const UserRoomCard: FC<Props> = ({
-  room,
-  userId,
-  userName,
-  isLoading,
-  setIsLoading,
-}) => {
-  const [active, setActive] = useState(false);
-  const [editMode, setEditMode] = useState(false);
-  const { socket } = useSocket();
+export const UserRoomCard: FC<Props> = ({ room, userId, userName, isLoading, setIsLoading }) => {
+  const [active, setActive] = useState(false)
+  const [editMode, setEditMode] = useState(false)
+  const { socket } = useSocket()
 
-  const handleEditMode = () => setEditMode((prev) => !prev);
-  const handleActiveMode = () => setActive((prev) => !prev);
+  const handleEditMode = () => setEditMode((prev) => !prev)
+  const handleActiveMode = () => setActive((prev) => !prev)
   const handleDeleteRoom = () => {
-    setIsLoading(true);
+    setIsLoading(true)
     socket.emit(DELETE_USER_ROOM_SOCKET, {
       userId,
       roomId: room._id,
-      roomPassword: room.roomPassword,
-    });
-  };
+      roomPassword: room.roomPassword
+    })
+  }
 
   const handleJoinRoom = () => {
-    setIsLoading(true);
+    setIsLoading(true)
     socket.emit(JOIN_ROOM_SOCKET, {
       userId,
       userName,
       roomId: room._id,
-      roomPassword: room.roomPassword,
-    });
-  };
+      roomPassword: room.roomPassword
+    })
+  }
 
   return (
     <RoomCard active={active}>
@@ -79,9 +73,9 @@ export const UserRoomCard: FC<Props> = ({
       )}
       <span onClick={handleActiveMode}>
         {!active ? (
-          <img src="/assets/dots.png" alt="edit" width={30} height={30} />
+          <img src='/assets/dots.png' alt='edit' width={30} height={30} />
         ) : (
-          <img src="/assets/close.png" alt="close" width={25} height={25} />
+          <img src='/assets/close.png' alt='close' width={25} height={25} />
         )}
       </span>
 
@@ -94,5 +88,5 @@ export const UserRoomCard: FC<Props> = ({
         />
       )}
     </RoomCard>
-  );
-};
+  )
+}

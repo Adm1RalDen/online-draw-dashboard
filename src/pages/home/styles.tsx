@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const SubmitButton = styled.button`
   width: 200px;
@@ -17,12 +17,12 @@ const SubmitButton = styled.button`
     color: #000;
     cursor: not-allowed;
   }
-`;
+`
 
 const HomePageSection = styled.section`
   min-height: 100vh;
   background-color: #183333;
-`;
+`
 
 const HomePageWrapper = styled.div`
   display: grid;
@@ -32,15 +32,15 @@ const HomePageWrapper = styled.div`
   padding: 2vh 0px 0px 0px;
   grid-template: 50px 1fr 1fr / 1fr 3fr 2fr;
   grid-template-areas:
-    "header header header"
-    "activeRooms wrapper chat"
-    "activeRooms myRooms chat";
+    'header header header'
+    'activeRooms wrapper chat'
+    'activeRooms myRooms chat';
   gap: 20px;
 
   & > div {
     border-radius: 10px;
   }
-`;
+`
 
 const HomeHeader = styled.header`
   grid-area: header;
@@ -60,7 +60,7 @@ const HomeHeader = styled.header`
       background-color: #457353;
     }
   }
-`;
+`
 
 const ActiveRoomsWrapper = styled.div`
   grid-area: activeRooms;
@@ -75,7 +75,7 @@ const ActiveRoomsWrapper = styled.div`
     font-size: 22px;
     margin-bottom: 15px;
   }
-`;
+`
 
 const Wrapper = styled.div`
   grid-area: wrapper;
@@ -87,11 +87,11 @@ const Wrapper = styled.div`
   & > div:last-child {
     margin-top: 20px;
   }
-`;
+`
 
 const ChatWrapper = styled(ActiveRoomsWrapper)`
   grid-area: chat;
-`;
+`
 
 const RoomWrapper = styled.div`
   border-radius: 10px;
@@ -106,7 +106,7 @@ const RoomWrapper = styled.div`
     height: 30px;
     margin-top: 10px;
   }
-`;
+`
 
 export {
   HomePageSection,
@@ -116,5 +116,5 @@ export {
   Wrapper,
   RoomWrapper,
   HomeHeader,
-  SubmitButton,
-};
+  SubmitButton
+}

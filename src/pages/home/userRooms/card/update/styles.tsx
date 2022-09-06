@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const UpdateModalWrapper = styled.div`
   background-color: #fff;
@@ -6,7 +6,7 @@ const UpdateModalWrapper = styled.div`
   padding: 10px;
   width: 350px;
   height: 250px;
-`;
+`
 
 const UpdateModalForm = styled.form`
   display: flex;
@@ -14,19 +14,19 @@ const UpdateModalForm = styled.form`
   flex-direction: column;
   justify-content: space-between;
 
-  & > div > input:not([type="checkbox"]) {
+  & > div > input:not([type='checkbox']) {
     width: 100%;
     height: 30px;
     border-radius: 5px;
     margin-bottom: 5px;
   }
-  & > div > input:not([type="text"]) {
+  & > div > input:not([type='text']) {
     display: block;
     width: 20px;
     height: 20px;
     margin-top: 10px;
   }
-`;
+`
 
 const UpdateModalButtonsWrapper = styled.div`
   display: flex;
@@ -58,6 +58,6 @@ const UpdateModalButtonsWrapper = styled.div`
       background-color: #ed1b1b;
     }
   }
-`;
+`
 
-export { UpdateModalWrapper, UpdateModalForm, UpdateModalButtonsWrapper };
+export { UpdateModalWrapper, UpdateModalForm, UpdateModalButtonsWrapper }

@@ -1,29 +1,26 @@
-import { ChangeEvent, FC } from "react";
-import { Heading4 } from "styles/typography/styles";
-import { FunctionWithParams } from "types";
+import { ChangeEvent, FC } from 'react'
+import { Heading4 } from 'styles/typography/styles'
+import { FunctionWithParams } from 'types'
 
-import { FileInput } from "components/fileInput";
-import { Input } from "components/input";
-import { RadioButtons } from "components/radioButton";
+import { FileInput } from 'components/fileInput'
+import { Input } from 'components/input'
+import { RadioButtons } from 'components/radioButton'
 
-import { MALE, WOMAN } from "../const";
-import { RadioButtonsWrapper } from "../updateUserModal/styles";
+import { MALE, WOMAN } from '../const'
+import { RadioButtonsWrapper } from '../updateUserModal/styles'
 
 type Props = {
-  formik: any;
-  handleSaveBackground: FunctionWithParams<ChangeEvent<HTMLInputElement> | null>;
-};
+  formik: any
+  handleSaveBackground: FunctionWithParams<ChangeEvent<HTMLInputElement> | null>
+}
 
-export const UserRadioButtons: FC<Props> = ({
-  formik,
-  handleSaveBackground,
-}) => {
+export const UserRadioButtons: FC<Props> = ({ formik, handleSaveBackground }) => {
   return (
     <RadioButtonsWrapper>
       <div>
         <Heading4>Gender</Heading4>
         <RadioButtons
-          name="gender"
+          name='gender'
           onChange={formik.handleChange}
           values={[MALE, WOMAN]}
           defaultValue={formik.values.gender}
@@ -32,10 +29,10 @@ export const UserRadioButtons: FC<Props> = ({
       <div>
         <Heading4>Favorite color</Heading4>
         <Input
-          key="color"
-          label="Color"
-          name="color"
-          type={"color"}
+          key='color'
+          label='Color'
+          name='color'
+          type={'color'}
           value={formik.values.color}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -44,8 +41,8 @@ export const UserRadioButtons: FC<Props> = ({
 
       <div>
         <Heading4>Background image</Heading4>
-        <FileInput name="backgroundFon" onChange={handleSaveBackground} />
+        <FileInput name='backgroundFon' onChange={handleSaveBackground} />
       </div>
     </RadioButtonsWrapper>
-  );
-};
+  )
+}

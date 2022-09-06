@@ -1,28 +1,23 @@
-import { useSocket } from "hooks/useSocket";
-import { Link, NavLink, useLocation } from "react-router-dom";
-import { logoutAction } from "store/slices/user.slice";
-import { useAppDispatch } from "store/store";
+import { useSocket } from 'hooks/useSocket'
+import { Link, NavLink, useLocation } from 'react-router-dom'
+import { logoutAction } from 'store/slices/user.slice'
+import { useAppDispatch } from 'store/store'
 
-import { BurgerMenu } from "components/burger-menu";
+import { BurgerMenu } from 'components/burger-menu'
 
-import { Container } from "../container/styles";
-import { LINKS } from "./const";
-import {
-  BurgerWrapper,
-  HeaderComponent,
-  HeaderNavigation,
-  HeaderUserBlock,
-} from "./styles";
+import { Container } from '../container/styles'
+import { LINKS } from './const'
+import { BurgerWrapper, HeaderComponent, HeaderNavigation, HeaderUserBlock } from './styles'
 
 export const Header = () => {
-  const dispatch = useAppDispatch();
-  const { socket } = useSocket();
-  const { pathname } = useLocation();
+  const dispatch = useAppDispatch()
+  const { socket } = useSocket()
+  const { pathname } = useLocation()
 
   const handleLeave = () => {
-    socket.disconnect();
-    dispatch(logoutAction());
-  };
+    socket.disconnect()
+    dispatch(logoutAction())
+  }
 
   return (
     <HeaderComponent>
@@ -42,10 +37,10 @@ export const Header = () => {
         </HeaderNavigation>
 
         <HeaderUserBlock>
-          {pathname !== "/cabinet" && <Link to="/cabinet">My Cabinet</Link>}
+          {pathname !== '/cabinet' && <Link to='/cabinet'>My Cabinet</Link>}
           <button onClick={handleLeave}>logout</button>
         </HeaderUserBlock>
       </Container>
     </HeaderComponent>
-  );
-};
+  )
+}

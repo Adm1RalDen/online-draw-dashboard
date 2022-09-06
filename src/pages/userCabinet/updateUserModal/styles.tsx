@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const UserForm = styled.form`
   min-width: 300px;
@@ -8,16 +8,16 @@ const UserForm = styled.form`
   padding: 20px;
   border-radius: 10px;
   background-color: ${(p) => p.theme.colors.light_gray};
-`;
+`
 
 const ButtonWrapper = styled.div`
   display: flex;
-`;
+`
 const AvatarWrapper = styled.div`
   background-color: white;
   border-radius: 10px;
   padding: 10px;
-`;
+`
 
 const RadioButtonsWrapper = styled.div`
   display: grid;
@@ -37,6 +37,6 @@ const RadioButtonsWrapper = styled.div`
   & > div > h4 {
     padding: 10px 0px;
   }
-`;
+`
 
-export { UserForm, ButtonWrapper, RadioButtonsWrapper, AvatarWrapper };
+export { UserForm, ButtonWrapper, RadioButtonsWrapper, AvatarWrapper }

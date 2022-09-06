@@ -1,23 +1,23 @@
-import { FC, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { FC, useState } from 'react'
+import { NavLink } from 'react-router-dom'
 
-import { Burger, BurgerWrapper, NavigationMenu } from "./styles";
+import { Burger, BurgerWrapper, NavigationMenu } from './styles'
 
 type ListItem = {
-  url: string;
-  label: string;
-};
+  url: string
+  label: string
+}
 interface BurgerProps {
-  list: ListItem[];
+  list: ListItem[]
 }
 
 export const BurgerMenu: FC<BurgerProps> = ({ list = [] }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const handleClick = () => setIsOpen(!isOpen);
+  const [isOpen, setIsOpen] = useState(false)
+  const handleClick = () => setIsOpen(!isOpen)
 
   return (
     <BurgerWrapper>
-      <Burger isOpen={isOpen} onClick={handleClick} role="navigation">
+      <Burger isOpen={isOpen} onClick={handleClick} role='navigation'>
         <span />
       </Burger>
 
@@ -33,5 +33,5 @@ export const BurgerMenu: FC<BurgerProps> = ({ list = [] }) => {
         ) : null}
       </NavigationMenu>
     </BurgerWrapper>
-  );
-};
+  )
+}

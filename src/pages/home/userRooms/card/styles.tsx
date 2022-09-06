@@ -1,8 +1,8 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 type Props = {
-  active: boolean;
-};
+  active: boolean
+}
 
 const CardSettings = styled.ul`
   position: absolute;
@@ -13,12 +13,12 @@ const CardSettings = styled.ul`
   background-color: #000;
   color: #fff;
   padding: 5px;
-`;
+`
 
 const RoomCard = styled.div<Props>`
   flex-grow: 1;
   padding: 10px;
-  background-color: ${(p) => (p.active ? "#fff" : "#ffffff76")};
+  background-color: ${(p) => (p.active ? '#fff' : '#ffffff76')};
   transition: 0.3s all;
   position: relative;
 
@@ -30,7 +30,7 @@ const RoomCard = styled.div<Props>`
   }
 
   & > span {
-    display: ${(p) => (p.active ? "#block" : "none")};
+    display: ${(p) => (p.active ? '#block' : 'none')};
     position: absolute;
     right: 0;
     top: 10px;
@@ -42,7 +42,7 @@ const RoomCard = styled.div<Props>`
 
   color: black;
   cursor: pointer;
-`;
+`
 
 const CardSettingsButton = styled.button`
   width: 100%;
@@ -52,6 +52,6 @@ const CardSettingsButton = styled.button`
   &:disabled {
     cursor: not-allowed;
   }
-`;
+`
 
-export { RoomCard, CardSettings, CardSettingsButton };
+export { RoomCard, CardSettings, CardSettingsButton }

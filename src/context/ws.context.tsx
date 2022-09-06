@@ -1,8 +1,8 @@
-import { createContext } from "react";
-import { Socket } from "socket.io-client";
+import { createContext } from 'react'
+import { Socket } from 'socket.io-client'
 
 type WSContextType = {
-  socket: Socket<any, any>;
-};
+  socket: Socket<any, any>
+}
 
-export const WsContext = createContext<WSContextType>({ socket: null! });
+export const WsContext = createContext<WSContextType>({ socket: null! })

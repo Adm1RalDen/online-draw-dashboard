@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const Room = styled.div`
   color: #000000;
@@ -18,6 +18,6 @@ const Room = styled.div`
     background-color: green;
     border-radius: 50%;
   }
-`;
+`
 
-export { Room };
+export { Room }
