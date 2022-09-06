@@ -33,9 +33,8 @@ export const UserRadioButtons: FC<Props> = ({
         <Heading4>Favorite color</Heading4>
         <Input
           key="color"
-          label="Color"
           name="color"
-          type={"color"}
+          type="color"
           value={formik.values.color}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}

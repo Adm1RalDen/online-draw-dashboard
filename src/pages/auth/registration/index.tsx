@@ -4,11 +4,10 @@ import { useAppDispatch, useAppSelector } from "store/store";
 import { UserRegistrationData } from "types";
 import { Portal } from "utils/portal";
 
-import { Button } from "components/button/styles";
-import { Input } from "components/input";
+import { InputAnimation } from "components/input-animation";
 import { Loader } from "components/loaders/loader";
 
-import { Form, FormWrapper, Title } from "../styles";
+import { AuthButton, Title } from "../styles";
 import {
   RegistrationFileds,
   SetTypesFields,
@@ -28,11 +27,11 @@ export const RegistrationComponent = () => {
 
   return (
     <>
-      <FormWrapper>
+      <div>
         <Title>Registration</Title>
-        <Form onSubmit={formik.handleSubmit}>
+        <form onSubmit={formik.handleSubmit}>
           {RegistrationFileds.map((field) => (
-            <Input
+            <InputAnimation
               key={field}
               margin="5px 0px 0px 0px"
               label={field[0].toUpperCase() + field.slice(1)}
@@ -49,17 +48,11 @@ export const RegistrationComponent = () => {
               }
             />
           ))}
-          <Button
-            type="submit"
-            width="100%"
-            margin="10px 0px 0px 0px"
-            color="#fff"
-            disabled={!formik.isValid || !formik.dirty}
-          >
+          <AuthButton disabled={!formik.isValid || !formik.dirty}>
             Send
-          </Button>
-        </Form>
-      </FormWrapper>
+          </AuthButton>
+        </form>
+      </div>
       {isLoading && (
         <Portal>
           <Loader color="white" />

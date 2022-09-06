@@ -15,7 +15,7 @@ const ErrorSpan = styled.span`
   top: 10px;
   right: 5px;
   height: 30px;
-  color: red;
+  color: ${({ theme }) => theme.colors.red};
 `;
 const InputWrapper = styled.div<InputWrapperProps>`
   position: relative;
@@ -27,52 +27,50 @@ const InputWrapper = styled.div<InputWrapperProps>`
     `};
 
   & > input {
-    width: 100%;
     height: 40px;
     position: relative;
-    caret-color: #0a87e1;
-    padding: 0px 30px 0px 10px;
-    border-radius: 5px;
+    caret-color: ${({ theme }) => theme.colors.blue};
     border: 2px solid ${(p) => p.theme.colors.light_gray};
+    border-radius: 5px;
     outline: none;
     ${(p) =>
       p.isError &&
       css`
         border: 2px solid red;
-        caret-color: red;
+        caret-color: ${({ theme }) => theme.colors.red};
       `}
 
     &:focus {
-      box-shadow: 0px 0px 1px 1px #0c94f6;
-      border: 2px solid #0a87e1;
+      box-shadow: 0px 0px 1px 1px ${({ theme }) => theme.colors.middleBlue};
+      border: 2px solid ${({ theme }) => theme.colors.blue};
 
       ${(p) =>
         p.isError &&
         css`
-          border-color: red;
+          border-color: ${({ theme }) => theme.colors.red};
           box-shadow: 0px 0px 1px 1px red;
         `}
     }
 
     &:focus ~ label {
       top: -10px;
-      color: #0a87e1;
+      color: ${({ theme }) => theme.colors.blue};
       ${(p) =>
         p.hasValue &&
         css`
           opacity: 1;
         `}
-      background-color: white;
-      border-left: 2px solid #0a87e1;
-      border-right: 2px solid #0a87e1;
-      border-top: 2px solid #0a87e1;
-      border-bottom: 2px solid #0a87e1;
+      background-color: ${({ theme }) => theme.colors.white};
+      border-left: 2px solid ${({ theme }) => theme.colors.blue};
+      border-right: 2px solid ${({ theme }) => theme.colors.blue};
+      border-top: 2px solid ${({ theme }) => theme.colors.blue};
+      border-bottom: 2px solid ${({ theme }) => theme.colors.blue};
       padding: 2px 4px;
       ${(p) =>
         p.isError &&
         css`
-          border-color: red;
-          color: red;
+          border-color: ${({ theme }) => theme.colors.red};
+          color: ${({ theme }) => theme.colors.red};
         `}
     }
   }
@@ -81,8 +79,8 @@ const InputWrapper = styled.div<InputWrapperProps>`
     position: absolute;
     top: 19px;
     left: 5px;
-    font-size: 12px;
-    color: ${(p) => p.theme.colors.light_gray};
+    font-size: ${({ theme }) => theme.fontSizes.small};
+    color: ${({ theme }) => theme.colors.middleGray};
 
     ${(p) =>
       p.hasValue &&
@@ -94,7 +92,7 @@ const InputWrapper = styled.div<InputWrapperProps>`
     ${(p) =>
       p.isError &&
       css`
-        color: red;
+        color: ${({ theme }) => theme.colors.red};
       `}
   }
 `;

@@ -28,11 +28,12 @@ export const FileInput: FC<FileInputProps> = ({ onChange, name }) => {
     setFile(null);
     onChange(null);
   };
+  const handleClick = () => inputRef.current!.click();
 
   return (
     <ContentWrapper>
       <Wrapper>
-        <LoadButton type="button" onClick={() => inputRef.current!.click()}>
+        <LoadButton type="button" onClick={handleClick}>
           Load file
         </LoadButton>
         {file && (

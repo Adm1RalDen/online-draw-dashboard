@@ -9,7 +9,14 @@ import { LittleLoader } from "components/loaders/littleLoader";
 
 import { ChatMessage } from "../types";
 import { ClearConnectionChat, SetConnectionChat } from "./const";
-import { ChatWrapper, Message, MessagesWrapper } from "./styles";
+import {
+  ChatWrapper,
+  Message,
+  MessageInput,
+  MessagesBlock,
+  MessagesWrapper,
+  SendMessageButton,
+} from "./styles";
 
 export const Chat = () => {
   const { socket } = useSocket();
@@ -54,7 +61,7 @@ export const Chat = () => {
 
   return (
     <ChatWrapper>
-      <div ref={chatRef}>
+      <MessagesBlock ref={chatRef}>
         {error ? (
           <span>{error}</span>
         ) : isLoading ? (
@@ -81,12 +88,15 @@ export const Chat = () => {
             </MessagesWrapper>
           ))
         )}
-      </div>
+      </MessagesBlock>
       <div>
-        <input type="text" ref={inputRef} />
-        <button onClick={handleSendMessage} disabled={messageLoading}>
+        <MessageInput type="text" ref={inputRef} />
+        <SendMessageButton
+          onClick={handleSendMessage}
+          disabled={messageLoading}
+        >
           send
-        </button>
+        </SendMessageButton>
       </div>
     </ChatWrapper>
   );

@@ -20,7 +20,8 @@ const Burger = styled.div<Props>`
     position: absolute;
     width: 100%;
     height: 2px;
-    background-color: ${(p) => (p.isOpen ? "#000" : "#fff")};
+    background-color: ${(p) =>
+      p.isOpen ? p.theme.colors.black : p.theme.colors.white};
     transition: all 0.3s;
   }
 
@@ -76,17 +77,17 @@ const NavigationMenu = styled.nav<Props>`
   display: flex;
   justify-content: center;
   transition: all 0.3s;
-  background-color: #ffffff;
+  background-color: ${({ theme }) => theme.colors.white};
 
   & > ul > li {
     text-align: center;
     padding: 15px;
     position: relative;
-    border-bottom: 1px solid #000000a9;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.black};
 
     & > a {
-      color: Gold;
-      font-size: 20px;
+      color: ${({ theme }) => theme.colors.gold};
+      font-size: ${({ theme }) => theme.fontSizes.middle};
       font-weight: 400;
     }
   }

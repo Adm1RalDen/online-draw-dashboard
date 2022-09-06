@@ -3,7 +3,7 @@ import styled from "styled-components";
 const UserForm = styled.form`
   min-width: 300px;
   max-width: 1200px;
-  overflow-y: scroll;
+  overflow-y: auto;
   height: 90vh;
   padding: 20px;
   border-radius: 10px;
@@ -13,16 +13,18 @@ const UserForm = styled.form`
 const ButtonWrapper = styled.div`
   display: flex;
 `;
+
 const AvatarWrapper = styled.div`
-  background-color: white;
+  background-color: ${({ theme }) => theme.colors.white};
   border-radius: 10px;
   padding: 10px;
+  margin-bottom: 10px;
 `;
 
 const RadioButtonsWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  background: white;
+  background: ${({ theme }) => theme.colors.white};
   justify-content: center;
   border-radius: 10px;
   padding: 10px;
