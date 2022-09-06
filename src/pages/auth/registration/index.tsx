@@ -7,7 +7,7 @@ import { Portal } from "utils/portal";
 import { InputAnimation } from "components/input-animation";
 import { Loader } from "components/loaders/loader";
 
-import { AuthButton, FormWrapper, Title } from "../styles";
+import { AuthButton, Title } from "../styles";
 import {
   RegistrationFileds,
   SetTypesFields,
@@ -27,7 +27,7 @@ export const RegistrationComponent = () => {
 
   return (
     <>
-      <FormWrapper>
+      <div>
         <Title>Registration</Title>
         <form onSubmit={formik.handleSubmit}>
           {RegistrationFileds.map((field) => (
@@ -52,7 +52,7 @@ export const RegistrationComponent = () => {
             Send
           </AuthButton>
         </form>
-      </FormWrapper>
+      </div>
       {isLoading && (
         <Portal>
           <Loader color="white" />

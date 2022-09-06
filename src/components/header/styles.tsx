@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 const HeaderComponent = styled.header`
-  background-color: black;
-  color: white;
+  background-color: ${({ theme }) => theme.colors.dark};
+  color: ${({ theme }) => theme.colors.white};
 
   & > div {
     height: 100%;
@@ -33,7 +33,7 @@ const HeaderNavigation = styled.nav`
     position: relative;
 
     & > a {
-      color: gold;
+      color: ${({ theme }) => theme.colors.gold};
     }
   }
 `;

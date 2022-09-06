@@ -42,7 +42,9 @@ export const PrivateRoom = () => {
       });
     }
   };
-
+  const handleHomeNavigate = () => navigate(HOME_URL);
+  const handleSetPassword = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setPassword(e.target.value);
   return (
     <ConfirmAccessPage>
       <ConfirmAccessPageMain>
@@ -56,14 +58,14 @@ export const PrivateRoom = () => {
                 type="password"
                 placeholder="Room password"
                 value={roomPassword}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={handleSetPassword}
               />
             </ConfirmAccessPageInputWrapper>
             <ConfirmAccessPageButtonsWrapper>
               <ConfirmAccessPageButton onClick={handleEnter}>
                 Enter
               </ConfirmAccessPageButton>
-              <ConfirmAccessPageButton onClick={() => navigate(HOME_URL)}>
+              <ConfirmAccessPageButton onClick={handleHomeNavigate}>
                 Back
               </ConfirmAccessPageButton>
             </ConfirmAccessPageButtonsWrapper>

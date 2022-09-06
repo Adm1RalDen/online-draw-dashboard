@@ -50,14 +50,4 @@ const Logo = styled(Heading1)`
   color: ${({ theme }) => theme.colors.white};
 `;
 
-const FormWrapper = styled.div``;
-
-export {
-  AuthSection,
-  FormWrapper,
-  Container,
-  Logo,
-  Wrapper,
-  Title,
-  AuthButton,
-};
+export { AuthSection, Container, Logo, Wrapper, Title, AuthButton };

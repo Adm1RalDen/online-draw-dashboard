@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 import { Button } from "components/button";
-import { FlexContainer } from "components/flex-container/styles";
+import { FlexContainer } from "components/flex-container";
 
 type ToolButtonProps = {
   img: string;
@@ -27,8 +27,11 @@ const SnapshotButtonsWrapper = styled.div`
 const DrawToolsWrapper = styled.div`
   display: flex;
   gap: 10px;
-  & > input {
-    margin-top: 5px;
+
+  & > input[type="color"] {
+    width: 50px;
+    padding: 0px;
+    margin-top: 2px;
   }
 `;
 

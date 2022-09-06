@@ -35,6 +35,7 @@ export const HomePage = () => {
   const dispatch = useAppDispatch();
   const { socket } = useSocket();
   const navigate = useNavigate();
+  const handleLogOut = () => UserLogoutThunk(dispatch);
 
   useEffect(() => {
     SetRoomsConnection({
@@ -54,7 +55,7 @@ export const HomePage = () => {
         <HomePageWrapper>
           <HomeHeader>
             <HomeCabinet />
-            <Button onClick={() => UserLogoutThunk(dispatch)}>logout</Button>
+            <Button onClick={handleLogOut}>logout</Button>
           </HomeHeader>
 
           <ActiveRoomsWrapper>

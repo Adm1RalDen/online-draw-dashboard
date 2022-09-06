@@ -7,7 +7,7 @@ import { Portal } from "utils/portal";
 import { InputAnimation } from "components/input-animation";
 import { Loader } from "components/loaders/loader";
 
-import { AuthButton, FormWrapper, Title } from "../styles";
+import { AuthButton, Title } from "../styles";
 import {
   AuthorizationFileds,
   initialValues,
@@ -26,7 +26,7 @@ export const LoginComponent = () => {
 
   return (
     <>
-      <FormWrapper>
+      <div>
         <Title>Login</Title>
         <form onSubmit={formik.handleSubmit}>
           {AuthorizationFileds.map((field) => (
@@ -52,7 +52,7 @@ export const LoginComponent = () => {
             Send
           </AuthButton>
         </form>
-      </FormWrapper>
+      </div>
 
       {isLoading && (
         <Portal>
