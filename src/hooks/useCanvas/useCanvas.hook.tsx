@@ -1,10 +1,7 @@
 import { useSocket } from "hooks/useSocket";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  userDataSelector,
-  userInfoSelector,
-} from "store/selectors/user.selector";
+import { userDataSelector } from "store/selectors/user.selector";
 import { useAppSelector } from "store/store";
 import { ToolsTypes } from "types/canvas";
 
@@ -15,6 +12,7 @@ import {
   SetDrawConnection,
 } from "./methods/setDrawConnection";
 import { handleSnapshot, pushRedo, pushUndo } from "./methods/snapshot";
+import { ToolsEnum } from "./types";
 
 type ParamsProps = {
   roomId: string;
@@ -23,7 +21,7 @@ type ParamsProps = {
 export const useCanvas = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null!);
   const navigate = useNavigate();
-  const [tool, setTool] = useState<ToolsTypes>("pen");
+  const [tool, setTool] = useState<ToolsTypes>(ToolsEnum.pen);
   const [snapshotList, setSnapshotList] = useState<string[]>([]);
   const [snapshotIndex, setSnapshotIndex] = useState(-1);
   const { socket } = useSocket();
@@ -46,7 +44,7 @@ export const useCanvas = () => {
       userId: id,
       socket,
       canvasRef,
-      roomId: roomId || "",
+      roomId: roomId as string,
       name,
       navigate,
       fillStyle: Tool.fillStyle,

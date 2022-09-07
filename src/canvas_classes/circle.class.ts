@@ -1,8 +1,19 @@
 import { DRAW_SOCKET } from "const/sockets";
+import { ToolsEnum } from "hooks/useCanvas/types";
 import { Socket } from "socket.io-client";
 
 import { Tool } from "./tool.class";
 
+type DrawOnlineProps = {
+  ctx: CanvasRenderingContext2D;
+  x1: number;
+  y1: number;
+  a: number;
+  b: number;
+  fillStyle: string;
+  strokeStyle: string;
+  lineWidth: number;
+};
 export class Circle extends Tool {
   private mouseDown = false;
   private saved = "";
@@ -46,7 +57,7 @@ export class Circle extends Tool {
     if (this.ctx) {
       this.socket.emit(DRAW_SOCKET, {
         roomId: this.id,
-        tool: "circle",
+        tool: ToolsEnum.circle,
         x1: this.x1,
         y1: this.y1,
         a: e.offsetY - this.y1,
@@ -76,34 +87,22 @@ export class Circle extends Tool {
     }
   }
 
-  static drawOnline(
-    ctx: CanvasRenderingContext2D,
-    x1: number,
-    y1: number,
-    a: number,
-    b: number,
-    fillStyle: string,
-    strokeStyle: string,
-    lineWidht: number
-  ) {
-    let c = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+  static drawOnline(data: DrawOnlineProps) {
+    const { a, b, ctx, fillStyle, lineWidth, strokeStyle, x1, y1 } = data;
 
     if (ctx) {
-      const strokeStyleDefault = ctx.strokeStyle;
-      const lineWidthDefault = ctx.lineWidth;
-      const fillStyleDefault = ctx.fillStyle;
+      let c = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
       ctx.fillStyle = fillStyle;
       ctx.strokeStyle = strokeStyle;
-      ctx.lineWidth = lineWidht;
-
+      ctx.lineWidth = lineWidth;
       ctx.beginPath();
       ctx.arc(x1, y1, c / 2, 0, 2 * Math.PI);
       ctx.fill();
       ctx.stroke();
       ctx.closePath();
-      ctx.strokeStyle = strokeStyleDefault;
-      ctx.lineWidth = lineWidthDefault;
-      ctx.fillStyle = fillStyleDefault;
+      ctx.strokeStyle = this.strokeStyle;
+      ctx.lineWidth = this.lineWidth;
+      ctx.fillStyle = this.fillStyle;
     }
   }
 }
