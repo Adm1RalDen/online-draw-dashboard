@@ -1,3 +1,4 @@
+import { Tool } from "canvas_classes";
 import { useSocket } from "hooks/useSocket";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -5,7 +6,6 @@ import { userDataSelector } from "store/selectors/user.selector";
 import { useAppSelector } from "store/store";
 import { ToolsTypes } from "types/canvas";
 
-import { Tool } from "../../canvas_classes/index";
 import { handleSetTool, setCanvasHeight, setCanvasWidth } from "./const";
 import {
   ClearDrawConnection,

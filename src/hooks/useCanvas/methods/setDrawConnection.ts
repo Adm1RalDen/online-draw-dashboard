@@ -1,3 +1,4 @@
+import { Circle, Eraser, Line, Pen, Square } from "canvas_classes";
 import { USER_JOINED } from "const/messages";
 import {
   CASE_EXIT_SOCKET,
@@ -12,13 +13,6 @@ import { HOME_URL } from "const/urls";
 import { toastSuccess } from "services/toast.service";
 import { Socket } from "socket.io-client";
 
-import {
-  Circle,
-  Eraser,
-  Line,
-  Pen,
-  Square,
-} from "../../../canvas_classes/index";
 import { DrawConnectionProps, ToolsEnum } from "../types";
 
 export const SetDrawConnection = (data: DrawConnectionProps) => {

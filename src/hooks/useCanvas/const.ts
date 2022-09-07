@@ -1,10 +1,6 @@
+import { Circle, Eraser, Line, Pen, Square } from "canvas_classes";
 import { Socket } from "socket.io-client";
 
-import { Circle } from "./../../canvas_classes/circle.class";
-import { Eraser } from "./../../canvas_classes/eraser.class";
-import { Line } from "./../../canvas_classes/line.class";
-import { Pen } from "./../../canvas_classes/pen.class";
-import { Square } from "./../../canvas_classes/square.class";
 import { ToolsEnum } from "./types";
 
 type Props = {
