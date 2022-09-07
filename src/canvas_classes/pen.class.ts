@@ -38,9 +38,6 @@ export class Pen extends Tool {
 
   private onMouseDown() {
     this.mouseDown = true;
-    if (this.ctx) {
-      this.ctx.beginPath();
-    }
   }
 
   private onMouseMove(e: MouseEvent) {

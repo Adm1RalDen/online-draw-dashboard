@@ -1,4 +1,4 @@
-import { DRAW_SOCKET } from "const/sockets";
+import { DRAW_SOCKET, FINISH_DRAW_SOCKET } from "const/sockets";
 import { ToolsEnum } from "hooks/useCanvas/types";
 import { Socket } from "socket.io-client";
 
@@ -33,6 +33,10 @@ export class Eraser extends Tool {
     this.mouseDown = true;
     this.x1 = e.offsetX;
     this.y1 = e.offsetY;
+
+    this.socket.emit(FINISH_DRAW_SOCKET, {
+      roomId: this.id,
+    });
   }
 
   private onMouseMove(e: MouseEvent) {
@@ -61,7 +65,7 @@ export class Eraser extends Tool {
       ctx.arc(x1, y1, 20, 0, Math.PI * 2);
       ctx.fillStyle = "#fff";
       ctx.fill();
-      ctx.closePath();
+      ctx.fillStyle = this.fillStyle;
     }
   }
 }
