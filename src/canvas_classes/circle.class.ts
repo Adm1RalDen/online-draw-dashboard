@@ -1,4 +1,4 @@
-import { DRAW_SOCKET } from "const/sockets";
+import { DRAW_SOCKET, FINISH_DRAW_SOCKET } from "const/sockets";
 import { ToolsEnum } from "hooks/useCanvas/types";
 import { Socket } from "socket.io-client";
 
@@ -67,6 +67,11 @@ export class Circle extends Tool {
         lineWidth: this.ctx.lineWidth,
       });
     }
+
+    this.socket.emit(FINISH_DRAW_SOCKET, {
+      roomId: this.id,
+    });
+
     this.x1 = e.offsetX;
     this.y1 = e.offsetY;
   }
@@ -77,13 +82,12 @@ export class Circle extends Tool {
     let c = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
 
     if (this.ctx) {
+      this.ctx.beginPath();
       this.ctx.clearRect(0, 0, this.width, this.height);
       this.ctx.drawImage(img, 0, 0, this.width, this.height);
-      this.ctx.beginPath();
       this.ctx.arc(this.x1, this.y1, c / 2, 0, 2 * Math.PI);
       this.ctx.fill();
       this.ctx.stroke();
-      this.ctx.closePath();
     }
   }
 
@@ -91,15 +95,14 @@ export class Circle extends Tool {
     const { a, b, ctx, fillStyle, lineWidth, strokeStyle, x1, y1 } = data;
 
     if (ctx) {
+      ctx.beginPath();
       let c = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
       ctx.fillStyle = fillStyle;
       ctx.strokeStyle = strokeStyle;
       ctx.lineWidth = lineWidth;
-      ctx.beginPath();
       ctx.arc(x1, y1, c / 2, 0, 2 * Math.PI);
       ctx.fill();
       ctx.stroke();
-      ctx.closePath();
       ctx.strokeStyle = this.strokeStyle;
       ctx.lineWidth = this.lineWidth;
       ctx.fillStyle = this.fillStyle;

@@ -1,4 +1,4 @@
-import { DRAW_SOCKET } from "const/sockets";
+import { DRAW_SOCKET, FINISH_DRAW_SOCKET } from "const/sockets";
 import { ToolsEnum } from "hooks/useCanvas/types";
 import { Socket } from "socket.io-client";
 
@@ -76,6 +76,11 @@ export class Square extends Tool {
         lineWidth: this.ctx.lineWidth,
       });
     }
+
+    this.socket.emit(FINISH_DRAW_SOCKET, {
+      roomId: this.id,
+    });
+
     this.x1 = 0;
     this.y1 = 0;
   }
@@ -90,13 +95,12 @@ export class Square extends Tool {
     img: HTMLImageElement
   ) {
     if (ctx) {
+      ctx.beginPath();
       ctx.clearRect(0, 0, canvas.current.width, canvas.current.height);
       ctx.drawImage(img, 0, 0, canvas.current.width, canvas.current.height);
-      ctx.beginPath();
       ctx.rect(x1, y1, widht, height);
       ctx.fill();
       ctx.stroke();
-      ctx.closePath();
     }
   }
 
@@ -105,14 +109,13 @@ export class Square extends Tool {
       data;
 
     if (ctx) {
+      ctx.beginPath();
       ctx.fillStyle = fillStyle;
       ctx.strokeStyle = strokeStyle;
       ctx.lineWidth = lineWidth;
-      ctx.beginPath();
       ctx.rect(x1, y1, width, height);
       ctx.fill();
       ctx.stroke();
-      ctx.closePath();
       ctx.strokeStyle = this.strokeStyle;
       ctx.lineWidth = this.lineWidth;
       ctx.fillStyle = this.fillStyle;

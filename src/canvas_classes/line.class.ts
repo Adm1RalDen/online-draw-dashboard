@@ -1,4 +1,4 @@
-import { DRAW_SOCKET } from "const/sockets";
+import { DRAW_SOCKET, FINISH_DRAW_SOCKET } from "const/sockets";
 import { ToolsEnum } from "hooks/useCanvas/types";
 import { Socket } from "socket.io-client";
 
@@ -48,6 +48,11 @@ export class Line extends Tool {
         strokeStyle: this.ctx.strokeStyle,
       });
     }
+
+    this.socket.emit(FINISH_DRAW_SOCKET, {
+      roomId: this.id,
+    });
+
     this.x1 = 0;
     this.y1 = 0;
   }
@@ -71,13 +76,12 @@ export class Line extends Tool {
 
   private draw(e: MouseEvent, img: HTMLImageElement) {
     if (this.ctx && this.mouseDown) {
+      this.ctx.beginPath();
       this.ctx.clearRect(0, 0, this.width, this.height);
       this.ctx.drawImage(img, 0, 0, this.width, this.height);
-      this.ctx.beginPath();
       this.ctx.moveTo(this.x1, this.y1);
       this.ctx.lineTo(e.offsetX, e.offsetY);
       this.ctx.stroke();
-      this.ctx.closePath();
     }
   }
 
@@ -85,15 +89,12 @@ export class Line extends Tool {
     const { ctx, lineWidth, strokeStyle, x1, x2, y1, y2 } = data;
 
     if (ctx) {
-      ctx.strokeStyle = strokeStyle;
-      ctx.lineWidth = lineWidth;
-      ctx.strokeStyle = strokeStyle;
-      ctx.lineWidth = lineWidth;
       ctx.beginPath();
+      ctx.strokeStyle = strokeStyle;
+      ctx.lineWidth = lineWidth;
       ctx.moveTo(x1, y1);
       ctx.lineTo(x2, y2);
       ctx.stroke();
-      ctx.closePath();
       ctx.strokeStyle = this.strokeStyle;
       ctx.lineWidth = this.lineWidth;
     }
