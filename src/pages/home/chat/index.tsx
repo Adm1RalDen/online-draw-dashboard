@@ -13,6 +13,7 @@ import {
   ChatWrapper,
   Message,
   MessageInput,
+  MessagesBlock,
   MessagesWrapper,
   SendMessageButton,
 } from "./styles";
@@ -60,7 +61,7 @@ export const Chat = () => {
 
   return (
     <ChatWrapper>
-      <div ref={chatRef}>
+      <MessagesBlock ref={chatRef}>
         {error ? (
           <span>{error}</span>
         ) : isLoading ? (
@@ -87,7 +88,7 @@ export const Chat = () => {
             </MessagesWrapper>
           ))
         )}
-      </div>
+      </MessagesBlock>
       <div>
         <MessageInput type="text" ref={inputRef} />
         <SendMessageButton

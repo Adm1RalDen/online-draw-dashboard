@@ -4,10 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { userDataSelector } from "store/selectors/user.selector";
 import { useAppDispatch, useAppSelector } from "store/store";
 import { UserLogoutThunk } from "store/thunks/user/authorization.thunk";
+import { Heading3 } from "styles/typography/styles";
 import { ActiveRoom } from "types/rooms";
 import { Portal } from "utils/portal";
 
-import { Button } from "components/button/styles";
+import { Button } from "components/button";
 import { Loader } from "components/loaders/loader";
 
 import { ActiveRooms } from "./activeRooms";
@@ -34,6 +35,7 @@ export const HomePage = () => {
   const dispatch = useAppDispatch();
   const { socket } = useSocket();
   const navigate = useNavigate();
+  const handleLogOut = () => UserLogoutThunk(dispatch);
 
   useEffect(() => {
     SetRoomsConnection({
@@ -53,11 +55,11 @@ export const HomePage = () => {
         <HomePageWrapper>
           <HomeHeader>
             <HomeCabinet />
-            <Button onClick={() => UserLogoutThunk(dispatch)}>logout</Button>
+            <Button onClick={handleLogOut}>logout</Button>
           </HomeHeader>
 
           <ActiveRoomsWrapper>
-            <h3>Active rooms</h3>
+            <Heading3>Active rooms</Heading3>
             <ActiveRooms activeRooms={activeRooms} userId={id} />
           </ActiveRoomsWrapper>
 
@@ -81,7 +83,7 @@ export const HomePage = () => {
           />
 
           <ChatWrapper>
-            <h3>Chat</h3>
+            <Heading3>Chat</Heading3>
             <Chat />
           </ChatWrapper>
         </HomePageWrapper>

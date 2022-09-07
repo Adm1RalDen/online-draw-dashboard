@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 const Room = styled.div`
-  color: #ffffff;
+  color: ${({ theme }) => theme.colors.white};
   padding: 10px 10px 10px 20px;
-  background-color: #0092b6;
-  box-shadow: 1px 2px 3px 2px #005b71;
+  background-color: ${({ theme }) => theme.colors.aquaMiddle};
+  box-shadow: 1px 2px 3px 2px ${({ theme }) => theme.colors.darkAqua};
   text-align: center;
   border-radius: 5px;
   margin-top: 10px;
@@ -17,7 +17,7 @@ const Room = styled.div`
     width: 10px;
     height: 10px;
     margin-right: 10px;
-    background-color: green;
+    background-color: ${({ theme }) => theme.colors.green};
     border-radius: 50%;
   }
 `;

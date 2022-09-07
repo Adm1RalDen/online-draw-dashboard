@@ -3,21 +3,13 @@ import styled from "styled-components";
 const UserRoomsWrapper = styled.div`
   grid-area: myRooms;
   padding: 20px;
-  box-shadow: 0px 0px 2px 1px #0092b6;
+  box-shadow: 0px 0px 2px 1px ${({ theme }) => theme.colors.aqua};
   overflow: auto;
 
-  &::-webkit-scrollbar {
-    width: 5px;
-  }
-  &::-webkit-scrollbar-thumb {
-    background-color: #0092b6;
-    border-radius: 30px;
-  }
-
   & > h3 {
-    color: #ffffff;
+    color: ${({ theme }) => theme.colors.white};
     font-weight: 400;
-    font-size: 22px;
+    font-size: ${({ theme }) => theme.fontSizes.middleUp};
     margin-bottom: 15px;
   }
 `;

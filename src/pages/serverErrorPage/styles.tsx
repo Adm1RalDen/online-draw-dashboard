@@ -1,23 +1,17 @@
 import styled from "styled-components";
 
-const ServerErrorPageWrapper = styled.div`
-  width: 100vw;
+import { FlexContainer } from "components/flex-container";
+
+const ServerErrorPageWrapper = styled(FlexContainer)`
   height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;
 const ServerErrorPageContent = styled.div`
   & > p {
-    font-size: 30px;
-    font-weight: 400;
-    font-family: Roboto;
+    font-size: ${({ theme }) => theme.fontSizes.big};
     margin-bottom: 5px;
   }
   & > a {
-    display: inline-block;
-    text-decoration: none;
-    font-size: 20px;
+    font-size: ${({ theme }) => theme.fontSizes.middle};
   }
 `;
 

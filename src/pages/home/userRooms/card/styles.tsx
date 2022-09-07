@@ -17,23 +17,24 @@ const RoomCard = styled.div<Props>`
   flex-grow: 1;
   padding: 10px;
   border-radius: 5px;
-  color: #c7c7c7;
+  color: ${({ theme }) => theme.colors.light_gray};
   font-weight: 300;
-  background-color: ${(p) => (p.active ? "#0092b6" : "#00596f")};
+  background-color: ${(p) =>
+    p.active ? p.theme.colors.aqua : p.theme.colors.darkAqua};
   transition: 0.3s all;
   position: relative;
   cursor: pointer;
 
   &:hover {
-    color: #fff;
-    background-color: #0092b6;
+    color: ${({ theme }) => theme.colors.white};
+    background-color: ${({ theme }) => theme.colors.aqua};
   }
   &:hover span {
     display: block;
   }
 
   & > span {
-    display: ${(p) => (p.active ? "#block" : "none")};
+    display: ${(p) => (p.active ? "block" : "none")};
     position: absolute;
     right: 0;
     top: 10px;

@@ -1,31 +1,10 @@
-import { FC } from "react";
-import { FunctionWithParams } from "types";
+import styled from "styled-components";
 
-import { ErrorSpan, InputWrapper } from "./styles";
-
-type InputProps = {
-  margin?: string;
-  type: string;
-  label: string;
-  value: any;
-  name: string;
-  error?: string;
-  id?: string;
-  onChange?: FunctionWithParams<any>;
-  onBlur?: FunctionWithParams<any>;
-  disabled?: boolean;
-};
-
-export const Input: FC<InputProps> = ({ label, ...rest }) => {
-  return (
-    <InputWrapper
-      isError={!!rest.error}
-      hasValue={!!rest.value}
-      margin={rest.margin}
-    >
-      <input {...rest} type={rest.type} />
-      <label>{label}</label>
-      {!!rest.error && <ErrorSpan title={rest.error}></ErrorSpan>}
-    </InputWrapper>
-  );
-};
+export const Input = styled.input`
+  width: 100%;
+  height: 40px;
+  padding: 0px 30px 0px 10px;
+  border-radius: 2px;
+  background-color: ${(p) => p.theme.colors.white};
+  border: 2px solid ${(p) => p.theme.colors.light_gray};
+`;

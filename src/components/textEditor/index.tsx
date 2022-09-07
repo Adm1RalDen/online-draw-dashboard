@@ -4,22 +4,9 @@ import htmlToDraft from "html-to-draftjs";
 import { FC, useState } from "react";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import styled from "styled-components";
 import { FunctionWithParams } from "types";
 
-const EditorWrapper = styled.div`
-  border: 1px solid #f3f3f3;
-  position: relative;
-  background-color: white;
-  margin: 10px 0px;
-  border-radius: 10px;
-  overflow: hidden;
-
-  & > textarea {
-    position: absolute;
-    opacity: 0;
-  }
-`;
+import { EditorWrapper } from "./styles";
 
 type TextEditorProps = {
   name: string;
