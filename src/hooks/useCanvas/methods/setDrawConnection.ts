@@ -3,6 +3,9 @@ import {
   CONNECTION_DRAW_SOCKET,
   DRAW_SOCKET,
   FINISH_DRAW_SOCKET,
+  GET_SNAPSHOT_SOCKET,
+  SEND_SNAPSHOT_SOCKET,
+  SET_SNAPSHOT_SOCKET,
 } from "const/sockets";
 import { HOME_URL } from "const/urls";
 import { NavigateFunction } from "react-router-dom";
@@ -34,22 +37,21 @@ type Props = {
 };
 export const SetDrawConnection = (data: Props) => {
   const { canvasRef, name, navigate, roomId, socket, userId } = data;
-  socket.emit("GET_SNAPSHOT", { roomId, userId, socketId: socket.id });
-  socket.on("SEND_SNAPSHOT", (ownerId: string, recipient: string) => {
+  socket.emit(GET_SNAPSHOT_SOCKET, { roomId, userId, socketId: socket.id });
+  socket.on(SEND_SNAPSHOT_SOCKET, (ownerId: string, recipient: string) => {
     if (canvasRef && ownerId === userId) {
       const img = canvasRef.current.toDataURL();
-      socket.emit("SEND_SNAPSHOT", { img, recipient });
+      socket.emit(SEND_SNAPSHOT_SOCKET, { img, recipient });
     }
   });
 
-  socket.on("SET_SNAPSHOT", (img: string) => {
+  socket.on(SET_SNAPSHOT_SOCKET, (img: string) => {
     const ctx = canvasRef.current.getContext("2d");
     if (ctx) {
       let image = new Image();
       image.src = img;
       image.onload = () => {
         ctx.drawImage(image, 0, 0, ctx.canvas.width, ctx.canvas.height);
-        socket.emit("");
       };
     }
   });
@@ -138,4 +140,7 @@ export const ClearDrawConnection = (socket: Socket<any, any>) => {
   socket.off(CONNECTION_DRAW_SOCKET);
   socket.off(FINISH_DRAW_SOCKET);
   socket.off(CASE_EXIT_SOCKET);
+  socket.off(DRAW_SOCKET);
+  socket.off(SEND_SNAPSHOT_SOCKET);
+  socket.off(SET_SNAPSHOT_SOCKET);
 };
