@@ -24,6 +24,7 @@ module.exports = {
       utils: path.resolve(__dirname, "src", "utils"),
       components: path.resolve(__dirname, "src", "components"),
       styles: path.resolve(__dirname, "src", "styles"),
+      canvas_classes: path.resolve(__dirname, "src", "canvas_classes"),
     },
   },
   output: {
