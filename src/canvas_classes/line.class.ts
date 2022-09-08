@@ -1,8 +1,18 @@
-import { DRAW_SOCKET } from 'const/sockets'
+import { DRAW_SOCKET, FINISH_DRAW_SOCKET } from 'const/sockets'
+import { ToolsEnum } from 'hooks/useCanvas/types'
 import { Socket } from 'socket.io-client'
 
 import { Tool } from './tool.class'
 
+type DrawOnlineProps = {
+  ctx: CanvasRenderingContext2D
+  x1: number
+  y1: number
+  x2: number
+  y2: number
+  strokeStyle: string
+  lineWidth: number
+}
 export class Line extends Tool {
   private mouseDown = false
   private saved = ''
@@ -24,11 +34,11 @@ export class Line extends Tool {
     this.canvas.current.onmouseup = this.onMouseUp.bind(this)
   }
 
-  private onMouseUp(e: any) {
+  private onMouseUp(e: MouseEvent) {
     this.mouseDown = false
     if (this.ctx) {
       this.socket.emit(DRAW_SOCKET, {
-        tool: 'line',
+        tool: ToolsEnum.line,
         roomId: this.id,
         x1: this.x1,
         y1: this.y1,
@@ -38,6 +48,11 @@ export class Line extends Tool {
         strokeStyle: this.ctx.strokeStyle
       })
     }
+
+    this.socket.emit(FINISH_DRAW_SOCKET, {
+      roomId: this.id
+    })
+
     this.x1 = 0
     this.y1 = 0
   }
@@ -61,41 +76,27 @@ export class Line extends Tool {
 
   private draw(e: MouseEvent, img: HTMLImageElement) {
     if (this.ctx && this.mouseDown) {
+      this.ctx.beginPath()
       this.ctx.clearRect(0, 0, this.width, this.height)
       this.ctx.drawImage(img, 0, 0, this.width, this.height)
-      this.ctx.beginPath()
       this.ctx.moveTo(this.x1, this.y1)
       this.ctx.lineTo(e.offsetX, e.offsetY)
       this.ctx.stroke()
-      this.ctx.closePath()
     }
   }
 
-  static drawOnline(
-    ctx: any,
-    x1: number,
-    y1: number,
-    x2: number,
-    y2: number,
-    strokeStyle: string,
-    lineWidth: string
-  ) {
+  static drawOnline(data: DrawOnlineProps) {
+    const { ctx, lineWidth, strokeStyle, x1, x2, y1, y2 } = data
+
     if (ctx) {
-      const strokeStyleDefault = ctx.strokeStyle
-      const lineWidthDefault = ctx.lineWidth
-
-      ctx.strokeStyle = strokeStyle
-      ctx.lineWidth = lineWidth
-      ctx.strokeStyle = strokeStyle
-      ctx.lineWidth = lineWidth
-
       ctx.beginPath()
+      ctx.strokeStyle = strokeStyle
+      ctx.lineWidth = lineWidth
       ctx.moveTo(x1, y1)
       ctx.lineTo(x2, y2)
       ctx.stroke()
-      ctx.closePath()
-      ctx.strokeStyle = strokeStyleDefault
-      ctx.lineWidth = lineWidthDefault
+      ctx.strokeStyle = this.strokeStyle
+      ctx.lineWidth = this.lineWidth
     }
   }
 }

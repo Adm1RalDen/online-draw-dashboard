@@ -6,10 +6,17 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { userDataSelector } from 'store/selectors/user.selector'
 import { useAppSelector } from 'store/store'
 
+import { Input } from 'components/input'
 import { Loader } from 'components/loaders/loader'
 
 import { ClearAccessPageConnection, SetAccessPageConnection } from './const'
-import { ConfirmAccessPage, ConfirmAccessPageMain } from './styles'
+import {
+  ConfirmAccessPage,
+  ConfirmAccessPageButton,
+  ConfirmAccessPageButtonsWrapper,
+  ConfirmAccessPageInputWrapper,
+  ConfirmAccessPageMain
+} from './styles'
 
 export const PrivateRoom = () => {
   const [roomPassword, setPassword] = useState('')
@@ -35,7 +42,8 @@ export const PrivateRoom = () => {
       })
     }
   }
-
+  const handleHomeNavigate = () => navigate(HOME_URL)
+  const handleSetPassword = (e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)
   return (
     <ConfirmAccessPage>
       <ConfirmAccessPageMain>
@@ -43,19 +51,19 @@ export const PrivateRoom = () => {
           <Loader position='absolute' color='white' />
         ) : (
           <>
-            <div>
+            <ConfirmAccessPageInputWrapper>
               <p>Please confirm room password</p>
-              <input
+              <Input
                 type='password'
                 placeholder='Room password'
                 value={roomPassword}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={handleSetPassword}
               />
-            </div>
-            <div>
-              <button onClick={handleEnter}>enter</button>
-              <button onClick={() => navigate(HOME_URL)}>back</button>
-            </div>
+            </ConfirmAccessPageInputWrapper>
+            <ConfirmAccessPageButtonsWrapper>
+              <ConfirmAccessPageButton onClick={handleEnter}>Enter</ConfirmAccessPageButton>
+              <ConfirmAccessPageButton onClick={handleHomeNavigate}>Back</ConfirmAccessPageButton>
+            </ConfirmAccessPageButtonsWrapper>
           </>
         )}
       </ConfirmAccessPageMain>

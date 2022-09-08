@@ -50,10 +50,10 @@ const LoaderWrapper = styled.div<LoaderProps>`
       width: 34px;
       height: 34px;
       margin: 8px;
-      border: 4px solid #fff;
+      border: 4px solid ${({ theme }) => theme.colors.white};
       border-radius: 50%;
       animation: ${ldsRing} 1s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-      border-color: #fff transparent transparent transparent;
+      border-color: ${({ theme }) => theme.colors.white} transparent transparent transparent;
     }
     & > div:nth-child(1) {
       animation-delay: -0.25s;

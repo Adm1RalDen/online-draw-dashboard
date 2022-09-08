@@ -1,62 +1,53 @@
 import styled from 'styled-components'
+import { Heading1, Heading2 } from 'styles/typography/styles'
+
+import { Button } from 'components/button'
+import { Container as DefaultContainer } from 'components/container'
+
+const AuthButton = styled(Button)`
+  width: 100%;
+  margin-top: 10px;
+
+  &:not([disabled]) {
+    background-color: ${({ theme }) => theme.colors.blue};
+  }
+
+  &:disabled {
+    background-color: transparent;
+  }
+`
 
 const AuthSection = styled.section`
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #4361ee;
+  height: 100vh;
+  background-color: ${(p) => p.theme.colors.greenBackground};
 `
-const Container = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
+
+const Container = styled(DefaultContainer)`
   display: grid;
+  height: inherit;
   grid-template-columns: auto minmax(300px, 500px);
+  justify-content: center;
+  align-items: center;
   gap: 50px;
 `
 
 const Wrapper = styled.div`
-  width: 100%;
-  display: flex;
   border-radius: 10px;
-  flex-flow: column wrap;
-  gap: 20px;
-  border: 4px solid #fff;
-  box-shadow: 0px 0px 2px 0px #989898;
+  border: 2px solid ${({ theme }) => theme.colors.white};
   padding: 20px;
-`
 
-const Title = styled.h2`
-  color: #ffffff;
-  font-weight: 400;
-`
-const Logo = styled.h1`
-  font-weight: 400;
-  font-size: 40px;
-  line-height: 48px;
-  color: #fff;
-  display: flex;
-  align-items: center;
-`
-const FormWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  & > h2 {
-    margin: 0;
-  }
-  & > a {
-    width: max-content;
-    display: inline-block;
-    padding: 10px 5px;
-    transition: all 0.3s;
-    border-bottom: 2px solid transparent;
-
-    &:hover {
-      border-color: ${(p) => p.theme.colors.link};
-    }
+  & > div:last-child {
+    margin-top: 20px;
   }
 `
-const Form = styled.form``
 
-export { AuthSection, Form, FormWrapper, Container, Logo, Wrapper, Title }
+const Title = styled(Heading2)`
+  color: ${({ theme }) => theme.colors.white};
+`
+
+const Logo = styled(Heading1)`
+  font-size: ${({ theme }) => theme.fontSizes.large};
+  color: ${({ theme }) => theme.colors.white};
+`
+
+export { AuthSection, Container, Logo, Wrapper, Title, AuthButton }

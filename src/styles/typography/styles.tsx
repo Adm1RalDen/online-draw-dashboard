@@ -1,21 +1,18 @@
 import styled from 'styled-components'
 
-type TypographyProps = {
-  color?: string
-}
-
-export const MainTitle = styled.h1<TypographyProps>`
-  font-size: 32px;
-  color: ${(p) => p.color || '#000'};
-`
-
-export const Heading3 = styled.h4<TypographyProps>`
-  font-size: 26px;
-  color: ${(p) => p.color || '#000'};
-`
-
-export const Heading4 = styled.h4<TypographyProps>`
-  font-size: 22px;
+export const Heading1 = styled.h1`
   font-weight: 400;
-  color: ${(p) => p.color || '#000'};
+  line-height: 48px;
+`
+
+export const Heading2 = styled.h2`
+  font-weight: 400;
+`
+
+export const Heading3 = styled.h3`
+  font-weight: 400;
+`
+
+export const Heading4 = styled.h4`
+  font-weight: 400;
 `

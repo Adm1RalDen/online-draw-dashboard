@@ -4,7 +4,7 @@ import { useAppDispatch } from 'store/store'
 import { Heading3 } from 'styles/typography/styles'
 import { Portal } from 'utils/portal'
 
-import { Button } from 'components/button/styles'
+import { Button } from 'components/button'
 import { ImageCrop } from 'components/image-crop'
 import { Input } from 'components/input'
 import { TextEditor } from 'components/textEditor'
@@ -66,8 +66,8 @@ export const UpdateUserModal: FC<UpdateUserModalTypes> = ({ userData, handleEdit
         {userFields.map(([key]: [keyof UserCabinetTypes, string]) => (
           <Input
             key={key}
-            label={key}
             name={key}
+            placeholder={key}
             type={setInputTypes(key)}
             value={formik.values[key]}
             onChange={formik.handleChange}
@@ -76,14 +76,9 @@ export const UpdateUserModal: FC<UpdateUserModalTypes> = ({ userData, handleEdit
         ))}
         <UserRadioButtons formik={formik} handleSaveBackground={handleSaveBackground} />
         <TextEditor name='biography' onChange={setBiography} value={biography} />
-
         <ButtonWrapper>
-          <Button type='submit' color='#fff'>
-            Save
-          </Button>{' '}
-          <Button type='submit' color='#fff' onClick={handleEdit} background='red'>
-            Cancel
-          </Button>
+          <Button type='submit'>Save</Button>
+          <Button onClick={handleEdit}>Cancel</Button>
         </ButtonWrapper>
       </UserForm>
     </Portal>

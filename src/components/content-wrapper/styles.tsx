@@ -6,6 +6,6 @@ const Wrapper = styled.div`
   grid-template: 50px 1fr 50px / 1fr;
   grid-gap: 10px;
   align-items: stretch;
-  background-color: ${(p) => p.theme.colors.light_gray};
+  background-color: ${({ theme }) => theme.colors.light_gray};
 `
 export { Wrapper }

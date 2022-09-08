@@ -1,4 +1,3 @@
-import { UPDATE_USER_ROOM_SOCKET } from 'const/sockets'
 import { useFormik } from 'formik'
 import { useSocket } from 'hooks/useSocket'
 import { FC } from 'react'
@@ -6,19 +5,22 @@ import { FunctionWithParams } from 'types'
 import { ActiveRoom } from 'types/rooms'
 import { Portal } from 'utils/portal'
 
-import { UpdateModalButtonsWrapper, UpdateModalForm, UpdateModalWrapper } from './styles'
+import { Button } from 'components/button'
+
+import { onSubmit } from './const'
+import {
+  UpdateModalButtonsWrapper,
+  UpdateModalCheckbox,
+  UpdateModalForm,
+  UpdateModalInput,
+  UpdateModalWrapper
+} from './styles'
 
 type Props = {
   room: ActiveRoom
   userId: string
   setEditMode: FunctionWithParams<boolean>
   setIsLoading: FunctionWithParams<boolean>
-}
-
-enum Updatekeys {
-  roomName = 'roomName',
-  isShow = 'isShow',
-  roomPassword = 'roomPassword'
 }
 
 export const UpdateCard: FC<Props> = ({ room, setEditMode, userId, setIsLoading }) => {
@@ -30,24 +32,9 @@ export const UpdateCard: FC<Props> = ({ room, setEditMode, userId, setIsLoading 
       roomPassword: room.roomPassword
     },
     enableReinitialize: true,
-    onSubmit: (data) => {
-      setIsLoading(true)
-      const keys = Object.keys(data) as Updatekeys[]
-      const res = keys
-        .filter((key) => data[key] !== room[key])
-        .reduce((acum: any, key) => {
-          acum[key] = data[key]
-          return acum
-        }, {})
-
-      socket.emit(UPDATE_USER_ROOM_SOCKET, {
-        ...res,
-        roomId: room._id,
-        userId
-      })
-      setEditMode(false)
-    }
+    onSubmit: (data) => onSubmit({ data, socket, setIsLoading, room, userId, setEditMode })
   })
+  const changeEditMode = () => setEditMode(false)
 
   return (
     <Portal>
@@ -55,7 +42,7 @@ export const UpdateCard: FC<Props> = ({ room, setEditMode, userId, setIsLoading 
         <UpdateModalForm onSubmit={formik.handleSubmit}>
           <div>
             <label>Room name</label>
-            <input
+            <UpdateModalInput
               type='text'
               name='roomName'
               value={formik.values.roomName}
@@ -64,7 +51,7 @@ export const UpdateCard: FC<Props> = ({ room, setEditMode, userId, setIsLoading 
             />
 
             <label>Room password</label>
-            <input
+            <UpdateModalInput
               type='text'
               name='roomPassword'
               value={formik.values.roomPassword}
@@ -73,17 +60,17 @@ export const UpdateCard: FC<Props> = ({ room, setEditMode, userId, setIsLoading 
             />
 
             <label>Show</label>
-            <input
+            <UpdateModalCheckbox
               type='checkbox'
               name='isShow'
-              checked={!!formik.values.isShow}
+              checked={formik.values.isShow}
               onChange={formik.handleChange}
               title='all users can saw your room'
             />
           </div>
           <UpdateModalButtonsWrapper>
-            <button type='submit'>save</button>
-            <button onClick={() => setEditMode(false)}>cancel</button>
+            <Button type='submit'>save</Button>
+            <Button onClick={changeEditMode}>cancel</Button>
           </UpdateModalButtonsWrapper>
         </UpdateModalForm>
       </UpdateModalWrapper>

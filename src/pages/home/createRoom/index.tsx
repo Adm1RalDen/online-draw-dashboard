@@ -3,11 +3,12 @@ import { useSocket } from 'hooks/useSocket'
 import { FC } from 'react'
 import { userDataSelector } from 'store/selectors/user.selector'
 import { useAppSelector } from 'store/store'
+import { Heading3 } from 'styles/typography/styles'
 import { FunctionWithParams } from 'types'
 
 import { ErrorOutput } from 'components/errorOutput'
 
-import { RoomWrapper, SubmitButton } from '../styles'
+import { RoomInput, RoomWrapper, SubmitButton } from '../styles'
 import { initialValues, onSubmit, validationSchema } from './const'
 
 type ComponentProps = {
@@ -28,10 +29,10 @@ export const CreateRoomComponent: FC<ComponentProps> = ({ isLoading, setIsLoadin
 
   return (
     <RoomWrapper>
-      <h3>Create room</h3>
+      <Heading3>Create room</Heading3>
       <form onSubmit={formik.handleSubmit}>
         <div>
-          <input
+          <RoomInput
             type='text'
             name='roomName'
             placeholder='Room name'
@@ -45,7 +46,7 @@ export const CreateRoomComponent: FC<ComponentProps> = ({ isLoading, setIsLoadin
           )}
         </div>
         <div>
-          <input
+          <RoomInput
             type='password'
             name='roomPassword'
             placeholder='Room password'

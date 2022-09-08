@@ -1,8 +1,16 @@
 import { DRAW_SOCKET, FINISH_DRAW_SOCKET } from 'const/sockets'
+import { ToolsEnum } from 'hooks/useCanvas/types'
 import { Socket } from 'socket.io-client'
 
 import { Tool } from './tool.class'
 
+type OnlineDrawProps = {
+  ctx: CanvasRenderingContext2D
+  x: number
+  y: number
+  strokeStyle: string
+  lineWidth: number
+}
 export class Pen extends Tool {
   private mouseDown = false
 
@@ -21,24 +29,21 @@ export class Pen extends Tool {
     this.canvas.current.onmouseup = this.onMouseUp.bind(this)
   }
 
-  private onMouseUp(e: MouseEvent) {
+  private onMouseUp() {
     this.mouseDown = false
     this.socket.emit(FINISH_DRAW_SOCKET, {
       roomId: this.id
     })
   }
 
-  private onMouseDown(e: MouseEvent) {
+  private onMouseDown() {
     this.mouseDown = true
-    if (this.ctx) {
-      this.ctx.beginPath()
-    }
   }
 
   private onMouseMove(e: MouseEvent) {
     if (this.mouseDown && this.ctx) {
       this.socket.emit(DRAW_SOCKET, {
-        tool: 'pen',
+        tool: ToolsEnum.pen,
         roomId: this.id,
         x: e.offsetX,
         y: e.offsetY,
@@ -54,23 +59,15 @@ export class Pen extends Tool {
     ctx.stroke()
   }
 
-  static drawOnline(
-    ctx: CanvasRenderingContext2D,
-    x: number,
-    y: number,
-    strokeStyle: string,
-    lineWidht: number
-  ) {
+  static drawOnline(data: OnlineDrawProps) {
+    const { ctx, lineWidth, strokeStyle, x, y } = data
     if (ctx) {
-      const strokeStyleDefault = ctx.strokeStyle
-      const lineWidthDefault = ctx.lineWidth
-
       ctx.strokeStyle = strokeStyle
-      ctx.lineWidth = lineWidht
+      ctx.lineWidth = lineWidth
       ctx.lineTo(x, y)
       ctx.stroke()
-      ctx.strokeStyle = strokeStyleDefault
-      ctx.lineWidth = lineWidthDefault
+      ctx.strokeStyle = this.strokeStyle
+      ctx.lineWidth = this.lineWidth
     }
   }
 }

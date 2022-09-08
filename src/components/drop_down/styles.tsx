@@ -18,12 +18,12 @@ const DropDownContainer = styled.div<DropDownContainerProps>`
   & > div:first-child {
     cursor: pointer;
     border: 1px solid white;
-    background-color: black;
+    background-color: ${({ theme }) => theme.colors.black};
     border-radius: 5px;
     width: 50px;
     text-align: center;
     padding: 5px;
-    color: white;
+    color: ${({ theme }) => theme.colors.white};
   }
 
   ${(p) =>
@@ -31,10 +31,10 @@ const DropDownContainer = styled.div<DropDownContainerProps>`
     css`
       & > div:last-child {
         position: absolute;
-        background-color: #000000;
+        background-color: ${({ theme }) => theme.colors.black};
         border-radius: 5px;
         padding: 10px;
-        color: #ffffff;
+        color: ${({ theme }) => theme.colors.white};
         right: 0;
         top: 0;
         border: 1px solid black;

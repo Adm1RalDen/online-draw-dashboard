@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { Heading3 } from 'styles/typography/styles'
 import { ActiveRoom } from 'types/rooms'
 
 import { UserRoomCard } from './card'
@@ -15,7 +16,7 @@ type Props = {
 export const UserRooms: FC<Props> = ({ userRooms, userId, userName, isLoading, setIsLoading }) => {
   return (
     <UserRoomsWrapper>
-      <h3>Your Rooms</h3>
+      <Heading3>Your Rooms</Heading3>
       <UserCardsWrapper>
         {userRooms.map((room) => (
           <UserRoomCard

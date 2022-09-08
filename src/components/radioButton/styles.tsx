@@ -12,7 +12,7 @@ const Input = styled.input`
   width: 0;
 
   &:checked ~ span {
-    background-color: #2196f3;
+    background-color: ${({ theme }) => theme.colors.blue};
   }
   &:checked ~ span:after {
     display: block;
@@ -25,7 +25,7 @@ const Span = styled.span`
   left: 0;
   height: 25px;
   width: 25px;
-  background-color: #eee;
+  background-color: ${({ theme }) => theme.colors.whiteGray};
   border-radius: 50%;
 
   &:after {
@@ -40,7 +40,7 @@ const Span = styled.span`
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: white;
+    background: ${({ theme }) => theme.colors.white};
   }
 `
 
@@ -50,7 +50,7 @@ const Label = styled.label`
   padding-left: 35px;
   margin-bottom: 12px;
   cursor: pointer;
-  font-size: 22px;
+  font-size: ${({ theme }) => theme.fontSizes.middleUp};
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;

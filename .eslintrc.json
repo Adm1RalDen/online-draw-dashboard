@@ -10,7 +10,6 @@
     "plugin:import/errors",
     "plugin:import/warnings",
     "plugin:import/typescript",
-    "google",
     "plugin:prettier/recommended"
   ],
   "parser": "@typescript-eslint/parser",
@@ -21,11 +20,15 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": [
-    "react",
-    "@typescript-eslint",
-    "prettier"
-  ],
+  "plugins": ["react", "@typescript-eslint", "prettier"],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "moduleDirectory": ["node_modules", "src/"],
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
   "rules": {
     "prettier/prettier": [
       "error",
@@ -46,14 +49,8 @@
         "allowTemplateLiterals": true
       }
     ],
-    "linebreak-style": [
-      "error",
-      "unix"
-    ],
-    "object-curly-spacing": [
-      "error",
-      "always"
-    ],
+    "linebreak-style": ["error", "unix"],
+    "object-curly-spacing": ["error", "always"],
     "spaced-comment": "error",
     "import/default": "error",
     "import/no-named-as-default-member": "error",

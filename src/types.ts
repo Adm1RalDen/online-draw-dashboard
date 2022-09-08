@@ -48,3 +48,7 @@ export interface UserInRoom {
   userName: string
   userId: string
 }
+
+export type CustomRefObject<T> = {
+  readonly current: T
+}

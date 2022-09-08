@@ -1,10 +1,7 @@
+import { Circle, Eraser, Line, Pen, Square } from 'canvas_classes'
 import { Socket } from 'socket.io-client'
 
-import { Circle } from './../../canvas_classes/circle.class'
-import { Eraser } from './../../canvas_classes/eraser.class'
-import { Line } from './../../canvas_classes/line.class'
-import { Pen } from './../../canvas_classes/pen.class'
-import { Square } from './../../canvas_classes/square.class'
+import { ToolsEnum } from './types'
 
 type Props = {
   tool: string
@@ -25,19 +22,19 @@ export const handleSetTool = (data: Props) => {
   const { canvasRef, roomId, socket, tool } = data
 
   switch (tool) {
-    case 'pen':
+    case ToolsEnum.pen:
       new Pen(canvasRef, socket, roomId)
       break
-    case 'square':
+    case ToolsEnum.square:
       new Square(canvasRef, socket, roomId)
       break
-    case 'circle':
+    case ToolsEnum.circle:
       new Circle(canvasRef, socket, roomId)
       break
-    case 'eraser':
+    case ToolsEnum.eraser:
       new Eraser(canvasRef, socket, roomId)
       break
-    case 'line':
+    case ToolsEnum.line:
       new Line(canvasRef, socket, roomId)
       break
     default:

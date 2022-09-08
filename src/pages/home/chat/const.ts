@@ -13,7 +13,7 @@ type Props = {
   id: string
 }
 
-export const SetConnectionChat = (data: Props) => {
+export const setConnectionChat = (data: Props) => {
   const { setIsLoading, setMessages, id, setMessageLoading, setError, socket } = data
 
   socket.emit(GET_CHAT_SOCKET)
@@ -29,7 +29,7 @@ export const SetConnectionChat = (data: Props) => {
     }
   })
 }
-export const ClearConnectionChat = (socket: Socket<any, any>) => {
+export const clearConnectionChat = (socket: Socket<any, any>) => {
   socket.off(CHAT_ERROR_SOCKET)
   socket.off(GET_CHAT_SOCKET)
   socket.off(CHAT_MESSAGE_SOCKET)

@@ -1,4 +1,4 @@
-import { Tool } from '../../../canvas_classes'
+import { Tool } from 'canvas_classes'
 
 type handleSnapshotProps = {
   snapshotList: string[]
