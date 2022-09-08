@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import { ChangeEvent, FC, useState } from "react";
-import { useAppDispatch } from "store/store";
+import { useAppDispatch } from "store";
 import { Heading3 } from "styles/typography/styles";
 import { Portal } from "utils/portal";
 

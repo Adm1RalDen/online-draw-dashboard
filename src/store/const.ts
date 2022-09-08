@@ -21,6 +21,7 @@ export const userInitialState: UserReducerInitialTypes = {
   error: undefined,
   isLoading: false,
   token: undefined,
+  hasUserStateLoaded: false,
   data: {
     id: "",
     avatar: "",

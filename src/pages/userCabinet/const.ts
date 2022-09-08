@@ -1,4 +1,4 @@
-import { AppDispatch } from "store/store";
+import { AppDispatch } from "store";
 import { updateUserProfileThunk } from "store/thunks/user/user.thunk";
 import { AuthorizedUser } from "types";
 import { createBlobFile } from "utils/encodeBase64";

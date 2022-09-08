@@ -3,6 +3,7 @@ export type UserReducerInitialTypes = {
   isLoading: boolean;
   error: undefined | string;
   token: undefined | string;
+  hasUserStateLoaded: boolean;
   data: {
     id: string;
     avatar: string;
