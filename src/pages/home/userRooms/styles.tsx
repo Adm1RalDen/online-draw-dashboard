@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const UserRoomsWrapper = styled.div`
   grid-area: myRooms;
@@ -12,12 +12,12 @@ const UserRoomsWrapper = styled.div`
     font-size: ${({ theme }) => theme.fontSizes.middleUp};
     margin-bottom: 15px;
   }
-`;
+`
 
 const UserCardsWrapper = styled.div`
   display: flex;
   flex-flow: column;
   gap: 10px;
-`;
+`
 
-export { UserRoomsWrapper, UserCardsWrapper };
+export { UserRoomsWrapper, UserCardsWrapper }

@@ -1,63 +1,63 @@
-import { nanoid } from "@reduxjs/toolkit";
-import { CHAT_MESSAGE_SOCKET } from "const/sockets";
-import { useSocket } from "hooks/useSocket";
-import { useEffect, useRef, useState } from "react";
-import { useAppSelector } from "store";
-import { userInfoSelector } from "store/selectors/user.selector";
+import { nanoid } from '@reduxjs/toolkit'
+import { CHAT_MESSAGE_SOCKET } from 'const/sockets'
+import { useSocket } from 'hooks/useSocket'
+import { useEffect, useRef, useState } from 'react'
+import { useAppSelector } from 'store'
+import { userInfoSelector } from 'store/selectors/user.selector'
 
-import { LittleLoader } from "components/loaders/littleLoader";
+import { LittleLoader } from 'components/loaders/littleLoader'
 
-import { ChatMessage } from "../types";
-import { ClearConnectionChat, SetConnectionChat } from "./const";
+import { ChatMessage } from '../types'
+import { clearConnectionChat, setConnectionChat } from './const'
 import {
   ChatWrapper,
   Message,
   MessageInput,
   MessagesBlock,
   MessagesWrapper,
-  SendMessageButton,
-} from "./styles";
+  SendMessageButton
+} from './styles'
 
 export const Chat = () => {
-  const { socket } = useSocket();
-  const [messages, setMessages] = useState<ChatMessage[] | []>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState("");
-  const inputRef = useRef<HTMLInputElement>(null);
-  const { data } = useAppSelector(userInfoSelector);
-  const chatRef = useRef<HTMLDivElement>(null);
-  const [messageLoading, setMessageLoading] = useState(false);
-  const DEFAULT_IMAGE = "http://localhost:5000/users/defaultUserImage.png";
+  const { socket } = useSocket()
+  const [messages, setMessages] = useState<ChatMessage[] | []>([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState('')
+  const inputRef = useRef<HTMLInputElement>(null)
+  const { data } = useAppSelector(userInfoSelector)
+  const chatRef = useRef<HTMLDivElement>(null)
+  const [messageLoading, setMessageLoading] = useState(false)
+  const DEFAULT_IMAGE = 'http://localhost:5000/users/defaultUserImage.png'
 
   useEffect(() => {
-    SetConnectionChat({
+    setConnectionChat({
       id: data.id,
       socket,
       setIsLoading,
       setMessageLoading,
       setMessages,
-      setError,
-    });
+      setError
+    })
 
-    return () => ClearConnectionChat(socket);
-  }, []);
+    return () => clearConnectionChat(socket)
+  }, [data.id, socket])
 
   useEffect(() => {
     if (chatRef.current) {
-      chatRef.current.scrollTo(0, chatRef.current.scrollHeight);
+      chatRef.current.scrollTo(0, chatRef.current.scrollHeight)
     }
-  }, [messages]);
+  }, [messages])
 
   const handleSendMessage = () => {
     if (inputRef.current?.value) {
       socket.emit(CHAT_MESSAGE_SOCKET, {
         userId: data.id,
         name: data.name,
-        message: inputRef.current.value,
-      });
-      inputRef.current.value = "";
+        message: inputRef.current.value
+      })
+      inputRef.current.value = ''
     }
-  };
+  }
 
   return (
     <ChatWrapper>
@@ -73,8 +73,8 @@ export const Chat = () => {
                 <img
                   src={`http://localhost:5000/users/${msg.userId}/${msg.userId}_avatar.png`}
                   onError={(e) => {
-                    (e.target as HTMLImageElement).onerror = null;
-                    (e.target as HTMLImageElement).src = DEFAULT_IMAGE;
+                    ;(e.target as HTMLImageElement).onerror = null
+                    ;(e.target as HTMLImageElement).src = DEFAULT_IMAGE
                   }}
                   width={30}
                   height={30}
@@ -90,14 +90,11 @@ export const Chat = () => {
         )}
       </MessagesBlock>
       <div>
-        <MessageInput type="text" ref={inputRef} />
-        <SendMessageButton
-          onClick={handleSendMessage}
-          disabled={messageLoading}
-        >
+        <MessageInput type='text' ref={inputRef} />
+        <SendMessageButton onClick={handleSendMessage} disabled={messageLoading}>
           send
         </SendMessageButton>
       </div>
     </ChatWrapper>
-  );
-};
+  )
+}

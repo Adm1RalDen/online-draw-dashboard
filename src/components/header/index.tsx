@@ -1,30 +1,25 @@
-import { CABINET_URL } from "const/urls";
-import { useSocket } from "hooks/useSocket";
-import { Link, NavLink, useLocation } from "react-router-dom";
-import { useAppDispatch } from "store";
-import { logoutAction } from "store/slices/user.slice";
+import { CABINET_URL } from 'const/urls'
+import { useSocket } from 'hooks/useSocket'
+import { Link, NavLink, useLocation } from 'react-router-dom'
+import { useAppDispatch } from 'store'
+import { logoutAction } from 'store/slices/user.slice'
 
-import { BurgerMenu } from "components/burger-menu";
-import { Button } from "components/button";
+import { BurgerMenu } from 'components/burger-menu'
+import { Button } from 'components/button'
 
-import { Container } from "../container";
-import { LINKS } from "./const";
-import {
-  BurgerWrapper,
-  HeaderComponent,
-  HeaderNavigation,
-  HeaderUserBlock,
-} from "./styles";
+import { Container } from '../container'
+import { LINKS } from './const'
+import { BurgerWrapper, HeaderComponent, HeaderNavigation, HeaderUserBlock } from './styles'
 
 export const Header = () => {
-  const dispatch = useAppDispatch();
-  const { socket } = useSocket();
-  const { pathname } = useLocation();
+  const dispatch = useAppDispatch()
+  const { socket } = useSocket()
+  const { pathname } = useLocation()
 
   const handleLeave = () => {
-    socket.disconnect();
-    dispatch(logoutAction());
-  };
+    socket.disconnect()
+    dispatch(logoutAction())
+  }
 
   return (
     <HeaderComponent>
@@ -49,5 +44,5 @@ export const Header = () => {
         </HeaderUserBlock>
       </Container>
     </HeaderComponent>
-  );
-};
+  )
+}

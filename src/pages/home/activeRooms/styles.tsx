@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const Room = styled.div`
   color: ${({ theme }) => theme.colors.white};
@@ -20,6 +20,6 @@ const Room = styled.div`
     background-color: ${({ theme }) => theme.colors.green};
     border-radius: 50%;
   }
-`;
+`
 
-export { Room };
+export { Room }

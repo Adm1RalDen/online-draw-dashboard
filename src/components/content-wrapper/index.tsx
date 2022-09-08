@@ -1,17 +1,17 @@
-import { useOutlet } from "react-router-dom";
+import { useOutlet } from 'react-router-dom'
 
-import { FooterComponent } from "components/footer";
-import { Header } from "components/header";
+import { FooterComponent } from 'components/footer'
+import { Header } from 'components/header'
 
-import { Wrapper } from "./styles";
+import { Wrapper } from './styles'
 
 export const ContentWrapper = () => {
-  const outlet = useOutlet();
+  const outlet = useOutlet()
   return (
     <Wrapper>
       <Header />
       {outlet}
       <FooterComponent />
     </Wrapper>
-  );
-};
+  )
+}

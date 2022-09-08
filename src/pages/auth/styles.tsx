@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import { Heading1, Heading2 } from "styles/typography/styles";
+import styled from 'styled-components'
+import { Heading1, Heading2 } from 'styles/typography/styles'
 
-import { Button } from "components/button";
-import { Container as DefaultContainer } from "components/container";
+import { Button } from 'components/button'
+import { Container as DefaultContainer } from 'components/container'
 
 const AuthButton = styled(Button)`
   width: 100%;
@@ -15,12 +15,12 @@ const AuthButton = styled(Button)`
   &:disabled {
     background-color: transparent;
   }
-`;
+`
 
 const AuthSection = styled.section`
   height: 100vh;
   background-color: ${(p) => p.theme.colors.greenBackground};
-`;
+`
 
 const Container = styled(DefaultContainer)`
   display: grid;
@@ -29,7 +29,7 @@ const Container = styled(DefaultContainer)`
   justify-content: center;
   align-items: center;
   gap: 50px;
-`;
+`
 
 const Wrapper = styled.div`
   border-radius: 10px;
@@ -39,15 +39,15 @@ const Wrapper = styled.div`
   & > div:last-child {
     margin-top: 20px;
   }
-`;
+`
 
 const Title = styled(Heading2)`
   color: ${({ theme }) => theme.colors.white};
-`;
+`
 
 const Logo = styled(Heading1)`
   font-size: ${({ theme }) => theme.fontSizes.large};
   color: ${({ theme }) => theme.colors.white};
-`;
+`
 
-export { AuthSection, Container, Logo, Wrapper, Title, AuthButton };
+export { AuthSection, Container, Logo, Wrapper, Title, AuthButton }

@@ -1,11 +1,11 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
-import { Input } from "components/input";
-import { StyledScroll } from "components/scroll/styles";
+import { Input } from 'components/input'
+import { StyledScroll } from 'components/scroll/styles'
 
 type WrapperProps = {
-  myMessage: boolean;
-};
+  myMessage: boolean
+}
 
 const MessagesBlock = styled(StyledScroll)`
   max-height: 100%;
@@ -13,7 +13,7 @@ const MessagesBlock = styled(StyledScroll)`
   background-color: ${({ theme }) => theme.colors.greenBackground};
   border-radius: 5px;
   padding: 10px;
-`;
+`
 
 const ChatWrapper = styled.div`
   height: calc(100% - 50px);
@@ -28,7 +28,7 @@ const ChatWrapper = styled.div`
     align-items: center;
     padding: 0px 10px;
   }
-`;
+`
 
 const MessageInput = styled(Input)`
   height: 30px;
@@ -36,7 +36,7 @@ const MessageInput = styled(Input)`
   padding: 0px 10px;
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
-`;
+`
 
 const SendMessageButton = styled.button`
   width: 60px;
@@ -50,7 +50,7 @@ const SendMessageButton = styled.button`
   &:hover {
     background-color: ${({ theme }) => theme.colors.darkAqua};
   }
-`;
+`
 
 const MessagesWrapper = styled.div`
   display: flex;
@@ -65,13 +65,12 @@ const MessagesWrapper = styled.div`
     height: 30px;
     object-fit: cover;
   }
-`;
+`
 
 const Message = styled.div<WrapperProps>`
   flex-grow: 1;
   padding: 5px;
-  background-color: ${(p) =>
-    p.myMessage ? p.theme.colors.aquaMiddle : p.theme.colors.aquaGreen};
+  background-color: ${(p) => (p.myMessage ? p.theme.colors.aquaMiddle : p.theme.colors.aquaGreen)};
   border-radius: 10px;
 
   & > h4 {
@@ -84,13 +83,6 @@ const Message = styled.div<WrapperProps>`
     color: ${({ theme }) => theme.colors.white};
     word-break: break-all;
   }
-`;
+`
 
-export {
-  Message,
-  MessagesWrapper,
-  ChatWrapper,
-  SendMessageButton,
-  MessageInput,
-  MessagesBlock,
-};
+export { Message, MessagesWrapper, ChatWrapper, SendMessageButton, MessageInput, MessagesBlock }

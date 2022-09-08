@@ -1,32 +1,32 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
-import { Input } from "components/input";
+import { Input } from 'components/input'
 
 const UpdateModalWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   padding: 10px;
   width: 350px;
   height: 250px;
-`;
+`
 
 const UpdateModalInput = styled(Input)`
   height: 30px;
   margin-bottom: 5px;
-`;
+`
 
 const UpdateModalCheckbox = styled(Input)`
   display: block;
   width: 20px;
   height: 20px;
   margin-top: 10px;
-`;
+`
 
 const UpdateModalForm = styled.form`
   display: flex;
   height: 100%;
   flex-direction: column;
   justify-content: space-between;
-`;
+`
 
 const UpdateModalButtonsWrapper = styled.div`
   display: flex;
@@ -49,12 +49,12 @@ const UpdateModalButtonsWrapper = styled.div`
       background-color: ${({ theme }) => theme.colors.red};
     }
   }
-`;
+`
 
 export {
   UpdateModalWrapper,
   UpdateModalForm,
   UpdateModalButtonsWrapper,
   UpdateModalInput,
-  UpdateModalCheckbox,
-};
+  UpdateModalCheckbox
+}

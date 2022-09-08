@@ -1,8 +1,9 @@
-import { createContext } from "react";
-import { Socket } from "socket.io-client";
+import { createContext } from 'react'
+import { SocketApp } from 'types/socket'
 
 type WSContextType = {
-  socket: Socket<any, any>;
-};
+  socket: SocketApp
+}
 
-export const WsContext = createContext<WSContextType>({ socket: null! });
+/* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
+export const WsContext = createContext<WSContextType>({ socket: null! })

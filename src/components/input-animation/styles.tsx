@@ -1,22 +1,22 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components'
 
 type InputWrapperProps = {
-  isError: boolean;
-  hasValue: boolean;
-  margin?: string;
-};
+  isError: boolean
+  hasValue: boolean
+  margin?: string
+}
 
 const ErrorSpan = styled.span`
   position: absolute;
   width: 30px;
   overflow: hidden;
-  background: url("/assets/warning.png") no-repeat;
+  background: url('/assets/warning.png') no-repeat;
   background-size: 30px 30px;
   top: 10px;
   right: 5px;
   height: 30px;
   color: ${({ theme }) => theme.colors.red};
-`;
+`
 const InputWrapper = styled.div<InputWrapperProps>`
   position: relative;
   padding-top: 5px;
@@ -95,6 +95,6 @@ const InputWrapper = styled.div<InputWrapperProps>`
         color: ${({ theme }) => theme.colors.red};
       `}
   }
-`;
+`
 
-export { InputWrapper, ErrorSpan };
+export { InputWrapper, ErrorSpan }

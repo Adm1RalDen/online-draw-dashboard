@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const Container = styled.div`
   max-width: 1400px;
@@ -7,4 +7,4 @@ export const Container = styled.div`
   @media screen and (max-width: ${(p) => p.theme.breakPoints.desktop}) {
     padding-left: 10px;
   }
-`;
+`

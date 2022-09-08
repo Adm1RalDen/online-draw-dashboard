@@ -1,8 +1,8 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
-import { Button } from "components/button";
-import { Input } from "components/input";
-import { StyledScroll } from "components/scroll/styles";
+import { Button } from 'components/button'
+import { Input } from 'components/input'
+import { StyledScroll } from 'components/scroll/styles'
 
 const SubmitButton = styled(Button)`
   margin-top: 10px;
@@ -15,12 +15,12 @@ const SubmitButton = styled(Button)`
       cursor: not-allowed;
     }
   }
-`;
+`
 
 const HomePageSection = styled.section`
   min-height: 100vh;
   background-color: ${({ theme }) => theme.colors.greenBackground};
-`;
+`
 
 const HomePageWrapper = styled.div`
   display: grid;
@@ -31,14 +31,14 @@ const HomePageWrapper = styled.div`
   padding: 2vh 0px 0px 0px;
   grid-template: 50px 1fr 1fr / 1fr 3fr 2fr;
   grid-template-areas:
-    "header header header"
-    "activeRooms wrapper chat"
-    "activeRooms myRooms chat";
+    'header header header'
+    'activeRooms wrapper chat'
+    'activeRooms myRooms chat';
 
   & > div {
     border-radius: 10px;
   }
-`;
+`
 
 const HomeHeader = styled.header`
   grid-area: header;
@@ -49,7 +49,7 @@ const HomeHeader = styled.header`
   display: flex;
   align-items: center;
   justify-content: right;
-`;
+`
 
 const ActiveRoomsWrapper = styled(StyledScroll)`
   grid-area: activeRooms;
@@ -67,7 +67,7 @@ const ActiveRoomsWrapper = styled(StyledScroll)`
     font-size: ${({ theme }) => theme.fontSizes.middleUp};
     margin-bottom: 15px;
   }
-`;
+`
 
 const Wrapper = styled.div`
   grid-area: wrapper;
@@ -80,12 +80,12 @@ const Wrapper = styled.div`
   & > div:last-child {
     margin-top: 20px;
   }
-`;
+`
 
 const ChatWrapper = styled(ActiveRoomsWrapper)`
   grid-area: chat;
   background-color: ${({ theme }) => theme.colors.aqua};
-`;
+`
 
 const RoomWrapper = styled.div`
   border-radius: 10px;
@@ -97,13 +97,13 @@ const RoomWrapper = styled.div`
     font-size: ${({ theme }) => theme.fontSizes.middleUp};
     color: ${({ theme }) => theme.colors.white};
   }
-`;
+`
 
 const RoomInput = styled(Input)`
   width: 100%;
   height: 35px;
   margin-top: 5px;
-`;
+`
 
 export {
   HomePageSection,
@@ -114,5 +114,5 @@ export {
   RoomWrapper,
   HomeHeader,
   SubmitButton,
-  RoomInput,
-};
+  RoomInput
+}

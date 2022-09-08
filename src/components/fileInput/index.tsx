@@ -1,5 +1,5 @@
-import { ChangeEvent, FC, useRef, useState } from "react";
-import { FunctionWithParams } from "types";
+import { ChangeEvent, FC, useRef, useState } from 'react'
+import { FunctionWithParams } from 'types'
 
 import {
   CloseDiv,
@@ -8,32 +8,32 @@ import {
   FileName,
   LoadButton,
   SpanWrapper,
-  Wrapper,
-} from "./styles";
+  Wrapper
+} from './styles'
 
 type FileInputProps = {
-  name: string;
-  onChange: FunctionWithParams<ChangeEvent<HTMLInputElement> | null>;
-};
+  name: string
+  onChange: FunctionWithParams<ChangeEvent<HTMLInputElement> | null>
+}
 
 export const FileInput: FC<FileInputProps> = ({ onChange, name }) => {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const [file, setFile] = useState<File | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null)
+  const [file, setFile] = useState<File | null>(null)
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setFile(e.target.files ? e.target.files[0] : null);
-    onChange(e);
-  };
+    setFile(e.target.files ? e.target.files[0] : null)
+    onChange(e)
+  }
   const handleClose = () => {
-    setFile(null);
-    onChange(null);
-  };
-  const handleClick = () => inputRef.current!.click();
+    setFile(null)
+    onChange(null)
+  }
+  const handleClick = () => inputRef.current?.click()
 
   return (
     <ContentWrapper>
       <Wrapper>
-        <LoadButton type="button" onClick={handleClick}>
+        <LoadButton type='button' onClick={handleClick}>
           Load file
         </LoadButton>
         {file && (
@@ -43,12 +43,7 @@ export const FileInput: FC<FileInputProps> = ({ onChange, name }) => {
           </SpanWrapper>
         )}
       </Wrapper>
-      <FileInputStyled
-        name={name}
-        type="file"
-        ref={inputRef}
-        onChange={handleChange}
-      />
+      <FileInputStyled name={name} type='file' ref={inputRef} onChange={handleChange} />
     </ContentWrapper>
-  );
-};
+  )
+}

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const EditorWrapper = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.littleDarkWhite};
@@ -12,6 +12,6 @@ const EditorWrapper = styled.div`
     position: absolute;
     opacity: 0;
   }
-`;
+`
 
-export { EditorWrapper };
+export { EditorWrapper }

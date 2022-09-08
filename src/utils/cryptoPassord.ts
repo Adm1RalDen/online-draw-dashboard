@@ -1,5 +1,5 @@
-import { SHA256 } from "crypto-js";
+import sha265 from 'crypto-js/sha256'
 
 export const cryptoSha256 = (str: string) => {
-  return SHA256(str).toString();
-};
+  return sha265(str).toString()
+}

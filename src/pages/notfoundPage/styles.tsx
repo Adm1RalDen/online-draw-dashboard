@@ -1,10 +1,10 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
-import { FlexContainer } from "components/flex-container";
+import { FlexContainer } from 'components/flex-container'
 
 const NotFoundPageWrapper = styled(FlexContainer)`
   height: 100vh;
-`;
+`
 
 const NotFoundPageContent = styled.div`
   & > p {
@@ -14,6 +14,6 @@ const NotFoundPageContent = styled.div`
   & > a {
     font-size: ${({ theme }) => theme.fontSizes.middle};
   }
-`;
+`
 
-export { NotFoundPageWrapper, NotFoundPageContent };
+export { NotFoundPageWrapper, NotFoundPageContent }

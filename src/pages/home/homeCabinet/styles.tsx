@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const HomeCabinetWrapper = styled.div`
   color: ${({ theme }) => theme.colors.white};
@@ -7,6 +7,6 @@ const HomeCabinetWrapper = styled.div`
   border-radius: 5px;
   padding: 10px;
   margin-right: 5px;
-`;
+`
 
-export { HomeCabinetWrapper };
+export { HomeCabinetWrapper }

@@ -1,50 +1,77 @@
+import { ToolsEnum } from 'hooks/useCanvas/types'
+
 export interface UserLoginFormData {
-  email: string;
-  password: string;
+  email: string
+  password: string
 }
 export interface UserRegistrationData extends UserLoginFormData {
-  name: string;
+  name: string
 }
 export interface AuthorizedUser {
-  id: string;
-  name: string;
-  avatar: string;
-  backgroundFon: string;
-  age: string;
-  role: string;
-  email: string;
-  country: string;
-  city: string;
-  color: string;
-  gender: string;
-  date: string;
-  biography: string;
+  id: string
+  name: string
+  avatar: string
+  backgroundFon: string
+  age: string
+  role: string
+  email: string
+  country: string
+  city: string
+  color: string
+  gender: string
+  date: string
+  biography: string
 }
 
 export interface AuthorizedUserObject {
-  token: string;
-  data: AuthorizedUser;
+  token: string
+  data: AuthorizedUser
 }
 export interface SavedUserObject {
-  token: string;
-  user: Pick<AuthorizedUser, "name" | "role" | "id">;
-}
-export interface FunctionWithParams<T> {
-  (e: T): void;
-}
-export interface AuthContextTypes {
-  isAuth: boolean;
-  isReady: boolean;
-  userData: SavedUserObject;
-  login: FunctionWithParams<UserLoginFormData>;
-  logout: VoidFunction;
-  isLoading: boolean;
-}
-export interface RoomType {
-  _id: string;
+  token: string
+  user: Pick<AuthorizedUser, 'name' | 'role' | 'id'>
 }
 
+/* eslint no-unused-vars: "off" */
+export interface FunctionWithParams<T> {
+  (e: T): void
+}
+export interface AuthContextTypes {
+  isAuth: boolean
+  isReady: boolean
+  userData: SavedUserObject
+  login: FunctionWithParams<UserLoginFormData>
+  logout: VoidFunction
+  isLoading: boolean
+}
+export interface RoomType {
+  _id: string
+}
+
+export type ChildrenProps = {
+  children: React.ReactNode
+}
 export interface UserInRoom {
-  userName: string;
-  userId: string;
+  userName: string
+  userId: string
+}
+
+export interface DrawData {
+  roomId: string
+  x1?: number
+  y1?: number
+  x2?: number
+  y2?: number
+  a?: number
+  b?: number
+  width?: number
+  height?: number
+  fillStyle?: string | CanvasGradient | CanvasPattern
+  strokeStyle?: string | CanvasGradient | CanvasPattern
+  lineWidth?: number
+  tool?: keyof typeof ToolsEnum
+}
+
+export type CustomRefObject<T> = {
+  readonly current: T
 }

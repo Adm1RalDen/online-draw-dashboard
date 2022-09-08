@@ -1,19 +1,19 @@
-import { FC } from "react";
-import styled, { css } from "styled-components";
+import { FC } from 'react'
+import styled, { css } from 'styled-components'
 
 type LoaderProps = {
-  position?: "absolute" | "fixed";
-  color?: "white" | "black";
-};
+  position?: 'absolute' | 'fixed'
+  color?: 'white' | 'black'
+}
 
 const LoaderWrapper = styled.div<LoaderProps>`
   ${(p) =>
-    p.position === "fixed" &&
+    p.position === 'fixed' &&
     css`
       position: fixed;
     `}
   ${(p) =>
-    p.position === "absolute" &&
+    p.position === 'absolute' &&
     css`
       position: absolute;
       top: 0;
@@ -56,7 +56,7 @@ const LoaderWrapper = styled.div<LoaderProps>`
     left: 56px;
     animation: lds-ellipsis3 0.6s infinite;
   }
-`;
+`
 export const Loader: FC<LoaderProps> = ({ position, color }) => {
   return (
     <LoaderWrapper position={position} color={color}>
@@ -67,5 +67,5 @@ export const Loader: FC<LoaderProps> = ({ position, color }) => {
         <div />
       </div>
     </LoaderWrapper>
-  );
-};
+  )
+}

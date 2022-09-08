@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const CanvasWrapper = styled.div`
   grid-area: canvas;
@@ -10,6 +10,6 @@ const CanvasWrapper = styled.div`
     border: 2px solid ${({ theme }) => theme.colors.gray};
     border-radius: 5px;
   }
-`;
+`
 
-export { CanvasWrapper };
+export { CanvasWrapper }

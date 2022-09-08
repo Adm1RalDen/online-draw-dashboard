@@ -1,5 +1,7 @@
-import { Instance } from "../instance";
+import { EnterInRoomType } from 'pages/home/types'
 
-export const enterInRoom = async (data: any) => {
-  return Instance.post("/room/enter", data, { withCredentials: true });
-};
+import { Instance } from '../instance'
+
+export const enterInRoom = async (data: EnterInRoomType) => {
+  return Instance.post('/room/enter', data, { withCredentials: true })
+}

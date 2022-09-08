@@ -1,17 +1,17 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const UserCabinetSection = styled.section`
   & > div {
     max-width: 1400px;
     padding: 5px;
   }
-`;
+`
 
 const Wrapper = styled.div`
   display: grid;
   grid-template: 350px minmax(100px, auto) auto / minmax(100px, 350px) 1fr;
   gap: 30px;
-`;
+`
 
 const ImagesWrapper = styled.div`
   grid-column: 1/3;
@@ -34,7 +34,7 @@ const ImagesWrapper = styled.div`
       transform: scale(110%);
     }
   }
-`;
+`
 
 const AvatarWrapper = styled.div`
   position: absolute;
@@ -54,7 +54,7 @@ const AvatarWrapper = styled.div`
     filter: invert(1);
     font-weight: 400;
   }
-`;
+`
 
 const Avatar = styled.div`
   width: 120px;
@@ -70,7 +70,7 @@ const Avatar = styled.div`
     object-fit: cover;
     box-shadow: 0px 0px 5px 1px black;
   }
-`;
+`
 
 const UserInfoWrapper = styled.div`
   grid-column: 1/3;
@@ -78,14 +78,14 @@ const UserInfoWrapper = styled.div`
   display: grid;
   grid-template: minmax(150px, auto) minmax(50px, auto) / 1fr;
   box-shadow: 2px 2px 10px 1px ${({ theme }) => theme.colors.middleGray};
-`;
+`
 
 const UserInfo = styled.div`
   display: grid;
   background-color: ${({ theme }) => theme.colors.white};
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-`;
+`
 
 const InfoWrapper = styled.div`
   width: 100%;
@@ -105,19 +105,19 @@ const InfoWrapper = styled.div`
       font-weight: 300;
     }
   }
-`;
+`
 
 type Props = {
-  color: string;
-};
+  color: string
+}
 
 const ColorSpan = styled.span<Props>`
   display: inline-block;
-  background: ${(p) => p.color || "transparent"};
+  background: ${(p) => p.color || 'transparent'};
   width: 10px;
   height: 10px;
   border-radius: 10px;
-`;
+`
 
 const Biography = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
@@ -135,7 +135,7 @@ const Biography = styled.div`
     font-size: ${({ theme }) => theme.fontSizes.smallUp};
     padding: 10px 5px 10px 0px;
   }
-`;
+`
 
 const ButtonWrapper = styled.div`
   box-shadow: 2px 2px 10px 1px ${({ theme }) => theme.colors.middleGray};
@@ -147,7 +147,7 @@ const ButtonWrapper = styled.div`
   & > button {
     width: 100px;
   }
-`;
+`
 
 export {
   UserCabinetSection,
@@ -160,5 +160,5 @@ export {
   AvatarWrapper,
   ButtonWrapper,
   InfoWrapper,
-  ColorSpan,
-};
+  ColorSpan
+}

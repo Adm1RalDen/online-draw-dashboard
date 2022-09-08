@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const HeaderComponent = styled.header`
   background-color: ${({ theme }) => theme.colors.dark};
@@ -10,14 +10,14 @@ const HeaderComponent = styled.header`
     align-items: center;
     justify-content: space-between;
   }
-`;
+`
 
 const BurgerWrapper = styled.div`
   display: none;
   @media screen and (max-width: ${(p) => p.theme.breakPoints.tablet}) {
     display: block;
   }
-`;
+`
 
 const HeaderNavigation = styled.nav`
   @media screen and (max-width: ${(p) => p.theme.breakPoints.tablet}) {
@@ -36,10 +36,10 @@ const HeaderNavigation = styled.nav`
       color: ${({ theme }) => theme.colors.gold};
     }
   }
-`;
+`
 
 const HeaderUserBlock = styled.div`
   display: flex;
-`;
+`
 
-export { HeaderComponent, BurgerWrapper, HeaderNavigation, HeaderUserBlock };
+export { HeaderComponent, BurgerWrapper, HeaderNavigation, HeaderUserBlock }

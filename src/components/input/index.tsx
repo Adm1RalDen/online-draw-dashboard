@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const Input = styled.input`
   width: 100%;
@@ -7,4 +7,4 @@ export const Input = styled.input`
   border-radius: 2px;
   background-color: ${(p) => p.theme.colors.white};
   border: 2px solid ${(p) => p.theme.colors.light_gray};
-`;
+`

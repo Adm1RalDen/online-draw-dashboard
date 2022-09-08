@@ -1,7 +1,7 @@
-import { HOME_URL } from "const/urls";
-import { Link } from "react-router-dom";
+import { HOME_URL } from 'const/urls'
+import { Link } from 'react-router-dom'
 
-import { ServerErrorPageContent, ServerErrorPageWrapper } from "./styles";
+import { ServerErrorPageContent, ServerErrorPageWrapper } from './styles'
 
 export const ServerErrorPage = () => (
   <ServerErrorPageWrapper>
@@ -10,4 +10,4 @@ export const ServerErrorPage = () => (
       <Link to={HOME_URL}>Home</Link>
     </ServerErrorPageContent>
   </ServerErrorPageWrapper>
-);
+)

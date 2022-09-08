@@ -1,28 +1,28 @@
-import jwtDecode from "jwt-decode";
-import { SavedUserObject } from "types";
+import jwtDecode from 'jwt-decode'
+import { SavedUserObject } from 'types'
 
-const USER = "user";
+const USER = 'user'
 
 export const saveUserInStorage = (user: SavedUserObject) =>
-  localStorage.setItem(USER, JSON.stringify(user));
+  localStorage.setItem(USER, JSON.stringify(user))
 
-export const deleteSavedToken = () => localStorage.removeItem(USER);
+export const deleteSavedToken = () => localStorage.removeItem(USER)
 
 export const getSavedUser = (): SavedUserObject | null => {
-  const user = localStorage.getItem(USER);
+  const user = localStorage.getItem(USER)
   if (user) {
-    return JSON.parse(user);
+    return JSON.parse(user)
   }
-  return null;
-};
+  return null
+}
 
 export const getToken = () => {
-  const user = localStorage.getItem(USER);
+  const user = localStorage.getItem(USER)
   if (user) {
-    const obj: SavedUserObject = JSON.parse(user);
-    return obj.token;
+    const obj: SavedUserObject = JSON.parse(user)
+    return obj.token
   }
-  return null;
-};
+  return null
+}
 
-export const decodeJWT = (token: string) => jwtDecode(token);
+export const decodeJWT = (token: string) => jwtDecode(token)

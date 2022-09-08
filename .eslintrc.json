@@ -10,7 +10,6 @@
     "plugin:import/errors",
     "plugin:import/warnings",
     "plugin:import/typescript",
-    "google",
     "plugin:prettier/recommended"
   ],
   "parser": "@typescript-eslint/parser",
@@ -22,35 +21,47 @@
     "sourceType": "module"
   },
   "plugins": ["react", "@typescript-eslint", "prettier"],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "moduleDirectory": ["node_modules", "src/"],
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
   "rules": {
-    "prettier/prettier": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "tabWidth": 2,
+        "jsxSingleQuote": true
+      }
+    ],
     "no-unused-vars": "warn",
     "no-var": "error",
     "react/react-in-jsx-scope": 0,
     "quotes": [
       2,
-      "double",
+      "single",
       {
-        "avoidEscape": true
+        "avoidEscape": true,
+        "allowTemplateLiterals": true
       }
     ],
-    "linebreak-style": "off",
-    "object-curly-spacing": "off",
-    "spaced-comment": "off",
-    "import/default": "off",
-    "import/no-named-as-default-member": "off",
-    "import/namespace": "off",
-    "import/no-named-as-default": "off",
-    "import/no-unresolved": "off",
-    "@typescript-eslint/no-var-requires": "warn",
-    "require-jsdoc": "off",
-    "prefer-const": "off",
-    "react/jsx-no-comment-textnodes": "off",
-    "react/display-name": "off",
-    "react/prop-types": "off",
-    "@typescript-eslint/no-non-null-assertion": "warn",
-    "new-cap": "off",
-    "react-hooks/exhaustive-deps": "off",
-    "guard-for-in": "off"
+    "linebreak-style": ["error", "unix"],
+    "object-curly-spacing": ["error", "always"],
+    "spaced-comment": "error",
+    "import/default": "error",
+    "import/no-named-as-default-member": "error",
+    "import/namespace": "error",
+    "import/no-named-as-default": "error",
+    "import/no-unresolved": "error",
+    "@typescript-eslint/no-var-requires": "error",
+    "prefer-const": "error",
+    "react/jsx-no-comment-textnodes": "error",
+    "react/display-name": "error",
+    "@typescript-eslint/no-non-null-assertion": "error",
+    "react-hooks/exhaustive-deps": "warn"
   }
 }

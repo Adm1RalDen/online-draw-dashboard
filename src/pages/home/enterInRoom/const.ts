@@ -1,25 +1,25 @@
-import { JOIN_ROOM_SOCKET } from "const/sockets";
-import { Socket } from "socket.io-client";
-import { FunctionWithParams } from "types";
-import * as yup from "yup";
+import { JOIN_ROOM_SOCKET } from 'const/sockets'
+import { FunctionWithParams } from 'types'
+import { SocketApp } from 'types/socket'
+import * as yup from 'yup'
 
-import { EnterInRoomType } from "../types";
+import { EnterInRoomType } from '../types'
 
 const initialValues = {
-  roomId: "",
-  roomPassword: "",
-};
+  roomId: '',
+  roomPassword: ''
+}
 const validationSchema = yup.object().shape({
-  roomId: yup.string().required("Required"),
-});
+  roomId: yup.string().required('Required')
+})
 
 const onSubmit = async (
   data: EnterInRoomType,
-  socket: Socket<any, any>,
+  socket: SocketApp,
   setIsLoading: FunctionWithParams<boolean>
 ) => {
-  setIsLoading(true);
-  socket.emit(JOIN_ROOM_SOCKET, data);
-};
+  setIsLoading(true)
+  socket.emit(JOIN_ROOM_SOCKET, data)
+}
 
-export { initialValues, onSubmit, validationSchema };
+export { initialValues, onSubmit, validationSchema }

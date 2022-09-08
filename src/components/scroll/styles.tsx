@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const StyledScroll = styled.div`
   &::-webkit-scrollbar {
@@ -8,4 +8,4 @@ export const StyledScroll = styled.div`
     background-color: ${({ theme }) => theme.colors.aquaMiddle};
     border-radius: 30px;
   }
-`;
+`

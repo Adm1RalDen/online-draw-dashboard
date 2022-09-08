@@ -1,9 +1,9 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
-const InputWrapper = styled.div``;
+const InputWrapper = styled.div``
 const Wrapper = styled.div`
   width: max-content;
-`;
+`
 const Input = styled.input`
   position: absolute;
   opacity: 0;
@@ -17,7 +17,7 @@ const Input = styled.input`
   &:checked ~ span:after {
     display: block;
   }
-`;
+`
 
 const Span = styled.span`
   position: absolute;
@@ -29,7 +29,7 @@ const Span = styled.span`
   border-radius: 50%;
 
   &:after {
-    content: "";
+    content: '';
     position: absolute;
     display: none;
   }
@@ -42,7 +42,7 @@ const Span = styled.span`
     border-radius: 50%;
     background: ${({ theme }) => theme.colors.white};
   }
-`;
+`
 
 const Label = styled.label`
   display: block;
@@ -55,6 +55,6 @@ const Label = styled.label`
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-`;
+`
 
-export { InputWrapper, Wrapper, Label, Input, Span };
+export { InputWrapper, Wrapper, Label, Input, Span }

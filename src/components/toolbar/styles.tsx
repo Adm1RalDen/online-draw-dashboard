@@ -1,12 +1,12 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components'
 
-import { Button } from "components/button";
-import { FlexContainer } from "components/flex-container";
+import { Button } from 'components/button'
+import { FlexContainer } from 'components/flex-container'
 
 type ToolButtonProps = {
-  img: string;
-  active?: boolean;
-};
+  img: string
+  active?: boolean
+}
 
 const StyledToolbar = styled(FlexContainer)`
   padding: 5px;
@@ -14,7 +14,7 @@ const StyledToolbar = styled(FlexContainer)`
   justify-content: space-between;
   background-color: ${({ theme }) => theme.colors.white};
   border-bottom: 2px solid ${({ theme }) => theme.colors.black};
-`;
+`
 
 const SnapshotButtonsWrapper = styled.div`
   display: flex;
@@ -22,18 +22,18 @@ const SnapshotButtonsWrapper = styled.div`
   & > button:first-child {
     transform: rotate(180deg);
   }
-`;
+`
 
 const DrawToolsWrapper = styled.div`
   display: flex;
   gap: 10px;
 
-  & > input[type="color"] {
+  & > input[type='color'] {
     width: 50px;
     padding: 0px;
     margin-top: 2px;
   }
-`;
+`
 
 const ToolButton = styled.button<ToolButtonProps>`
   display: inline-block;
@@ -59,7 +59,7 @@ const ToolButton = styled.button<ToolButtonProps>`
       background-position: center center;
       background-repeat: no-repeat;
     `}
-`;
+`
 
 const LeaveButton = styled(Button)`
   width: 100px;
@@ -77,12 +77,6 @@ const LeaveButton = styled(Button)`
   &:focus {
     ${(p) => p.theme.shadows.buttonFocus}
   }
-`;
+`
 
-export {
-  ToolButton,
-  StyledToolbar,
-  LeaveButton,
-  SnapshotButtonsWrapper,
-  DrawToolsWrapper,
-};
+export { ToolButton, StyledToolbar, LeaveButton, SnapshotButtonsWrapper, DrawToolsWrapper }

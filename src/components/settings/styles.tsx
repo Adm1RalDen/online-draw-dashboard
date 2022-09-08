@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
-import { Input as DefaultInput } from "components/input";
+import { Input as DefaultInput } from 'components/input'
 
 const StyledSettings = styled.div`
   grid-area: settings;
@@ -16,17 +16,17 @@ const StyledSettings = styled.div`
     align-items: center;
     gap: 10px;
   }
-`;
+`
 
 const Input = styled(DefaultInput)`
   width: 60px;
   padding: 0;
-  &[type="color"] {
+  &[type='color'] {
     width: 50px;
   }
-  &[type="number"] {
+  &[type='number'] {
     padding: 0px 5px 0px 5px;
   }
-`;
+`
 
-export { StyledSettings, Input };
+export { StyledSettings, Input }

@@ -1,41 +1,41 @@
-import { useSocket } from "hooks/useSocket";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "store";
-import { userDataSelector } from "store/selectors/user.selector";
-import { UserLogoutThunk } from "store/thunks/user/authorization.thunk";
-import { Heading3 } from "styles/typography/styles";
-import { ActiveRoom } from "types/rooms";
-import { Portal } from "utils/portal";
+import { useSocket } from 'hooks/useSocket'
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from 'store'
+import { userDataSelector } from 'store/selectors/user.selector'
+import { UserLogoutThunk } from 'store/thunks/user/authorization.thunk'
+import { Heading3 } from 'styles/typography/styles'
+import { ActiveRoom } from 'types/rooms'
+import { Portal } from 'utils/portal'
 
-import { Button } from "components/button";
-import { Loader } from "components/loaders/loader";
+import { Button } from 'components/button'
+import { Loader } from 'components/loaders/loader'
 
-import { ActiveRooms } from "./activeRooms";
-import { Chat } from "./chat";
-import { ClearRoomsConnection, SetRoomsConnection } from "./const";
-import { CreateRoomComponent } from "./createRoom";
-import { EnterInRoomComponent } from "./enterInRoom";
-import { HomeCabinet } from "./homeCabinet";
+import { ActiveRooms } from './activeRooms'
+import { Chat } from './chat'
+import { ClearRoomsConnection, SetRoomsConnection } from './const'
+import { CreateRoomComponent } from './createRoom'
+import { EnterInRoomComponent } from './enterInRoom'
+import { HomeCabinet } from './homeCabinet'
 import {
   ActiveRoomsWrapper,
   ChatWrapper,
   HomeHeader,
   HomePageSection,
   HomePageWrapper,
-  Wrapper,
-} from "./styles";
-import { UserRooms } from "./userRooms";
+  Wrapper
+} from './styles'
+import { UserRooms } from './userRooms'
 
 export const HomePage = () => {
-  const { id, name } = useAppSelector(userDataSelector);
-  const [isLoading, setIsLoading] = useState(false);
-  const [activeRooms, setActiveRooms] = useState<ActiveRoom[]>([]);
-  const [userRooms, setUserRooms] = useState<ActiveRoom[]>([]);
-  const dispatch = useAppDispatch();
-  const { socket } = useSocket();
-  const navigate = useNavigate();
-  const handleLogOut = () => UserLogoutThunk(dispatch);
+  const { id, name } = useAppSelector(userDataSelector)
+  const [isLoading, setIsLoading] = useState(false)
+  const [activeRooms, setActiveRooms] = useState<ActiveRoom[]>([])
+  const [userRooms, setUserRooms] = useState<ActiveRoom[]>([])
+  const dispatch = useAppDispatch()
+  const { socket } = useSocket()
+  const navigate = useNavigate()
+  const handleLogOut = () => UserLogoutThunk(dispatch)
 
   useEffect(() => {
     SetRoomsConnection({
@@ -44,10 +44,10 @@ export const HomePage = () => {
       setIsLoading,
       setUserRooms,
       socket,
-      userId: id,
-    });
-    return () => ClearRoomsConnection(socket);
-  }, []);
+      userId: id
+    })
+    return () => ClearRoomsConnection(socket)
+  }, [navigate, setActiveRooms, setIsLoading, setUserRooms, socket, id])
 
   return (
     <>
@@ -64,14 +64,8 @@ export const HomePage = () => {
           </ActiveRoomsWrapper>
 
           <Wrapper>
-            <CreateRoomComponent
-              isLoading={isLoading}
-              setIsLoading={setIsLoading}
-            />
-            <EnterInRoomComponent
-              isLoading={isLoading}
-              setIsLoading={setIsLoading}
-            />
+            <CreateRoomComponent isLoading={isLoading} setIsLoading={setIsLoading} />
+            <EnterInRoomComponent isLoading={isLoading} setIsLoading={setIsLoading} />
           </Wrapper>
 
           <UserRooms
@@ -91,9 +85,9 @@ export const HomePage = () => {
 
       {isLoading && (
         <Portal>
-          <Loader color="white" />
+          <Loader color='white' />
         </Portal>
       )}
     </>
-  );
-};
+  )
+}

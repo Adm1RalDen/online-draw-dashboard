@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const Button = styled.button`
   width: 150px;
@@ -19,4 +19,4 @@ export const Button = styled.button`
   &:hover {
     background-color: ${(p) => p.theme.colors.lightAqua};
   }
-`;
+`

@@ -1,21 +1,21 @@
-import { UserReducerInitialTypes } from "./types/user.types";
+import { UserReducerInitialTypes } from './types/user.types'
 
-export const USER_REDUCER = "user";
+export const USER_REDUCER = 'user'
 export const defaultUserData = {
-  id: "",
-  avatar: "",
-  backgroundFon: "",
-  name: "",
-  age: "",
-  role: "",
-  email: "",
-  country: "",
-  city: "",
-  color: "",
-  gender: "",
-  date: "",
-  biography: "",
-};
+  id: '',
+  avatar: '',
+  backgroundFon: '',
+  name: '',
+  age: '',
+  role: '',
+  email: '',
+  country: '',
+  city: '',
+  color: '',
+  gender: '',
+  date: '',
+  biography: ''
+}
 export const userInitialState: UserReducerInitialTypes = {
   isAuth: false,
   error: undefined,
@@ -23,18 +23,18 @@ export const userInitialState: UserReducerInitialTypes = {
   token: undefined,
   hasUserStateLoaded: false,
   data: {
-    id: "",
-    avatar: "",
-    backgroundFon: "",
-    name: "",
-    age: "",
-    role: "",
-    email: "",
-    country: "",
-    city: "",
-    color: "",
-    gender: "",
-    date: "",
-    biography: "",
-  },
-};
+    id: '',
+    avatar: '',
+    backgroundFon: '',
+    name: '',
+    age: '',
+    role: '',
+    email: '',
+    country: '',
+    city: '',
+    color: '',
+    gender: '',
+    date: '',
+    biography: ''
+  }
+}
