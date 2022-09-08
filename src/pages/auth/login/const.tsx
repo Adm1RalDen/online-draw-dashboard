@@ -1,4 +1,5 @@
-import { AppDispatch } from 'store/store'
+import { NavigateFunction } from 'react-router-dom'
+import { AppDispatch } from 'store'
 import { UserLoginThunk } from 'store/thunks/user/authorization.thunk'
 import { UserLoginFormData } from 'types'
 import { cryptoSha256 } from 'utils/cryptoPassord'

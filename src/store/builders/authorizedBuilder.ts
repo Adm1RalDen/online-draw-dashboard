@@ -17,6 +17,7 @@ export const authorizedBuilder = (builder: ActionReducerMapBuilder<UserReducerIn
       state.isLoading = false
       state.error = undefined
       state.isAuth = true
+      state.hasUserStateLoaded = true
     }
   )
   builder.addCase(AuthorizedThunk.rejected, (state, { payload }) => {

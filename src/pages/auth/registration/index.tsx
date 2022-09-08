@@ -1,6 +1,6 @@
 import { useFormik } from 'formik'
+import { useAppDispatch, useAppSelector } from 'store'
 import { userInfoSelector } from 'store/selectors/user.selector'
-import { useAppDispatch, useAppSelector } from 'store/store'
 import { UserRegistrationData } from 'types'
 import { Portal } from 'utils/portal'
 

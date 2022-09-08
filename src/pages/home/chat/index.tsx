@@ -2,8 +2,8 @@ import { nanoid } from '@reduxjs/toolkit'
 import { CHAT_MESSAGE_SOCKET } from 'const/sockets'
 import { useSocket } from 'hooks/useSocket'
 import { useEffect, useRef, useState } from 'react'
+import { useAppSelector } from 'store'
 import { userInfoSelector } from 'store/selectors/user.selector'
-import { useAppSelector } from 'store/store'
 
 import { LittleLoader } from 'components/loaders/littleLoader'
 

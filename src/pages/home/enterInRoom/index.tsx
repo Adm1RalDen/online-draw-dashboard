@@ -1,8 +1,8 @@
 import { useFormik } from 'formik'
 import { useSocket } from 'hooks/useSocket'
 import { FC } from 'react'
+import { useAppSelector } from 'store'
 import { userInfoSelector } from 'store/selectors/user.selector'
-import { useAppSelector } from 'store/store'
 import { FunctionWithParams } from 'types'
 
 import { ErrorOutput } from 'components/errorOutput'

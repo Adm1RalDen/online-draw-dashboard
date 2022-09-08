@@ -9,8 +9,8 @@ import { OnlineCanvas } from 'pages/onlineDrawPage/canvas'
 import { ServerErrorPage } from 'pages/serverErrorPage'
 import { UserCabinet } from 'pages/userCabinet'
 import { Navigate, useRoutes } from 'react-router-dom'
+import { useAppSelector } from 'store'
 import { userInfoSelector } from 'store/selectors/user.selector'
-import { useAppSelector } from 'store/store'
 
 import { socket } from './utils/socket'
 
