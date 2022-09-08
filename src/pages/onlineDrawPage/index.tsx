@@ -1,8 +1,8 @@
 import { useSocket } from "hooks/useSocket";
 import { FC, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useAppSelector } from "store";
 import { userDataSelector } from "store/selectors/user.selector";
-import { useAppSelector } from "store/store";
 
 import { Loader } from "components/loaders/loader";
 

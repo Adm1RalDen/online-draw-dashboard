@@ -1,4 +1,4 @@
-import { AppDispatch } from "store/store";
+import { AppDispatch } from "store";
 import { UserRegistrationThunk } from "store/thunks/user/authorization.thunk";
 import { UserRegistrationData } from "types";
 import { cryptoSha256 } from "utils/cryptoPassord";

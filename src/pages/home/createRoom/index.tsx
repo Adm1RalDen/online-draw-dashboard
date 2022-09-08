@@ -1,8 +1,8 @@
 import { useFormik } from "formik";
 import { useSocket } from "hooks/useSocket";
 import { FC } from "react";
+import { useAppSelector } from "store";
 import { userDataSelector } from "store/selectors/user.selector";
-import { useAppSelector } from "store/store";
 import { Heading3 } from "styles/typography/styles";
 import { FunctionWithParams } from "types";
 

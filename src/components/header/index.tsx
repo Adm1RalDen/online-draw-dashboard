@@ -1,8 +1,8 @@
 import { CABINET_URL } from "const/urls";
 import { useSocket } from "hooks/useSocket";
 import { Link, NavLink, useLocation } from "react-router-dom";
+import { useAppDispatch } from "store";
 import { logoutAction } from "store/slices/user.slice";
-import { useAppDispatch } from "store/store";
 
 import { BurgerMenu } from "components/burger-menu";
 import { Button } from "components/button";

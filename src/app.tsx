@@ -1,6 +1,6 @@
 import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "store";
 import { userInfoSelector } from "store/selectors/user.selector";
-import { useAppDispatch, useAppSelector } from "store/store";
 import { AuthorizedThunk } from "store/thunks/user/authorization.thunk";
 
 import { Loader } from "components/loaders/loader";
