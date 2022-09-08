@@ -1,24 +1,20 @@
 import { DRAW_SOCKET, FINISH_DRAW_SOCKET } from 'const/sockets'
 import { ToolsEnum } from 'hooks/useCanvas/types'
-import { Socket } from 'socket.io-client'
+import { SocketApp } from 'types/socket'
 
 import { Tool } from './tool.class'
 
 type OnlineDrawProps = {
   ctx: CanvasRenderingContext2D
-  x: number
-  y: number
+  x1: number
+  y1: number
   strokeStyle: string
   lineWidth: number
 }
 export class Pen extends Tool {
   private mouseDown = false
 
-  constructor(
-    canvas: React.MutableRefObject<HTMLCanvasElement>,
-    socket: Socket<any, any>,
-    id: string
-  ) {
+  constructor(canvas: React.MutableRefObject<HTMLCanvasElement>, socket: SocketApp, id: string) {
     super(canvas, socket, id)
     this.listen()
   }
@@ -45,8 +41,8 @@ export class Pen extends Tool {
       this.socket.emit(DRAW_SOCKET, {
         tool: ToolsEnum.pen,
         roomId: this.id,
-        x: e.offsetX,
-        y: e.offsetY,
+        x1: e.offsetX,
+        y1: e.offsetY,
         strokeStyle: this.ctx.strokeStyle,
         lineWidth: this.ctx.lineWidth
       })
@@ -60,11 +56,11 @@ export class Pen extends Tool {
   }
 
   static drawOnline(data: OnlineDrawProps) {
-    const { ctx, lineWidth, strokeStyle, x, y } = data
+    const { ctx, lineWidth, strokeStyle, x1, y1 } = data
     if (ctx) {
       ctx.strokeStyle = strokeStyle
       ctx.lineWidth = lineWidth
-      ctx.lineTo(x, y)
+      ctx.lineTo(x1, y1)
       ctx.stroke()
       ctx.strokeStyle = this.strokeStyle
       ctx.lineWidth = this.lineWidth

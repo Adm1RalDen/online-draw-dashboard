@@ -20,7 +20,7 @@ export const TextEditor: FC<TextEditorProps> = ({ name, onChange, value = '' }) 
 
   const [textState, setTextState] = useState(EditorState.createWithContent(contentState))
 
-  const onEditorStateChange = (editorState: any) => {
+  const onEditorStateChange = (editorState: EditorState) => {
     setTextState(editorState)
     onChange(draftToHtml(convertToRaw(editorState.getCurrentContent())))
   }

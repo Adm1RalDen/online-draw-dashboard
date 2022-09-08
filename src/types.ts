@@ -1,3 +1,5 @@
+import { ToolsEnum } from 'hooks/useCanvas/types'
+
 export interface UserLoginFormData {
   email: string
   password: string
@@ -29,6 +31,8 @@ export interface SavedUserObject {
   token: string
   user: Pick<AuthorizedUser, 'name' | 'role' | 'id'>
 }
+
+/* eslint no-unused-vars: "off" */
 export interface FunctionWithParams<T> {
   (e: T): void
 }
@@ -44,9 +48,28 @@ export interface RoomType {
   _id: string
 }
 
+export type ChildrenProps = {
+  children: React.ReactNode
+}
 export interface UserInRoom {
   userName: string
   userId: string
+}
+
+export interface DrawData {
+  roomId: string
+  x1?: number
+  y1?: number
+  x2?: number
+  y2?: number
+  a?: number
+  b?: number
+  width?: number
+  height?: number
+  fillStyle?: string | CanvasGradient | CanvasPattern
+  strokeStyle?: string | CanvasGradient | CanvasPattern
+  lineWidth?: number
+  tool?: keyof typeof ToolsEnum
 }
 
 export type CustomRefObject<T> = {

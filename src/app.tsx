@@ -12,7 +12,7 @@ export const App = () => {
 
   useEffect(() => {
     dispatch(AuthorizedThunk()).finally(() => setIsReady(true))
-  }, [])
+  }, [dispatch])
 
   if (!isReady) return <Loader position='absolute' />
   return <Router />

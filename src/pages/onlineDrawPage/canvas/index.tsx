@@ -25,7 +25,7 @@ export const OnlineCanvas = () => {
     () => () => {
       handleLeave(user.id, roomId || '')
     },
-    []
+    [roomId, user.id]
   )
 
   return (

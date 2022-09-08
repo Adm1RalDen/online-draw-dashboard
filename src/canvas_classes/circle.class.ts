@@ -1,10 +1,11 @@
 import { DRAW_SOCKET, FINISH_DRAW_SOCKET } from 'const/sockets'
 import { ToolsEnum } from 'hooks/useCanvas/types'
-import { Socket } from 'socket.io-client'
+import { SocketApp } from 'types/socket'
 
 import { Tool } from './tool.class'
 
 type DrawOnlineProps = {
+  roomId?: string
   ctx: CanvasRenderingContext2D
   x1: number
   y1: number
@@ -14,23 +15,13 @@ type DrawOnlineProps = {
   strokeStyle: string
   lineWidth: number
 }
-
-/**
- * @param {string} canvas The first number.
- * @param {string} socket The second number.
- * @param {string} id The second number.
- */
 export class Circle extends Tool {
   private mouseDown = false
   private saved = ''
   private x1 = 0
   private y1 = 0
 
-  constructor(
-    canvas: React.MutableRefObject<HTMLCanvasElement>,
-    socket: Socket<any, any>,
-    id: string
-  ) {
+  constructor(canvas: React.MutableRefObject<HTMLCanvasElement>, socket: SocketApp, id: string) {
     super(canvas, socket, id)
     this.listen()
   }

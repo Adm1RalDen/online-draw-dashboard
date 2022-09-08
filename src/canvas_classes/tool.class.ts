@@ -1,4 +1,4 @@
-import { Socket } from 'socket.io-client'
+import { SocketApp } from 'types/socket'
 
 export class Tool {
   protected canvas
@@ -11,11 +11,7 @@ export class Tool {
   static fillStyle = '#000'
   static lineWidth = 1
 
-  constructor(
-    canvas: React.MutableRefObject<HTMLCanvasElement>,
-    socket: Socket<any, any>,
-    id: string
-  ) {
+  constructor(canvas: React.MutableRefObject<HTMLCanvasElement>, socket: SocketApp, id: string) {
     this.canvas = canvas
     this.socket = socket
     this.id = id

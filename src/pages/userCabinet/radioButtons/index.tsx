@@ -1,3 +1,4 @@
+import { FormikProps } from 'formik'
 import { ChangeEvent, FC } from 'react'
 import { Heading4 } from 'styles/typography/styles'
 import { FunctionWithParams } from 'types'
@@ -7,10 +8,11 @@ import { Input } from 'components/input'
 import { RadioButtons } from 'components/radioButton'
 
 import { MALE, WOMAN } from '../const'
+import { InitialStateTypes } from '../types'
 import { RadioButtonsWrapper } from '../updateUserModal/styles'
 
 type Props = {
-  formik: any
+  formik: FormikProps<InitialStateTypes>
   handleSaveBackground: FunctionWithParams<ChangeEvent<HTMLInputElement> | null>
 }
 

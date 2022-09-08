@@ -35,7 +35,7 @@ export const Toolbar = () => {
 
   const handleExitFromRoom = () => {
     socket.emit(EXIT_SOCKET, {
-      roomId,
+      roomId: roomId || '',
       userId: id
     })
   }

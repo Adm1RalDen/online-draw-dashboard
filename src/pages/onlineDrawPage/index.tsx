@@ -3,6 +3,7 @@ import { FC, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { userDataSelector } from 'store/selectors/user.selector'
 import { useAppSelector } from 'store/store'
+import { ChildrenProps } from 'types'
 
 import { Loader } from 'components/loaders/loader'
 
@@ -12,7 +13,7 @@ type ParamsProps = {
   roomId: string
 }
 
-export const OnlineDrawPage: FC<any> = ({ children }) => {
+export const OnlineDrawPage: FC<ChildrenProps> = ({ children }) => {
   const user = useAppSelector(userDataSelector)
   const { roomId } = useParams<ParamsProps>()
   const navigate = useNavigate()
@@ -29,10 +30,10 @@ export const OnlineDrawPage: FC<any> = ({ children }) => {
       setAccess,
       socket
     })
-  }, [])
+  }, [navigate, roomId, setIsLoading, user.id, setAccess, socket])
 
   if (isLoading) return <Loader position='absolute' />
-  if (!access) return null
+  if (!access) return <div>have not access</div>
 
-  return children
+  return <>{children}</>
 }

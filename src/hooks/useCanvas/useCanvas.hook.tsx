@@ -16,7 +16,8 @@ type ParamsProps = {
 }
 
 export const useCanvas = () => {
-  const canvasRef: any = useRef<HTMLCanvasElement>(null)
+  /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion*/
+  const canvasRef = useRef<HTMLCanvasElement>(null!)
   const navigate = useNavigate()
   const [tool, setTool] = useState<ToolsTypes>(ToolsEnum.pen)
   const [snapshotList, setSnapshotList] = useState<string[]>([])
@@ -57,11 +58,12 @@ export const useCanvas = () => {
     return () => {
       ClearDrawConnection(socket)
     }
+    /* eslint-disable-next-line react-hooks/exhaustive-deps*/
   }, [])
 
   useEffect(() => {
     handleSetTool({ canvasRef, roomId: roomId as string, socket, tool })
-  }, [tool])
+  }, [tool, canvasRef, roomId, socket])
 
   const setToolhandler = (tool: ToolsTypes) => setTool(tool)
   const changeFillStyle = (color: string) =>

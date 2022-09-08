@@ -1,12 +1,12 @@
 import { Circle, Eraser, Line, Pen, Square } from 'canvas_classes'
-import { Socket } from 'socket.io-client'
+import { SocketApp } from 'types/socket'
 
 import { ToolsEnum } from './types'
 
 type Props = {
   tool: string
   canvasRef: React.MutableRefObject<HTMLCanvasElement>
-  socket: Socket<any, any>
+  socket: SocketApp
   roomId: string
 }
 

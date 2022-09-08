@@ -20,10 +20,12 @@ export const ImageCrop: FC<ImageCropProps> = ({
 
   const onClose = () => setPreview(null)
   const onCrop = (preview: string) => setPreview(preview)
-  const onBeforeFileLoad = (elem: any) => {
-    if (elem.target.files[0].size > 10_485_760) {
-      alert('File is too big!')
-      elem.target.value = ''
+  const onBeforeFileLoad = (elem: React.ChangeEvent<HTMLInputElement>) => {
+    if (elem.target.files) {
+      if (elem.target.files[0].size > 10_485_760) {
+        alert('File is too big!')
+        elem.target.value = ''
+      }
     }
   }
   const onSave = () => {
@@ -34,11 +36,12 @@ export const ImageCrop: FC<ImageCropProps> = ({
     }
   }
 
-  const onFileLoad = (file: any) => {
-    EncodeBase64(file).then((res) => {
-      console.log('res', res)
-      setEditingImage(res)
-    })
+  const onFileLoad = (file: React.ChangeEvent<HTMLInputElement> | File) => {
+    if (file instanceof File) {
+      EncodeBase64(file).then((res) => {
+        setEditingImage(res)
+      })
+    }
   }
   const handleEditModeOff = () => setEditMode(false)
   const handleEditModeOn = () => setEditMode(true)

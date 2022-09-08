@@ -13,16 +13,16 @@ import {
 import { DRAW_ONLINE_URL } from 'const/urls'
 import { NavigateFunction } from 'react-router-dom'
 import { toastError } from 'services/toast.service'
-import { Socket } from 'socket.io-client'
 import { FunctionWithParams } from 'types'
 import { ActiveRoom } from 'types/rooms'
+import { SocketApp } from 'types/socket'
 
 type Props = {
   setActiveRooms: FunctionWithParams<ActiveRoom[]>
   setUserRooms: FunctionWithParams<ActiveRoom[]>
   navigate: NavigateFunction
   setIsLoading: FunctionWithParams<boolean>
-  socket: Socket<any, any>
+  socket: SocketApp
   userId: string
 }
 const accessPermitted = (
@@ -43,19 +43,19 @@ export const SetRoomsConnection = (data: Props) => {
   socket.emit(GET_ROOMS_SOCKET)
   socket.emit(GET_USER_ROOMS_SOCKET, { userId })
 
-  socket.on(GET_ROOMS_SOCKET, (data: ActiveRoom[]) => setActiveRooms(data))
+  socket.on(GET_ROOMS_SOCKET, (data) => setActiveRooms(data))
 
-  socket.on(CREATE_SUCCESS_SOCKET, (id: string) => accessPermitted(id, navigate, setIsLoading))
-  socket.on(CREATE_ERROR_SOCKET, (e: string) => accessUnPermitted(e, setIsLoading))
-  socket.on(JOIN_ROOM_SUCCESS_SOCKET, (id: string) => {
+  socket.on(CREATE_SUCCESS_SOCKET, (id) => accessPermitted(id, navigate, setIsLoading))
+  socket.on(CREATE_ERROR_SOCKET, (e) => accessUnPermitted(e, setIsLoading))
+  socket.on(JOIN_ROOM_SUCCESS_SOCKET, (id) => {
     accessPermitted(id, navigate, setIsLoading)
   })
-  socket.on(JOIN_ROOM_ERROR_SOCKET, (e: string) => {
+  socket.on(JOIN_ROOM_ERROR_SOCKET, (e) => {
     accessUnPermitted(e, setIsLoading)
   })
-  socket.on(GET_USER_ROOMS_SOCKET, (data: ActiveRoom[]) => setUserRooms(data))
+  socket.on(GET_USER_ROOMS_SOCKET, (data) => setUserRooms(data))
 
-  socket.on(DELETE_USER_ROOM_ERROR_SOCKET, (error: string) => {
+  socket.on(DELETE_USER_ROOM_ERROR_SOCKET, (error) => {
     setIsLoading(false)
     toastError(error)
   })
@@ -65,13 +65,13 @@ export const SetRoomsConnection = (data: Props) => {
   socket.on(UPDATE_USER_ROOM_SUCCESS_SOCKET, () => {
     setIsLoading(false)
   })
-  socket.on(UPDATE_USER_ROOM_ERROR_SOCKET, (error: string) => {
+  socket.on(UPDATE_USER_ROOM_ERROR_SOCKET, (error) => {
     toastError(error)
     setIsLoading(false)
   })
 }
 
-export const ClearRoomsConnection = (socket: Socket<any, any>) => {
+export const ClearRoomsConnection = (socket: SocketApp) => {
   socket.off(GET_ROOMS_SOCKET)
   socket.off(CREATE_SUCCESS_SOCKET)
   socket.off(CREATE_ERROR_SOCKET)

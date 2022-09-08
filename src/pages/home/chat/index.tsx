@@ -40,7 +40,7 @@ export const Chat = () => {
     })
 
     return () => clearConnectionChat(socket)
-  }, [])
+  }, [data.id, socket])
 
   useEffect(() => {
     if (chatRef.current) {

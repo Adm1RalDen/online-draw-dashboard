@@ -11,7 +11,7 @@ import {
 } from 'const/sockets'
 import { HOME_URL } from 'const/urls'
 import { toastSuccess } from 'services/toast.service'
-import { Socket } from 'socket.io-client'
+import { SocketApp } from 'types/socket'
 
 import { DrawConnectionProps, ToolsEnum } from '../types'
 
@@ -20,14 +20,14 @@ export const SetDrawConnection = (data: DrawConnectionProps) => {
   const ctx = canvasRef.current.getContext('2d')
 
   socket.emit(GET_SNAPSHOT_SOCKET, { roomId, userId, socketId: socket.id })
-  socket.on(SEND_SNAPSHOT_SOCKET, (ownerId: string, recipient: string) => {
+  socket.on(SEND_SNAPSHOT_SOCKET, (ownerId, recipient) => {
     if (canvasRef.current && ownerId === userId) {
       const img = canvasRef.current.toDataURL()
       socket.emit(SEND_SNAPSHOT_SOCKET, { img, recipient })
     }
   })
 
-  socket.on(SET_SNAPSHOT_SOCKET, (img: string) => {
+  socket.on(SET_SNAPSHOT_SOCKET, (img) => {
     if (ctx) {
       const image = new Image()
       image.src = img
@@ -38,7 +38,7 @@ export const SetDrawConnection = (data: DrawConnectionProps) => {
   })
 
   socket.emit(CONNECTION_DRAW_SOCKET, { userName: name, roomId })
-  socket.on(CONNECTION_DRAW_SOCKET, (data: string) => {
+  socket.on(CONNECTION_DRAW_SOCKET, (data) => {
     toastSuccess(`${data} ${USER_JOINED}`)
   })
 
@@ -49,7 +49,7 @@ export const SetDrawConnection = (data: DrawConnectionProps) => {
     navigate(HOME_URL)
   })
 
-  socket.on(DRAW_SOCKET, (data: any) => {
+  socket.on(DRAW_SOCKET, (data) => {
     if (ctx) {
       switch (data.tool) {
         case ToolsEnum.pen:
@@ -75,7 +75,7 @@ export const SetDrawConnection = (data: DrawConnectionProps) => {
   })
 }
 
-export const ClearDrawConnection = (socket: Socket<any, any>) => {
+export const ClearDrawConnection = (socket: SocketApp) => {
   socket.off(CONNECTION_DRAW_SOCKET)
   socket.off(FINISH_DRAW_SOCKET)
   socket.off(CASE_EXIT_SOCKET)

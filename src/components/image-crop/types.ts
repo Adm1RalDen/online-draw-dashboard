@@ -1,3 +1,5 @@
+/* eslint no-unused-vars: "off" */
+
 export type ImageCropProps = {
   image: string
   width: number

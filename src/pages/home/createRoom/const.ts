@@ -1,6 +1,6 @@
 import { CREATE_ROOM_SOCKET, GET_USER_ROOMS_SOCKET } from 'const/sockets'
-import { Socket } from 'socket.io-client'
 import { FunctionWithParams } from 'types'
+import { SocketApp } from 'types/socket'
 import * as yup from 'yup'
 
 import { CreateRoom } from '../types'
@@ -16,7 +16,7 @@ const validationSchema = yup.object().shape({
 const onSubmit = async (
   data: CreateRoom,
   setIsLoading: FunctionWithParams<boolean>,
-  socket: Socket<any, any>
+  socket: SocketApp
 ) => {
   setIsLoading(true)
   socket.emit(CREATE_ROOM_SOCKET, data)

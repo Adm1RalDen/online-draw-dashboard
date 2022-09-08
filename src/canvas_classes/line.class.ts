@@ -1,6 +1,6 @@
 import { DRAW_SOCKET, FINISH_DRAW_SOCKET } from 'const/sockets'
 import { ToolsEnum } from 'hooks/useCanvas/types'
-import { Socket } from 'socket.io-client'
+import { SocketApp } from 'types/socket'
 
 import { Tool } from './tool.class'
 
@@ -19,11 +19,7 @@ export class Line extends Tool {
   private x1 = 0
   private y1 = 0
 
-  constructor(
-    canvas: React.MutableRefObject<HTMLCanvasElement>,
-    socket: Socket<any, any>,
-    id: string
-  ) {
+  constructor(canvas: React.MutableRefObject<HTMLCanvasElement>, socket: SocketApp, id: string) {
     super(canvas, socket, id)
     this.listen()
   }

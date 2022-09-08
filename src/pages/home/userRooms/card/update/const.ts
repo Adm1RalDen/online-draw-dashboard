@@ -1,7 +1,7 @@
 import { UPDATE_USER_ROOM_SOCKET } from 'const/sockets'
-import { Socket } from 'socket.io-client'
 import { FunctionWithParams } from 'types'
 import { ActiveRoom } from 'types/rooms'
+import { SocketApp } from 'types/socket'
 
 type Props = {
   data: {
@@ -9,7 +9,7 @@ type Props = {
     isShow: boolean
     roomPassword: string
   }
-  socket: Socket<any, any>
+  socket: SocketApp
   setIsLoading: FunctionWithParams<boolean>
   room: ActiveRoom
   userId: string
@@ -21,6 +21,7 @@ export const onSubmit = ({ data, socket, setIsLoading, room, userId, setEditMode
   const keys = Object.keys(data) as (keyof Props['data'])[]
   const res = keys
     .filter((key) => data[key] !== room[key])
+    /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
     .reduce((acum: any, key: keyof Props['data']) => {
       acum[key] = data[key]
       return acum

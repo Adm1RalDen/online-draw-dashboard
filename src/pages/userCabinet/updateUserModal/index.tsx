@@ -20,7 +20,7 @@ export const UpdateUserModal: FC<UpdateUserModalTypes> = ({ userData, handleEdit
   const [avatar, setAvatar] = useState(userData.avatar)
   const [biography, setBiography] = useState(userData.biography)
   const [cropAvatar, setCropAvatar] = useState(userData.avatar)
-  const [backgroundFon, setBackgroundFon] = useState<any>(userData.backgroundFon)
+  const [backgroundFon, setBackgroundFon] = useState<File | string>(userData.backgroundFon)
 
   const handleSaveAvatar = (crop: string, originalImage: string) => {
     setCropAvatar(crop)

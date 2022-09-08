@@ -29,7 +29,7 @@ export const PrivateRoom = () => {
   useEffect(() => {
     SetAccessPageConnection({ navigate, setIsLoading, socket })
     return () => ClearAccessPageConnection(socket)
-  }, [])
+  }, [navigate, socket])
 
   const handleEnter = async () => {
     if (roomId) {

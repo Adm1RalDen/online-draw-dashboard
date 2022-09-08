@@ -12,11 +12,11 @@ export const RoomUsers = () => {
   const [users, setUsers] = useState<UserInRoom[]>([])
 
   useEffect(() => {
-    socket.emit(GET_ROOM_SOCKET, roomId)
-    socket.on(GET_ROOM_SOCKET, (data: any) => {
+    socket.emit(GET_ROOM_SOCKET, roomId as string)
+    socket.on(GET_ROOM_SOCKET, (data) => {
       setUsers(data.users)
     })
-  }, [])
+  }, [socket, roomId])
 
   return (
     <RoomUsersBlock>

@@ -47,7 +47,7 @@ export const HomePage = () => {
       userId: id
     })
     return () => ClearRoomsConnection(socket)
-  }, [])
+  }, [navigate, setActiveRooms, setIsLoading, setUserRooms, socket, id])
 
   return (
     <>

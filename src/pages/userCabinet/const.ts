@@ -65,7 +65,9 @@ const setInputTypes = (name: string) => {
 }
 
 const onSubmit = async (
-  chenchedData: Omit<AuthorizedUser, 'role' | 'email'>,
+  chenchedData: Omit<AuthorizedUser, 'role' | 'email' | 'backgroundFon'> & {
+    backgroundFon: File | string
+  },
   original: AuthorizedUser,
   dispatch: AppDispatch,
   handleEdit: VoidFunction

@@ -1,5 +1,4 @@
 import { FC } from 'react'
-import { FunctionWithParams } from 'types'
 
 import { Input } from 'components/input'
 
@@ -9,12 +8,12 @@ type InputProps = {
   margin?: string
   type: string
   label: string
-  value: any
+  value: string
   name: string
   error?: string
   id?: string
-  onChange?: FunctionWithParams<any>
-  onBlur?: FunctionWithParams<any>
+  onChange?: React.ChangeEventHandler<HTMLInputElement>
+  onBlur?: React.FocusEventHandler<HTMLInputElement>
   disabled?: boolean
 }
 
