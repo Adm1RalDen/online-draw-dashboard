@@ -60,8 +60,9 @@ export const Chat = () => {
   }
 
   const onError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    ;(e.target as HTMLImageElement).onerror = null
-    ;(e.target as HTMLImageElement).src = ALTERNATIVE_IMAGE
+    const target = e.target as HTMLImageElement
+    target.onerror = null
+    target.src = ALTERNATIVE_IMAGE
   }
 
   return (
