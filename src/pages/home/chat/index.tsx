@@ -27,7 +27,7 @@ export const Chat = () => {
   const { data } = useAppSelector(userInfoSelector)
   const chatRef = useRef<HTMLDivElement>(null)
   const [messageLoading, setMessageLoading] = useState(false)
-  const DEFAULT_IMAGE = 'http://localhost:5000/users/defaultUserImage.png'
+  // const DEFAULT_IMAGE = 'http://localhost:5000/users/defaultUserImage.png'
 
   useEffect(() => {
     setConnectionChat({
@@ -74,7 +74,8 @@ export const Chat = () => {
                   src={`http://localhost:5000/users/${msg.userId}/${msg.userId}_avatar.png`}
                   onError={(e) => {
                     ;(e.target as HTMLImageElement).onerror = null
-                    ;(e.target as HTMLImageElement).src = DEFAULT_IMAGE
+                    ;(e.target as HTMLImageElement).src =
+                      'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-portrait-176256935.jpg'
                   }}
                   width={30}
                   height={30}

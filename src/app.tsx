@@ -13,7 +13,7 @@ export const App = () => {
 
   useEffect(() => {
     dispatch(AuthorizedThunk())
-  }, [])
+  }, [dispatch])
 
   if (!hasUserStateLoaded) return <Loader position='absolute' />
   return <Router />
