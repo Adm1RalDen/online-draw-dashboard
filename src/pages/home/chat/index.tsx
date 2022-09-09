@@ -1,4 +1,5 @@
 import { nanoid } from '@reduxjs/toolkit'
+import { HOST } from 'api/const'
 import { CHAT_MESSAGE_SOCKET } from 'const/sockets'
 import { useSocket } from 'hooks/useSocket'
 import { useEffect, useRef, useState } from 'react'
@@ -8,7 +9,7 @@ import { userInfoSelector } from 'store/selectors/user.selector'
 import { LittleLoader } from 'components/loaders/littleLoader'
 
 import { ChatMessage } from '../types'
-import { clearConnectionChat, setConnectionChat } from './const'
+import { ALTERNATIVE_IMAGE, clearConnectionChat, setConnectionChat } from './const'
 import {
   ChatWrapper,
   Message,
@@ -27,7 +28,6 @@ export const Chat = () => {
   const { data } = useAppSelector(userInfoSelector)
   const chatRef = useRef<HTMLDivElement>(null)
   const [messageLoading, setMessageLoading] = useState(false)
-  const DEFAULT_IMAGE = 'http://localhost:5000/users/defaultUserImage.png'
 
   useEffect(() => {
     setConnectionChat({
@@ -59,6 +59,12 @@ export const Chat = () => {
     }
   }
 
+  const onError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    const target = e.target as HTMLImageElement
+    target.onerror = null
+    target.src = ALTERNATIVE_IMAGE
+  }
+
   return (
     <ChatWrapper>
       <MessagesBlock ref={chatRef}>
@@ -71,11 +77,8 @@ export const Chat = () => {
             <MessagesWrapper key={nanoid()}>
               <div>
                 <img
-                  src={`http://localhost:5000/users/${msg.userId}/${msg.userId}_avatar.png`}
-                  onError={(e) => {
-                    ;(e.target as HTMLImageElement).onerror = null
-                    ;(e.target as HTMLImageElement).src = DEFAULT_IMAGE
-                  }}
+                  src={`${HOST}/users/${msg.userId}/${msg.userId}_avatar.png`}
+                  onError={onError}
                   width={30}
                   height={30}
                   alt={msg.name}
