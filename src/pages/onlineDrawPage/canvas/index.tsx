@@ -41,8 +41,12 @@ export const OnlineCanvas = () => {
     window.addEventListener('beforeunload', handleTabClosing)
     return () => {
       window.removeEventListener('beforeunload', handleTabClosing)
+      socket.emit(EXIT_SOCKET, {
+        roomId: roomId as string,
+        userId: user.id
+      })
     }
-  }, [handleTabClosing])
+  }, [handleTabClosing, socket, roomId, user.id])
 
   return (
     <CanvasSection>
