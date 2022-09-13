@@ -42,8 +42,10 @@ export const PrivateRoom = () => {
       })
     }
   }
+
   const handleHomeNavigate = () => navigate(HOME_URL)
   const handleSetPassword = (e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)
+
   return (
     <ConfirmAccessPage>
       <ConfirmAccessPageMain>
