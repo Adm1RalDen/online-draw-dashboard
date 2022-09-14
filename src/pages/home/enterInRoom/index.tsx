@@ -3,11 +3,12 @@ import { useSocket } from 'hooks/useSocket'
 import { FC } from 'react'
 import { useAppSelector } from 'store'
 import { userInfoSelector } from 'store/selectors/user.selector'
+import { Heading3 } from 'styles/typography/styles'
 import { FunctionWithParams } from 'types'
 
-import { ErrorOutput } from 'components/errorOutput'
+import { ErrorSpan } from 'components/error-span'
 
-import { RoomInput, RoomWrapper, SubmitButton } from '../styles'
+import { RoomInput, RoomInputWrapper, RoomWrapper, SubmitButton } from '../styles'
 import { initialValues, onSubmit, validationSchema } from './const'
 
 type Props = {
@@ -27,34 +28,32 @@ export const EnterInRoomComponent: FC<Props> = ({ isLoading, setIsLoading }) => 
 
   return (
     <RoomWrapper>
-      <h3>Join to room</h3>
+      <Heading3>Join to room</Heading3>
       <form onSubmit={formik.handleSubmit}>
-        <div>
+        <RoomInputWrapper>
           <RoomInput
+            isError={!!formik.errors.roomId}
             type='text'
             name='roomId'
             placeholder='Room id'
             value={formik.values.roomId}
             onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
             disabled={isLoading}
           />
-          {formik.errors.roomId && formik.touched.roomId && (
-            <ErrorOutput>{formik.errors.roomId}</ErrorOutput>
-          )}
-        </div>
+          {formik.errors.roomId && <ErrorSpan title={formik.errors.roomId} />}
+        </RoomInputWrapper>
         <div>
           <RoomInput
+            isError={false}
             type='password'
             name='roomPassword'
             placeholder='Room password'
             value={formik.values.roomPassword}
             onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
             disabled={isLoading}
           />
         </div>
-        <SubmitButton type='submit' disabled={isLoading || !formik.dirty}>
+        <SubmitButton type='submit' disabled={isLoading || !formik.dirty || !formik.isValid}>
           Enter in room
         </SubmitButton>
       </form>

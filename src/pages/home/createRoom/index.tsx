@@ -6,9 +6,9 @@ import { userDataSelector } from 'store/selectors/user.selector'
 import { Heading3 } from 'styles/typography/styles'
 import { FunctionWithParams } from 'types'
 
-import { ErrorOutput } from 'components/errorOutput'
+import { ErrorSpan } from 'components/error-span'
 
-import { RoomInput, RoomWrapper, SubmitButton } from '../styles'
+import { RoomInput, RoomInputWrapper, RoomWrapper, SubmitButton } from '../styles'
 import { initialValues, onSubmit, validationSchema } from './const'
 
 type ComponentProps = {
@@ -31,32 +31,30 @@ export const CreateRoomComponent: FC<ComponentProps> = ({ isLoading, setIsLoadin
     <RoomWrapper>
       <Heading3>Create room</Heading3>
       <form onSubmit={formik.handleSubmit}>
-        <div>
+        <RoomInputWrapper>
           <RoomInput
             type='text'
             name='roomName'
             placeholder='Room name'
             value={formik.values.roomName}
             onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
             disabled={isLoading}
+            isError={!!formik.errors.roomName}
           />
-          {formik.errors.roomName && formik.touched.roomName && (
-            <ErrorOutput>{formik.errors.roomName}</ErrorOutput>
-          )}
-        </div>
+          {formik.errors.roomName && <ErrorSpan title={formik.errors.roomName} />}
+        </RoomInputWrapper>
         <div>
           <RoomInput
+            isError={false}
             type='password'
             name='roomPassword'
             placeholder='Room password'
             value={formik.values.roomPassword}
             onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
             disabled={isLoading}
           />
         </div>
-        <SubmitButton type='submit' disabled={isLoading || !formik.dirty}>
+        <SubmitButton type='submit' disabled={isLoading || !formik.dirty || !formik.isValid}>
           Create room
         </SubmitButton>
       </form>
