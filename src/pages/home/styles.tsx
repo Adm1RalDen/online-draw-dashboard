@@ -93,8 +93,6 @@ const RoomWrapper = styled.div`
     padding-top: 5px;
   }
   & > h3 {
-    font-weight: 400;
-    font-size: ${({ theme }) => theme.fontSizes.middleUp};
     color: ${({ theme }) => theme.colors.white};
   }
 `
@@ -103,6 +101,10 @@ const RoomInput = styled(Input)`
   width: 100%;
   height: 35px;
   margin-top: 5px;
+  border-radius: 5px;
+`
+const RoomInputWrapper = styled.div`
+  position: relative;
 `
 
 export {
@@ -114,5 +116,6 @@ export {
   RoomWrapper,
   HomeHeader,
   SubmitButton,
-  RoomInput
+  RoomInput,
+  RoomInputWrapper
 }
