@@ -3,7 +3,7 @@ import { useSocket } from 'hooks/useSocket'
 import { FC, useState } from 'react'
 import { ActiveRoom } from 'types/rooms'
 
-import { CardSettings, CardSettingsButton, RoomCard } from './styles'
+import { CardDeleteButton, CardEditButton, CardJoinButton, CardSettings, RoomCard } from './styles'
 import { UpdateCard } from './update'
 
 type Props = {
@@ -55,19 +55,13 @@ export const UserRoomCard: FC<Props> = ({ room, userId, userName, isLoading, set
       {active && (
         <CardSettings>
           <li>
-            <CardSettingsButton disabled={isLoading} onClick={handleEditMode}>
-              edit
-            </CardSettingsButton>
+            <CardEditButton disabled={isLoading} onClick={handleEditMode} />
           </li>
           <li>
-            <CardSettingsButton disabled={isLoading} onClick={handleDeleteRoom}>
-              delete
-            </CardSettingsButton>
+            <CardDeleteButton disabled={isLoading} onClick={handleDeleteRoom} />
           </li>
           <li>
-            <CardSettingsButton disabled={isLoading} onClick={handleJoinRoom}>
-              join
-            </CardSettingsButton>
+            <CardJoinButton disabled={isLoading} onClick={handleJoinRoom} />
           </li>
         </CardSettings>
       )}

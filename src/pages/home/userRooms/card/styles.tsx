@@ -1,15 +1,19 @@
 import styled from 'styled-components'
 
+import { ButtonImage } from 'components/button-image'
+
 type Props = {
   active: boolean
 }
 
 const CardSettings = styled.ul`
   position: absolute;
-  top: 10px;
-  right: 40px;
-  width: 120px;
+  top: 7px;
+  right: 45px;
+  width: 40px;
   list-style-type: none;
+  background-color: ${({ theme }) => theme.colors.white};
+  border-radius: 5px;
   padding: 5px;
 `
 
@@ -44,14 +48,33 @@ const RoomCard = styled.div<Props>`
   }
 `
 
-const CardSettingsButton = styled.button`
+const CardSettingsButton = styled(ButtonImage)`
   width: 100%;
   height: 30px;
-  cursor: pointer;
+  background-size: 20px 20px;
+  border-radius: none;
 
-  &:disabled {
-    cursor: not-allowed;
+  &:hover {
+    box-shadow: 0px 0px 5px 1px ${({ theme }) => theme.colors.darkGray};
+    background-color: transparent;
   }
 `
 
-export { RoomCard, CardSettings, CardSettingsButton }
+const CardEditButton = styled(CardSettingsButton)`
+  background-image: url('assets/edit.png');
+`
+const CardDeleteButton = styled(CardSettingsButton)`
+  background-image: url('assets/delete.png');
+`
+const CardJoinButton = styled(CardSettingsButton)`
+  background-image: url('assets/enter.png');
+`
+
+export {
+  RoomCard,
+  CardSettings,
+  CardSettingsButton,
+  CardEditButton,
+  CardDeleteButton,
+  CardJoinButton
+}

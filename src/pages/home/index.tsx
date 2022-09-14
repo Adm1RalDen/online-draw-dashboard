@@ -1,3 +1,4 @@
+import { CABINET_URL } from 'const/urls'
 import { useSocket } from 'hooks/useSocket'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -8,21 +9,22 @@ import { Heading3 } from 'styles/typography/styles'
 import { ActiveRoom } from 'types/rooms'
 import { Portal } from 'utils/portal'
 
-import { Button } from 'components/button'
 import { Loader } from 'components/loaders/loader'
+import { Logo } from 'components/logo'
 
 import { ActiveRooms } from './activeRooms'
 import { Chat } from './chat'
 import { ClearRoomsConnection, SetRoomsConnection } from './const'
 import { CreateRoomComponent } from './createRoom'
 import { EnterInRoomComponent } from './enterInRoom'
-import { HomeCabinet } from './homeCabinet'
 import {
   ActiveRoomsWrapper,
   ChatWrapper,
   HomeHeader,
   HomePageSection,
   HomePageWrapper,
+  LogOutButton,
+  UserCabinetButton,
   Wrapper
 } from './styles'
 import { UserRooms } from './userRooms'
@@ -36,6 +38,7 @@ export const HomePage = () => {
   const { socket } = useSocket()
   const navigate = useNavigate()
   const handleLogOut = () => UserLogoutThunk(dispatch)
+  const handleNavigateCabinet = () => navigate(CABINET_URL)
 
   useEffect(() => {
     SetRoomsConnection({
@@ -54,8 +57,11 @@ export const HomePage = () => {
       <HomePageSection>
         <HomePageWrapper>
           <HomeHeader>
-            <HomeCabinet />
-            <Button onClick={handleLogOut}>logout</Button>
+            <Logo />
+            <div>
+              <UserCabinetButton onClick={handleNavigateCabinet} />
+              <LogOutButton onClick={handleLogOut} />
+            </div>
           </HomeHeader>
 
           <ActiveRoomsWrapper>
