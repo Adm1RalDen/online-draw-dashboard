@@ -3,6 +3,7 @@ import { ChangeEvent, FC, useState } from 'react'
 import { useAppDispatch } from 'store'
 import { Heading3 } from 'styles/typography/styles'
 import { Portal } from 'utils/portal'
+import { setImageUrl } from 'utils/setImageUrl'
 
 import { Button } from 'components/button'
 import { ImageCrop } from 'components/image-crop'
@@ -60,7 +61,12 @@ export const UpdateUserModal: FC<UpdateUserModalTypes> = ({ userData, handleEdit
       <UserForm onSubmit={formik.handleSubmit}>
         <AvatarWrapper>
           <Heading3>Avatar</Heading3>
-          <ImageCrop image={avatar} width={350} height={220} handleSavePhoto={handleSaveAvatar} />
+          <ImageCrop
+            image={setImageUrl(avatar)}
+            width={350}
+            height={220}
+            handleSavePhoto={handleSaveAvatar}
+          />
         </AvatarWrapper>
 
         {userFields.map(([key]: [keyof UserCabinetTypes, string]) => (
