@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAppSelector } from 'store'
 import { userInfoSelector } from 'store/selectors/user.selector'
+import { setImageUrl } from 'utils/setImageUrl'
 import { setLargeFirstLetter } from 'utils/setLargeFirstLetter'
 import { toLocaleDateString } from 'utils/toLocaleDateString'
 
@@ -77,10 +78,10 @@ export const UserCabinet = () => {
         ) : (
           <Wrapper>
             <ImagesWrapper>
-              <img src={backgroundFonSrc} alt={data.name} />
+              <img src={setImageUrl(backgroundFonSrc)} alt={data.name} />
               <AvatarWrapper>
                 <Avatar>
-                  <img src={data.avatar} alt={data.name} />
+                  <img src={setImageUrl(data.avatar)} alt={data.name} />
                 </Avatar>
                 <div>{data.name}</div>
               </AvatarWrapper>
