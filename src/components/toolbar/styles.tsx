@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-import { Button } from 'components/button'
+import { ButtonImage } from 'components/button-image'
 import { FlexContainer } from 'components/flex-container'
 
 type ToolButtonProps = {
@@ -18,7 +18,7 @@ const StyledToolbar = styled(FlexContainer)`
 
 const SnapshotButtonsWrapper = styled.div`
   display: flex;
-  gap: 10px;
+  gap: 5px;
   & > button:first-child {
     transform: rotate(180deg);
   }
@@ -61,18 +61,14 @@ const ToolButton = styled.button<ToolButtonProps>`
     `}
 `
 
-const LeaveButton = styled(Button)`
-  width: 100px;
-  background-color: ${({ theme }) => theme.colors.greenBackground};
-  color: ${({ theme }) => theme.colors.white};
-  border: 2px solid ${({ theme }) => theme.colors.black};
-  cursor: pointer;
+const LeaveButton = styled(ButtonImage)`
+  width: 45px;
+  height: 45px;
   padding: 5px;
-  border-radius: 5px;
-  transition: all 0.3s;
+  background-image: url('/assets/logout_b.png');
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.greenLiteBackground};
+    background-color: transparent;
   }
   &:focus {
     ${(p) => p.theme.shadows.buttonFocus}

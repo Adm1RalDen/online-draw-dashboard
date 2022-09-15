@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 
+import { ButtonImage } from 'components/button-image'
 import { Input } from 'components/input'
 import { StyledScroll } from 'components/scroll/styles'
 
@@ -34,22 +35,17 @@ const MessageInput = styled(Input)`
   height: 30px;
   flex-grow: 1;
   padding: 0px 10px;
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 0px;
+  border-radius: 5px;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
 `
 
-const SendMessageButton = styled.button`
-  width: 60px;
+const SendMessageButton = styled(ButtonImage)`
   height: 30px;
   color: ${({ theme }) => theme.colors.white};
-  border: 1px solid ${({ theme }) => theme.colors.white};
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-  background-color: ${({ theme }) => theme.colors.aqua};
-
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.darkAqua};
-  }
+  background-image: url('/assets/send.png');
+  background-size: 25px 25px;
+  margin-left: 5px;
 `
 
 const MessagesWrapper = styled.div`

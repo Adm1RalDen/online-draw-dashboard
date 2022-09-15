@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 import { Button } from 'components/button'
+import { ButtonImage } from 'components/button-image'
 import { Input } from 'components/input'
 import { StyledScroll } from 'components/scroll/styles'
 
@@ -15,6 +16,14 @@ const SubmitButton = styled(Button)`
       cursor: not-allowed;
     }
   }
+`
+
+const LogOutButton = styled(ButtonImage)`
+  background-image: url('assets/logout_w.png');
+`
+const UserCabinetButton = styled(ButtonImage)`
+  margin-right: 5px;
+  background-image: url('assets/profile-user.png');
 `
 
 const HomePageSection = styled.section`
@@ -48,7 +57,13 @@ const HomeHeader = styled.header`
   border-radius: 10px;
   display: flex;
   align-items: center;
-  justify-content: right;
+  justify-content: space-between;
+  color: ${({ theme }) => theme.colors.white};
+
+  & > div {
+    border-radius: 5px;
+    padding: 2px 6px;
+  }
 `
 
 const ActiveRoomsWrapper = styled(StyledScroll)`
@@ -117,5 +132,7 @@ export {
   HomeHeader,
   SubmitButton,
   RoomInput,
+  LogOutButton,
+  UserCabinetButton,
   RoomInputWrapper
 }

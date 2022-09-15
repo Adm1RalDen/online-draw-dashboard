@@ -94,9 +94,7 @@ export const Chat = () => {
       </MessagesBlock>
       <div>
         <MessageInput type='text' ref={inputRef} />
-        <SendMessageButton onClick={handleSendMessage} disabled={messageLoading}>
-          send
-        </SendMessageButton>
+        <SendMessageButton onClick={handleSendMessage} disabled={messageLoading} />
       </div>
     </ChatWrapper>
   )
