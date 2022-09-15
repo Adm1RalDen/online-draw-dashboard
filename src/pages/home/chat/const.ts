@@ -1,9 +1,11 @@
-import { HOST } from 'api/const'
 import { CHAT_ERROR_SOCKET, CHAT_MESSAGE_SOCKET, GET_CHAT_SOCKET } from 'const/sockets'
 import { FunctionWithParams } from 'types'
 import { SocketApp } from 'types/socket'
+import { setImageUrl } from 'utils/setImageUrl'
 
 import { ChatMessage } from '../types'
+
+export const DEFAULT_IMAGE = setImageUrl('users/defaultUserImage.png')
 
 type Props = {
   socket: SocketApp
@@ -14,10 +16,6 @@ type Props = {
   id: string
 }
 
-// !!! when will fix problem static folder delete ALTERNATIVE_IMAGE and exchange on DEFAULT_IMAGE
-export const ALTERNATIVE_IMAGE =
-  'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-portrait-176256935.jpg'
-export const DEFAULT_IMAGE = `${HOST}/users/defaultUserImage.png`
 export const setConnectionChat = (data: Props) => {
   const { setIsLoading, setMessages, id, setMessageLoading, setError, socket } = data
 

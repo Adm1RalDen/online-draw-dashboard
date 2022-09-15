@@ -1,15 +1,15 @@
 import { nanoid } from '@reduxjs/toolkit'
-import { HOST } from 'api/const'
 import { CHAT_MESSAGE_SOCKET } from 'const/sockets'
 import { useSocket } from 'hooks/useSocket'
 import { useEffect, useRef, useState } from 'react'
 import { useAppSelector } from 'store'
 import { userInfoSelector } from 'store/selectors/user.selector'
+import { setImageUrl } from 'utils/setImageUrl'
 
 import { LittleLoader } from 'components/loaders/littleLoader'
 
 import { ChatMessage } from '../types'
-import { ALTERNATIVE_IMAGE, clearConnectionChat, setConnectionChat } from './const'
+import { DEFAULT_IMAGE, clearConnectionChat, setConnectionChat } from './const'
 import {
   ChatWrapper,
   Message,
@@ -62,7 +62,7 @@ export const Chat = () => {
   const onError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
     const target = e.target as HTMLImageElement
     target.onerror = null
-    target.src = ALTERNATIVE_IMAGE
+    target.src = DEFAULT_IMAGE
   }
 
   return (
@@ -77,11 +77,11 @@ export const Chat = () => {
             <MessagesWrapper key={nanoid()}>
               <div>
                 <img
-                  src={`${HOST}/users/${msg.userId}/${msg.userId}_avatar.png`}
-                  onError={onError}
+                  src={setImageUrl(`users/${msg.userId}/${msg.userId}_avatar.png`)}
                   width={30}
                   height={30}
                   alt={msg.name}
+                  onError={onError}
                 />
               </div>
               <Message myMessage={msg.userId === data.id}>
