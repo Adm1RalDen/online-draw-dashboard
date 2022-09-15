@@ -56,6 +56,12 @@ export interface UserInRoom {
   userId: string
 }
 
+export interface RefreshResponse {
+  token: string
+  refreshToken: string
+  user: Pick<AuthorizedUser, 'name' | 'role' | 'id'>
+}
+
 export interface DrawData {
   roomId: string
   x1?: number

@@ -5,7 +5,12 @@ import { logout } from 'api/user/logout'
 import { registrationUser } from 'api/user/registration'
 import { AxiosError } from 'axios'
 import { toastError, toastSuccess } from 'services/toast.service'
-import { deleteSavedToken, getSavedUser, saveUserInStorage } from 'services/token.service'
+import {
+  deleteSavedToken,
+  getSavedUser,
+  saveRefreshToken,
+  saveUserInStorage
+} from 'services/token.service'
 import { USER_REDUCER } from 'store/const'
 import { initializeUser, logoutAction } from 'store/slices/user.slice'
 
@@ -35,6 +40,7 @@ export const UserLoginThunk = createAsyncThunk(
     try {
       const response = await authorizeUser(data)
       saveUserInStorage(response.data)
+      saveRefreshToken(response.data.refreshToken)
       const profile = await getProfile(response.data.user.id)
       return { token: response.data.token, profile: profile.data }
     } catch (e) {
