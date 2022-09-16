@@ -1,10 +1,17 @@
 import { ToastOptions, toast } from 'react-toastify'
 
+type SettingsType = Partial<ToastOptions>
+
 const settings: Pick<ToastOptions, 'autoClose' | 'hideProgressBar'> = {
-  hideProgressBar: true,
-  autoClose: false
+  hideProgressBar: false,
+  autoClose: 5000
 }
 
-export const toastError = (str: string) => toast.error(str, settings)
-export const toastSuccess = (str: string) => toast.success(str, settings)
-export const toastWarn = (str: string) => toast.warn(str, settings)
+const setSettings = (data: SettingsType = {}) => ({ ...settings, ...data })
+
+export const toastError = (str: string, data: SettingsType = {}) =>
+  toast.error(str, setSettings(data))
+export const toastSuccess = (str: string, data: SettingsType = {}) =>
+  toast.success(str, setSettings(data))
+export const toastWarn = (str: string, data: SettingsType = {}) =>
+  toast.warn(str, setSettings(data))
