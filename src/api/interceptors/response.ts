@@ -1,7 +1,8 @@
-import { API, SetHeaders } from 'api/const'
+import { API, SetHeaders, setRefreshToken } from 'api/const'
 import { Instance } from 'api/instance'
 import axios, { AxiosError } from 'axios'
 import { getToken, saveUserInStorage } from 'services/token.service'
+import { RefreshResponse } from 'types'
 
 export const responseInterceptor = async (error: AxiosError) => {
   if (error.code === 'ERR_NETWORK' || error.response?.status === 500) {
@@ -12,12 +13,14 @@ export const responseInterceptor = async (error: AxiosError) => {
     try {
       const token = getToken()
       if (token) {
-        const refresh = await axios.get(`${API}/user/refresh`, {
-          withCredentials: true,
-          ...SetHeaders()
-        })
-        saveUserInStorage(refresh.data)
-        error.config.headers['authorization'] = `Bearer ${refresh.data.token}`
+        const refresh = await axios.post<RefreshResponse>(
+          `${API}/user/refresh`,
+          setRefreshToken(),
+          SetHeaders()
+        )
+        const { token, user } = refresh.data
+        saveUserInStorage({ user, token })
+        error.config.headers['authorization'] = `Bearer ${token}`
         return Instance.request(error.config)
       }
     } catch (e) {
