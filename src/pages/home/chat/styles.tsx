@@ -7,6 +7,7 @@ type WrapperProps = {
 }
 
 const MessagesBlock = styled(StyledScroll)`
+  position: relative;
   max-height: 100%;
   overflow: auto;
   background-color: ${({ theme }) => theme.colors.greenBackground};
@@ -60,5 +61,13 @@ const Message = styled.div<WrapperProps>`
     word-break: break-all;
   }
 `
+const LoadIndicator = styled.div`
+  position: sticky;
+  height: 0px;
+  top: 50%;
+  bottom: 50%;
+  left: 0;
+  right: 0;
+`
 
-export { Message, MessagesWrapper, ChatWrapper, MessagesBlock }
+export { Message, MessagesWrapper, ChatWrapper, MessagesBlock, LoadIndicator }

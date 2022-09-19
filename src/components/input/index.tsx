@@ -12,6 +12,10 @@ export const Input = styled.input<Props>`
   background-color: ${(p) => p.theme.colors.white};
   border: 2px solid ${(p) => p.theme.colors.light_gray};
 
+  &:disabled {
+    cursor: no-drop;
+  }
+
   ${({ isError }) =>
     isError &&
     css`

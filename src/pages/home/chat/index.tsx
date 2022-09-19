@@ -10,13 +10,13 @@ import { LittleLoader } from 'components/loaders/littleLoader'
 import { ChatMessage } from '../types'
 import { DEFAULT_IMAGE, clearConnectionChat, setConnectionChat } from './const'
 import { MessageControll } from './message-controll'
-import { ChatWrapper, Message, MessagesBlock, MessagesWrapper } from './styles'
+import { ChatWrapper, LoadIndicator, Message, MessagesBlock, MessagesWrapper } from './styles'
 
 export const Chat = () => {
   const { socket } = useSocket()
   const [messages, setMessages] = useState<ChatMessage[] | []>([])
-  const [isLoading, setIsLoading] = useState(true)
-  const [messageLoading, setMessageLoading] = useState(false)
+  const [isLoadingChat, setIsLoadingChat] = useState(true)
+  const [isMessageLoading, setIsMessageLoading] = useState(false)
   const [error, setError] = useState('')
   const { data } = useAppSelector(userInfoSelector)
   const chatRef = useRef<HTMLDivElement>(null)
@@ -25,8 +25,8 @@ export const Chat = () => {
     setConnectionChat({
       id: data.id,
       socket,
-      setIsLoading,
-      setMessageLoading,
+      setIsLoadingChat,
+      setIsMessageLoading,
       setMessages,
       setError
     })
@@ -51,7 +51,7 @@ export const Chat = () => {
       <MessagesBlock ref={chatRef}>
         {error ? (
           <span>{error}</span>
-        ) : isLoading ? (
+        ) : isLoadingChat ? (
           <LittleLoader />
         ) : (
           messages.map((msg: ChatMessage) => (
@@ -72,11 +72,17 @@ export const Chat = () => {
             </MessagesWrapper>
           ))
         )}
+        {isMessageLoading && (
+          <LoadIndicator>
+            <LittleLoader />
+          </LoadIndicator>
+        )}
       </MessagesBlock>
       <MessageControll
-        messageLoading={messageLoading}
-        setMessageLoading={setMessageLoading}
-        data={data}
+        isLoadingChat={isLoadingChat}
+        isMessageLoading={isMessageLoading}
+        setIsMessageLoading={setIsMessageLoading}
+        user={data}
       />
     </ChatWrapper>
   )
