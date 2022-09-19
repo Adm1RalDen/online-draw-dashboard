@@ -79,7 +79,7 @@ export const ImageCrop: FC<ImageCropProps> = ({
           />
           <div>
             <Button onClick={handleEditModeOn} type='button'>
-              edit
+              Edit avatar
             </Button>
           </div>
         </div>

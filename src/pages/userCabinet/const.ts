@@ -13,7 +13,6 @@ const defaultUserValues = {
   name: '',
   country: '',
   city: '',
-  age: '',
   color: '',
   gender: '',
   date: ''
@@ -23,15 +22,13 @@ const setInitialValues = (data: AuthorizedUser): InitialStateTypes => ({
   name: data.name,
   country: data.country,
   city: data.city,
-  age: data.age,
   color: data.color,
   gender: data.gender,
   date: data.date
 })
 
 const validationSchema = yup.object().shape({
-  name: yup.string().min(2, 'min 2'),
-  age: yup.string(),
+  name: yup.string().min(2, 'Min 2 symbols').max(25, 'Max 25 symbols'),
   country: yup.string(),
   city: yup.string(),
   color: yup.string(),
@@ -39,13 +36,23 @@ const validationSchema = yup.object().shape({
   date: yup.date()
 })
 
-const inputKeys = ['id', 'role', 'email', 'biography', 'avatar', 'backgroundFon', 'gender', 'color']
+const inputKeys = [
+  'id',
+  'role',
+  'email',
+  'biography',
+  'avatar',
+  'backgroundFon',
+  'gender',
+  'color',
+  'date'
+]
 
 const filterFields = (
   userFields: AuthorizedUser
-): [keyof Omit<UserCabinetTypes, 'gender' | 'color'>, string][] => {
+): [keyof Omit<UserCabinetTypes, 'gender' | 'color' | 'date'>, string][] => {
   const res = Object.entries(userFields).filter(([key]) => !inputKeys.includes(key)) as [
-    keyof Omit<UserCabinetTypes, 'gender' | 'color'>,
+    keyof Omit<UserCabinetTypes, 'gender' | 'color' | 'date'>,
     string
   ][]
   return res

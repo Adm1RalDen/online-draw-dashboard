@@ -39,7 +39,6 @@ export const UserCabinet = () => {
 
   const userInfoFields = [
     'name',
-    'age',
     'country',
     'city',
     'color',

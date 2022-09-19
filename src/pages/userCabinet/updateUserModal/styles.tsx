@@ -1,5 +1,15 @@
 import styled from 'styled-components'
 
+import { Input as DefaultInput } from 'components/input'
+
+const Input = styled(DefaultInput)`
+  height: 35px;
+  margin-top: 5px;
+  border-radius: 5px;
+`
+const InputWrapper = styled.div`
+  position: relative;
+`
 const UserForm = styled.form`
   min-width: 300px;
   max-width: 1200px;
@@ -41,4 +51,4 @@ const RadioButtonsWrapper = styled.div`
   }
 `
 
-export { UserForm, ButtonWrapper, RadioButtonsWrapper, AvatarWrapper }
+export { UserForm, ButtonWrapper, RadioButtonsWrapper, AvatarWrapper, InputWrapper, Input }
