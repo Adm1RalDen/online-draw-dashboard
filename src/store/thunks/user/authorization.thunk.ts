@@ -4,7 +4,7 @@ import { getProfile } from 'api/user/getProfile'
 import { logout } from 'api/user/logout'
 import { registrationUser } from 'api/user/registration'
 import { AxiosError } from 'axios'
-import { toastError, toastSuccess } from 'services/toast.service'
+import { toast } from 'react-toastify'
 import {
   deleteSavedToken,
   getSavedUser,
@@ -45,7 +45,7 @@ export const UserLoginThunk = createAsyncThunk(
       return { token: response.data.token, profile: profile.data }
     } catch (e) {
       if (e instanceof AxiosError) {
-        toastError(e.response?.data.message)
+        toast.error(e.response?.data.message)
         return rejectWithValue(e.response?.data.message || 'Login error')
       }
       return rejectWithValue('Login error')
@@ -58,11 +58,11 @@ export const UserRegistrationThunk = createAsyncThunk(
   async (data: UserRegistrationData, { rejectWithValue }) => {
     try {
       const response = await registrationUser(data)
-      toastSuccess(response.data.message, { autoClose: false })
+      toast.success(response.data.message, { autoClose: false })
       return response.data
     } catch (e) {
       if (e instanceof AxiosError) {
-        toastError(e.response?.data.message)
+        toast.error(e.response?.data.message)
         return rejectWithValue(e.response?.data.message || 'Registration error')
       }
       return rejectWithValue('Registration error')

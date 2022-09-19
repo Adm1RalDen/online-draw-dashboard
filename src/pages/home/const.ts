@@ -12,7 +12,7 @@ import {
 } from 'const/sockets'
 import { DRAW_ONLINE_URL } from 'const/urls'
 import { NavigateFunction } from 'react-router-dom'
-import { toastError } from 'services/toast.service'
+import { toast } from 'react-toastify'
 import { FunctionWithParams } from 'types'
 import { ActiveRoom } from 'types/rooms'
 import { SocketApp } from 'types/socket'
@@ -35,7 +35,7 @@ const accessPermitted = (
 }
 const accessUnPermitted = (error: string, setIsLoading: FunctionWithParams<boolean>) => {
   setIsLoading(false)
-  toastError(error)
+  toast.error(error)
 }
 
 export const SetRoomsConnection = (data: Props) => {
@@ -57,7 +57,7 @@ export const SetRoomsConnection = (data: Props) => {
 
   socket.on(DELETE_USER_ROOM_ERROR_SOCKET, (error) => {
     setIsLoading(false)
-    toastError(error)
+    toast.error(error)
   })
   socket.on(DELETE_USER_ROOM_SUCCESS_SOCKET, () => {
     setIsLoading(false)
@@ -66,7 +66,7 @@ export const SetRoomsConnection = (data: Props) => {
     setIsLoading(false)
   })
   socket.on(UPDATE_USER_ROOM_ERROR_SOCKET, (error) => {
-    toastError(error)
+    toast.error(error)
     setIsLoading(false)
   })
 }

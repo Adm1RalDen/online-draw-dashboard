@@ -7,6 +7,7 @@ import { store } from 'store'
 import { ThemeProvider } from 'styled-components'
 import { GlobalStyles } from 'styles/global'
 import { themes } from 'styles/themes'
+import { toastSettings } from 'utils/toast.settings'
 
 import { App } from './app'
 
@@ -20,7 +21,7 @@ root.render(
       <Provider store={store}>
         <App />
       </Provider>
-      <ToastContainer />
+      <ToastContainer {...toastSettings} />
     </ThemeProvider>
   </BrowserRouter>
 )
