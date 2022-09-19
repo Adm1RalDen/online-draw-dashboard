@@ -12,7 +12,6 @@ export interface AuthorizedUser {
   name: string
   avatar: string
   backgroundFon: string
-  age: string
   role: string
   email: string
   country: string

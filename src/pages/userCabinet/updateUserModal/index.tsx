@@ -6,14 +6,14 @@ import { Portal } from 'utils/portal'
 import { setImageUrl } from 'utils/setImageUrl'
 
 import { Button } from 'components/button'
+import { ErrorSpan } from 'components/error-span'
 import { ImageCrop } from 'components/image-crop'
-import { Input } from 'components/input'
 import { TextEditor } from 'components/textEditor'
 
 import { filterFields, onSubmit, setInitialValues, setInputTypes, validationSchema } from '../const'
 import { UserRadioButtons } from '../radioButtons'
 import { UserCabinetTypes } from '../types'
-import { AvatarWrapper, ButtonWrapper, UserForm } from './styles'
+import { AvatarWrapper, ButtonWrapper, Input, InputWrapper, UserForm } from './styles'
 import { UpdateUserModalTypes } from './types'
 
 export const UpdateUserModal: FC<UpdateUserModalTypes> = ({ userData, handleEdit }) => {
@@ -70,16 +70,34 @@ export const UpdateUserModal: FC<UpdateUserModalTypes> = ({ userData, handleEdit
         </AvatarWrapper>
 
         {userFields.map(([key]: [keyof UserCabinetTypes, string]) => (
+          <InputWrapper key={key}>
+            <Input
+              isError={!!(formik.errors[key] && formik.touched[key])}
+              key={key}
+              name={key}
+              placeholder={key}
+              type={setInputTypes(key)}
+              value={formik.values[key]}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            {formik.errors[key] && formik.touched[key] && <ErrorSpan title={formik.errors[key]} />}
+          </InputWrapper>
+        ))}
+
+        <InputWrapper>
           <Input
-            key={key}
-            name={key}
-            placeholder={key}
-            type={setInputTypes(key)}
-            value={formik.values[key]}
+            isError={!!(formik.errors.date && formik.touched.date)}
+            name='date'
+            type='date'
+            placeholder='bithday'
+            value={formik.values.date}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-        ))}
+          {formik.errors.date && formik.touched.date && <ErrorSpan title={formik.errors.date} />}
+        </InputWrapper>
+
         <UserRadioButtons formik={formik} handleSaveBackground={handleSaveBackground} />
         <TextEditor name='biography' onChange={setBiography} value={biography} />
         <ButtonWrapper>

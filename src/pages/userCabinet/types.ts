@@ -8,7 +8,6 @@ export type InitialStateTypes = {
   name: string
   country: string
   city: string
-  age: string
   color: string
   gender: string
   date: string
