@@ -10,7 +10,7 @@ import {
   SET_SNAPSHOT_SOCKET
 } from 'const/sockets'
 import { HOME_URL } from 'const/urls'
-import { toastSuccess } from 'services/toast.service'
+import { toast } from 'react-toastify'
 import { SocketApp } from 'types/socket'
 
 import { DrawConnectionProps, ToolsEnum } from '../types'
@@ -39,7 +39,7 @@ export const SetDrawConnection = (data: DrawConnectionProps) => {
 
   socket.emit(CONNECTION_DRAW_SOCKET, { userName: name, roomId })
   socket.on(CONNECTION_DRAW_SOCKET, (data) => {
-    toastSuccess(`${data} ${USER_JOINED}`)
+    toast.success(`${data} ${USER_JOINED}`)
   })
 
   socket.on(FINISH_DRAW_SOCKET, () => {

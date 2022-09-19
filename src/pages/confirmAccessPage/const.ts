@@ -1,7 +1,7 @@
 import { JOIN_ROOM_ERROR_SOCKET, JOIN_ROOM_SUCCESS_SOCKET } from 'const/sockets'
 import { DRAW_ONLINE_URL } from 'const/urls'
 import { NavigateFunction } from 'react-router-dom'
-import { toastError } from 'services/toast.service'
+import { toast } from 'react-toastify'
 import { FunctionWithParams } from 'types'
 import { SocketApp } from 'types/socket'
 
@@ -21,7 +21,7 @@ export const SetAccessPageConnection = (data: Props) => {
 
   socket.on(JOIN_ROOM_ERROR_SOCKET, (e) => {
     setIsLoading(false)
-    toastError(e)
+    toast.error(e)
   })
 }
 
