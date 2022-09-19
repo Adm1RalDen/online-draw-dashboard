@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const path = require('path')
 const Dotenv = require('dotenv-webpack')
+const CopyPlugin = require('copy-webpack-plugin')
 
 const DEVELOPMENT_MODE = process.env.DEVELOPMENT_MODE
 
@@ -46,7 +47,10 @@ module.exports = {
       template: './public/index.html',
       favicon: './public/assets/webpack-logo.png'
     }),
-    new MiniCssExtractPlugin()
+    new MiniCssExtractPlugin(),
+    new CopyPlugin({
+      patterns: [{ from: 'public/assets', to: 'assets' }]
+    })
   ],
   module: {
     rules: [
@@ -103,7 +107,14 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif)$/i,
-        type: 'asset/resource'
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[path][name].[ext]'
+            }
+          }
+        ]
       },
       {
         test: /\.(woff2?|ttf)$/i,
