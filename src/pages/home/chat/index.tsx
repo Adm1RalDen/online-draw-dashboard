@@ -1,7 +1,6 @@
 import { nanoid } from '@reduxjs/toolkit'
-import { CHAT_MESSAGE_SOCKET } from 'const/sockets'
 import { useSocket } from 'hooks/useSocket'
-import { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useAppSelector } from 'store'
 import { userInfoSelector } from 'store/selectors/user.selector'
 import { setImageUrl } from 'utils/setImageUrl'
@@ -10,31 +9,24 @@ import { LittleLoader } from 'components/loaders/littleLoader'
 
 import { ChatMessage } from '../types'
 import { DEFAULT_IMAGE, clearConnectionChat, setConnectionChat } from './const'
-import {
-  ChatWrapper,
-  Message,
-  MessageInput,
-  MessagesBlock,
-  MessagesWrapper,
-  SendMessageButton
-} from './styles'
+import { MessageControll } from './message-controll'
+import { ChatWrapper, LoadIndicator, Message, MessagesBlock, MessagesWrapper } from './styles'
 
 export const Chat = () => {
   const { socket } = useSocket()
   const [messages, setMessages] = useState<ChatMessage[] | []>([])
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoadingChat, setIsLoadingChat] = useState(true)
+  const [isMessageLoading, setIsMessageLoading] = useState(false)
   const [error, setError] = useState('')
-  const inputRef = useRef<HTMLInputElement>(null)
   const { data } = useAppSelector(userInfoSelector)
   const chatRef = useRef<HTMLDivElement>(null)
-  const [messageLoading, setMessageLoading] = useState(false)
 
   useEffect(() => {
     setConnectionChat({
       id: data.id,
       socket,
-      setIsLoading,
-      setMessageLoading,
+      setIsLoadingChat,
+      setIsMessageLoading,
       setMessages,
       setError
     })
@@ -48,17 +40,6 @@ export const Chat = () => {
     }
   }, [messages])
 
-  const handleSendMessage = () => {
-    if (inputRef.current?.value) {
-      socket.emit(CHAT_MESSAGE_SOCKET, {
-        userId: data.id,
-        name: data.name,
-        message: inputRef.current.value
-      })
-      inputRef.current.value = ''
-    }
-  }
-
   const onError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
     const target = e.target as HTMLImageElement
     target.onerror = null
@@ -70,7 +51,7 @@ export const Chat = () => {
       <MessagesBlock ref={chatRef}>
         {error ? (
           <span>{error}</span>
-        ) : isLoading ? (
+        ) : isLoadingChat ? (
           <LittleLoader />
         ) : (
           messages.map((msg: ChatMessage) => (
@@ -91,11 +72,18 @@ export const Chat = () => {
             </MessagesWrapper>
           ))
         )}
+        {isMessageLoading && (
+          <LoadIndicator>
+            <LittleLoader />
+          </LoadIndicator>
+        )}
       </MessagesBlock>
-      <div>
-        <MessageInput type='text' ref={inputRef} />
-        <SendMessageButton onClick={handleSendMessage} disabled={messageLoading} />
-      </div>
+      <MessageControll
+        isLoadingChat={isLoadingChat}
+        isMessageLoading={isMessageLoading}
+        setIsMessageLoading={setIsMessageLoading}
+        user={data}
+      />
     </ChatWrapper>
   )
 }
