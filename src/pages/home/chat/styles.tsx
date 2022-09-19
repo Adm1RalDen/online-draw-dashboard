@@ -1,7 +1,5 @@
 import styled from 'styled-components'
 
-import { ButtonImage } from 'components/button-image'
-import { Input } from 'components/input'
 import { StyledScroll } from 'components/scroll/styles'
 
 type WrapperProps = {
@@ -9,6 +7,7 @@ type WrapperProps = {
 }
 
 const MessagesBlock = styled(StyledScroll)`
+  position: relative;
   max-height: 100%;
   overflow: auto;
   background-color: ${({ theme }) => theme.colors.greenBackground};
@@ -30,24 +29,6 @@ const ChatWrapper = styled.div`
     padding: 0px 10px;
   }
 `
-
-const MessageInput = styled(Input)`
-  height: 30px;
-  flex-grow: 1;
-  padding: 0px 10px;
-  border-radius: 5px;
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
-`
-
-const SendMessageButton = styled(ButtonImage)`
-  height: 30px;
-  color: ${({ theme }) => theme.colors.white};
-  background-image: url('/assets/send.png');
-  background-size: 25px 25px;
-  margin-left: 5px;
-`
-
 const MessagesWrapper = styled.div`
   display: flex;
   align-items: flex-start;
@@ -80,5 +61,13 @@ const Message = styled.div<WrapperProps>`
     word-break: break-all;
   }
 `
+const LoadIndicator = styled.div`
+  position: sticky;
+  height: 0px;
+  top: 50%;
+  bottom: 50%;
+  left: 0;
+  right: 0;
+`
 
-export { Message, MessagesWrapper, ChatWrapper, SendMessageButton, MessageInput, MessagesBlock }
+export { Message, MessagesWrapper, ChatWrapper, MessagesBlock, LoadIndicator }
