@@ -58,7 +58,7 @@ export const UserRegistrationThunk = createAsyncThunk(
   async (data: UserRegistrationData, { rejectWithValue }) => {
     try {
       const response = await registrationUser(data)
-      toast.success(response.data.message, { autoClose: false })
+      toast.success(response.data.message)
       return response.data
     } catch (e) {
       if (e instanceof AxiosError) {
