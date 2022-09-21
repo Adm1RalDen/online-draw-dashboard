@@ -26,7 +26,7 @@ export interface ClientToServerEvents {
   CHAT_MESSAGE: (data: { userId: string; name: string; message: string }) => void
   DELETE_USER_ROOM: (data: { userId: string; roomId: string; roomPassword: string }) => void
   UPDATE_USER_ROOM: (data: UpdateUserRoom) => void
-  JOIN_ACCESS: (data: { roomId: string }) => void
+  JOIN_ACCESS: (data: { roomId: string; userId: string }) => void
 }
 
 export interface ServerToClientEvents {
