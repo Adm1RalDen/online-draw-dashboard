@@ -20,6 +20,7 @@ const ImagesWrapper = styled.div`
   background-color: transparent;
   border-radius: 10px;
   box-shadow: 2px 2px 10px 1px ${({ theme }) => theme.colors.aqua};
+  border: 2px solid ${(p) => p.theme.colors.light_gray};
   overflow: hidden;
 
   & > img {
@@ -28,7 +29,7 @@ const ImagesWrapper = styled.div`
     aspect-ratio: 1/1;
     object-fit: cover;
     transition: all 1s linear;
-    box-shadow: 0px 2px 5px 1px ${({ theme }) => theme.colors.darkAqua};
+    border-bottom: 2px solid ${(p) => p.theme.colors.light_gray};
     &:hover {
       transform: scale(110%);
     }
@@ -83,6 +84,7 @@ const UserInfo = styled.div`
   display: grid;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  border: 2px solid ${(p) => p.theme.colors.light_gray};
 `
 
 const InfoWrapper = styled.div`
@@ -90,6 +92,10 @@ const InfoWrapper = styled.div`
   font-weight: 400;
   padding: 10px 10px;
   border-bottom: 2px solid ${(p) => p.theme.colors.light_gray};
+
+  &:last-child {
+    border-bottom: none;
+  }
 
   & > p {
     font-size: 18px;
@@ -127,6 +133,8 @@ const Biography = styled.div`
   font-weight: 400;
   display: flex;
   align-items: center;
+  border: 2px solid ${(p) => p.theme.colors.light_gray};
+  border-top: none;
 
   & > p {
     min-width: 100px;
@@ -138,13 +146,13 @@ const Biography = styled.div`
 const ButtonWrapper = styled.div`
   background-color: transparent;
   box-shadow: 2px 2px 10px 1px ${({ theme }) => theme.colors.aqua};
+  border: 2px solid ${(p) => p.theme.colors.light_gray};
   padding: 10px;
   border-radius: 10px;
   grid-column: 1/3;
 `
 
 const CabinetButton = styled(Button)`
-  background-color: transparent;
   margin-right: 10px;
   width: 100px;
 `

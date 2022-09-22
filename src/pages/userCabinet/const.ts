@@ -45,7 +45,8 @@ const inputKeys = [
   'backgroundFon',
   'gender',
   'color',
-  'date'
+  'date',
+  'age'
 ]
 
 const filterFields = (
