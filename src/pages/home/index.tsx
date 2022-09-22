@@ -11,6 +11,7 @@ import { Portal } from 'utils/portal'
 
 import { Loader } from 'components/loaders/loader'
 import { Logo } from 'components/logo'
+import { Popper } from 'components/popper'
 
 import { ActiveRooms } from './activeRooms'
 import { Chat } from './chat'
@@ -60,7 +61,9 @@ export const HomePage = () => {
             <Logo />
             <div>
               <UserCabinetButton onClick={handleNavigateCabinet} />
-              <LogOutButton onClick={handleLogOut} />
+              <Popper onAgreeAction={handleLogOut} title='Are you shure to handle leave from app?'>
+                <LogOutButton />
+              </Popper>
             </div>
           </HomeHeader>
 

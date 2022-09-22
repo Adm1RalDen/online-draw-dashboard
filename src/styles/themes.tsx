@@ -26,9 +26,13 @@ export const themes = {
     aquaMiddle: '#0092b6',
     aquaGreen: '#3f6d78',
     red: '#ed1b1b',
-    darkRed: '#930202'
+    darkRed: '#930202',
+    lightBlue: '#b4dcff'
   },
-
+  zIndex: {
+    modal: 9999,
+    popper: 9998
+  },
   breakPoints: {
     desktop: '1400px',
     tablet: '800px',

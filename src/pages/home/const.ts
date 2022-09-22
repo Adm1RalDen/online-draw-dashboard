@@ -31,7 +31,7 @@ const accessPermitted = (
   setIsLoading: FunctionWithParams<boolean>
 ) => {
   setIsLoading(false)
-  navigate(`${DRAW_ONLINE_URL}/${id}`)
+  navigate(`${DRAW_ONLINE_URL}/${id}`, { state: true })
 }
 const accessUnPermitted = (error: string, setIsLoading: FunctionWithParams<boolean>) => {
   setIsLoading(false)

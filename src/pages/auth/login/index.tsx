@@ -43,7 +43,7 @@ export const LoginComponent = () => {
               }
             />
           ))}
-          <AuthButton disabled={!formik.isValid || !formik.dirty || isLoading}>Send</AuthButton>
+          <AuthButton disabled={!formik.isValid || isLoading}>Send</AuthButton>
         </form>
       </div>
 

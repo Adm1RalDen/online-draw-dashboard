@@ -15,7 +15,7 @@ export const SetAccessPageConnection = (data: Props) => {
   const { navigate, setIsLoading, socket } = data
 
   socket.on(JOIN_ROOM_SUCCESS_SOCKET, (id) => {
-    navigate(`${DRAW_ONLINE_URL}/${id}`)
+    navigate(`${DRAW_ONLINE_URL}/${id}`, { state: true })
     setIsLoading(false)
   })
 
