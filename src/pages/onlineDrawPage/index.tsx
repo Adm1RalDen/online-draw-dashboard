@@ -1,6 +1,6 @@
 import { useSocket } from 'hooks/useSocket'
 import { FC, useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useAppSelector } from 'store'
 import { userDataSelector } from 'store/selectors/user.selector'
 import { ChildrenProps } from 'types'
@@ -20,20 +20,25 @@ export const OnlineDrawPage: FC<ChildrenProps> = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [access, setAccess] = useState(false)
   const { socket } = useSocket()
+  const { state } = useLocation()
 
   useEffect(() => {
-    checkUserInRoom({
-      navigate,
-      roomId,
-      setIsLoading,
-      userId: user.id,
-      setAccess,
-      socket
-    })
-  }, [navigate, roomId, setIsLoading, user.id, setAccess, socket])
+    if (!state) {
+      checkUserInRoom({
+        navigate,
+        roomId: roomId as string,
+        setIsLoading,
+        userId: user.id,
+        setAccess,
+        socket
+      })
+    } else {
+      setAccess(true)
+    }
+  }, [navigate, roomId, setIsLoading, user.id, setAccess, socket, state])
 
   if (isLoading) return <Loader position='absolute' />
-  if (!access) return <div>have not access</div>
+  if (!access) return <div>You have not access</div>
 
   return <>{children}</>
 }
