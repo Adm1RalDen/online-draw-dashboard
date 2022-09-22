@@ -5,7 +5,6 @@ import { Heading3 } from 'styles/typography/styles'
 import { Portal } from 'utils/portal'
 import { setImageUrl } from 'utils/setImageUrl'
 
-import { Button } from 'components/button'
 import { ErrorSpan } from 'components/error-span'
 import { ImageCrop } from 'components/image-crop'
 import { TextEditor } from 'components/textEditor'
@@ -13,7 +12,14 @@ import { TextEditor } from 'components/textEditor'
 import { filterFields, onSubmit, setInitialValues, setInputTypes, validationSchema } from '../const'
 import { UserRadioButtons } from '../radioButtons'
 import { UserCabinetTypes } from '../types'
-import { AvatarWrapper, ButtonWrapper, Input, InputWrapper, UserForm } from './styles'
+import {
+  AvatarWrapper,
+  ButtonWrapper,
+  Input,
+  InputWrapper,
+  UpdateProfileButton,
+  UserForm
+} from './styles'
 import { UpdateUserModalTypes } from './types'
 
 export const UpdateUserModal: FC<UpdateUserModalTypes> = ({ userData, handleEdit }) => {
@@ -101,8 +107,8 @@ export const UpdateUserModal: FC<UpdateUserModalTypes> = ({ userData, handleEdit
         <UserRadioButtons formik={formik} handleSaveBackground={handleSaveBackground} />
         <TextEditor name='biography' onChange={setBiography} value={biography} />
         <ButtonWrapper>
-          <Button type='submit'>Save</Button>
-          <Button onClick={handleEdit}>Cancel</Button>
+          <UpdateProfileButton type='submit'>Save</UpdateProfileButton>
+          <UpdateProfileButton onClick={handleEdit}>Cancel</UpdateProfileButton>
         </ButtonWrapper>
       </UserForm>
     </Portal>

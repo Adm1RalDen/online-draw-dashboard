@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 
+import { Button } from 'components/button'
+
 const UserCabinetSection = styled.section`
-  & > div {
-    max-width: 1400px;
-    padding: 5px;
-  }
+  background-color: ${({ theme }) => theme.colors.greenBackground};
+  padding: 15px 0px;
 `
 
 const Wrapper = styled.div`
@@ -17,10 +17,9 @@ const ImagesWrapper = styled.div`
   grid-column: 1/3;
   position: relative;
   padding-bottom: 60px;
-  border: 10px solid ${({ theme }) => theme.colors.white};
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: transparent;
   border-radius: 10px;
-  box-shadow: 2px 2px 10px 1px ${({ theme }) => theme.colors.middleGray};
+  box-shadow: 2px 2px 10px 1px ${({ theme }) => theme.colors.aqua};
   overflow: hidden;
 
   & > img {
@@ -29,7 +28,7 @@ const ImagesWrapper = styled.div`
     aspect-ratio: 1/1;
     object-fit: cover;
     transition: all 1s linear;
-
+    box-shadow: 0px 2px 5px 1px ${({ theme }) => theme.colors.darkAqua};
     &:hover {
       transform: scale(110%);
     }
@@ -68,7 +67,6 @@ const Avatar = styled.div`
     border-radius: 50%;
     aspect-ratio: 1/1;
     object-fit: cover;
-    box-shadow: 0px 0px 5px 1px black;
   }
 `
 
@@ -77,12 +75,12 @@ const UserInfoWrapper = styled.div`
   border-radius: 10px;
   display: grid;
   grid-template: minmax(150px, auto) minmax(50px, auto) / 1fr;
-  box-shadow: 2px 2px 10px 1px ${({ theme }) => theme.colors.middleGray};
+  box-shadow: 2px 2px 10px 1px ${({ theme }) => theme.colors.aqua};
 `
 
 const UserInfo = styled.div`
+  color: ${({ theme }) => theme.colors.white};
   display: grid;
-  background-color: ${({ theme }) => theme.colors.white};
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 `
@@ -120,7 +118,7 @@ const ColorSpan = styled.span<Props>`
 `
 
 const Biography = styled.div`
-  background-color: ${({ theme }) => theme.colors.white};
+  color: #fff;
   font-weight: 600;
   padding: 5px 10px;
   border-bottom-left-radius: 10px;
@@ -138,15 +136,17 @@ const Biography = styled.div`
 `
 
 const ButtonWrapper = styled.div`
-  box-shadow: 2px 2px 10px 1px ${({ theme }) => theme.colors.middleGray};
+  background-color: transparent;
+  box-shadow: 2px 2px 10px 1px ${({ theme }) => theme.colors.aqua};
   padding: 10px;
-  background-color: ${({ theme }) => theme.colors.white};
   border-radius: 10px;
   grid-column: 1/3;
+`
 
-  & > button {
-    width: 100px;
-  }
+const CabinetButton = styled(Button)`
+  background-color: transparent;
+  margin-right: 10px;
+  width: 100px;
 `
 
 export {
@@ -160,5 +160,6 @@ export {
   AvatarWrapper,
   ButtonWrapper,
   InfoWrapper,
-  ColorSpan
+  ColorSpan,
+  CabinetButton
 }

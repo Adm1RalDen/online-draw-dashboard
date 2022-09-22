@@ -7,7 +7,7 @@ export const Button = styled.button`
   font-weight: 400;
   color: ${(p) => p.theme.colors.white};
   border-radius: 5px;
-  transition: all 0.3s ease-in;
+  transition: all 0.3s linear;
   border: 2px solid ${({ theme }) => theme.colors.white};
   cursor: pointer;
 
