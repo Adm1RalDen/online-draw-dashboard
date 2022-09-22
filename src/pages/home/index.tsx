@@ -61,8 +61,8 @@ export const HomePage = () => {
             <Logo />
             <div>
               <UserCabinetButton onClick={handleNavigateCabinet} />
-              <Popper onClick={handleLogOut} title='Are you shure to handle leave from app?'>
-                <LogOutButton onClick={handleLogOut} />
+              <Popper onAgreeAction={handleLogOut} title='Are you shure to handle leave from app?'>
+                <LogOutButton />
               </Popper>
             </div>
           </HomeHeader>

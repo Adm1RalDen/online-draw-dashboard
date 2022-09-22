@@ -7,10 +7,10 @@ import { PopperButton, PopperButtonsWrapper, PopperModal, PopperWrapper } from '
 type Props = {
   children: React.ReactElement
   title?: string
-  onClick: VoidFunction
+  onAgreeAction: VoidFunction
 }
 
-export const Popper: FC<Props> = ({ children, onClick, title = '' }) => {
+export const Popper: FC<Props> = ({ children, onAgreeAction, title = '' }) => {
   const [isShowPopper, setIsShowPopper] = useState(false)
   const handleShowPopper = () => setIsShowPopper(true)
   const handleHidePopper = () => setIsShowPopper(false)
@@ -22,7 +22,7 @@ export const Popper: FC<Props> = ({ children, onClick, title = '' }) => {
         <PopperModal>
           <Heading3>{title || DEFAULT_POPPER_TITLE}</Heading3>
           <PopperButtonsWrapper>
-            <PopperButton onClick={onClick}>{POPPER_AGREE}</PopperButton>
+            <PopperButton onClick={onAgreeAction}>{POPPER_AGREE}</PopperButton>
             <PopperButton onClick={handleHidePopper}>{POPPER_DISAGREE}</PopperButton>
           </PopperButtonsWrapper>
         </PopperModal>
