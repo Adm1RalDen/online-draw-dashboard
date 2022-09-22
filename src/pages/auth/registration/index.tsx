@@ -48,7 +48,7 @@ export const RegistrationComponent = () => {
               }
             />
           ))}
-          <AuthButton disabled={!formik.isValid || !formik.dirty}>Send</AuthButton>
+          <AuthButton disabled={!formik.isValid || isLoading}>Send</AuthButton>
         </form>
       </div>
       {isLoading && (
