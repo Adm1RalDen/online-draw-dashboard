@@ -1,13 +1,14 @@
 import { activationAccauntApi } from 'api/user/activate-accaunt'
 import { checkActivationLinkApi } from 'api/user/checkActivationLink'
-import { AxiosError } from 'axios'
+import { HOME_URL } from 'const/urls'
 import { toast } from 'react-toastify'
 
 export const ACTIVATION_PAGE_TITLE = 'Activate your account'
 export const ACTIVATION_PAGE_HEADING_TITLE =
   'To confirm your registration on the Draw Online website, click the confirmation button'
 export const ACTIVATION_PAGE_BUTTON_TEXT = 'Activate'
-export const ACTIVATION_PAGE_IS_ACTIVATED_TEXT = 'Your accaunt is activated'
+export const ACTIVATION_PAGE_IS_ACTIVATED_TEXT = 'Your account is activated'
+const SUCCESS_MESSAGE = 'Success'
 
 type Props = {
   link: string
@@ -24,7 +25,7 @@ export const checkActivationLink = async (data: checkProps) => {
     await checkActivationLinkApi(link)
     setIsShow(true)
   } catch (e) {
-    window.location.replace('/')
+    window.location.replace(HOME_URL)
   }
 }
 
@@ -35,16 +36,13 @@ export const activationAccaunt = async (data: Props) => {
     const response = await activationAccauntApi(link)
     if (response.status === 200) {
       setIsSuccess(true)
-      toast.success('Success', { autoClose: 3000 })
+      toast.success(SUCCESS_MESSAGE, { autoClose: 3000 })
       setTimeout(() => {
-        window.location.replace('/')
+        window.location.replace(HOME_URL)
       }, 3000)
     }
   } catch (e) {
-    if (e instanceof AxiosError) {
-      toast.error(e.response?.data.message)
-    }
-    window.location.replace('/')
+    window.location.replace(HOME_URL)
   }
   setIsLoading(false)
 }
