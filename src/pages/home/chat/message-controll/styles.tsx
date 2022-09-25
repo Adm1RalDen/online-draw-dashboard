@@ -17,12 +17,15 @@ const MessageInput = styled(Input)<ButtonProps>`
   border-bottom-right-radius: ${({ isShow }) => (isShow ? '15px' : '5px')};
 `
 const SendMessageButton = styled(ButtonImage)<ButtonProps>`
-  height: 30px;
-  transition: all 0.2s linear;
   width: ${({ isShow }) => (isShow ? '35px' : '0px')};
-  color: ${({ theme }) => theme.colors.white};
-  background-image: url('/assets/send.png');
-  background-size: 25px 25px;
+  height: 30px;
+  transition-duration: 0.2s;
+  background-color: transparent;
   margin-left: 5px;
+
+  & > svg {
+    width: inherit;
+    height: inherit;
+  }
 `
 export { MessageInput, SendMessageButton }

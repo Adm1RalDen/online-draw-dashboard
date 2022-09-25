@@ -1,3 +1,4 @@
+import { PaperAirplaneIcon } from '@heroicons/react/24/solid'
 import { CHAT_MESSAGE_SOCKET } from 'const/sockets'
 import { useSocket } from 'hooks/useSocket'
 import { FC, useRef, useState } from 'react'
@@ -53,7 +54,9 @@ export const MessageControll: FC<Props> = ({
         onChange={onChangeMessage}
         onKeyDown={onKeyDown}
       />
-      <SendMessageButton onClick={handleSendMessage} disabled={isLoadingChat} isShow={!!message} />
+      <SendMessageButton onClick={handleSendMessage} disabled={isLoadingChat} isShow={!!message}>
+        <PaperAirplaneIcon />
+      </SendMessageButton>
     </div>
   )
 }
