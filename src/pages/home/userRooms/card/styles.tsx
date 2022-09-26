@@ -63,7 +63,7 @@ const CardSettingsButton = styled(ButtonImage)`
   & > svg {
     width: 25px;
     height: 25px;
-    color: #000;
+    color: ${({ theme }) => theme.colors.black};
   }
 `
 

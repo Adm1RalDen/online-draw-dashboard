@@ -2,6 +2,7 @@ export type ThemeTypes = typeof themes
 
 export const themes = {
   colors: {
+    portalBackground: '#0000006f',
     dark: '#121212',
     white: '#fff',
     whiteGray: '#eee',

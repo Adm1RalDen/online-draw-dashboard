@@ -38,7 +38,7 @@ const ToolButton = styled(ButtonImage)<ToolButtonProps>`
   border: 2px solid ${({ theme }) => theme.colors.white};
 
   & > svg {
-    color: #000;
+    color: ${({ theme }) => theme.colors.black};
   }
   ${(p) =>
     p.active &&
