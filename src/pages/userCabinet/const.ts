@@ -13,7 +13,7 @@ const defaultUserValues = {
   name: '',
   country: '',
   city: '',
-  color: '',
+  color: '#000000',
   gender: '',
   date: ''
 }
@@ -42,6 +42,7 @@ const inputKeys = [
   'email',
   'biography',
   'avatar',
+  'originalAvatar',
   'backgroundFon',
   'gender',
   'color',
@@ -80,7 +81,6 @@ const onSubmit = async (
   handleEdit: VoidFunction
 ) => {
   const keys = Object.keys(chenchedData) as (keyof Omit<AuthorizedUser, 'role' | 'email'>)[]
-
   const filteredKeys = keys.filter((key) => {
     return chenchedData[key] !== original[key]
   })
@@ -90,13 +90,21 @@ const onSubmit = async (
     const isAvatar = filteredKeys.includes('avatar')
 
     if (isAvatar) {
-      const file = await createBlobFile(chenchedData.avatar, 'image', 'image/png')
-      formData.append('avatar', file)
+      const { originalAvatar, avatar } = chenchedData
+      const ext = avatar.match(/[^:]\w+\/[\w-+\d.]+(?=;|,)/) as RegExpMatchArray
+      const avatarFile = await createBlobFile(chenchedData.avatar, 'avatar', ext[0])
+      formData.append('avatar', avatarFile)
+
+      if (originalAvatar && originalAvatar !== original.originalAvatar) {
+        const originalAvatarImage = await createBlobFile(originalAvatar, 'originalAvatar', ext[0])
+        formData.append('originalAvatar', originalAvatarImage)
+      }
     }
 
-    filteredKeys.map((key: keyof Omit<AuthorizedUser, 'role' | 'email'>) => {
-      if (key === 'avatar') return
-      formData.append(key, chenchedData[key])
+    filteredKeys.forEach((key: keyof Omit<AuthorizedUser, 'role' | 'email'>) => {
+      if (key !== 'avatar' && key !== 'originalAvatar') {
+        formData.append(key, chenchedData[key])
+      }
     })
 
     formData.append('id', original.id)

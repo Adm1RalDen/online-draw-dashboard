@@ -1,7 +1,8 @@
 /* eslint no-unused-vars: "off" */
 
 export type ImageCropProps = {
-  image: string
+  fullImg: string
+  savedPreviewImg: string
   width: number
   height: number
   handleSavePhoto: (crop: string, originalImage: string) => void

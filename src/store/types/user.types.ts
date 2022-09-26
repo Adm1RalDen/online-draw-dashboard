@@ -8,6 +8,7 @@ export type UserReducerInitialTypes = {
     id: string
     avatar: string
     backgroundFon: string
+    originalAvatar: string
     name: string
     role: string
     email: string

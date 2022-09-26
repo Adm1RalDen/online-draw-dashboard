@@ -1,5 +1,5 @@
 import { useFormik } from 'formik'
-import { ChangeEvent, FC, useState } from 'react'
+import { ChangeEvent, FC, useMemo, useState } from 'react'
 import { useAppDispatch } from 'store'
 import { Heading3 } from 'styles/typography/styles'
 import { Portal } from 'utils/portal'
@@ -17,16 +17,28 @@ import { AvatarWrapper, ButtonWrapper, Input, InputWrapper, UserForm } from './s
 import { UpdateUserModalTypes } from './types'
 
 export const UpdateUserModal: FC<UpdateUserModalTypes> = ({ userData, handleEdit }) => {
-  const dispatch = useAppDispatch()
-  const [avatar, setAvatar] = useState(userData.avatar)
-  const [biography, setBiography] = useState(userData.biography)
-  const [cropAvatar, setCropAvatar] = useState(userData.avatar)
   const [backgroundFon, setBackgroundFon] = useState<File | string>(userData.backgroundFon)
+  const [originalAvatar, setOriginalAvatar] = useState(userData.originalAvatar)
+  const [cropAvatar, setCropAvatar] = useState(userData.avatar)
+  const [biography, setBiography] = useState(userData.biography)
+  const dispatch = useAppDispatch()
+
+  const avatarSrc = useMemo(
+    () => `${userData.avatar}?id=${Math.floor(Math.random() * 1000)}`,
+    /* eslint-disable-next-line */
+    [cropAvatar]
+  )
+  const originalAvatarSrc = useMemo(
+    () => `${userData.originalAvatar}?id=${Math.floor(Math.random() * 1000)}`,
+    /* eslint-disable-next-line */
+    [originalAvatar]
+  )
 
   const handleSaveAvatar = (crop: string, originalImage: string) => {
     setCropAvatar(crop)
-    setAvatar(originalImage)
+    setOriginalAvatar(originalImage)
   }
+
   const handleSaveBackground = (e: ChangeEvent<HTMLInputElement> | null) => {
     if (e === null) {
       setBackgroundFon(userData.backgroundFon)
@@ -42,6 +54,7 @@ export const UpdateUserModal: FC<UpdateUserModalTypes> = ({ userData, handleEdit
           ...data,
           id: userData.id,
           avatar: cropAvatar,
+          originalAvatar,
           backgroundFon,
           biography
         },
@@ -62,7 +75,8 @@ export const UpdateUserModal: FC<UpdateUserModalTypes> = ({ userData, handleEdit
         <AvatarWrapper>
           <Heading3>Avatar</Heading3>
           <ImageCrop
-            image={setImageUrl(avatar)}
+            savedPreviewImg={setImageUrl(avatarSrc)}
+            fullImg={setImageUrl(originalAvatarSrc)}
             width={350}
             height={220}
             handleSavePhoto={handleSaveAvatar}
