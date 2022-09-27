@@ -7,6 +7,7 @@ import { NotFoundPage } from 'pages/notfoundPage'
 import { OnlineDrawPage } from 'pages/onlineDrawPage'
 import { OnlineCanvas } from 'pages/onlineDrawPage/canvas'
 import { ServerErrorPage } from 'pages/serverErrorPage'
+import { SuccessGoogleAuth } from 'pages/successGoogleAuth'
 import { UserCabinet } from 'pages/userCabinet'
 import { Navigate, useRoutes } from 'react-router-dom'
 import { useAppSelector } from 'store'
@@ -35,6 +36,7 @@ const setRoutes = (isAuth: boolean) =>
       ]
     : [
         { path: '/authorization', element: <AuthPage /> },
+        { path: '/auth/google/success', element: <SuccessGoogleAuth /> },
         { path: '*', element: <Navigate to='/authorization' /> }
       ]
 

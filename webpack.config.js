@@ -15,6 +15,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
     alias: {
+      public: path.resolve(__dirname, 'public'),
       const: path.resolve(__dirname, 'src', 'const'),
       store: path.resolve(__dirname, 'src', 'store'),
       pages: path.resolve(__dirname, 'src', 'pages'),
@@ -104,6 +105,10 @@ module.exports = {
       {
         test: /\.s(a|c)ss$/i,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+      },
+      {
+        test: /\.svg$/,
+        use: ['@svgr/webpack']
       },
       {
         test: /\.(png|jpe?g|gif)$/i,

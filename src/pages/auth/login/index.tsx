@@ -7,6 +7,7 @@ import { Portal } from 'utils/portal'
 import { InputAnimation } from 'components/input-animation'
 import { Loader } from 'components/loaders/loader'
 
+import { GoogleLoginComponent } from '../googleLogin'
 import { AuthButton, Title } from '../styles'
 import { AuthorizationFileds, initialValues, onSubmit, validationSchema } from './const'
 
@@ -43,6 +44,7 @@ export const LoginComponent = () => {
               }
             />
           ))}
+          <GoogleLoginComponent />
           <AuthButton disabled={!formik.isValid || isLoading}>Send</AuthButton>
         </form>
       </div>
