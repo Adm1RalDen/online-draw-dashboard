@@ -1,5 +1,6 @@
 import { AppDispatch } from 'store'
 import { updateUserProfileThunk } from 'store/thunks/user/user.thunk'
+import { themes } from 'styles/themes'
 import { AuthorizedUser } from 'types'
 import { createBlobFile } from 'utils/encodeBase64'
 import * as yup from 'yup'
@@ -13,7 +14,7 @@ const defaultUserValues = {
   name: '',
   country: '',
   city: '',
-  color: '#000000',
+  color: themes.colors.black,
   gender: '',
   date: ''
 }

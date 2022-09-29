@@ -4,6 +4,7 @@ import { EncodeBase64 } from 'utils/encodeBase64'
 
 import { Button } from 'components/button'
 
+import { SIZE_2MB } from './const'
 import { AvatarEditWrapper } from './styles'
 import { ImageCropProps } from './types'
 
@@ -23,7 +24,7 @@ export const ImageCrop: FC<ImageCropProps> = ({
   const onCrop = (preview: string) => setCropedImg(preview)
   const onBeforeFileLoad = (elem: React.ChangeEvent<HTMLInputElement>) => {
     if (elem.target.files) {
-      if (elem.target.files[0].size > 2_097_152) {
+      if (elem.target.files[0].size > SIZE_2MB) {
         alert('File is too big!')
         elem.target.value = ''
       }

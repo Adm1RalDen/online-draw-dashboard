@@ -6,7 +6,7 @@ export const themes = {
     white: '#fff',
     whiteGray: '#eee',
     littleDarkWhite: '#f3f3f3',
-    black: '#000',
+    black: '#000000',
     link: '#6363fa',
     gold: '#ffc800',
     green: '#00be03',
