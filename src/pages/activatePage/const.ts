@@ -1,4 +1,4 @@
-import { activationAccauntApi } from 'api/user/activate-accaunt'
+import { activationAccountApi } from 'api/user/activate-account'
 import { AxiosError } from 'axios'
 import { HOME_URL } from 'const/urls'
 import { toast } from 'react-toastify'
@@ -12,10 +12,10 @@ type Props = {
   setError: React.Dispatch<React.SetStateAction<string>>
 }
 
-export const activationAccaunt = async (data: Props) => {
+export const activationAccount = async (data: Props) => {
   const { link, setIsLoading, setError } = data
   try {
-    await activationAccauntApi(link)
+    await activationAccountApi(link)
     toast.success(SUCCESS_MESSAGE, { autoClose: 3000 })
     setTimeout(() => {
       window.location.replace(HOME_URL)

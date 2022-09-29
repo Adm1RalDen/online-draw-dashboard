@@ -5,7 +5,7 @@ import { Heading1 } from 'styles/typography/styles'
 
 import { Loader } from 'components/loaders/loader'
 
-import { ACTIVATION_PAGE_IS_ACTIVATED_TEXT, activationAccaunt } from './const'
+import { ACTIVATION_PAGE_IS_ACTIVATED_TEXT, activationAccount } from './const'
 import { ActivationPageSection } from './styles'
 
 export const ActivationPage = () => {
@@ -14,7 +14,7 @@ export const ActivationPage = () => {
   const { link } = useParams()
 
   useEffect(() => {
-    activationAccaunt({ link: link as string, setIsLoading, setError })
+    activationAccount({ link: link as string, setIsLoading, setError })
   }, [link, setIsLoading, setError])
 
   return (
