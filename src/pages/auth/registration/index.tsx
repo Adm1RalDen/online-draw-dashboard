@@ -2,10 +2,8 @@ import { useFormik } from 'formik'
 import { useAppDispatch, useAppSelector } from 'store'
 import { userInfoSelector } from 'store/selectors/user.selector'
 import { UserRegistrationData } from 'types'
-import { Portal } from 'utils/portal'
 
 import { InputAnimation } from 'components/input-animation'
-import { Loader } from 'components/loaders/loader'
 
 import { AuthButton, Title } from '../styles'
 import {
@@ -51,11 +49,6 @@ export const RegistrationComponent = () => {
           <AuthButton disabled={!formik.isValid || isLoading}>Send</AuthButton>
         </form>
       </div>
-      {isLoading && (
-        <Portal>
-          <Loader color='white' />
-        </Portal>
-      )}
     </>
   )
 }

@@ -20,7 +20,9 @@ export const responseInterceptor = async (error: AxiosError) => {
         )
         const { token, user } = refresh.data
         saveUserInStorage({ user, token })
-        error.config.headers['authorization'] = `Bearer ${token}`
+        if (error.config.headers) {
+          error.config.headers['authorization'] = `Bearer ${token}`
+        }
         return Instance.request(error.config)
       }
     } catch (e) {

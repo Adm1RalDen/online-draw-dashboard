@@ -60,7 +60,20 @@ export interface RefreshResponse {
   refreshToken: string
   user: Pick<AuthorizedUser, 'name' | 'role' | 'id'>
 }
+export type VerifyRequestData = {
+  userId: string
+  code: string
+}
 
+export type User2FAData = {
+  userId: string
+  qrcode: string
+}
+export interface User2FALoginResponse {
+  isUse2FA: boolean
+  qrcode: string
+  userId: string
+}
 export interface DrawData {
   roomId: string
   x1?: number

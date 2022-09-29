@@ -1,8 +1,15 @@
+import { useAppSelector } from 'store'
+import { userInfoSelector } from 'store/selectors/user.selector'
+import { Portal } from 'utils/portal'
+
+import { Loader } from 'components/loaders/loader'
+
 import { LoginComponent } from './login'
 import { RegistrationComponent } from './registration'
 import { AuthSection, Container, Logo, Wrapper } from './styles'
 
 export const AuthPage = () => {
+  const { isLoading } = useAppSelector(userInfoSelector)
   return (
     <AuthSection>
       <Container>
@@ -10,6 +17,11 @@ export const AuthPage = () => {
         <Wrapper>
           <LoginComponent />
           <RegistrationComponent />
+          {isLoading && (
+            <Portal>
+              <Loader color='white' />
+            </Portal>
+          )}
         </Wrapper>
       </Container>
     </AuthSection>

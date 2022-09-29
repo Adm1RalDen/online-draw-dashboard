@@ -1,6 +1,7 @@
 import { WsContext } from 'context/ws.context'
 import { AuthPage } from 'pages/auth/index'
 import { PrivateRoom } from 'pages/confirmAccessPage'
+import { FailedGoogleAuthPage } from 'pages/failedGoogleAuthPage'
 import { HomePage } from 'pages/home'
 import { LayoutComponent } from 'pages/layout'
 import { NotFoundPage } from 'pages/notfoundPage'
@@ -37,6 +38,7 @@ const setRoutes = (isAuth: boolean) =>
     : [
         { path: '/authorization', element: <AuthPage /> },
         { path: '/auth/google/success', element: <SuccessGoogleAuth /> },
+        { path: '/auth/google/failure', element: <FailedGoogleAuthPage /> },
         { path: '*', element: <Navigate to='/authorization' /> }
       ]
 

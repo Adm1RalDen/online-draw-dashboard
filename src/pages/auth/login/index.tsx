@@ -1,23 +1,31 @@
 import { useFormik } from 'formik'
+import { useState } from 'react'
 import { useAppDispatch, useAppSelector } from 'store'
 import { userInfoSelector } from 'store/selectors/user.selector'
-import { UserLoginFormData } from 'types'
+import { User2FAData as User2FADataType, UserLoginFormData } from 'types'
 import { Portal } from 'utils/portal'
 
+import { User2FAComponent } from 'components/2FA'
 import { InputAnimation } from 'components/input-animation'
-import { Loader } from 'components/loaders/loader'
 
 import { GoogleLoginComponent } from '../googleLogin'
 import { AuthButton, Title } from '../styles'
 import { AuthorizationFileds, initialValues, onSubmit, validationSchema } from './const'
 
 export const LoginComponent = () => {
+  const [user2FAData, setUser2FAData] = useState<User2FADataType | null>(null)
+  const handleCloseModal = () => setUser2FAData(null)
   const { isLoading } = useAppSelector(userInfoSelector)
   const dispatch = useAppDispatch()
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: (data: UserLoginFormData) => onSubmit(data, dispatch)
+    onSubmit: (data: UserLoginFormData) =>
+      onSubmit({
+        data,
+        dispatch,
+        setUser2FAData
+      })
   })
 
   return (
@@ -48,10 +56,9 @@ export const LoginComponent = () => {
           <AuthButton disabled={!formik.isValid || isLoading}>Send</AuthButton>
         </form>
       </div>
-
-      {isLoading && (
+      {user2FAData && (
         <Portal>
-          <Loader color='white' />
+          <User2FAComponent user2FAData={user2FAData} handleCloseModal={handleCloseModal} />
         </Portal>
       )}
     </>

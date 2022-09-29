@@ -24,6 +24,10 @@ export const UserSlice = createSlice({
       state.isAuth = false
       state.error = undefined
       state.token = undefined
+    },
+
+    setUserIsLoadingAction: (state, { payload }: PayloadAction<boolean>) => {
+      state.isLoading = payload
     }
   },
 
@@ -36,4 +40,4 @@ export const UserSlice = createSlice({
   }
 })
 
-export const { initializeUser, logoutAction } = UserSlice.actions
+export const { initializeUser, logoutAction, setUserIsLoadingAction } = UserSlice.actions

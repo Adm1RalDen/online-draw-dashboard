@@ -1,8 +1,8 @@
 import { Instance } from 'api/instance'
-import { RefreshResponse, UserLoginFormData } from 'types'
-
-import { setRefreshToken } from './../const'
+import { RefreshResponse, User2FALoginResponse, UserLoginFormData } from 'types'
 
 export const authorizeUser = async (data: UserLoginFormData) => {
-  return Instance.post<RefreshResponse>('/user/login', { ...data, ...setRefreshToken() })
+  return Instance.post<RefreshResponse | User2FALoginResponse>('/user/login', {
+    ...data
+  })
 }

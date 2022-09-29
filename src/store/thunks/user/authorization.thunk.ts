@@ -1,5 +1,4 @@
 import { Dispatch, createAsyncThunk } from '@reduxjs/toolkit'
-import { authorizeUser } from 'api/user/authorize'
 import { getProfile } from 'api/user/getProfile'
 import { logout } from 'api/user/logout'
 import { registrationUser } from 'api/user/registration'
@@ -14,7 +13,7 @@ import {
 import { USER_REDUCER } from 'store/const'
 import { initializeUser, logoutAction } from 'store/slices/user.slice'
 
-import { UserLoginFormData, UserRegistrationData } from '../../../types'
+import { RefreshResponse, UserRegistrationData } from '../../../types'
 
 export const AuthorizedThunk = createAsyncThunk(
   `${USER_REDUCER}/authorize-thunk`,
@@ -36,13 +35,12 @@ export const AuthorizedThunk = createAsyncThunk(
 
 export const UserLoginThunk = createAsyncThunk(
   `${USER_REDUCER}/login-thunk`,
-  async (data: UserLoginFormData, { rejectWithValue }) => {
+  async (data: RefreshResponse, { rejectWithValue }) => {
     try {
-      const response = await authorizeUser(data)
-      saveUserInStorage(response.data)
-      saveRefreshToken(response.data.refreshToken)
-      const profile = await getProfile(response.data.user.id)
-      return { token: response.data.token, profile: profile.data }
+      saveUserInStorage({ token: data.token, user: data.user })
+      saveRefreshToken(data.refreshToken)
+      const profile = await getProfile(data.user.id)
+      return { token: data.token, profile: profile.data }
     } catch (e) {
       if (e instanceof AxiosError) {
         toast.error(e.response?.data.message)
