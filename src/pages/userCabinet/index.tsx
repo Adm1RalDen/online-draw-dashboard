@@ -31,11 +31,12 @@ export const UserCabinet = () => {
   const { data, isLoading } = useAppSelector(userInfoSelector)
   const [editMode, setEditMode] = useState(false)
   const navigate = useNavigate()
-  const handleEdit = () => setEditMode(!editMode)
+  const handleEdit = () => setEditMode((prev) => !prev)
   const handleNavigate = () => {
     navigate(HOME_URL)
   }
-  const backgroundFonSrc = `${data.backgroundFon}?id=${Math.floor(Math.random() * 100)}`
+  const backgroundFonSrc = `${data.backgroundFon}?id=${Math.floor(Math.random() * 1000)}`
+  const avatarSrc = `${data.avatar}?id=${Math.floor(Math.random() * 1000)}`
 
   const userInfoFields = [
     'name',
@@ -80,7 +81,7 @@ export const UserCabinet = () => {
               <img src={setImageUrl(backgroundFonSrc)} alt={data.name} />
               <AvatarWrapper>
                 <Avatar>
-                  <img src={setImageUrl(data.avatar)} alt={data.name} />
+                  <img src={setImageUrl(avatarSrc)} alt={data.name} />
                 </Avatar>
                 <div>{data.name}</div>
               </AvatarWrapper>

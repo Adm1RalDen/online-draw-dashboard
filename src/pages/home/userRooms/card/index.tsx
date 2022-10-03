@@ -1,9 +1,11 @@
+import { PencilIcon, TrashIcon, UserPlusIcon } from '@heroicons/react/24/outline'
+import { EllipsisVerticalIcon, XMarkIcon } from '@heroicons/react/24/solid'
 import { DELETE_USER_ROOM_SOCKET, JOIN_ROOM_SOCKET } from 'const/sockets'
 import { useSocket } from 'hooks/useSocket'
 import { FC, useState } from 'react'
 import { ActiveRoom } from 'types/rooms'
 
-import { CardDeleteButton, CardEditButton, CardJoinButton, CardSettings, RoomCard } from './styles'
+import { CardButton, CardSettings, RoomCard } from './styles'
 import { UpdateCard } from './update'
 
 type Props = {
@@ -54,24 +56,18 @@ export const UserRoomCard: FC<Props> = ({ room, userId, userName, isLoading, set
       </p>
       {active && (
         <CardSettings>
-          <li>
-            <CardEditButton disabled={isLoading} onClick={handleEditMode} />
-          </li>
-          <li>
-            <CardDeleteButton disabled={isLoading} onClick={handleDeleteRoom} />
-          </li>
-          <li>
-            <CardJoinButton disabled={isLoading} onClick={handleJoinRoom} />
-          </li>
+          <CardButton disabled={isLoading} onClick={handleEditMode} title='Edit'>
+            <PencilIcon />
+          </CardButton>
+          <CardButton disabled={isLoading} onClick={handleDeleteRoom} title='Delete'>
+            <TrashIcon />
+          </CardButton>
+          <CardButton disabled={isLoading} onClick={handleJoinRoom} title='Join'>
+            <UserPlusIcon />
+          </CardButton>
         </CardSettings>
       )}
-      <span onClick={handleActiveMode}>
-        {!active ? (
-          <img src='/assets/dots.png' alt='edit' width={30} height={30} />
-        ) : (
-          <img src='/assets/close.png' alt='close' width={25} height={25} />
-        )}
-      </span>
+      <span onClick={handleActiveMode}>{!active ? <EllipsisVerticalIcon /> : <XMarkIcon />}</span>
 
       {editMode && (
         <UpdateCard

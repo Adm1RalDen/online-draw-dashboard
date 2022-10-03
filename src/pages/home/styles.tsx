@@ -18,12 +18,9 @@ const SubmitButton = styled(Button)`
   }
 `
 
-const LogOutButton = styled(ButtonImage)`
-  background-image: url('assets/logout_w.png');
-`
+const LogOutButton = styled(ButtonImage)``
 const UserCabinetButton = styled(ButtonImage)`
   margin-right: 5px;
-  background-image: url('assets/profile-user.png');
 `
 
 const HomePageSection = styled.section`

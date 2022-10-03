@@ -4,6 +4,7 @@ export const USER_REDUCER = 'user'
 export const defaultUserData = {
   id: '',
   avatar: '',
+  originalAvatar: '',
   backgroundFon: '',
   name: '',
   role: '',
@@ -15,6 +16,7 @@ export const defaultUserData = {
   date: '',
   biography: ''
 }
+
 export const userInitialState: UserReducerInitialTypes = {
   isAuth: false,
   error: undefined,
@@ -25,6 +27,7 @@ export const userInitialState: UserReducerInitialTypes = {
     id: '',
     avatar: '',
     backgroundFon: '',
+    originalAvatar: '',
     name: '',
     role: '',
     email: '',

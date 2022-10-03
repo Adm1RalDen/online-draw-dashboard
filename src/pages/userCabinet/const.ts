@@ -1,10 +1,8 @@
-import { AppDispatch } from 'store'
-import { updateUserProfileThunk } from 'store/thunks/user/user.thunk'
+import { themes } from 'styles/themes'
 import { AuthorizedUser } from 'types'
-import { createBlobFile } from 'utils/encodeBase64'
 import * as yup from 'yup'
 
-import { InitialStateTypes, UserCabinetTypes } from './types'
+import { InitialStateTypes } from './types'
 
 export const MALE = 'male'
 export const WOMAN = 'woman'
@@ -13,7 +11,7 @@ const defaultUserValues = {
   name: '',
   country: '',
   city: '',
-  color: '',
+  color: themes.colors.black,
   gender: '',
   date: ''
 }
@@ -42,6 +40,7 @@ const inputKeys = [
   'email',
   'biography',
   'avatar',
+  'originalAvatar',
   'backgroundFon',
   'gender',
   'color',
@@ -49,69 +48,4 @@ const inputKeys = [
   'age'
 ]
 
-const filterFields = (
-  userFields: AuthorizedUser
-): [keyof Omit<UserCabinetTypes, 'gender' | 'color' | 'date'>, string][] => {
-  const res = Object.entries(userFields).filter(([key]) => !inputKeys.includes(key)) as [
-    keyof Omit<UserCabinetTypes, 'gender' | 'color' | 'date'>,
-    string
-  ][]
-  return res
-}
-
-const setInputTypes = (name: string) => {
-  switch (name) {
-    case 'date':
-      return 'date'
-    case 'age':
-      return 'number'
-    case 'color':
-      return 'color'
-    default:
-      return 'text'
-  }
-}
-
-const onSubmit = async (
-  chenchedData: Omit<AuthorizedUser, 'role' | 'email' | 'backgroundFon'> & {
-    backgroundFon: File | string
-  },
-  original: AuthorizedUser,
-  dispatch: AppDispatch,
-  handleEdit: VoidFunction
-) => {
-  const keys = Object.keys(chenchedData) as (keyof Omit<AuthorizedUser, 'role' | 'email'>)[]
-
-  const filteredKeys = keys.filter((key) => {
-    return chenchedData[key] !== original[key]
-  })
-
-  if (filteredKeys.length) {
-    const formData = new FormData()
-    const isAvatar = filteredKeys.includes('avatar')
-
-    if (isAvatar) {
-      const file = await createBlobFile(chenchedData.avatar, 'image', 'image/png')
-      formData.append('avatar', file)
-    }
-
-    filteredKeys.map((key: keyof Omit<AuthorizedUser, 'role' | 'email'>) => {
-      if (key === 'avatar') return
-      formData.append(key, chenchedData[key])
-    })
-
-    formData.append('id', original.id)
-
-    dispatch(updateUserProfileThunk(formData))
-  }
-
-  handleEdit()
-}
-export {
-  setInitialValues,
-  validationSchema,
-  defaultUserValues,
-  filterFields,
-  setInputTypes,
-  onSubmit
-}
+export { setInitialValues, validationSchema, defaultUserValues, inputKeys }
