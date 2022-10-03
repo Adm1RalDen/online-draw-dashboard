@@ -18,6 +18,7 @@ const MessageInput = styled(Input)<ButtonProps>`
 `
 const SendMessageButton = styled(ButtonImage)<ButtonProps>`
   width: ${({ isShow }) => (isShow ? '35px' : '0px')};
+  box-shadow: none;
   height: 30px;
   transition-duration: 0.2s;
   background-color: transparent;

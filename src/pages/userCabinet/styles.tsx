@@ -5,6 +5,7 @@ import { Button } from 'components/button'
 const UserCabinetSection = styled.section`
   background-color: ${({ theme }) => theme.colors.greenBackground};
   padding: 15px 0px;
+  min-height: 100vh;
 `
 
 const Wrapper = styled.div`
@@ -17,7 +18,7 @@ const ImagesWrapper = styled.div`
   grid-column: 1/3;
   position: relative;
   padding-bottom: 60px;
-  background-color: transparent;
+  background-color: ${({ theme }) => theme.colors.aqua};
   border-radius: 10px;
   box-shadow: 2px 2px 10px 1px ${({ theme }) => theme.colors.aqua};
   border: 2px solid ${(p) => p.theme.colors.light_gray};
@@ -61,6 +62,7 @@ const Avatar = styled.div`
   height: 120px;
   border-radius: 50%;
   background-color: ${({ theme }) => theme.colors.white};
+  border: 2px solid ${({ theme }) => theme.colors.white};
 
   & > img {
     width: 100%;
@@ -75,6 +77,7 @@ const UserInfoWrapper = styled.div`
   grid-column: 1/3;
   border-radius: 10px;
   display: grid;
+  background-color: ${({ theme }) => theme.colors.aqua};
   grid-template: minmax(150px, auto) minmax(50px, auto) / 1fr;
   box-shadow: 2px 2px 10px 1px ${({ theme }) => theme.colors.aqua};
 `
@@ -124,7 +127,7 @@ const ColorSpan = styled.span<Props>`
 `
 
 const Biography = styled.div`
-  color: #fff;
+  color: ${({ theme }) => theme.colors.white};
   font-weight: 600;
   padding: 5px 10px;
   border-bottom-left-radius: 10px;
@@ -145,8 +148,7 @@ const Biography = styled.div`
 
 const ButtonWrapper = styled.div`
   background-color: transparent;
-  box-shadow: 2px 2px 10px 1px ${({ theme }) => theme.colors.aqua};
-  border: 2px solid ${(p) => p.theme.colors.light_gray};
+  width: max-content;
   padding: 10px;
   border-radius: 10px;
   grid-column: 1/3;
@@ -155,6 +157,7 @@ const ButtonWrapper = styled.div`
 const CabinetButton = styled(Button)`
   margin-right: 10px;
   width: 100px;
+  box-shadow: 2px 2px 10px 1px ${({ theme }) => theme.colors.aqua};
 `
 
 export {

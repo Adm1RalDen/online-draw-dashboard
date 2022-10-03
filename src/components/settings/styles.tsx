@@ -7,9 +7,10 @@ const StyledSettings = styled.div`
   padding: 5px;
   display: flex;
   align-items: center;
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.aqua};
   gap: 20px;
   border-bottom: 2px solid ${({ theme }) => theme.colors.black};
+  color: ${({ theme }) => theme.colors.white};
 
   & > div {
     display: flex;
@@ -21,10 +22,8 @@ const StyledSettings = styled.div`
 const Input = styled(DefaultInput)`
   width: 60px;
   padding: 0;
-  &[type='color'] {
-    width: 50px;
-  }
   &[type='number'] {
+    border: none;
     padding: 0px 5px 0px 5px;
   }
 `
