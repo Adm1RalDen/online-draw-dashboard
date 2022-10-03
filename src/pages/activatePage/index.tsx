@@ -5,8 +5,9 @@ import { Heading1 } from 'styles/typography/styles'
 
 import { Loader } from 'components/loaders/loader'
 
-import { ACTIVATION_PAGE_IS_ACTIVATED_TEXT, activationAccount } from './const'
+import { ACTIVATION_PAGE_HOME_BUTTON_TEXT, ACTIVATION_PAGE_SUCCESS_TITLE } from './const'
 import { ActivationPageSection } from './styles'
+import { activationAccount } from './utils'
 
 export const ActivationPage = () => {
   const [isLoading, setIsLoading] = useState(true)
@@ -28,13 +29,13 @@ export const ActivationPage = () => {
               <Heading1>{error}</Heading1>
               <div>
                 <Link to={HOME_URL} replace={true}>
-                  Come back home
+                  {ACTIVATION_PAGE_HOME_BUTTON_TEXT}
                 </Link>
               </div>
             </div>
           ) : (
             <>
-              <Heading1>{ACTIVATION_PAGE_IS_ACTIVATED_TEXT}</Heading1>
+              <Heading1>{ACTIVATION_PAGE_SUCCESS_TITLE}</Heading1>
             </>
           )}
         </>
