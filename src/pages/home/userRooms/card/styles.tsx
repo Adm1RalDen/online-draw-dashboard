@@ -6,12 +6,14 @@ type Props = {
   active: boolean
 }
 
-const CardSettings = styled.ul`
+const CardSettings = styled.div`
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
   top: 7px;
   right: 45px;
   width: 40px;
-  list-style-type: none;
   background-color: ${({ theme }) => theme.colors.white};
   border-radius: 5px;
   padding: 5px;
@@ -51,30 +53,20 @@ const RoomCard = styled.div<Props>`
 const CardSettingsButton = styled(ButtonImage)`
   width: 100%;
   height: 30px;
-  background-size: 20px 20px;
   border-radius: none;
+  background-color: transparent;
 
   &:hover {
     box-shadow: 0px 0px 5px 1px ${({ theme }) => theme.colors.darkGray};
     background-color: transparent;
   }
+  & > svg {
+    width: 25px;
+    height: 25px;
+    color: ${({ theme }) => theme.colors.black};
+  }
 `
 
-const CardEditButton = styled(CardSettingsButton)`
-  background-image: url('assets/edit.png');
-`
-const CardDeleteButton = styled(CardSettingsButton)`
-  background-image: url('assets/delete.png');
-`
-const CardJoinButton = styled(CardSettingsButton)`
-  background-image: url('assets/enter.png');
-`
+const CardButton = styled(CardSettingsButton)``
 
-export {
-  RoomCard,
-  CardSettings,
-  CardSettingsButton,
-  CardEditButton,
-  CardDeleteButton,
-  CardJoinButton
-}
+export { RoomCard, CardSettings, CardSettingsButton, CardButton }

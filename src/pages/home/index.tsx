@@ -1,3 +1,4 @@
+import { ArrowLeftOnRectangleIcon, UserIcon } from '@heroicons/react/24/outline'
 import { CABINET_URL } from 'const/urls'
 import { useSocket } from 'hooks/useSocket'
 import { useEffect, useState } from 'react'
@@ -60,9 +61,13 @@ export const HomePage = () => {
           <HomeHeader>
             <Logo />
             <div>
-              <UserCabinetButton onClick={handleNavigateCabinet} />
+              <UserCabinetButton onClick={handleNavigateCabinet}>
+                <UserIcon />
+              </UserCabinetButton>
               <Popper onAgreeAction={handleLogOut} title='Are you shure to handle leave from app?'>
-                <LogOutButton />
+                <LogOutButton>
+                  <ArrowLeftOnRectangleIcon />
+                </LogOutButton>
               </Popper>
             </div>
           </HomeHeader>

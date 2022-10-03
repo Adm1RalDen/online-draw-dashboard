@@ -4,7 +4,6 @@ import { ButtonImage } from 'components/button-image'
 import { FlexContainer } from 'components/flex-container'
 
 type ToolButtonProps = {
-  img: string
   active?: boolean
 }
 
@@ -19,9 +18,6 @@ const StyledToolbar = styled(FlexContainer)`
 const SnapshotButtonsWrapper = styled.div`
   display: flex;
   gap: 5px;
-  & > button:first-child {
-    transform: rotate(180deg);
-  }
 `
 
 const DrawToolsWrapper = styled.div`
@@ -35,44 +31,20 @@ const DrawToolsWrapper = styled.div`
   }
 `
 
-const ToolButton = styled.button<ToolButtonProps>`
-  display: inline-block;
-  padding: 5px;
-  width: 45px;
-  height: 45px;
-  cursor: pointer;
+const ToolButton = styled(ButtonImage)<ToolButtonProps>`
+  width: 40px;
+  height: 40px;
   background: transparent;
-  border-radius: 5px;
   border: 2px solid ${({ theme }) => theme.colors.white};
 
+  & > svg {
+    color: ${({ theme }) => theme.colors.black};
+  }
   ${(p) =>
     p.active &&
     css`
       border: 2px solid ${({ theme }) => theme.colors.black};
     `};
-
-  ${(p) =>
-    p.img &&
-    css`
-      background-image: url(${p.img});
-      background-size: 30px 30px;
-      background-position: center center;
-      background-repeat: no-repeat;
-    `}
 `
 
-const LeaveButton = styled(ButtonImage)`
-  width: 45px;
-  height: 45px;
-  padding: 5px;
-  background-image: url('/assets/logout_b.png');
-
-  &:hover {
-    background-color: transparent;
-  }
-  &:focus {
-    ${(p) => p.theme.shadows.buttonFocus}
-  }
-`
-
-export { ToolButton, StyledToolbar, LeaveButton, SnapshotButtonsWrapper, DrawToolsWrapper }
+export { ToolButton, StyledToolbar, SnapshotButtonsWrapper, DrawToolsWrapper }
