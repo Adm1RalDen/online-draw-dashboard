@@ -4,7 +4,7 @@ import { ButtonImage } from 'components/button-image'
 import { Input } from 'components/input'
 
 type ButtonProps = {
-  isShow: boolean
+  isShow: string
 }
 
 const MessageInput = styled(Input)<ButtonProps>`
