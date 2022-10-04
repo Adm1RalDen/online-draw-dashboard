@@ -5,18 +5,11 @@ import { FlexContainer } from 'components/flex-container'
 
 const ConfirmAccessPage = styled(FlexContainer)`
   height: 100vh;
-  background-color: ${({ theme }) => theme.colors.dark};
+  background-color: ${({ theme }) => theme.colors.greenBackground};
 `
 
 const ConfirmAccessPageButton = styled(Button)`
-  color: ${({ theme }) => theme.colors.dark};
-  background-color: ${({ theme }) => theme.colors.white};
   flex-basis: 50%;
-
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.blue};
-    color: ${({ theme }) => theme.colors.white};
-  }
 `
 
 const ConfirmAccessPageInputWrapper = styled.div`

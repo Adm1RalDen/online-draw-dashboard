@@ -44,7 +44,8 @@ const inputKeys = [
   'backgroundFon',
   'gender',
   'color',
-  'date'
+  'date',
+  'age'
 ]
 
 export { setInitialValues, validationSchema, defaultUserValues, inputKeys }

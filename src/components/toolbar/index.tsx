@@ -14,7 +14,7 @@ import { useAppSelector } from 'store'
 import { userDataSelector } from 'store/selectors/user.selector'
 import { ToolsTypes } from 'types/canvas'
 
-import { Input } from 'components/input'
+import { InputColor } from 'components/input/color'
 
 import CircleIcon from '../../../public/assets/circle.svg'
 import EraserIcon from '../../../public/assets/eraser.svg'
@@ -75,7 +75,7 @@ export const Toolbar = () => {
         <ToolButton data-tool='line' active={tool === 'line'}>
           <ArrowDownRightIcon />
         </ToolButton>
-        <Input type='color' name='color' onChange={handleChangeFillStyle} />
+        <InputColor type='color' name='color' onChange={handleChangeFillStyle} />
       </DrawToolsWrapper>
 
       <SnapshotButtonsWrapper>
