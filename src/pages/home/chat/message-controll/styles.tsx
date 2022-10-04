@@ -28,5 +28,9 @@ const SendMessageButton = styled(ButtonImage)<ButtonProps>`
     width: inherit;
     height: inherit;
   }
+  &:hover {
+    background-color: transparent;
+    box-shadow: none;
+  }
 `
 export { MessageInput, SendMessageButton }

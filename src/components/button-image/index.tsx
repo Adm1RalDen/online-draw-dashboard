@@ -18,4 +18,14 @@ export const ButtonImage = styled.button`
     width: 30px;
     height: 30px;
   }
+
+  &:disabled {
+    background-color: ${(p) => p.theme.colors.darkAqua};
+    cursor: no-drop;
+  }
+
+  &:hover {
+    background-color: ${(p) => p.theme.colors.aqua};
+    box-shadow: 0px 0px 2px 1px ${({ theme }) => theme.colors.white};
+  }
 `
