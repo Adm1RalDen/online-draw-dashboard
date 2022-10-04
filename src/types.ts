@@ -11,6 +11,7 @@ export interface AuthorizedUser {
   id: string
   name: string
   avatar: string
+  originalAvatar: string
   backgroundFon: string
   role: string
   email: string

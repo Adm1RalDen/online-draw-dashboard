@@ -1,3 +1,11 @@
+import {
+  ArrowDownRightIcon,
+  ArrowDownTrayIcon,
+  ArrowLeftOnRectangleIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  PencilIcon
+} from '@heroicons/react/24/outline'
 import { EXIT_SOCKET } from 'const/sockets'
 import { useSocket } from 'hooks/useSocket'
 import { MouseEvent, useContext } from 'react'
@@ -8,14 +16,11 @@ import { ToolsTypes } from 'types/canvas'
 
 import { Input } from 'components/input'
 
+import CircleIcon from '../../../public/assets/circle.svg'
+import EraserIcon from '../../../public/assets/eraser.svg'
+import SquareIcon from '../../../public/assets/square.svg'
 import { PaintContext } from '../../context/paintContext'
-import {
-  DrawToolsWrapper,
-  LeaveButton,
-  SnapshotButtonsWrapper,
-  StyledToolbar,
-  ToolButton
-} from './styles'
+import { DrawToolsWrapper, SnapshotButtonsWrapper, StyledToolbar, ToolButton } from './styles'
 
 export const Toolbar = () => {
   const { setToolhandler, tool, changeFillStyle, handleRedo, handleReset, snapshot } =
@@ -55,19 +60,37 @@ export const Toolbar = () => {
   return (
     <StyledToolbar>
       <DrawToolsWrapper onClickCapture={handleChangeTool}>
-        <ToolButton img='../assets/pen.png' data-tool='pen' active={tool === 'pen'} />
-        <ToolButton img='../assets/square.png' data-tool='square' active={tool === 'square'} />
-        <ToolButton img='../assets/circle.png' data-tool='circle' active={tool === 'circle'} />
-        <ToolButton img='../assets/eraser.png' data-tool='eraser' active={tool === 'eraser'} />
-        <ToolButton img='../assets/line.png' data-tool='line' active={tool === 'line'} />
+        <ToolButton data-tool='pen' active={tool === 'pen'}>
+          <PencilIcon />
+        </ToolButton>
+        <ToolButton data-tool='square' active={tool === 'square'}>
+          <SquareIcon />
+        </ToolButton>
+        <ToolButton data-tool='circle' active={tool === 'circle'}>
+          <CircleIcon />
+        </ToolButton>
+        <ToolButton data-tool='eraser' active={tool === 'eraser'}>
+          <EraserIcon />
+        </ToolButton>
+        <ToolButton data-tool='line' active={tool === 'line'}>
+          <ArrowDownRightIcon />
+        </ToolButton>
         <Input type='color' name='color' onChange={handleChangeFillStyle} />
       </DrawToolsWrapper>
 
       <SnapshotButtonsWrapper>
-        <ToolButton img='../assets/right-arrow.png' onClick={handleReset} />
-        <ToolButton img='../assets/right-arrow.png' onClick={handleRedo} />
-        <ToolButton img='../assets/diskette.png' onClick={handleSavePhoto} />
-        <LeaveButton onClick={handleExitFromRoom} />
+        <ToolButton onClick={handleReset}>
+          <ChevronLeftIcon />
+        </ToolButton>
+        <ToolButton onClick={handleRedo}>
+          <ChevronRightIcon />
+        </ToolButton>
+        <ToolButton onClick={handleSavePhoto}>
+          <ArrowDownTrayIcon />
+        </ToolButton>
+        <ToolButton onClick={handleExitFromRoom}>
+          <ArrowLeftOnRectangleIcon />
+        </ToolButton>
       </SnapshotButtonsWrapper>
     </StyledToolbar>
   )

@@ -1,4 +1,5 @@
 import { WsContext } from 'context/ws.context'
+import { ActivationPage } from 'pages/activatePage'
 import { AuthPage } from 'pages/auth/index'
 import { PrivateRoom } from 'pages/confirmAccessPage'
 import { FailedGoogleAuthPage } from 'pages/failedGoogleAuthPage'
@@ -36,7 +37,9 @@ const setRoutes = (isAuth: boolean) =>
         { path: '*', element: <NotFoundPage /> }
       ]
     : [
+        { path: '/', element: <Navigate to='/authorization' /> },
         { path: '/authorization', element: <AuthPage /> },
+        { path: '/activate/:link', element: <ActivationPage /> },
         { path: '/auth/google/success', element: <SuccessGoogleAuth /> },
         { path: '/auth/google/failure', element: <FailedGoogleAuthPage /> },
         { path: '*', element: <Navigate to='/authorization' /> }

@@ -4,34 +4,37 @@ import { EncodeBase64 } from 'utils/encodeBase64'
 
 import { Button } from 'components/button'
 
+import { SIZE_2MB } from './const'
 import { AvatarEditWrapper } from './styles'
 import { ImageCropProps } from './types'
 
 export const ImageCrop: FC<ImageCropProps> = ({
-  image,
+  fullImg,
+  savedPreviewImg,
   height = 200,
   width = 300,
   handleSavePhoto
 }) => {
   const [editMode, setEditMode] = useState(false)
-  const [editingImage, setEditingImage] = useState<string>('')
-  const [preview, setPreview] = useState<null | string>(null)
-  const [prevPreview, setPrevPreview] = useState<null | string>(null)
+  const [originalImg, setOriginalImage] = useState<string>('')
+  const [cropedImg, setCropedImg] = useState<string>('')
+  const [preview, setPreview] = useState<string>('')
 
-  const onClose = () => setPreview(null)
-  const onCrop = (preview: string) => setPreview(preview)
+  const onClose = () => setCropedImg('')
+  const onCrop = (preview: string) => setCropedImg(preview)
   const onBeforeFileLoad = (elem: React.ChangeEvent<HTMLInputElement>) => {
     if (elem.target.files) {
-      if (elem.target.files[0].size > 10_485_760) {
+      if (elem.target.files[0].size > SIZE_2MB) {
         alert('File is too big!')
         elem.target.value = ''
       }
     }
   }
+
   const onSave = () => {
-    if (preview) {
-      handleSavePhoto(preview, editingImage)
-      setPrevPreview(preview)
+    if (cropedImg) {
+      handleSavePhoto(cropedImg, originalImg)
+      setPreview(cropedImg)
       setEditMode(false)
     }
   }
@@ -39,19 +42,22 @@ export const ImageCrop: FC<ImageCropProps> = ({
   const onFileLoad = (file: React.ChangeEvent<HTMLInputElement> | File) => {
     if (file instanceof File) {
       EncodeBase64(file).then((res) => {
-        setEditingImage(res)
+        setOriginalImage(res)
       })
     }
   }
-  const handleEditModeOff = () => setEditMode(false)
-  const handleEditModeOn = () => setEditMode(true)
 
+  const handleEditModeOff = () => setEditMode(false)
+  const handleEditModeOn = () => {
+    setPreview('')
+    setEditMode(true)
+  }
   return (
     <AvatarEditWrapper>
       {editMode ? (
         <>
           <Avatar
-            src={image}
+            src={fullImg}
             width={width}
             height={height}
             onCrop={onCrop}
@@ -72,7 +78,7 @@ export const ImageCrop: FC<ImageCropProps> = ({
       ) : (
         <div>
           <img
-            src={prevPreview || image}
+            src={preview || savedPreviewImg || fullImg}
             width={120}
             height={120}
             className='image_default_styles'

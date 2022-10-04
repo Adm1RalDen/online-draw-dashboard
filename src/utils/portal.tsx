@@ -5,7 +5,7 @@ import styled from 'styled-components'
 const ChildrenWrapper = styled.div`
   position: fixed;
   width: 100%;
-  background: #0000006f;
+  background: ${({ theme }) => theme.colors.portalBackground};
   height: 100vh;
   z-index: 9999;
   backdrop-filter: blur(3px);
