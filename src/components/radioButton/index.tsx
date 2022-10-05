@@ -15,11 +15,11 @@ export const RadioButtons: FC<RadioButtonTypes> = ({ defaultValue, name, onChang
     <InputWrapper>
       {values.map((value) => (
         <Wrapper key={`${value}_${Math.floor(Math.random() * 100)}`}>
-          <Label htmlFor={`radio_color_${value}`}>
+          <Label htmlFor={`${name}_${value}`}>
             {value}
             <Input
               type='radio'
-              id={`radio_color_${value}`}
+              id={`${name}_${value}`}
               name={name}
               value={value}
               defaultChecked={value === defaultValue}

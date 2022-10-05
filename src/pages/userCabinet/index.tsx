@@ -38,14 +38,10 @@ export const UserCabinet = () => {
   const backgroundFonSrc = `${data.backgroundFon}?id=${Math.floor(Math.random() * 1000)}`
   const avatarSrc = `${data.avatar}?id=${Math.floor(Math.random() * 1000)}`
 
-  const userInfoFields = [
-    'name',
-    'country',
-    'city',
-    'color',
-    'gender',
-    'date'
-  ] as (keyof typeof data)[]
+  const userInfoFields = ['name', 'country', 'city', 'color', 'gender', 'date'] as Exclude<
+    keyof typeof data,
+    'isUse2FA'
+  >[]
 
   const setUserInfo = (key: string, value: string) => {
     switch (key) {

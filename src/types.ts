@@ -21,6 +21,7 @@ export interface AuthorizedUser {
   gender: string
   date: string
   biography: string
+  isUse2FA: boolean
 }
 
 export interface AuthorizedUserObject {

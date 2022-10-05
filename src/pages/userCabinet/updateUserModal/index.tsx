@@ -11,6 +11,7 @@ import { setImageUrl } from 'utils/setImageUrl'
 import { setInputTypes } from 'utils/setInputTypes'
 
 import { Button } from 'components/button'
+import { Checkbox } from 'components/checkbox'
 import { ErrorSpan } from 'components/error-span'
 import { ImageCrop } from 'components/image-crop'
 import { TextEditor } from 'components/textEditor'
@@ -18,7 +19,7 @@ import { TextEditor } from 'components/textEditor'
 import { inputKeys, setInitialValues, validationSchema } from '../const'
 import { UserRadioButtons } from '../radioButtons'
 import { InitialStateTypes, UserCabinetTypes } from '../types'
-import { AvatarWrapper, ButtonWrapper, Input, InputWrapper, UserForm } from './styles'
+import { AvatarWrapper, ButtonWrapper, Input, InputWrapper, UserForm, Wrapper } from './styles'
 import { UpdateUserModalTypes } from './types'
 
 export const UpdateUserModal: FC<UpdateUserModalTypes> = ({ userData, handleEdit }) => {
@@ -84,7 +85,7 @@ export const UpdateUserModal: FC<UpdateUserModalTypes> = ({ userData, handleEdit
 
       filteredKeys.forEach((key: keyof Omit<AuthorizedUser, 'role' | 'email'>) => {
         if (key !== 'avatar' && key !== 'originalAvatar') {
-          formData.append(key, chengedData[key])
+          formData.append(key, key === 'isUse2FA' ? String(chengedData[key]) : chengedData[key])
         }
       })
 
@@ -151,6 +152,15 @@ export const UpdateUserModal: FC<UpdateUserModalTypes> = ({ userData, handleEdit
           {formik.errors.date && formik.touched.date && <ErrorSpan title={formik.errors.date} />}
         </InputWrapper>
 
+        <Wrapper>
+          <Checkbox
+            title='For use you should install a google Authentificator (for scane qrcodes)'
+            name='isUse2FA'
+            lableTitle='Use 2FA?'
+            checked={formik.values.isUse2FA}
+            onChange={formik.handleChange}
+          />
+        </Wrapper>
         <UserRadioButtons formik={formik} handleSaveBackground={handleSaveBackground} />
         <TextEditor name='biography' onChange={setBiography} value={biography} />
         <ButtonWrapper>
