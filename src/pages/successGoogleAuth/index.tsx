@@ -1,12 +1,20 @@
 import { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
-
-import { checkGoogleAuthSearchParams } from './const'
+import { saveUserInStorage } from 'services/token.service'
 
 export const SuccessGoogleAuth = () => {
   const [searchParams] = useSearchParams()
   useEffect(() => {
-    checkGoogleAuthSearchParams(searchParams.get('user'))
+    const user = searchParams.get('user')
+    if (user) {
+      try {
+        const userObject = JSON.parse(user)
+        saveUserInStorage(userObject)
+      } catch (e) {
+        console.error('Parse Error')
+      }
+    }
+    window.location.replace('/')
   }, [searchParams])
 
   return null

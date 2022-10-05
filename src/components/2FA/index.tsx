@@ -1,4 +1,6 @@
 import { XMarkIcon } from '@heroicons/react/24/solid'
+import { verify2faApi } from 'api/user/verify2FA'
+import { AxiosError } from 'axios'
 import { FC, useEffect, useState } from 'react'
 import { Heading2 } from 'styles/typography/styles'
 import { FunctionWithParams, RefreshResponse } from 'types'
@@ -6,7 +8,7 @@ import { noopFunction } from 'utils/noop'
 
 import { LittleLoader } from 'components/loaders/littleLoader'
 
-import { handleSend2FA } from './const'
+import { AUTH_FAILURE_MESSAGE, AUTH_SYMBOLS_ARRAY, BACKSPACE_CODE, ENTER_CODE } from './const'
 import {
   QrCodeWrapper,
   User2FAButton,
@@ -42,36 +44,45 @@ export const User2FAComponent: FC<Props> = ({
   useEffect(() => {
     if (attemptCount <= 0) {
       handleCloseModal()
-      onErrorCallback('Authorization is failure')
+      onErrorCallback(AUTH_FAILURE_MESSAGE)
     }
   }, [attemptCount, onErrorCallback, handleCloseModal])
 
-  const handleSend = () =>
-    handleSend2FA({
-      userId,
-      code,
-      onSuccessCallback,
-      setIsLoading,
-      setError,
-      setAttempCount,
-      setIsSuccess
-    })
+  const handleSend = async () => {
+    try {
+      setIsLoading(true)
+      const res = await verify2faApi({ code, userId })
+      setIsSuccess(true)
+      setTimeout(() => {
+        onSuccessCallback(res.data)
+      }, 2000)
+    } catch (e) {
+      if (e instanceof AxiosError) {
+        setError(e.response?.data.message || 'Occured error')
+      } else {
+        setError('Occured error')
+      }
+      setAttempCount((prev) => --prev)
+    }
+    setIsLoading(false)
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (code.length < 6) {
       setCode(e.target.value)
     }
   }
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e) {
-      if (['e', '+', '-', '.', ','].includes(e.key)) {
+      if (AUTH_SYMBOLS_ARRAY.includes(e.key)) {
         e.preventDefault()
       }
-      if (code.length === 6 && e.code === 'Backspace') {
+      if (code.length === 6 && e.code === BACKSPACE_CODE) {
         setCode((prev) => prev.slice(0, 5))
         e.preventDefault()
       }
-      if (e.code === 'Enter' && code.length === 6) {
+      if (e.code === ENTER_CODE && code.length === 6) {
         handleSend()
       }
     }
@@ -96,7 +107,7 @@ export const User2FAComponent: FC<Props> = ({
             <LittleLoader />
           ) : (
             <User2FAButton onClick={handleSend} disabled={code.length < 6 || isSuccess}>
-              send
+              Send
             </User2FAButton>
           )}
         </div>
