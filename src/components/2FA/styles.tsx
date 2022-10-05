@@ -62,6 +62,7 @@ const User2FACloseModalButton = styled(ButtonImage)`
   height: 35px;
   background-color: transparent;
   transition-duration: 0.1s;
+  box-shadow: none;
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.black};

@@ -1,10 +1,11 @@
 import styled from 'styled-components'
 
+import { Button } from 'components/button'
+
 const UserCabinetSection = styled.section`
-  & > div {
-    max-width: 1400px;
-    padding: 5px;
-  }
+  background-color: ${({ theme }) => theme.colors.greenBackground};
+  padding: 15px 0px;
+  min-height: 100vh;
 `
 
 const Wrapper = styled.div`
@@ -17,10 +18,10 @@ const ImagesWrapper = styled.div`
   grid-column: 1/3;
   position: relative;
   padding-bottom: 60px;
-  border: 10px solid ${({ theme }) => theme.colors.white};
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.aqua};
   border-radius: 10px;
-  box-shadow: 2px 2px 10px 1px ${({ theme }) => theme.colors.middleGray};
+  box-shadow: 2px 2px 10px 1px ${({ theme }) => theme.colors.aqua};
+  border: 2px solid ${(p) => p.theme.colors.light_gray};
   overflow: hidden;
 
   & > img {
@@ -29,7 +30,7 @@ const ImagesWrapper = styled.div`
     aspect-ratio: 1/1;
     object-fit: cover;
     transition: all 1s linear;
-
+    border-bottom: 2px solid ${(p) => p.theme.colors.light_gray};
     &:hover {
       transform: scale(110%);
     }
@@ -61,6 +62,7 @@ const Avatar = styled.div`
   height: 120px;
   border-radius: 50%;
   background-color: ${({ theme }) => theme.colors.white};
+  border: 2px solid ${({ theme }) => theme.colors.white};
 
   & > img {
     width: 100%;
@@ -68,7 +70,6 @@ const Avatar = styled.div`
     border-radius: 50%;
     aspect-ratio: 1/1;
     object-fit: cover;
-    box-shadow: 0px 0px 5px 1px black;
   }
 `
 
@@ -76,15 +77,17 @@ const UserInfoWrapper = styled.div`
   grid-column: 1/3;
   border-radius: 10px;
   display: grid;
+  background-color: ${({ theme }) => theme.colors.aqua};
   grid-template: minmax(150px, auto) minmax(50px, auto) / 1fr;
-  box-shadow: 2px 2px 10px 1px ${({ theme }) => theme.colors.middleGray};
+  box-shadow: 2px 2px 10px 1px ${({ theme }) => theme.colors.aqua};
 `
 
 const UserInfo = styled.div`
+  color: ${({ theme }) => theme.colors.white};
   display: grid;
-  background-color: ${({ theme }) => theme.colors.white};
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  border: 2px solid ${(p) => p.theme.colors.light_gray};
 `
 
 const InfoWrapper = styled.div`
@@ -92,6 +95,10 @@ const InfoWrapper = styled.div`
   font-weight: 400;
   padding: 10px 10px;
   border-bottom: 2px solid ${(p) => p.theme.colors.light_gray};
+
+  &:last-child {
+    border-bottom: none;
+  }
 
   & > p {
     font-size: 18px;
@@ -120,7 +127,7 @@ const ColorSpan = styled.span<Props>`
 `
 
 const Biography = styled.div`
-  background-color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
   font-weight: 600;
   padding: 5px 10px;
   border-bottom-left-radius: 10px;
@@ -129,6 +136,8 @@ const Biography = styled.div`
   font-weight: 400;
   display: flex;
   align-items: center;
+  border: 2px solid ${(p) => p.theme.colors.light_gray};
+  border-top: none;
 
   & > p {
     min-width: 100px;
@@ -138,15 +147,17 @@ const Biography = styled.div`
 `
 
 const ButtonWrapper = styled.div`
-  box-shadow: 2px 2px 10px 1px ${({ theme }) => theme.colors.middleGray};
+  background-color: transparent;
+  width: max-content;
   padding: 10px;
-  background-color: ${({ theme }) => theme.colors.white};
   border-radius: 10px;
   grid-column: 1/3;
+`
 
-  & > button {
-    width: 100px;
-  }
+const CabinetButton = styled(Button)`
+  margin-right: 10px;
+  width: 100px;
+  box-shadow: 2px 2px 10px 1px ${({ theme }) => theme.colors.aqua};
 `
 
 export {
@@ -160,5 +171,6 @@ export {
   AvatarWrapper,
   ButtonWrapper,
   InfoWrapper,
-  ColorSpan
+  ColorSpan,
+  CabinetButton
 }

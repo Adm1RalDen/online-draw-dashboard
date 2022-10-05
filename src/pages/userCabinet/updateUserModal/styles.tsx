@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 
+import { Button } from 'components/button'
 import { Input as DefaultInput } from 'components/input'
 
 const Wrapper = styled.div`
@@ -58,4 +59,18 @@ const RadioButtonsWrapper = styled.div`
   }
 `
 
-export { UserForm, ButtonWrapper, RadioButtonsWrapper, AvatarWrapper, InputWrapper, Input, Wrapper }
+const UpdateProfileButton = styled(Button)`
+  border: none;
+  margin-right: 5px;
+`
+
+export {
+  UserForm,
+  ButtonWrapper,
+  RadioButtonsWrapper,
+  AvatarWrapper,
+  InputWrapper,
+  Input,
+  Wrapper,
+  UpdateProfileButton
+}

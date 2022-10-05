@@ -8,10 +8,6 @@ const AuthButton = styled(Button)`
   width: 100%;
   margin-top: 10px;
 
-  &:not([disabled]) {
-    background-color: ${({ theme }) => theme.colors.blue};
-  }
-
   &:disabled {
     background-color: transparent;
   }

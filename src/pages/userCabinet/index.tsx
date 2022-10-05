@@ -7,7 +7,6 @@ import { setImageUrl } from 'utils/setImageUrl'
 import { setLargeFirstLetter } from 'utils/setLargeFirstLetter'
 import { toLocaleDateString } from 'utils/toLocaleDateString'
 
-import { Button } from 'components/button'
 import { Container } from 'components/container'
 import { HtmlText } from 'components/htmlText'
 import { Loader } from 'components/loaders/loader'
@@ -17,6 +16,7 @@ import {
   AvatarWrapper,
   Biography,
   ButtonWrapper,
+  CabinetButton,
   ColorSpan,
   ImagesWrapper,
   InfoWrapper,
@@ -98,8 +98,8 @@ export const UserCabinet = () => {
             </UserInfoWrapper>
 
             <ButtonWrapper>
-              <Button onClick={handleEdit}>Edit</Button>
-              <Button onClick={handleNavigate}>Back</Button>
+              <CabinetButton onClick={handleEdit}>Edit</CabinetButton>
+              <CabinetButton onClick={handleNavigate}>Back</CabinetButton>
             </ButtonWrapper>
           </Wrapper>
         )}
