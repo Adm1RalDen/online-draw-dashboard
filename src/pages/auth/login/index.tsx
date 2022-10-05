@@ -1,8 +1,10 @@
 import { useFormik } from 'formik'
 import { useState } from 'react'
+import { toast } from 'react-toastify'
 import { useAppDispatch, useAppSelector } from 'store'
 import { userInfoSelector } from 'store/selectors/user.selector'
-import { User2FAData as User2FADataType, UserLoginFormData } from 'types'
+import { UserLoginThunk } from 'store/thunks/user/authorization.thunk'
+import { RefreshResponse, User2FAData as User2FADataType, UserLoginFormData } from 'types'
 import { Portal } from 'utils/portal'
 
 import { User2FAComponent } from 'components/2FA'
@@ -13,10 +15,14 @@ import { AuthButton, Title } from '../styles'
 import { AuthorizationFileds, initialValues, onSubmit, validationSchema } from './const'
 
 export const LoginComponent = () => {
-  const [user2FAData, setUser2FAData] = useState<User2FADataType | null>(null)
-  const handleCloseModal = () => setUser2FAData(null)
-  const { isLoading } = useAppSelector(userInfoSelector)
   const dispatch = useAppDispatch()
+  const { isLoading } = useAppSelector(userInfoSelector)
+  const [user2FAData, setUser2FAData] = useState<User2FADataType | null>(null)
+
+  const handleCloseModal = () => setUser2FAData(null)
+  const onSuccessCallback = (data: RefreshResponse) => dispatch(UserLoginThunk(data))
+  const onErrorCallback = (err: string) => toast.error(err)
+
   const formik = useFormik({
     initialValues,
     validationSchema,
@@ -58,7 +64,13 @@ export const LoginComponent = () => {
       </div>
       {user2FAData && (
         <Portal>
-          <User2FAComponent user2FAData={user2FAData} handleCloseModal={handleCloseModal} />
+          <User2FAComponent
+            qrcode={user2FAData.qrcode}
+            userId={user2FAData.userId}
+            handleCloseModal={handleCloseModal}
+            onSuccessCallback={onSuccessCallback}
+            onErrorCallback={onErrorCallback}
+          />
         </Portal>
       )}
     </>

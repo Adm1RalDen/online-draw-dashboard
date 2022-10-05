@@ -1,4 +1,5 @@
 import { WsContext } from 'context/ws.context'
+import { TwoFactorpage } from 'pages/2FaPage'
 import { ActivationPage } from 'pages/activatePage'
 import { AuthPage } from 'pages/auth/index'
 import { PrivateRoom } from 'pages/confirmAccessPage'
@@ -34,6 +35,7 @@ const setRoutes = (isAuth: boolean) =>
         { path: '/cabinet', element: <UserCabinet /> },
         { path: '/server-error', element: <ServerErrorPage /> },
         { path: '/authorization', element: <Navigate to='/' /> },
+        { path: '/auth/google/twoFactor', element: <Navigate to='/' /> },
         { path: '*', element: <NotFoundPage /> }
       ]
     : [
@@ -42,6 +44,7 @@ const setRoutes = (isAuth: boolean) =>
         { path: '/activate/:link', element: <ActivationPage /> },
         { path: '/auth/google/success', element: <SuccessGoogleAuth /> },
         { path: '/auth/google/failure', element: <FailedGoogleAuthPage /> },
+        { path: '/auth/google/twoFactor', element: <TwoFactorpage /> },
         { path: '*', element: <Navigate to='/authorization' /> }
       ]
 

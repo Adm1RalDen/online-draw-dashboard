@@ -1,15 +1,13 @@
 import { verify2faApi } from 'api/user/verify2FA'
 import { AxiosError } from 'axios'
-import { toast } from 'react-toastify'
-import { AppDispatch } from 'store'
 
-/* eslint-disabled-next-line */
-import { UserLoginThunk } from 'store/thunks/user/authorization.thunk'
+import { FunctionWithParams, RefreshResponse } from './../../types'
 
 type Params = {
   userId: string
   code: string
-  dispatch: AppDispatch
+  setIsSuccess: React.Dispatch<React.SetStateAction<boolean>>
+  onSuccessCallback: FunctionWithParams<RefreshResponse>
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
   setError: React.Dispatch<React.SetStateAction<string>>
   setAttempCount: React.Dispatch<React.SetStateAction<number>>
@@ -17,29 +15,27 @@ type Params = {
 
 export const handleSend2FA = async ({
   code,
-  dispatch,
+  userId,
+  onSuccessCallback,
   setError,
   setIsLoading,
-  userId,
-  setAttempCount
+  setAttempCount,
+  setIsSuccess
 }: Params) => {
   try {
     setIsLoading(true)
     const res = await verify2faApi({ code, userId })
-    toast.success('Authorization is success')
-    dispatch(UserLoginThunk(res.data))
+    setIsSuccess(true)
+    setTimeout(() => {
+      onSuccessCallback(res.data)
+    }, 2000)
   } catch (e) {
     if (e instanceof AxiosError) {
       setError(e.response?.data.message || 'Occured error')
     } else {
       setError('Occured error')
     }
-    setAttempCount((prev) => {
-      if (prev === 1) {
-        toast.error('Authorization is failure')
-      }
-      return --prev
-    })
+    setAttempCount((prev) => --prev)
   }
   setIsLoading(false)
 }

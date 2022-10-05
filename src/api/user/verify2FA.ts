@@ -1,5 +1,6 @@
 import { API } from 'api/const'
 import axios from 'axios'
-import { VerifyRequestData } from 'types'
+import { RefreshResponse, VerifyRequestData } from 'types'
 
-export const verify2faApi = (data: VerifyRequestData) => axios.post(`${API}/user/verify`, data)
+export const verify2faApi = (data: VerifyRequestData) =>
+  axios.post<RefreshResponse>(`${API}/user/verify`, data)

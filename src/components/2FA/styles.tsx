@@ -1,11 +1,13 @@
 import styled from 'styled-components'
 
 import { Button } from 'components/button'
+import { ButtonImage } from 'components/button-image'
 import { Input } from 'components/input'
 
 const User2FAComponentBlock = styled.div`
   width: 400px;
   background-color: ${({ theme }) => theme.colors.white};
+  position: relative;
   border-radius: 5px;
   padding: 15px;
 
@@ -49,11 +51,37 @@ const User2FAErrorSpan = styled.p`
   color: ${({ theme }) => theme.colors.red};
   font-size: 16px;
 `
+const User2FASuccessSpan = styled(User2FAErrorSpan)`
+  color: ${({ theme }) => theme.colors.green};
+`
+const User2FACloseModalButton = styled(ButtonImage)`
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 35px;
+  height: 35px;
+  background-color: transparent;
+  transition-duration: 0.1s;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.black};
+    & > svg {
+      fill: ${({ theme }) => theme.colors.white};
+    }
+  }
+  & > svg {
+    fill: ${({ theme }) => theme.colors.black};
+    width: 25px;
+    height: 25px;
+  }
+`
 export {
   User2FAComponentBlock,
   QrCodeWrapper,
   User2FAInput,
   User2FAButton,
   User2FAWrapper,
-  User2FAErrorSpan
+  User2FAErrorSpan,
+  User2FASuccessSpan,
+  User2FACloseModalButton
 }
