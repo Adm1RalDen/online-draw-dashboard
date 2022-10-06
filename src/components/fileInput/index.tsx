@@ -1,5 +1,6 @@
 import { ChangeEvent, FC, useRef, useState } from 'react'
 import { FunctionWithParams } from 'types'
+import { countBytes } from 'utils/countBytes'
 
 import {
   CloseDiv,
@@ -11,18 +12,24 @@ import {
   Wrapper
 } from './styles'
 
-type FileInputProps = {
-  name: string
-  onChange: FunctionWithParams<ChangeEvent<HTMLInputElement> | null>
-}
+type FileInputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> &
+  Required<{
+    name: string
+    onChange: FunctionWithParams<ChangeEvent<HTMLInputElement> | null>
+  }>
 
-export const FileInput: FC<FileInputProps> = ({ onChange, name }) => {
+export const FileInput: FC<FileInputProps> = ({ onChange, ...others }) => {
   const inputRef = useRef<HTMLInputElement>(null)
   const [file, setFile] = useState<File | null>(null)
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setFile(e.target.files ? e.target.files[0] : null)
-    onChange(e)
+    if (e.target.files && e.target.files[0].size > countBytes(2, 'MB')) {
+      alert('File is too big')
+      e.preventDefault()
+    } else {
+      setFile(e.target.files ? e.target.files[0] : null)
+      onChange(e)
+    }
   }
   const handleClose = () => {
     setFile(null)
@@ -43,7 +50,7 @@ export const FileInput: FC<FileInputProps> = ({ onChange, name }) => {
           </SpanWrapper>
         )}
       </Wrapper>
-      <FileInputStyled name={name} type='file' ref={inputRef} onChange={handleChange} />
+      <FileInputStyled {...others} type='file' ref={inputRef} onChange={handleChange} />
     </ContentWrapper>
   )
 }
