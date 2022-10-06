@@ -1,5 +1,6 @@
 import { FC, useState } from 'react'
 import Avatar from 'react-avatar-edit'
+import { toast } from 'react-toastify'
 import { countBytes } from 'utils/countBytes'
 import { EncodeBase64 } from 'utils/encodeBase64'
 
@@ -25,7 +26,7 @@ export const ImageCrop: FC<ImageCropProps> = ({
   const onBeforeFileLoad = (elem: React.ChangeEvent<HTMLInputElement>) => {
     if (elem.target.files) {
       if (elem.target.files[0].size > countBytes(2, 'MB')) {
-        alert('File is too big!')
+        toast.error('File is too big (should been less then 2Mb)')
         elem.target.value = ''
       }
     }

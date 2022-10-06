@@ -1,4 +1,5 @@
 import { ChangeEvent, FC, useRef, useState } from 'react'
+import { toast } from 'react-toastify'
 import { FunctionWithParams } from 'types'
 import { countBytes } from 'utils/countBytes'
 
@@ -23,12 +24,15 @@ export const FileInput: FC<FileInputProps> = ({ onChange, ...others }) => {
   const [file, setFile] = useState<File | null>(null)
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0].size > countBytes(2, 'MB')) {
-      alert('File is too big')
-      e.preventDefault()
-    } else {
-      setFile(e.target.files ? e.target.files[0] : null)
-      onChange(e)
+    if (e.target.files) {
+      if (e.target.files[0].size > countBytes(2, 'MB')) {
+        e.target.value = ''
+        toast.error('File is too big (should been less then 2Mb)')
+        setFile(null)
+      } else {
+        setFile(e.target.files[0])
+        onChange(e)
+      }
     }
   }
   const handleClose = () => {
