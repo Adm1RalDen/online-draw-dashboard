@@ -56,6 +56,7 @@ export const UpdateUserModal: FC<UpdateUserModalTypes> = ({ userData, handleEdit
     if (e === null) {
       setBackgroundFon(userData.backgroundFon)
     }
+
     e?.target?.files && setBackgroundFon(e.target.files[0])
   }
 
@@ -69,7 +70,10 @@ export const UpdateUserModal: FC<UpdateUserModalTypes> = ({ userData, handleEdit
       biography
     }
 
-    const keys = Object.keys(chengedData) as (keyof Omit<AuthorizedUser, 'role' | 'email'>)[]
+    const keys = Object.keys(chengedData) as (keyof Omit<
+      AuthorizedUser,
+      'role' | 'email' | 'qrcode'
+    >)[]
     const filteredKeys = keys.filter((key) => {
       return chengedData[key] !== userData[key]
     })
@@ -90,7 +94,7 @@ export const UpdateUserModal: FC<UpdateUserModalTypes> = ({ userData, handleEdit
         }
       }
 
-      filteredKeys.forEach((key: keyof Omit<AuthorizedUser, 'role' | 'email'>) => {
+      filteredKeys.forEach((key: keyof Omit<AuthorizedUser, 'role' | 'email' | 'qrcode'>) => {
         if (key !== 'avatar' && key !== 'originalAvatar') {
           formData.append(key, key === 'isUse2FA' ? String(chengedData[key]) : chengedData[key])
         }

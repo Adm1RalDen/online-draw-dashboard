@@ -55,5 +55,6 @@ export const Router = () => {
   if (isAuth) {
     return <WsContext.Provider value={{ socket }}>{routes}</WsContext.Provider>
   }
+
   return routes
 }

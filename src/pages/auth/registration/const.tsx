@@ -1,8 +1,7 @@
-import { AppDispatch } from 'store'
-import { userRegistrationThunk } from 'store/thunks/user/authorization.thunk'
 import { UserRegistrationData } from 'types'
-import { cryptoSha256 } from 'utils/cryptoPassord'
 import * as yup from 'yup'
+
+export const RegistrationFileds = ['name', 'email', 'password']
 
 export const validationSchema = yup.object().shape({
   name: yup.string().min(2, 'min 2 symbols').required('Required'),
@@ -14,22 +13,4 @@ export const initialValues: UserRegistrationData = {
   name: '',
   email: '',
   password: ''
-}
-
-export const RegistrationFileds = ['name', 'email', 'password']
-
-export const SetTypesFields = (name: string) => {
-  switch (name) {
-    case 'email':
-      return 'email'
-    case 'password':
-      return 'password'
-    default:
-      return 'text'
-  }
-}
-
-export const onSubmit = async (data: UserRegistrationData, dispatch: AppDispatch) => {
-  const password = cryptoSha256(data.password)
-  await dispatch(userRegistrationThunk({ ...data, password }))
 }

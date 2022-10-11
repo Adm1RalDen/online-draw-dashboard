@@ -22,6 +22,7 @@ const User2FAWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 5px;
+
   & > div {
     height: 35px;
     flex-basis: 25%;
@@ -33,6 +34,7 @@ const User2FAInput = styled(Input)`
     -webkit-appearance: none;
     margin: 0;
   }
+
   height: 35px;
   border-radius: 5px;
   flex-grow: 1;
@@ -74,6 +76,7 @@ const User2FACloseModalButton = styled(ButtonImage)`
       fill: ${({ theme }) => theme.colors.white};
     }
   }
+
   & > svg {
     fill: ${({ theme }) => theme.colors.black};
     width: 25px;

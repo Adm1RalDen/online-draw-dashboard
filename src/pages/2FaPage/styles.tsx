@@ -11,6 +11,7 @@ const TwoFactorPageSection = styled.section`
     color: ${({ theme }) => theme.colors.white};
     margin: 5px 0px;
   }
+
   & a {
     font-size: 20px;
     font-weight: 400;

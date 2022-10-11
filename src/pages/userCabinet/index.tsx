@@ -31,10 +31,10 @@ export const UserCabinet = () => {
   const { data, isLoading } = useAppSelector(userInfoSelector)
   const [editMode, setEditMode] = useState(false)
   const navigate = useNavigate()
+
   const handleEdit = () => setEditMode((prev) => !prev)
-  const handleNavigate = () => {
-    navigate(HOME_URL)
-  }
+  const handleNavigate = () => navigate(HOME_URL)
+
   const backgroundFonSrc = `${data.backgroundFon}?id=${Math.floor(Math.random() * 1000)}`
   const avatarSrc = `${data.avatar}?id=${Math.floor(Math.random() * 1000)}`
 

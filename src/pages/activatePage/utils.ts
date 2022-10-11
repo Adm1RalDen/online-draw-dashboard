@@ -8,6 +8,7 @@ import { ActivationAccountProps } from './types'
 
 export const activationAccount = async (data: ActivationAccountProps) => {
   const { link, setIsLoading, setError } = data
+
   try {
     await activationAccountApi(link)
     toast.success(ACTIVATION_PAGE_SUCCESS_MESSAGE, { autoClose: 3000 })
