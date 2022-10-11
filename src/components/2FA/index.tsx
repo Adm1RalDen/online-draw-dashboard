@@ -1,13 +1,12 @@
 import { XMarkIcon } from '@heroicons/react/24/solid'
-import { verify2faApi } from 'api/user/verify2FA'
-import { AxiosError } from 'axios'
 import { FC, useEffect, useState } from 'react'
 import { Heading2 } from 'styles/typography/styles'
-import { FunctionWithParams, RefreshResponse } from 'types'
+import { FunctionWithParams, SuccessAuthResponse } from 'types'
 import { noopFunction } from 'utils/noop'
 
 import { LittleLoader } from 'components/loaders/littleLoader'
 
+import { useConfirmUser2FAMutation } from './api'
 import { AUTH_FAILURE_MESSAGE, AUTH_SYMBOLS_ARRAY, BACKSPACE_CODE, ENTER_CODE } from './const'
 import {
   QrCodeWrapper,
@@ -24,7 +23,7 @@ type Props = {
   qrcode: string
   userId: string
   handleCloseModal: VoidFunction
-  onSuccessCallback: FunctionWithParams<RefreshResponse>
+  onSuccessCallback: FunctionWithParams<SuccessAuthResponse>
   onErrorCallback?: FunctionWithParams<string>
 }
 
@@ -35,11 +34,9 @@ export const User2FAComponent: FC<Props> = ({
   handleCloseModal,
   onErrorCallback = noopFunction
 }) => {
-  const [isLoading, setIsLoading] = useState(false)
   const [attemptCount, setAttempCount] = useState(3)
   const [code, setCode] = useState('')
-  const [error, setError] = useState('')
-  const [isSuccess, setIsSuccess] = useState(false)
+  const [submit2faData, { isLoading, isError, isSuccess, data }] = useConfirmUser2FAMutation()
 
   useEffect(() => {
     if (attemptCount <= 0) {
@@ -48,24 +45,29 @@ export const User2FAComponent: FC<Props> = ({
     }
   }, [attemptCount, onErrorCallback, handleCloseModal])
 
-  const handleSend = async () => {
-    try {
-      setIsLoading(true)
-      const res = await verify2faApi({ code, userId })
-      setIsSuccess(true)
-      setTimeout(() => {
-        onSuccessCallback(res.data)
-      }, 2000)
-    } catch (e) {
-      if (e instanceof AxiosError) {
-        setError(e.response?.data.message || 'Occured error')
-      } else {
-        setError('Occured error')
-      }
+  useEffect(() => {
+    if (isError) {
       setAttempCount((prev) => --prev)
     }
-    setIsLoading(false)
-  }
+  }, [isError])
+
+  useEffect(() => {
+    let timerId: NodeJS.Timeout
+
+    if (isSuccess) {
+      timerId = setTimeout(() => {
+        onSuccessCallback(data as SuccessAuthResponse)
+      }, 2000)
+    }
+
+    return () => {
+      if (timerId) {
+        clearTimeout(timerId)
+      }
+    }
+  }, [isSuccess, onSuccessCallback, data])
+
+  const handleSubmit = async () => submit2faData({ code, userId })
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (code.length < 6) {
@@ -78,12 +80,14 @@ export const User2FAComponent: FC<Props> = ({
       if (AUTH_SYMBOLS_ARRAY.includes(e.key)) {
         e.preventDefault()
       }
+
       if (code.length === 6 && e.code === BACKSPACE_CODE) {
         setCode((prev) => prev.slice(0, 5))
         e.preventDefault()
       }
+
       if (e.code === ENTER_CODE && code.length === 6) {
-        handleSend()
+        handleSubmit()
       }
     }
   }
@@ -100,13 +104,13 @@ export const User2FAComponent: FC<Props> = ({
           onChange={handleChange}
           onKeyDown={handleKeyDown}
           value={code}
-          autoFocus={true}
+          autoFocus
         />
         <div>
           {isLoading ? (
             <LittleLoader />
           ) : (
-            <User2FAButton onClick={handleSend} disabled={code.length < 6 || isSuccess}>
+            <User2FAButton onClick={handleSubmit} disabled={code.length < 6 || isSuccess}>
               Send
             </User2FAButton>
           )}
@@ -116,9 +120,11 @@ export const User2FAComponent: FC<Props> = ({
       {isSuccess ? (
         <User2FASuccessSpan>Success</User2FASuccessSpan>
       ) : (
-        <User2FAErrorSpan>{error && `${error} you have ${attemptCount} attempts`}</User2FAErrorSpan>
+        <User2FAErrorSpan>
+          {isError && `Invalid code you have ${attemptCount} attempts`}
+        </User2FAErrorSpan>
       )}
-      <User2FACloseModalButton onClick={handleCloseModal}>
+      <User2FACloseModalButton onClick={handleCloseModal} disabled={isLoading || isSuccess}>
         <XMarkIcon />
       </User2FACloseModalButton>
     </User2FAComponentBlock>

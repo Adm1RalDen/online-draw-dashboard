@@ -1,20 +1,21 @@
 import { ActionReducerMapBuilder, PayloadAction } from '@reduxjs/toolkit'
-import { UserLoginThunk } from 'store/thunks/user/authorization.thunk'
+import { saveUserDataThunk } from 'store/thunks/user/authorization.thunk'
 import { UserReducerInitialTypes } from 'store/types/user.types'
 import { AuthorizedUser } from 'types'
 
-type LoginPayload = {
+type UserPayload = {
   token: string
   profile: AuthorizedUser
 }
 
-export const userLoginBuilder = (builder: ActionReducerMapBuilder<UserReducerInitialTypes>) => {
-  builder.addCase(UserLoginThunk.pending, (state) => {
+export const saveUserDataBuilder = (builder: ActionReducerMapBuilder<UserReducerInitialTypes>) => {
+  builder.addCase(saveUserDataThunk.pending, (state) => {
     state.isLoading = true
   })
+
   builder.addCase(
-    UserLoginThunk.fulfilled,
-    (state, { payload: { token, profile } }: PayloadAction<LoginPayload>) => {
+    saveUserDataThunk.fulfilled,
+    (state, { payload: { token, profile } }: PayloadAction<UserPayload>) => {
       state.token = token
       state.data = { ...profile }
       state.error = undefined
@@ -22,7 +23,8 @@ export const userLoginBuilder = (builder: ActionReducerMapBuilder<UserReducerIni
       state.isAuth = true
     }
   )
-  builder.addCase(UserLoginThunk.rejected, (state, { payload }) => {
+
+  builder.addCase(saveUserDataThunk.rejected, (state, { payload }) => {
     state.isLoading = false
     state.isAuth = false
     state.error = payload as string

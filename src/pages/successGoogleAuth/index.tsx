@@ -4,8 +4,10 @@ import { saveUserInStorage } from 'services/token.service'
 
 export const SuccessGoogleAuth = () => {
   const [searchParams] = useSearchParams()
+
   useEffect(() => {
     const user = searchParams.get('user')
+
     if (user) {
       try {
         const userObject = JSON.parse(user)
@@ -14,6 +16,7 @@ export const SuccessGoogleAuth = () => {
         console.error('Parse Error')
       }
     }
+
     window.location.replace('/')
   }, [searchParams])
 

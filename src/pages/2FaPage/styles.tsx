@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const TwoFactorpageSection = styled.section`
+const TwoFactorPageSection = styled.section`
   background-color: ${({ theme }) => theme.colors.greenBackground};
   min-height: 100vh;
   display: flex;
@@ -16,4 +16,4 @@ const TwoFactorpageSection = styled.section`
     font-weight: 400;
   }
 `
-export { TwoFactorpageSection }
+export { TwoFactorPageSection }

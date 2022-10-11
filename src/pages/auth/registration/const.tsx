@@ -1,5 +1,5 @@
 import { AppDispatch } from 'store'
-import { UserRegistrationThunk } from 'store/thunks/user/authorization.thunk'
+import { userRegistrationThunk } from 'store/thunks/user/authorization.thunk'
 import { UserRegistrationData } from 'types'
 import { cryptoSha256 } from 'utils/cryptoPassord'
 import * as yup from 'yup'
@@ -31,5 +31,5 @@ export const SetTypesFields = (name: string) => {
 
 export const onSubmit = async (data: UserRegistrationData, dispatch: AppDispatch) => {
   const password = cryptoSha256(data.password)
-  await dispatch(UserRegistrationThunk({ ...data, password }))
+  await dispatch(userRegistrationThunk({ ...data, password }))
 }

@@ -1,15 +1,18 @@
 import { ActionReducerMapBuilder, PayloadAction } from '@reduxjs/toolkit'
 import { getSavedUser } from 'services/token.service'
-import { AuthorizedThunk } from 'store/thunks/user/authorization.thunk'
+import { updateAuthStatusThunk } from 'store/thunks/user/authorization.thunk'
 import { UserReducerInitialTypes } from 'store/types/user.types'
 import { AuthorizedUser, SavedUserObject } from 'types'
 
-export const authorizedBuilder = (builder: ActionReducerMapBuilder<UserReducerInitialTypes>) => {
-  builder.addCase(AuthorizedThunk.pending, (state) => {
+export const updateAuthStatusBuilder = (
+  builder: ActionReducerMapBuilder<UserReducerInitialTypes>
+) => {
+  builder.addCase(updateAuthStatusThunk.pending, (state) => {
     state.isLoading = true
   })
+
   builder.addCase(
-    AuthorizedThunk.fulfilled,
+    updateAuthStatusThunk.fulfilled,
     (state, { payload }: PayloadAction<AuthorizedUser>) => {
       const user = getSavedUser() as SavedUserObject
       state.token = user.token
@@ -20,7 +23,8 @@ export const authorizedBuilder = (builder: ActionReducerMapBuilder<UserReducerIn
       state.hasUserStateLoaded = true
     }
   )
-  builder.addCase(AuthorizedThunk.rejected, (state, { payload }) => {
+
+  builder.addCase(updateAuthStatusThunk.rejected, (state, { payload }) => {
     state.isLoading = false
     state.hasUserStateLoaded = true
     state.isAuth = false

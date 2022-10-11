@@ -2,7 +2,7 @@ import { API, SetHeaders, setRefreshToken } from 'api/const'
 import { Instance } from 'api/instance'
 import axios, { AxiosError } from 'axios'
 import { getToken, saveUserInStorage } from 'services/token.service'
-import { RefreshResponse } from 'types'
+import { SuccessAuthResponse } from 'types'
 
 export const responseInterceptor = async (error: AxiosError) => {
   if (error.code === 'ERR_NETWORK' || error.response?.status === 500) {
@@ -13,7 +13,7 @@ export const responseInterceptor = async (error: AxiosError) => {
     try {
       const token = getToken()
       if (token) {
-        const refresh = await axios.post<RefreshResponse>(
+        const refresh = await axios.post<SuccessAuthResponse>(
           `${API}/user/refresh`,
           setRefreshToken(),
           SetHeaders()

@@ -10,6 +10,7 @@ export const getUserProfileBuilder = (
     state.isLoading = true
     state.error = ''
   })
+
   builder.addCase(
     getUserProfileThunk.fulfilled,
     (state, { payload }: PayloadAction<AuthorizedUser>) => {
@@ -18,6 +19,7 @@ export const getUserProfileBuilder = (
       state.error = undefined
     }
   )
+
   builder.addCase(getUserProfileThunk.rejected, (state, { payload }) => {
     state.isLoading = false
     state.error = payload as string

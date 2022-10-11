@@ -22,6 +22,7 @@ export interface AuthorizedUser {
   date: string
   biography: string
   isUse2FA: boolean
+  qrcode: string
 }
 
 export interface AuthorizedUserObject {
@@ -57,7 +58,7 @@ export interface UserInRoom {
   userId: string
 }
 
-export interface RefreshResponse {
+export interface SuccessAuthResponse {
   token: string
   refreshToken: string
   user: Pick<AuthorizedUser, 'name' | 'role' | 'id'>

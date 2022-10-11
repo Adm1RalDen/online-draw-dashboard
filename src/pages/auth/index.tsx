@@ -10,6 +10,7 @@ import { AuthSection, Container, Logo, Wrapper } from './styles'
 
 export const AuthPage = () => {
   const { isLoading } = useAppSelector(userInfoSelector)
+
   return (
     <AuthSection>
       <Container>

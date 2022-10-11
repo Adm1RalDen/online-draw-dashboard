@@ -1,10 +1,10 @@
 import { useFormik } from 'formik'
-import { useState } from 'react'
 import { toast } from 'react-toastify'
 import { useAppDispatch, useAppSelector } from 'store'
-import { userInfoSelector } from 'store/selectors/user.selector'
-import { UserLoginThunk } from 'store/thunks/user/authorization.thunk'
-import { RefreshResponse, User2FAData as User2FADataType, UserLoginFormData } from 'types'
+import { userDataSelector, userInfoSelector } from 'store/selectors/user.selector'
+import { cancelUser2faAction, logoutAction } from 'store/slices/user.slice'
+import { loginThunk, saveUserDataThunk } from 'store/thunks/user/authorization.thunk'
+import { SuccessAuthResponse, UserLoginFormData } from 'types'
 import { Portal } from 'utils/portal'
 
 import { User2FAComponent } from 'components/2FA'
@@ -12,26 +12,22 @@ import { InputAnimation } from 'components/input-animation'
 
 import { GoogleLoginComponent } from '../googleLogin'
 import { AuthButton, Title } from '../styles'
-import { AuthorizationFileds, initialValues, onSubmit, validationSchema } from './const'
+import { AuthorizationFileds, initialValues, validationSchema } from './const'
 
 export const LoginComponent = () => {
   const dispatch = useAppDispatch()
   const { isLoading } = useAppSelector(userInfoSelector)
-  const [user2FAData, setUser2FAData] = useState<User2FADataType | null>(null)
+  const { id, qrcode, isUse2FA } = useAppSelector(userDataSelector)
 
-  const handleCloseModal = () => setUser2FAData(null)
-  const onSuccessCallback = (data: RefreshResponse) => dispatch(UserLoginThunk(data))
+  const onSuccessCallback = (data: SuccessAuthResponse) => dispatch(saveUserDataThunk(data))
+  const handleSubmit = (data: UserLoginFormData) => dispatch(loginThunk(data))
   const onErrorCallback = (err: string) => toast.error(err)
+  const handleCloseModal = () => dispatch(cancelUser2faAction())
 
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: (data: UserLoginFormData) =>
-      onSubmit({
-        data,
-        dispatch,
-        setUser2FAData
-      })
+    onSubmit: handleSubmit
   })
 
   return (
@@ -62,11 +58,11 @@ export const LoginComponent = () => {
           <AuthButton disabled={!formik.isValid || isLoading}>Send</AuthButton>
         </form>
       </div>
-      {user2FAData && (
+      {isUse2FA && (
         <Portal>
           <User2FAComponent
-            qrcode={user2FAData.qrcode}
-            userId={user2FAData.userId}
+            qrcode={qrcode}
+            userId={id}
             handleCloseModal={handleCloseModal}
             onSuccessCallback={onSuccessCallback}
             onErrorCallback={onErrorCallback}

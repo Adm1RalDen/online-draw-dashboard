@@ -8,9 +8,11 @@ export const updateUserProfileBuilder = (
   builder.addCase(updateUserProfileThunk.pending, (state) => {
     state.isLoading = true
   })
+
   builder.addCase(updateUserProfileThunk.fulfilled, (state) => {
     state.isLoading = false
   })
+
   builder.addCase(updateUserProfileThunk.rejected, (state) => {
     state.isLoading = false
     state.error = 'Error'
