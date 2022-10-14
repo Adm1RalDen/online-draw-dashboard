@@ -28,7 +28,7 @@ export const ActivationPage = () => {
             <div>
               <Heading1>{error}</Heading1>
               <div>
-                <Link to={HOME_URL} replace={true}>
+                <Link to={HOME_URL} replace>
                   {ACTIVATION_PAGE_HOME_BUTTON_TEXT}
                 </Link>
               </div>

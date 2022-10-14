@@ -1,6 +1,6 @@
 import { HOME_URL } from 'const/urls'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAppSelector } from 'store'
 import { userInfoSelector } from 'store/selectors/user.selector'
 import { setImageUrl } from 'utils/setImageUrl'
@@ -98,7 +98,9 @@ export const UserCabinet = () => {
             </UserInfoWrapper>
 
             <ButtonWrapper>
-              <CabinetButton onClick={handleEdit}>Edit</CabinetButton>
+              <CabinetButton onClick={handleEdit}>
+                <Link to='/settings'>Edit</Link>
+              </CabinetButton>
               <CabinetButton onClick={handleNavigate}>Back</CabinetButton>
             </ButtonWrapper>
           </Wrapper>

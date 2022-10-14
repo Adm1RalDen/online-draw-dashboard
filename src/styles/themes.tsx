@@ -14,7 +14,7 @@ export const themes = {
     darkGreen: '#006900',
     light_gray: '#d6d6d6',
     blue: '#0a87e1',
-    gray: '#64646445',
+    gray: '#e1e1e1',
     middleGray: '#888',
     darkBlue: '#1176e2',
     middleBlue: '#0c94f6',

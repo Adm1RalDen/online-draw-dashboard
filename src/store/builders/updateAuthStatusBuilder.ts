@@ -1,4 +1,5 @@
 import { ActionReducerMapBuilder, PayloadAction } from '@reduxjs/toolkit'
+import { ErrorMessages } from 'const/enums'
 import { getSavedUser } from 'services/token.service'
 import { updateAuthStatusThunk } from 'store/thunks/user/authorization.thunk'
 import { UserReducerInitialTypes } from 'store/types/user.types'
@@ -28,6 +29,6 @@ export const updateAuthStatusBuilder = (
     state.isLoading = false
     state.hasUserStateLoaded = true
     state.isAuth = false
-    state.error = payload as string
+    state.error = typeof payload === 'string' ? payload : ErrorMessages.OCCURED_ERROR
   })
 }

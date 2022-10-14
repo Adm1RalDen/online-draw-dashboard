@@ -1,10 +1,11 @@
+import { ErrorMessages } from 'const/enums'
 import { HOME_URL } from 'const/urls'
 import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { useAppDispatch } from 'store'
 import { saveUserDataThunk } from 'store/thunks/user/authorization.thunk'
 import { Heading1 } from 'styles/typography/styles'
-import { SuccessAuthResponse, User2FAData } from 'types'
+import { AuthResponse, User2FAData } from 'types'
 import { Portal } from 'utils/portal'
 
 import { User2FAComponent } from 'components/2FA'
@@ -19,8 +20,8 @@ export const TwoFactorPage = () => {
   const dispatch = useAppDispatch()
 
   const handleCloseModal = () => location.replace(HOME_URL)
-  const onErrorCallback = (err: string) => setError(err)
-  const onSuccessLogin = (data: SuccessAuthResponse) => dispatch(saveUserDataThunk(data))
+  const onErrorCallback = setError
+  const onSuccessLogin = (data: AuthResponse) => dispatch(saveUserDataThunk(data))
 
   useEffect(() => {
     const userId = searchParams.get('userId')
@@ -42,8 +43,8 @@ export const TwoFactorPage = () => {
     <TwoFactorPageSection>
       {error && (
         <div>
-          <Heading1>{error || 'Occured error'}</Heading1>
-          <Link to={HOME_URL} replace={true}>
+          <Heading1>{error || ErrorMessages.OCCURED_ERROR}</Heading1>
+          <Link to={HOME_URL} replace>
             Come back home
           </Link>
         </div>

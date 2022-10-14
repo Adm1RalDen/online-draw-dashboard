@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Span } from 'styles/typography/styles'
 
 import { Button } from 'components/button'
 import { ButtonImage } from 'components/button-image'
@@ -11,9 +12,7 @@ const User2FAComponentBlock = styled.div`
   border-radius: 5px;
   padding: 15px;
 
-  & > h2 {
-    font-weight: 300;
-    font-size: 19px;
+  & > p {
     text-align: center;
     margin-bottom: 10px;
   }
@@ -24,7 +23,6 @@ const User2FAWrapper = styled.div`
   gap: 5px;
 
   & > div {
-    height: 35px;
     flex-basis: 25%;
   }
 `
@@ -47,11 +45,9 @@ const User2FAButton = styled(Button)`
   height: 100%;
   border: none;
 `
-const User2FAErrorSpan = styled.p`
-  height: 24px;
-  padding: 3px 0px;
+const User2FAErrorSpan = styled(Span)`
+  display: inline-block;
   color: ${({ theme }) => theme.colors.red};
-  font-size: 16px;
 `
 const User2FASuccessSpan = styled(User2FAErrorSpan)`
   color: ${({ theme }) => theme.colors.green};

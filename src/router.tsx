@@ -10,6 +10,10 @@ import { NotFoundPage } from 'pages/notfoundPage'
 import { OnlineDrawPage } from 'pages/onlineDrawPage'
 import { OnlineCanvas } from 'pages/onlineDrawPage/canvas'
 import { ServerErrorPage } from 'pages/serverErrorPage'
+import { SettingsPage } from 'pages/settings'
+import { PrivacyAuthentificator } from 'pages/settings/components/privacyAuthentificator'
+import { PrivacyMain } from 'pages/settings/components/privacyMain'
+import { PrivacySettings } from 'pages/settings/kategories/privacy'
 import { SuccessGoogleAuth } from 'pages/successGoogleAuth'
 import { UserCabinet } from 'pages/userCabinet'
 import { Navigate, useRoutes } from 'react-router-dom'
@@ -36,6 +40,22 @@ const setRoutes = (isAuth: boolean) =>
         { path: '/server-error', element: <ServerErrorPage /> },
         { path: '/authorization', element: <Navigate to='/' /> },
         { path: '/auth/google/twoFactor', element: <Navigate to='/' /> },
+        {
+          path: '/settings',
+          element: <SettingsPage />,
+          children: [
+            { path: 'account', element: <div>account</div> },
+            {
+              path: 'privacy&security',
+              element: <PrivacySettings />,
+              children: [
+                { index: true, element: <PrivacyMain /> },
+                { path: 'enable-google-authentificator', element: <PrivacyAuthentificator /> }
+              ]
+            },
+            { path: '*', element: <Navigate to='/settings' /> }
+          ]
+        },
         { path: '*', element: <NotFoundPage /> }
       ]
     : [

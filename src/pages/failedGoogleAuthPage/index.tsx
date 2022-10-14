@@ -1,3 +1,4 @@
+import { ErrorMessages } from 'const/enums'
 import { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { Heading1 } from 'styles/typography/styles'
@@ -15,7 +16,7 @@ export const FailedGoogleAuthPage = () => {
 
   return (
     <FailedGoogleAuthPageSection>
-      <Heading1>{searchParams.get('error') || 'Auth is failed'}</Heading1>
+      <Heading1>{searchParams.get('error') || ErrorMessages.FAILURE_AUTH_ERROR}</Heading1>
     </FailedGoogleAuthPageSection>
   )
 }

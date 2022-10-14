@@ -1,4 +1,5 @@
 import { ActionReducerMapBuilder, PayloadAction } from '@reduxjs/toolkit'
+import { ErrorMessages } from 'const/enums'
 import { getUserProfileThunk } from 'store/thunks/user/user.thunk'
 import { UserReducerInitialTypes } from 'store/types/user.types'
 import { AuthorizedUser } from 'types'
@@ -20,8 +21,8 @@ export const getUserProfileBuilder = (
     }
   )
 
-  builder.addCase(getUserProfileThunk.rejected, (state, { payload }) => {
+  builder.addCase(getUserProfileThunk.rejected, (state) => {
     state.isLoading = false
-    state.error = payload as string
+    state.error = ErrorMessages.OCCURED_ERROR
   })
 }

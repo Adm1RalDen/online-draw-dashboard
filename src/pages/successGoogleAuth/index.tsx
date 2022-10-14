@@ -1,3 +1,5 @@
+import { ErrorMessages } from 'const/enums'
+import { HOME_URL } from 'const/urls'
 import { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { saveUserInStorage } from 'services/token.service'
@@ -13,11 +15,11 @@ export const SuccessGoogleAuth = () => {
         const userObject = JSON.parse(user)
         saveUserInStorage(userObject)
       } catch (e) {
-        console.error('Parse Error')
+        console.error(ErrorMessages.PARSING_ERROR)
       }
     }
 
-    window.location.replace('/')
+    window.location.replace(HOME_URL)
   }, [searchParams])
 
   return null

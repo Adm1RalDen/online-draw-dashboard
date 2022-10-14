@@ -1,5 +1,6 @@
 import { ChangeEvent, FC } from 'react'
 import { FunctionWithParams } from 'types'
+import { v4 as uuidv4 } from 'uuid'
 
 import { Input, InputWrapper, Label, Span, Wrapper } from './styles'
 
@@ -14,7 +15,7 @@ export const RadioButtons: FC<RadioButtonTypes> = ({ defaultValue, name, onChang
   return (
     <InputWrapper>
       {values.map((value) => (
-        <Wrapper key={`${value}_${Math.floor(Math.random() * 100)}`}>
+        <Wrapper key={uuidv4()}>
           <Label htmlFor={`${name}_${value}`}>
             {value}
             <Input

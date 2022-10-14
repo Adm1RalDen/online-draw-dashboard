@@ -167,7 +167,7 @@ export const UpdateUserModal: FC<UpdateUserModalTypes> = ({ userData, handleEdit
           <Checkbox
             title='For use you should install a google Authentificator (for scane qrcodes)'
             name='isUse2FA'
-            lableTitle='Use 2FA?'
+            labelTitle='Use 2FA?'
             checked={formik.values.isUse2FA}
             onChange={formik.handleChange}
           />

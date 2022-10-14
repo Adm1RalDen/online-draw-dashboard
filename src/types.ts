@@ -58,7 +58,7 @@ export interface UserInRoom {
   userId: string
 }
 
-export interface SuccessAuthResponse {
+export interface AuthResponse {
   token: string
   refreshToken: string
   user: Pick<AuthorizedUser, 'name' | 'role' | 'id'>

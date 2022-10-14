@@ -1,5 +1,6 @@
 import { activationAccountApi } from 'api/user/activate-account'
 import { AxiosError } from 'axios'
+import { ErrorMessages } from 'const/enums'
 import { toast } from 'react-toastify'
 import { redirectHome } from 'utils/redirectHome'
 
@@ -15,9 +16,9 @@ export const activationAccount = async (data: ActivationAccountProps) => {
     redirectHome()
   } catch (e) {
     if (e instanceof AxiosError) {
-      setError(e.response?.data?.message || 'Occured error')
+      setError(e.response?.data?.message || ErrorMessages.OCCURED_ERROR)
     } else {
-      setError('Occured error')
+      setError(ErrorMessages.OCCURED_ERROR)
     }
   }
   setIsLoading(false)

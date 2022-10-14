@@ -1,14 +1,13 @@
+import { API_URL } from 'api/const'
+
 /* eslint-disable-next-line */
 import GoogleIcon from 'public/assets/google-logo.svg'
 
-import { GOOGLE_LINK_HREF, GOOGLE_LINK_TEXT } from './const'
-import { GoogleLink, GoogleLoginWrapper } from './styles'
+import { GoogleLink } from './styles'
 
 export const GoogleLoginComponent = () => (
-  <GoogleLoginWrapper>
-    <GoogleLink href={GOOGLE_LINK_HREF}>
-      <GoogleIcon />
-      {GOOGLE_LINK_TEXT}
-    </GoogleLink>
-  </GoogleLoginWrapper>
+  <GoogleLink href={`${API_URL}/auth/google`}>
+    <GoogleIcon />
+    Sign in with Google
+  </GoogleLink>
 )

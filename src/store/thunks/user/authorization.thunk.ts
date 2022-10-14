@@ -3,7 +3,7 @@ import { authorizeUser } from 'api/user/authorize'
 import { getProfile } from 'api/user/getProfile'
 import { logout } from 'api/user/logout'
 import { registrationUser } from 'api/user/registration'
-import { AxiosError } from 'axios'
+import { ErrorMessages } from 'const/enums'
 import { toast } from 'react-toastify'
 import {
   deleteSavedToken,
@@ -17,7 +17,7 @@ import { cryptoSha256 } from 'utils/cryptoPassord'
 import { errorHandler } from 'utils/errorHandler'
 
 import {
-  SuccessAuthResponse,
+  AuthResponse,
   User2FALoginResponse,
   UserLoginFormData,
   UserRegistrationData
@@ -35,10 +35,10 @@ export const updateAuthStatusThunk = createAsyncThunk(
         return profile.data
       }
 
-      throw new Error('User is not authorized')
+      throw new Error(ErrorMessages.UNAUTHORITHED_ERROR)
     } catch (e) {
       await UserLogoutThunk(dispatch)
-      return rejectWithValue('User is not authorized')
+      return rejectWithValue(ErrorMessages.UNAUTHORITHED_ERROR)
     }
   }
 )
@@ -51,7 +51,7 @@ export const loginThunk = createAsyncThunk(
       const response = await authorizeUser({ ...data, password })
 
       if (!(response.data as User2FALoginResponse)?.isUse2FA) {
-        return dispatch(saveUserDataThunk({ ...(response.data as SuccessAuthResponse) }))
+        return dispatch(saveUserDataThunk({ ...(response.data as AuthResponse) }))
       }
 
       dispatch(setUser2faAction(response.data as User2FALoginResponse))
@@ -63,7 +63,7 @@ export const loginThunk = createAsyncThunk(
 
 export const saveUserDataThunk = createAsyncThunk(
   `${USER_REDUCER}/saveUserData-thunk`,
-  async (data: SuccessAuthResponse, { rejectWithValue }) => {
+  async (data: AuthResponse, { rejectWithValue }) => {
     try {
       saveUserInStorage({ token: data.token, user: data.user })
       saveRefreshToken(data.refreshToken)
@@ -72,7 +72,7 @@ export const saveUserDataThunk = createAsyncThunk(
       return { token: data.token, profile: profile.data }
     } catch (e) {
       errorHandler(e)
-      return rejectWithValue('Login error')
+      return rejectWithValue(ErrorMessages.OCCURED_ERROR)
     }
   }
 )
@@ -85,11 +85,7 @@ export const userRegistrationThunk = createAsyncThunk(
       toast.success(response.data.message)
       return response.data
     } catch (e) {
-      if (e instanceof AxiosError) {
-        toast.error(e.response?.data.message)
-        return rejectWithValue(e.response?.data.message || 'Registration error')
-      }
-      return rejectWithValue('Registration error')
+      return rejectWithValue(errorHandler(e, ErrorMessages.REGISTRATION_ERROR))
     }
   }
 )

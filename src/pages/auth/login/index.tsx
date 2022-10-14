@@ -2,9 +2,9 @@ import { useFormik } from 'formik'
 import { toast } from 'react-toastify'
 import { useAppDispatch, useAppSelector } from 'store'
 import { userDataSelector, userInfoSelector } from 'store/selectors/user.selector'
-import { cancelUser2faAction, logoutAction } from 'store/slices/user.slice'
+import { cancelUser2faAction } from 'store/slices/user.slice'
 import { loginThunk, saveUserDataThunk } from 'store/thunks/user/authorization.thunk'
-import { SuccessAuthResponse, UserLoginFormData } from 'types'
+import { AuthResponse, UserLoginFormData } from 'types'
 import { Portal } from 'utils/portal'
 
 import { User2FAComponent } from 'components/2FA'
@@ -19,7 +19,7 @@ export const LoginComponent = () => {
   const { isLoading } = useAppSelector(userInfoSelector)
   const { id, qrcode, isUse2FA } = useAppSelector(userDataSelector)
 
-  const onSuccessCallback = (data: SuccessAuthResponse) => dispatch(saveUserDataThunk(data))
+  const onSuccessCallback = (data: AuthResponse) => dispatch(saveUserDataThunk(data))
   const handleSubmit = (data: UserLoginFormData) => dispatch(loginThunk(data))
   const onErrorCallback = (err: string) => toast.error(err)
   const handleCloseModal = () => dispatch(cancelUser2faAction())

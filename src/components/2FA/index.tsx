@@ -1,13 +1,13 @@
 import { XMarkIcon } from '@heroicons/react/24/solid'
 import { FC, useEffect, useState } from 'react'
-import { Heading2 } from 'styles/typography/styles'
-import { FunctionWithParams, SuccessAuthResponse } from 'types'
+import { useConfirmUser2FAMutation } from 'store/rtk/api'
+import { Paragraph } from 'styles/typography/styles'
+import { AuthResponse, FunctionWithParams } from 'types'
 import { noopFunction } from 'utils/noop'
 
 import { LittleLoader } from 'components/loaders/littleLoader'
 
-import { useConfirmUser2FAMutation } from './api'
-import { AUTH_FAILURE_MESSAGE, AUTH_SYMBOLS_ARRAY, BACKSPACE_CODE, ENTER_CODE } from './const'
+import { AUTH_FAILURE_MESSAGE } from './const'
 import {
   QrCodeWrapper,
   User2FAButton,
@@ -23,7 +23,7 @@ type Props = {
   qrcode: string
   userId: string
   handleCloseModal: VoidFunction
-  onSuccessCallback: FunctionWithParams<SuccessAuthResponse>
+  onSuccessCallback: FunctionWithParams<AuthResponse>
   onErrorCallback?: FunctionWithParams<string>
 }
 
@@ -56,7 +56,7 @@ export const User2FAComponent: FC<Props> = ({
 
     if (isSuccess) {
       timerId = setTimeout(() => {
-        onSuccessCallback(data as SuccessAuthResponse)
+        onSuccessCallback(data as AuthResponse)
       }, 2000)
     }
 
@@ -67,29 +67,14 @@ export const User2FAComponent: FC<Props> = ({
     }
   }, [isSuccess, onSuccessCallback, data])
 
-  const handleSubmit = async () => submit2faData({ code, userId })
+  const handleSubmit = () => submit2faData({ code, userId })
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (code.length < 6) {
+    if (/^[0-9]{0,6}$/.test(e.target.value) || !e.target.value) {
       setCode(e.target.value)
     }
-  }
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e) {
-      if (AUTH_SYMBOLS_ARRAY.includes(e.key)) {
-        e.preventDefault()
-      }
-
-      if (code.length === 6 && e.code === BACKSPACE_CODE) {
-        setCode((prev) => prev.slice(0, 5))
-        e.preventDefault()
-      }
-
-      if (e.code === ENTER_CODE && code.length === 6) {
-        handleSubmit()
-      }
-    }
+    e.preventDefault()
   }
 
   return (
@@ -97,15 +82,9 @@ export const User2FAComponent: FC<Props> = ({
       <QrCodeWrapper>
         <img src={qrcode} />
       </QrCodeWrapper>
-      <Heading2>Please scan qrcode and enter your code</Heading2>
+      <Paragraph>Please scan qrcode and enter your code</Paragraph>
       <User2FAWrapper>
-        <User2FAInput
-          type='number'
-          onChange={handleChange}
-          onKeyDown={handleKeyDown}
-          value={code}
-          autoFocus
-        />
+        <User2FAInput type='text' onChange={handleChange} value={code} autoFocus />
         <div>
           {isLoading ? (
             <LittleLoader />

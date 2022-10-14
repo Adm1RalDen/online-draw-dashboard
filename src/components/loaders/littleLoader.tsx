@@ -18,7 +18,6 @@ const LoaderWrapper = styled.div<LoaderProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
 
   ${(p) =>
     p.position === 'fixed' &&
@@ -46,10 +45,10 @@ const LoaderWrapper = styled.div<LoaderProps>`
       position: absolute;
       width: inherit;
       height: inherit;
-      border: 3px solid ${({ theme }) => theme.colors.black};
+      border: 3px solid transparent;
       border-radius: 50%;
       animation: ${ldsRing} 1s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-      border-color: ${({ theme }) => theme.colors.black} transparent transparent transparent;
+      border-top-color: ${({ theme }) => theme.colors.black};
     }
     & > div:nth-child(1) {
       animation-delay: -0.25s;

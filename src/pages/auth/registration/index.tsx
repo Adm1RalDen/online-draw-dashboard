@@ -27,31 +27,29 @@ export const RegistrationComponent = () => {
   })
 
   return (
-    <>
-      <div>
-        <Title>Registration</Title>
-        <form onSubmit={formik.handleSubmit}>
-          {RegistrationFileds.map((field) => (
-            <InputAnimation
-              key={field}
-              margin='5px 0px 0px 0px'
-              label={field[0].toUpperCase() + field.slice(1)}
-              name={field}
-              type={setInputTypes(field)}
-              value={formik.values[field as keyof UserRegistrationData]}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              error={
-                formik.errors[field as keyof UserRegistrationData] &&
-                formik.touched[field as keyof UserRegistrationData]
-                  ? formik.errors[field as keyof UserRegistrationData]
-                  : ''
-              }
-            />
-          ))}
-          <AuthButton disabled={!formik.isValid || isLoading}>Send</AuthButton>
-        </form>
-      </div>
-    </>
+    <div>
+      <Title>Registration</Title>
+      <form onSubmit={formik.handleSubmit}>
+        {RegistrationFileds.map((field) => (
+          <InputAnimation
+            key={field}
+            margin='5px 0px 0px 0px'
+            label={field[0].toUpperCase() + field.slice(1)}
+            name={field}
+            type={setInputTypes(field)}
+            value={formik.values[field as keyof UserRegistrationData]}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={
+              formik.errors[field as keyof UserRegistrationData] &&
+              formik.touched[field as keyof UserRegistrationData]
+                ? formik.errors[field as keyof UserRegistrationData]
+                : ''
+            }
+          />
+        ))}
+        <AuthButton disabled={!formik.isValid || isLoading}>Send</AuthButton>
+      </form>
+    </div>
   )
 }

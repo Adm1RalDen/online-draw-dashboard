@@ -1,4 +1,5 @@
 import { ActionReducerMapBuilder, PayloadAction } from '@reduxjs/toolkit'
+import { ErrorMessages } from 'const/enums'
 import { saveUserDataThunk } from 'store/thunks/user/authorization.thunk'
 import { UserReducerInitialTypes } from 'store/types/user.types'
 import { AuthorizedUser } from 'types'
@@ -27,6 +28,6 @@ export const saveUserDataBuilder = (builder: ActionReducerMapBuilder<UserReducer
   builder.addCase(saveUserDataThunk.rejected, (state, { payload }) => {
     state.isLoading = false
     state.isAuth = false
-    state.error = payload as string
+    state.error = typeof payload === 'string' ? payload : ErrorMessages.OCCURED_ERROR
   })
 }
