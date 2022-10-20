@@ -14,7 +14,9 @@ export const defaultUserData = {
   color: '',
   gender: '',
   date: '',
-  biography: ''
+  biography: '',
+  isUse2FA: false,
+  qrcode: ''
 }
 
 export const userInitialState: UserReducerInitialTypes = {
@@ -36,6 +38,8 @@ export const userInitialState: UserReducerInitialTypes = {
     color: '',
     gender: '',
     date: '',
-    biography: ''
+    biography: '',
+    isUse2FA: false,
+    qrcode: ''
   }
 }

@@ -3,11 +3,15 @@ import normalize from 'styled-normalize'
 
 export const GlobalStyles = createGlobalStyle`
   *{
-    box-sizing:border-box;
+    box-sizing: border-box;
     padding: 0;
     margin: 0;
   }
- 
+
+  *::before, *::after {
+    box-sizing: border-box;
+  }
+  
   html, body{
     height: 100%;
   }
@@ -16,7 +20,7 @@ export const GlobalStyles = createGlobalStyle`
     overflow-x: hidden;
     font-family: Roboto;
     min-height: 100vh;
-
+    /* background-color: ${({ theme }) => theme.colors.greenBackground}; */
   }
 
   li{

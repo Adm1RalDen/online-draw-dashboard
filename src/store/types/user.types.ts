@@ -18,5 +18,7 @@ export type UserReducerInitialTypes = {
     gender: string
     date: string
     biography: string
+    isUse2FA: boolean
+    qrcode: string
   }
 }

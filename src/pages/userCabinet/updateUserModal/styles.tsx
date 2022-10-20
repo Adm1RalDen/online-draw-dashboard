@@ -3,10 +3,17 @@ import styled from 'styled-components'
 import { Button } from 'components/button'
 import { Input as DefaultInput } from 'components/input'
 
+const Wrapper = styled.div`
+  background-color: ${({ theme }) => theme.colors.white};
+  border-radius: 5px;
+  margin-top: 5px;
+  padding: 7px 10px;
+`
 const Input = styled(DefaultInput)`
   height: 35px;
   margin-top: 5px;
   border-radius: 5px;
+  border: none;
 `
 const InputWrapper = styled.div`
   position: relative;
@@ -64,5 +71,6 @@ export {
   AvatarWrapper,
   InputWrapper,
   Input,
+  Wrapper,
   UpdateProfileButton
 }

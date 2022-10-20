@@ -32,28 +32,23 @@ const LoaderWrapper = styled.div<LoaderProps>`
       bottom: 0;
       right: 0;
       left: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
     `}
 
   & > div {
     display: inline-block;
     position: relative;
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
 
     & > div {
-      box-sizing: border-box;
       display: block;
       position: absolute;
-      width: 34px;
-      height: 34px;
-      margin: 8px;
-      border: 4px solid ${({ theme }) => theme.colors.white};
+      width: inherit;
+      height: inherit;
+      border: 3px solid transparent;
       border-radius: 50%;
       animation: ${ldsRing} 1s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-      border-color: ${({ theme }) => theme.colors.white} transparent transparent transparent;
+      border-top-color: ${({ theme }) => theme.colors.black};
     }
     & > div:nth-child(1) {
       animation-delay: -0.25s;

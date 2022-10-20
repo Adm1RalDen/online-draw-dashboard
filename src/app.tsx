@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from 'store'
 import { userInfoSelector } from 'store/selectors/user.selector'
-import { AuthorizedThunk } from 'store/thunks/user/authorization.thunk'
+import { updateAuthStatusThunk } from 'store/thunks/user/authorization.thunk'
 
 import { Loader } from 'components/loaders/loader'
 
@@ -12,7 +12,7 @@ export const App = () => {
   const { hasUserStateLoaded } = useAppSelector(userInfoSelector)
 
   useEffect(() => {
-    dispatch(AuthorizedThunk())
+    dispatch(updateAuthStatusThunk())
   }, [dispatch])
 
   if (!hasUserStateLoaded) return <Loader position='absolute' />

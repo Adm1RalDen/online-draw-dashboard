@@ -1,4 +1,5 @@
 import { PaperAirplaneIcon } from '@heroicons/react/24/solid'
+import { KeysCodes } from 'const/enums'
 import { CHAT_MESSAGE_SOCKET } from 'const/sockets'
 import { useSocket } from 'hooks/useSocket'
 import { FC, useRef, useState } from 'react'
@@ -38,7 +39,7 @@ export const MessageControll: FC<Props> = ({
 
   const onChangeMessage = (e: React.ChangeEvent<HTMLInputElement>) => setMessage(e.target.value)
   const onKeyDown = (e: React.KeyboardEvent) => {
-    if (e.code === 'Enter') {
+    if (e.code === KeysCodes.ENTER) {
       handleSendMessage()
     }
   }

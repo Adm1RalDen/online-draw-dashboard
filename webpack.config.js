@@ -15,10 +15,10 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
     alias: {
+      public: path.resolve(__dirname, 'public'),
       const: path.resolve(__dirname, 'src', 'const'),
       store: path.resolve(__dirname, 'src', 'store'),
       pages: path.resolve(__dirname, 'src', 'pages'),
-      public: path.resolve(__dirname, 'public'),
       api: path.resolve(__dirname, 'src', 'api'),
       hooks: path.resolve(__dirname, 'src', 'hooks'),
       context: path.resolve(__dirname, 'src', 'context'),

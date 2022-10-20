@@ -1,22 +1,33 @@
 import { useFormik } from 'formik'
+import { toast } from 'react-toastify'
 import { useAppDispatch, useAppSelector } from 'store'
-import { userInfoSelector } from 'store/selectors/user.selector'
-import { UserLoginFormData } from 'types'
+import { userDataSelector, userInfoSelector } from 'store/selectors/user.selector'
+import { cancelUser2faAction } from 'store/slices/user.slice'
+import { loginThunk, saveUserDataThunk } from 'store/thunks/user/authorization.thunk'
+import { AuthResponse, UserLoginFormData } from 'types'
 import { Portal } from 'utils/portal'
 
+import { User2FAComponent } from 'components/2FA'
 import { InputAnimation } from 'components/input-animation'
-import { Loader } from 'components/loaders/loader'
 
+import { GoogleLoginComponent } from '../googleLogin'
 import { AuthButton, Title } from '../styles'
-import { AuthorizationFileds, initialValues, onSubmit, validationSchema } from './const'
+import { AuthorizationFileds, initialValues, validationSchema } from './const'
 
 export const LoginComponent = () => {
-  const { isLoading } = useAppSelector(userInfoSelector)
   const dispatch = useAppDispatch()
+  const { isLoading } = useAppSelector(userInfoSelector)
+  const { id, qrcode, isUse2FA } = useAppSelector(userDataSelector)
+
+  const onSuccessCallback = (data: AuthResponse) => dispatch(saveUserDataThunk(data))
+  const handleSubmit = (data: UserLoginFormData) => dispatch(loginThunk(data))
+  const onErrorCallback = (err: string) => toast.error(err)
+  const handleCloseModal = () => dispatch(cancelUser2faAction())
+
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: (data: UserLoginFormData) => onSubmit(data, dispatch)
+    onSubmit: handleSubmit
   })
 
   return (
@@ -43,13 +54,19 @@ export const LoginComponent = () => {
               }
             />
           ))}
+          <GoogleLoginComponent />
           <AuthButton disabled={!formik.isValid || isLoading}>Send</AuthButton>
         </form>
       </div>
-
-      {isLoading && (
+      {isUse2FA && (
         <Portal>
-          <Loader color='white' />
+          <User2FAComponent
+            qrcode={qrcode}
+            userId={id}
+            handleCloseModal={handleCloseModal}
+            onSuccessCallback={onSuccessCallback}
+            onErrorCallback={onErrorCallback}
+          />
         </Portal>
       )}
     </>

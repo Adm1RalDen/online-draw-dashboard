@@ -1,5 +1,6 @@
+import { SOCKET_HOST_URL } from 'api/const'
 import { io } from 'socket.io-client'
 
-export const socket = io(process.env.SOCKET_HOST || 'http://localhost:5000', {
+export const socket = io(SOCKET_HOST_URL, {
   closeOnBeforeunload: false
 })

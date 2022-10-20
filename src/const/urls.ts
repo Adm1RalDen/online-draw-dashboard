@@ -1,3 +1,4 @@
+export const DEFAULT_HOST_URL = 'http://localhost:5000'
 export const DRAW_ONLINE_URL = '/draw_online'
 export const HOME_URL = '/'
 export const NOT_FOUND_URL = '/not-found'
