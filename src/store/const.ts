@@ -1,6 +1,8 @@
 import { UserReducerInitialTypes } from './types/user.types'
 
-export const USER_REDUCER = 'user'
+export const USER_SLICE = 'user'
+export const TWOFA_SLICE = 'twoFa'
+
 export const defaultUserData = {
   id: '',
   avatar: '',
@@ -15,8 +17,7 @@ export const defaultUserData = {
   gender: '',
   date: '',
   biography: '',
-  isUse2FA: false,
-  qrcode: ''
+  isUse2FA: false
 }
 
 export const userInitialState: UserReducerInitialTypes = {
@@ -39,7 +40,6 @@ export const userInitialState: UserReducerInitialTypes = {
     gender: '',
     date: '',
     biography: '',
-    isUse2FA: false,
-    qrcode: ''
+    isUse2FA: false
   }
 }

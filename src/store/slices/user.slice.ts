@@ -7,10 +7,10 @@ import { updateUserProfileBuilder } from 'store/builders/updateUserProfileBuilde
 import { userRegistrationBuilder } from 'store/builders/userRegistrationBuilder'
 import { SavedUserObject, User2FALoginResponse } from 'types'
 
-import { USER_REDUCER, defaultUserData, userInitialState } from '../const'
+import { USER_SLICE, defaultUserData, userInitialState } from '../const'
 
 export const UserSlice = createSlice({
-  name: USER_REDUCER,
+  name: USER_SLICE,
   initialState: userInitialState,
   reducers: {
     initializeUser: (state, { payload: { token, user } }: PayloadAction<SavedUserObject>) => {
@@ -28,8 +28,8 @@ export const UserSlice = createSlice({
     },
 
     setUser2faAction: (state, { payload }: PayloadAction<User2FALoginResponse>) => {
-      const { userId, ...data } = payload
-      state.data = { ...state.data, ...data, id: userId }
+      const { userId, isUse2FA } = payload
+      state.data = { ...state.data, isUse2FA, id: userId }
     },
 
     cancelUser2faAction: (state) => {

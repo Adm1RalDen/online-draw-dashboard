@@ -3,7 +3,9 @@ import styled, { css, keyframes } from 'styled-components'
 
 type LoaderProps = {
   position?: 'absolute' | 'fixed'
+  color?: 'white'
 }
+
 const ldsRing = keyframes`
   0% {
     transform: rotate(0deg);
@@ -12,6 +14,7 @@ const ldsRing = keyframes`
     transform: rotate(360deg);
   }
 `
+
 const LoaderWrapper = styled.div<LoaderProps>`
   width: 100%;
   height: 100%;
@@ -48,7 +51,7 @@ const LoaderWrapper = styled.div<LoaderProps>`
       border: 3px solid transparent;
       border-radius: 50%;
       animation: ${ldsRing} 1s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-      border-top-color: ${({ theme }) => theme.colors.black};
+      border-top-color: ${(p) => (p.color ? p.theme.colors.white : p.theme.colors.black)};
     }
     & > div:nth-child(1) {
       animation-delay: -0.25s;
@@ -61,15 +64,13 @@ const LoaderWrapper = styled.div<LoaderProps>`
     }
   }
 `
-export const LittleLoader: FC<LoaderProps> = ({ position }) => {
-  return (
-    <LoaderWrapper position={position}>
-      <div>
-        <div />
-        <div />
-        <div />
-        <div />
-      </div>
-    </LoaderWrapper>
-  )
-}
+export const LittleLoader: FC<LoaderProps> = ({ position, color }) => (
+  <LoaderWrapper position={position} color={color}>
+    <div>
+      <div />
+      <div />
+      <div />
+      <div />
+    </div>
+  </LoaderWrapper>
+)

@@ -2,16 +2,9 @@ import { AuthorizedUser } from 'types'
 
 export type UserCabinetTypes = Omit<
   AuthorizedUser,
-  | 'id'
-  | 'role'
-  | 'email'
-  | 'avatar'
-  | 'backgroundFon'
-  | 'biography'
-  | 'originalAvatar'
-  | 'isUse2FA'
-  | 'qrcode'
+  'id' | 'role' | 'email' | 'avatar' | 'backgroundFon' | 'biography' | 'originalAvatar' | 'isUse2FA'
 >
+
 export type InitialStateTypes = {
   name: string
   country: string

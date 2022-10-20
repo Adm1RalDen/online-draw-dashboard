@@ -22,7 +22,6 @@ export interface AuthorizedUser {
   date: string
   biography: string
   isUse2FA: boolean
-  qrcode: string
 }
 
 export interface AuthorizedUserObject {
@@ -63,19 +62,21 @@ export interface AuthResponse {
   refreshToken: string
   user: Pick<AuthorizedUser, 'name' | 'role' | 'id'>
 }
+
 export type VerifyRequestData = {
   userId: string
-  code: string
+  secure2FACode: string
 }
 
-export type User2FAData = {
-  userId: string
-  qrcode: string
-}
 export interface User2FALoginResponse {
   isUse2FA: boolean
-  qrcode: string
   userId: string
+}
+
+export type ServerResponseError = {
+  data: {
+    message: string
+  }
 }
 export interface DrawData {
   roomId: string

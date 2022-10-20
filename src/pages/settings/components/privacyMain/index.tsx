@@ -1,4 +1,7 @@
+import { DISABLE_GOOGLE_AUTH, ENABLE_GOOGLE_AUTH } from 'const/urls'
 import { useNavigate } from 'react-router-dom'
+import { useAppSelector } from 'store'
+import { userDataSelector } from 'store/selectors/user.selector'
 
 import { Button } from 'components/button'
 import { Label } from 'components/label'
@@ -7,8 +10,10 @@ import { PrivacyMainFieldset, PrivacyMainInput } from './styles'
 
 export const PrivacyMain = () => {
   const navigate = useNavigate()
+  const { isUse2FA } = useAppSelector(userDataSelector)
 
-  const handleNavigate = () => navigate('/settings/privacy&security/enable-google-authentificator')
+  const handleNavigateEnable2FA = () => navigate(ENABLE_GOOGLE_AUTH)
+  const handleNavigateDisable2FA = () => navigate(DISABLE_GOOGLE_AUTH)
 
   return (
     <form>
@@ -24,7 +29,11 @@ export const PrivacyMain = () => {
 
       <PrivacyMainFieldset>
         <Label htmlFor='twoFA'>Google authentification</Label>
-        <Button onClick={handleNavigate}>Enable</Button>
+        {isUse2FA ? (
+          <Button onClick={handleNavigateDisable2FA}>Disable</Button>
+        ) : (
+          <Button onClick={handleNavigateEnable2FA}>Enable</Button>
+        )}
       </PrivacyMainFieldset>
     </form>
   )

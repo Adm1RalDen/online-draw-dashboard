@@ -1,12 +1,14 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 
-import { USER_REDUCER } from './const'
+import { TWOFA_SLICE, USER_SLICE } from './const'
 import { appApi } from './rtk/api'
+import { TwoFASlice } from './slices/twoFa.slice'
 import { UserSlice } from './slices/user.slice'
 
 const RootReducer = combineReducers({
-  [USER_REDUCER]: UserSlice.reducer,
+  [USER_SLICE]: UserSlice.reducer,
+  [TWOFA_SLICE]: TwoFASlice.reducer,
   [appApi.reducerPath]: appApi.reducer
 })
 

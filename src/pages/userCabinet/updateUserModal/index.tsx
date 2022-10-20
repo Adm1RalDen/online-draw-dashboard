@@ -70,10 +70,7 @@ export const UpdateUserModal: FC<UpdateUserModalTypes> = ({ userData, handleEdit
       biography
     }
 
-    const keys = Object.keys(chengedData) as (keyof Omit<
-      AuthorizedUser,
-      'role' | 'email' | 'qrcode'
-    >)[]
+    const keys = Object.keys(chengedData) as (keyof Omit<AuthorizedUser, 'role' | 'email'>)[]
     const filteredKeys = keys.filter((key) => {
       return chengedData[key] !== userData[key]
     })
@@ -94,7 +91,7 @@ export const UpdateUserModal: FC<UpdateUserModalTypes> = ({ userData, handleEdit
         }
       }
 
-      filteredKeys.forEach((key: keyof Omit<AuthorizedUser, 'role' | 'email' | 'qrcode'>) => {
+      filteredKeys.forEach((key: keyof Omit<AuthorizedUser, 'role' | 'email'>) => {
         if (key !== 'avatar' && key !== 'originalAvatar') {
           formData.append(key, key === 'isUse2FA' ? String(chengedData[key]) : chengedData[key])
         }

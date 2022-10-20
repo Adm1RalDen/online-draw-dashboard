@@ -20,7 +20,6 @@ export const GlobalStyles = createGlobalStyle`
     overflow-x: hidden;
     font-family: Roboto;
     min-height: 100vh;
-    /* background-color: ${({ theme }) => theme.colors.greenBackground}; */
   }
 
   li{
