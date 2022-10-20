@@ -6,7 +6,7 @@ import { ServerResponseError } from 'types'
 
 export const toastRtkRequestError = (err: FetchBaseQueryError | SerializedError | undefined) => {
   if (err) {
-    toast.error((err as ServerResponseError).data.message || ErrorMessages.OCCURED_ERROR)
+    toast.error((err as ServerResponseError)?.data?.message || ErrorMessages.OCCURED_ERROR)
     return err
   } else {
     toast.error(ErrorMessages.OCCURED_ERROR)
