@@ -11,7 +11,7 @@ import {
   saveRefreshToken,
   saveUserInStorage
 } from 'services/token.service'
-import { USER_SLICE } from 'store/const'
+import { USER_SLICE_NAME } from 'store/const'
 import { initializeUser, logoutAction, setUser2faAction } from 'store/slices/user.slice'
 import { cryptoSha256 } from 'utils/cryptoPassord'
 import { errorHandler } from 'utils/errorHandler'
@@ -24,7 +24,7 @@ import {
 } from '../../../types'
 
 export const updateAuthStatusThunk = createAsyncThunk(
-  `${USER_SLICE}/updateAuthStatus-thunk`,
+  `${USER_SLICE_NAME}/updateAuthStatus-thunk`,
   async (_, { dispatch, rejectWithValue }) => {
     try {
       const savedUser = getSavedUser()
@@ -44,7 +44,7 @@ export const updateAuthStatusThunk = createAsyncThunk(
 )
 
 export const loginThunk = createAsyncThunk(
-  `${USER_SLICE}/login-thunk`,
+  `${USER_SLICE_NAME}/login-thunk`,
   async (data: UserLoginFormData, { dispatch }) => {
     try {
       const password = cryptoSha256(data.password)
@@ -62,7 +62,7 @@ export const loginThunk = createAsyncThunk(
 )
 
 export const saveUserDataThunk = createAsyncThunk(
-  `${USER_SLICE}/saveUserData-thunk`,
+  `${USER_SLICE_NAME}/saveUserData-thunk`,
   async (data: AuthResponse, { rejectWithValue }) => {
     try {
       saveUserInStorage({ token: data.token, user: data.user })
@@ -78,7 +78,7 @@ export const saveUserDataThunk = createAsyncThunk(
 )
 
 export const userRegistrationThunk = createAsyncThunk(
-  `${USER_SLICE}/registration-thunk`,
+  `${USER_SLICE_NAME}/registration-thunk`,
   async (data: UserRegistrationData, { rejectWithValue }) => {
     try {
       const response = await registrationUser(data)

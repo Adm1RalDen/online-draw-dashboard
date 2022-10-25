@@ -7,7 +7,7 @@ import { useAppSelector } from 'store'
 import { userDataSelector } from 'store/selectors/user.selector'
 
 import { Input } from 'components/input'
-import { Loader } from 'components/loaders/loader'
+import { Loader } from 'components/loader'
 
 import { ClearAccessPageConnection, SetAccessPageConnection } from './const'
 import {
@@ -42,13 +42,15 @@ export const PrivateRoom = () => {
       })
     }
   }
+
   const handleHomeNavigate = () => navigate(HOME_URL)
   const handleSetPassword = (e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)
+
   return (
     <ConfirmAccessPage>
       <ConfirmAccessPageMain>
         {isLoading ? (
-          <Loader position='absolute' color='white' />
+          <Loader position='absolute' />
         ) : (
           <>
             <ConfirmAccessPageInputWrapper>

@@ -1,8 +1,7 @@
+import { getHeaders } from 'api/const'
 import { AxiosRequestConfig } from 'axios'
 
-import { setHeaders } from './../const'
-
 export const applyTokenInterceptor = async (config: AxiosRequestConfig) => {
-  config.headers = { ...config.headers, ...setHeaders().headers }
+  config.headers = { ...config.headers, ...getHeaders().headers }
   return config
 }

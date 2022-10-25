@@ -1,4 +1,3 @@
-import { ChevronLeftIcon } from '@heroicons/react/24/solid'
 import { ErrorMessages } from 'const/enums'
 import { FC, useEffect } from 'react'
 import { toast } from 'react-toastify'
@@ -7,7 +6,7 @@ import { useCreateTwoFAQuery } from 'store/rtk/api'
 import { twoFaSelector } from 'store/selectors/twoFa.selector'
 import { Heading4, Paragraph, Span } from 'styles/typography/styles'
 
-import { ButtonOutline } from 'components/button-outline'
+import { BackButton } from 'components/backButton'
 
 import { AuthentificatorButtonsWrapper, AuthentificatorNextButton } from '../styles'
 import { StepsProps } from '../types'
@@ -41,10 +40,7 @@ export const ScanQrCodeStep: FC<StepsProps> = ({ handleDeclineStep, handleIncrea
       </Span>
 
       <AuthentificatorButtonsWrapper>
-        <ButtonOutline onClick={handleDeclineStep}>
-          <ChevronLeftIcon />
-          back
-        </ButtonOutline>
+        <BackButton onClick={handleDeclineStep} />
         <AuthentificatorNextButton onClick={handleIncreaseStep} disabled={!qrcode && !secretKey}>
           next
         </AuthentificatorNextButton>

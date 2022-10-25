@@ -1,11 +1,12 @@
 import styled from 'styled-components'
 
-const InputWrapper = styled.div``
-const Wrapper = styled.div`
+const RadioButtonsWrapper = styled.div``
+const RadioButton = styled.div`
   display: inline-block;
   width: max-content;
   margin-right: 10px;
 `
+
 const Input = styled.input`
   position: absolute;
   opacity: 0;
@@ -21,7 +22,7 @@ const Input = styled.input`
   }
 `
 
-const Span = styled.span`
+const BackgroundCircle = styled.span`
   position: absolute;
   top: 0;
   left: 0;
@@ -59,4 +60,4 @@ const Label = styled.label`
   user-select: none;
 `
 
-export { InputWrapper, Wrapper, Label, Input, Span }
+export { RadioButtonsWrapper, RadioButton, Label, Input, BackgroundCircle }

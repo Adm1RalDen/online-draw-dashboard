@@ -1,19 +1,19 @@
 import { ChangeEvent, FC } from 'react'
 import { FunctionWithParams } from 'types'
 
-import { Input, InputWrapper, Label, Span, Wrapper } from './styles'
+import { BackgroundCircle, Input, Label, RadioButton, RadioButtonsWrapper } from './styles'
 
-type RadioButtonTypes = {
+type RadioButtonsType = {
   defaultValue: string
   values: string[]
   name: string
   onChange: FunctionWithParams<ChangeEvent<HTMLInputElement>>
 }
 
-export const RadioButtons: FC<RadioButtonTypes> = ({ defaultValue, name, onChange, values }) => (
-  <InputWrapper>
+export const RadioButtons: FC<RadioButtonsType> = ({ defaultValue, name, onChange, values }) => (
+  <RadioButtonsWrapper>
     {values.map((value, index) => (
-      <Wrapper key={`${name}_${value}_${index}`}>
+      <RadioButton key={`${name}_${value}_${index}`}>
         <Label htmlFor={`${name}_${value}`}>
           {value}
           <Input
@@ -24,9 +24,9 @@ export const RadioButtons: FC<RadioButtonTypes> = ({ defaultValue, name, onChang
             defaultChecked={value === defaultValue}
             onChange={onChange}
           />
-          <Span />
+          <BackgroundCircle />
         </Label>
-      </Wrapper>
+      </RadioButton>
     ))}
-  </InputWrapper>
+  </RadioButtonsWrapper>
 )

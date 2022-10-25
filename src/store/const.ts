@@ -1,7 +1,7 @@
 import { UserReducerInitialTypes } from './types/user.types'
 
-export const USER_SLICE = 'user'
-export const TWOFA_SLICE = 'twoFa'
+export const USER_SLICE_NAME = 'user'
+export const TWOFA_SLICE_NAME = 'twoFa'
 
 export const defaultUserData = {
   id: '',

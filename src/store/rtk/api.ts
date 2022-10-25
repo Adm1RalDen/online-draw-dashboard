@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { API_URL } from 'api/const'
+import { getToken } from 'services/token.service'
 import { AuthResponse, VerifyRequestData } from 'types'
 
 import { confirmCreating2FaQueryObj } from './queriesObjects/confirmCreating2Fa'
@@ -11,7 +12,15 @@ import { ConfirmCreating2FaData, Create2FARequestData, Disable2FAData } from './
 
 export const appApi = createApi({
   reducerPath: 'appApi',
-  baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
+
+  baseQuery: fetchBaseQuery({
+    baseUrl: API_URL,
+    prepareHeaders(headers) {
+      headers.set('authorization', `Bearer ${getToken()}`)
+      return headers
+    }
+  }),
+
   endpoints: (builder) => ({
     createTwoFA: builder.query<Create2FARequestData, void>(createTwoFaQueryObj),
     confirmUser2FA: builder.mutation<AuthResponse, VerifyRequestData>(confirmUser2FAQueryObj),

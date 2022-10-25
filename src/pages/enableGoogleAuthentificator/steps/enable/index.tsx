@@ -1,13 +1,12 @@
-import { ChevronLeftIcon } from '@heroicons/react/24/solid'
 import { ErrorMessages } from 'const/enums'
 import { useFormik } from 'formik'
 import { FC, useEffect } from 'react'
 import { toast } from 'react-toastify'
 import { useConfirmCreating2FaMutation, useSendCodeOnEmailQuery } from 'store/rtk/api'
 import { Heading4, Paragraph } from 'styles/typography/styles'
-import { digitInputObserver } from 'utils/digitInputObserver'
+import { checkForNumbersInString } from 'utils/checkForNumbersInString'
 
-import { ButtonOutline } from 'components/button-outline'
+import { BackButton } from 'components/backButton'
 import { Input } from 'components/input'
 import { Label } from 'components/label'
 
@@ -41,7 +40,7 @@ export const EnableStep: FC<StepsProps> = ({ handleDeclineStep, handleIncreaseSt
   const handleChangeCodes = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
 
-    if (digitInputObserver(e.target.value, 6)) {
+    if (checkForNumbersInString(e.target.value, 6)) {
       formik.handleChange(e)
     }
   }
@@ -75,10 +74,7 @@ export const EnableStep: FC<StepsProps> = ({ handleDeclineStep, handleIncreaseSt
       {isError && <Paragraph>{ErrorMessages.OCCURED_ERROR}</Paragraph>}
 
       <AuthentificatorButtonsWrapper>
-        <ButtonOutline onClick={handleDeclineStep}>
-          <ChevronLeftIcon />
-          back
-        </ButtonOutline>
+        <BackButton onClick={handleDeclineStep} />
         <AuthentificatorNextButton
           type='button'
           onClick={handleSubmit}

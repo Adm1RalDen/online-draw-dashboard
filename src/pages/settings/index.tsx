@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from 'store'
 import { userDataSelector, userInfoSelector } from 'store/selectors/user.selector'
 import { getUserProfileThunk } from 'store/thunks/user/user.thunk'
 
-import { LittleLoader } from 'components/loaders/littleLoader'
+import { Loader } from 'components/loader'
 
 import { SettingsPageHeader } from './components/header'
 import { SettingsPageSideBar } from './components/sidebar'
@@ -25,7 +25,7 @@ export const SettingsPage = () => {
       <SettingsPageContainer>
         <SettingsPageHeader />
         <SettingsPageSideBar />
-        <main>{isLoading ? <LittleLoader color='white' /> : outlet}</main>
+        <main>{isLoading ? <Loader type='solid' /> : outlet}</main>
       </SettingsPageContainer>
     </SettingsPageWrapper>
   )

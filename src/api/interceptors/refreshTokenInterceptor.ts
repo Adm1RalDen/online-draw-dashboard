@@ -1,4 +1,4 @@
-import { API_URL, setHeaders, setRefreshToken } from 'api/const'
+import { API_URL, getHeaders, setRefreshToken } from 'api/const'
 import { Instance } from 'api/instance'
 import axios, { AxiosError } from 'axios'
 import { NetworkStatus } from 'const/enums'
@@ -18,7 +18,7 @@ export const refreshTokenInterceptor = async (error: AxiosError) => {
         const refresh = await axios.post<AuthResponse>(
           `${API_URL}/user/refresh`,
           setRefreshToken(),
-          setHeaders()
+          getHeaders()
         )
 
         const { token, user } = refresh.data

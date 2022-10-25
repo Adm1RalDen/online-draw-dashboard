@@ -1,11 +1,10 @@
 import { KeyIcon } from '@heroicons/react/24/outline'
-import { ChevronLeftIcon } from '@heroicons/react/24/solid'
 import { FC } from 'react'
 import { useAppSelector } from 'store'
 import { twoFaSelector } from 'store/selectors/twoFa.selector'
 import { Heading4, Paragraph, Span } from 'styles/typography/styles'
 
-import { ButtonOutline } from 'components/button-outline'
+import { BackButton } from 'components/backButton'
 
 import { AuthentificatorButtonsWrapper, AuthentificatorNextButton } from '../styles'
 import { StepsProps } from '../types'
@@ -25,10 +24,7 @@ export const SaveKeyStep: FC<StepsProps> = ({ handleDeclineStep, handleIncreaseS
       <Span>This key allow you to restore you Authentificator in case of loss of the phone</Span>
 
       <AuthentificatorButtonsWrapper>
-        <ButtonOutline onClick={handleDeclineStep}>
-          <ChevronLeftIcon />
-          back
-        </ButtonOutline>
+        <BackButton onClick={handleDeclineStep} />
         <AuthentificatorNextButton onClick={handleIncreaseStep}>next</AuthentificatorNextButton>
       </AuthentificatorButtonsWrapper>
     </>

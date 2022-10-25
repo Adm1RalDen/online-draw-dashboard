@@ -2,11 +2,11 @@ import { FC } from 'react'
 
 import { CheckBoxInput, CheckBoxLabel, Checkmark } from './styles'
 
-type Props = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> & { labelTitle: string }
+type Props = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> & { label: string }
 
-export const Checkbox: FC<Props> = ({ labelTitle, ...params }) => (
+export const Checkbox: FC<Props> = ({ label, ...params }) => (
   <CheckBoxLabel htmlFor={params.name}>
-    {labelTitle}
+    {label}
     <CheckBoxInput {...params} />
     <Checkmark />
   </CheckBoxLabel>

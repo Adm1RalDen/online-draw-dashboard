@@ -7,10 +7,10 @@ import { updateUserProfileBuilder } from 'store/builders/updateUserProfileBuilde
 import { userRegistrationBuilder } from 'store/builders/userRegistrationBuilder'
 import { SavedUserObject, User2FALoginResponse } from 'types'
 
-import { USER_SLICE, defaultUserData, userInitialState } from '../const'
+import { USER_SLICE_NAME, defaultUserData, userInitialState } from '../const'
 
 export const UserSlice = createSlice({
-  name: USER_SLICE,
+  name: USER_SLICE_NAME,
   initialState: userInitialState,
   reducers: {
     initializeUser: (state, { payload: { token, user } }: PayloadAction<SavedUserObject>) => {

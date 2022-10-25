@@ -4,7 +4,9 @@ import { ErrorMessages } from 'const/enums'
 import { toast } from 'react-toastify'
 import { ServerResponseError } from 'types'
 
-export const toastRtkRequestError = (err: FetchBaseQueryError | SerializedError | undefined) => {
+type Parameters = FetchBaseQueryError | SerializedError | undefined
+
+export const toastRtkRequestError = (err: Parameters) => {
   if (err) {
     toast.error((err as ServerResponseError)?.data?.message || ErrorMessages.OCCURED_ERROR)
     return err

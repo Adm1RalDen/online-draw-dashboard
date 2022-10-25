@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import {
   ArrowDownRightIcon,
   ArrowDownTrayIcon,
@@ -7,7 +8,11 @@ import {
   PencilIcon
 } from '@heroicons/react/24/outline'
 import { EXIT_SOCKET } from 'const/sockets'
+import { PaintContext } from 'context/paintContext'
 import { useSocket } from 'hooks/useSocket'
+import CircleIcon from 'public/assets/circle.svg'
+import EraserIcon from 'public/assets/eraser.svg'
+import SquareIcon from 'public/assets/square.svg'
 import { MouseEvent, useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import { useAppSelector } from 'store'
@@ -16,10 +21,6 @@ import { ToolsTypes } from 'types/canvas'
 
 import { InputColor } from 'components/input/color'
 
-import CircleIcon from '../../../public/assets/circle.svg'
-import EraserIcon from '../../../public/assets/eraser.svg'
-import SquareIcon from '../../../public/assets/square.svg'
-import { PaintContext } from '../../context/paintContext'
 import { DrawToolsWrapper, SnapshotButtonsWrapper, StyledToolbar, ToolButton } from './styles'
 
 export const Toolbar = () => {

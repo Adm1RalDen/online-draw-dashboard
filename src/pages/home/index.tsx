@@ -10,7 +10,7 @@ import { Heading3 } from 'styles/typography/styles'
 import { ActiveRoom } from 'types/rooms'
 import { Portal } from 'utils/portal'
 
-import { Loader } from 'components/loaders/loader'
+import { Loader } from 'components/loader'
 import { Logo } from 'components/logo'
 import { Popper } from 'components/popper'
 
@@ -99,7 +99,7 @@ export const HomePage = () => {
 
       {isLoading && (
         <Portal>
-          <Loader color='white' />
+          <Loader />
         </Portal>
       )}
     </>

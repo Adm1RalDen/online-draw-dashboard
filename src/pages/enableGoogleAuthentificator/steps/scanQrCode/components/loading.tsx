@@ -1,9 +1,9 @@
-import { LittleLoader } from 'components/loaders/littleLoader'
+import { Loader } from 'components/loader'
 
 import { ScanQrCodeLoaderWrapper } from '../styles'
 
 export const ScanQrCodeStepLoading = () => (
   <ScanQrCodeLoaderWrapper>
-    <LittleLoader />
+    <Loader type='solid' />
   </ScanQrCodeLoaderWrapper>
 )

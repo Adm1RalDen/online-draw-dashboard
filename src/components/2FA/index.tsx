@@ -4,10 +4,10 @@ import { FC, useEffect, useState } from 'react'
 import { useConfirmUser2FAMutation } from 'store/rtk/api'
 import { Paragraph } from 'styles/typography/styles'
 import { AuthResponse, FunctionWithParams } from 'types'
-import { digitInputObserver } from 'utils/digitInputObserver'
+import { checkForNumbersInString } from 'utils/checkForNumbersInString'
 import { noopFunction } from 'utils/noop'
 
-import { LittleLoader } from 'components/loaders/littleLoader'
+import { Loader } from 'components/loader'
 import { SpanWrapper } from 'components/spanWrapper'
 
 import {
@@ -70,17 +70,14 @@ export const User2FAComponent: FC<Props> = ({
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (secure2FACode.length === 6 && e.code === KeysCodes.ENTER) {
-      e.preventDefault()
       handleSubmit()
     }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (digitInputObserver(e.target.value, 6) || !e.target.value) {
+    if (checkForNumbersInString(e.target.value, 6) || !e.target.value) {
       setSecure2FACode(e.target.value)
     }
-
-    e.preventDefault()
   }
 
   return (
@@ -95,7 +92,7 @@ export const User2FAComponent: FC<Props> = ({
           autoFocus
         />
         {isLoading ? (
-          <LittleLoader />
+          <Loader type='solid' color='black' />
         ) : (
           <User2FAButton onClick={handleSubmit} disabled={secure2FACode.length < 6 || isSuccess}>
             Send

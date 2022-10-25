@@ -15,7 +15,7 @@ const ToggleSwitchWrapper = styled.div<Props>`
   transition: 0.5s;
 `
 
-const ToggleSwitchSpan = styled.span<Props>`
+const ToggleSwitchText = styled.span<Props>`
   position: absolute;
   pointer-events: none;
   z-index: 3;
@@ -25,7 +25,7 @@ const ToggleSwitchSpan = styled.span<Props>`
   right: 10px;
 `
 
-const ToggleSwitchInput = styled.input`
+const Input = styled.input`
   width: 100%;
   height: 100%;
   top: 0;
@@ -62,4 +62,4 @@ const ToggleSwitchInput = styled.input`
     }
   }
 `
-export { ToggleSwitchWrapper, ToggleSwitchSpan, ToggleSwitchInput }
+export { ToggleSwitchWrapper, ToggleSwitchText, Input }

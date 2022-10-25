@@ -8,21 +8,21 @@ import { AuthentificatorStepsWrapper } from './styles'
 import { SuccessQrCodeStep } from './success'
 import { StepsProps } from './types'
 
-export const AuthentificatorSteps: FC<StepsProps> = (stepsProps) => {
+export const AuthentificatorSteps: FC<StepsProps> = (props) => {
   const handleSetSteps = () => {
-    switch (stepsProps.currentStep) {
+    switch (props.currentStep) {
       case 1:
-        return <DownloadAppStep {...stepsProps} />
+        return <DownloadAppStep {...props} />
       case 2:
-        return <ScanQrCodeStep {...stepsProps} />
+        return <ScanQrCodeStep {...props} />
       case 3:
-        return <SaveKeyStep {...stepsProps} />
+        return <SaveKeyStep {...props} />
       case 4:
-        return <EnableStep {...stepsProps} />
+        return <EnableStep {...props} />
       case 5:
-        return <SuccessQrCodeStep {...stepsProps} />
+        return <SuccessQrCodeStep {...props} />
       default:
-        return <DownloadAppStep {...stepsProps} />
+        return <DownloadAppStep {...props} />
     }
   }
 

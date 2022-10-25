@@ -8,8 +8,8 @@ import { useNavigate } from 'react-router-dom'
 import { useDisableTwoFAMutation } from 'store/rtk/api'
 import { userDataSelector } from 'store/selectors/user.selector'
 import { Heading2, Heading3, Paragraph } from 'styles/typography/styles'
+import { checkForNumbersInString } from 'utils/checkForNumbersInString'
 import { cryptoSha256 } from 'utils/cryptoPassord'
-import { digitInputObserver } from 'utils/digitInputObserver'
 import { toastRtkRequestError } from 'utils/toastRtkRequestError'
 
 import { Button } from 'components/button'
@@ -17,7 +17,7 @@ import { Container } from 'components/container'
 import { Input } from 'components/input'
 import { Label } from 'components/label'
 
-import { initialValues, validationSchema } from './const'
+import { initialValues } from './const'
 import {
   DisableAuthentificatorForm,
   DisableAuthentificatorSection,
@@ -25,6 +25,7 @@ import {
   SuccessIconWrapper,
   SuccessWrapper
 } from './styles'
+import { validationSchema } from './utils'
 
 export const DisableAuthentificator = () => {
   const [submitDisable, { isLoading, isError, error, isSuccess }] = useDisableTwoFAMutation()
@@ -54,7 +55,7 @@ export const DisableAuthentificator = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
 
-    if (digitInputObserver(e.target.value, 6)) {
+    if (checkForNumbersInString(e.target.value, 6)) {
       formik.handleChange(e)
     }
   }

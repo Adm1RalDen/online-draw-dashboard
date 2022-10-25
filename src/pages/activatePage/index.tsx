@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { Heading1 } from 'styles/typography/styles'
 
-import { Loader } from 'components/loaders/loader'
+import { Loader } from 'components/loader'
 
 import { ACTIVATION_PAGE_HOME_BUTTON_TEXT, ACTIVATION_PAGE_SUCCESS_TITLE } from './const'
 import { ActivationPageSection } from './styles'
@@ -21,7 +21,7 @@ export const ActivationPage = () => {
   return (
     <ActivationPageSection>
       {isLoading ? (
-        <Loader color='white' position='absolute' />
+        <Loader position='absolute' />
       ) : (
         <>
           {error ? (
