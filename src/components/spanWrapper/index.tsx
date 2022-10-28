@@ -1,5 +1,5 @@
 import styled from 'styled-components'
 
-export const SpanWrapper = styled.div`
+export const TextWrapper = styled.div`
   height: 20px;
 `

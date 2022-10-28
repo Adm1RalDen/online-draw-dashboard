@@ -16,10 +16,7 @@ const StepsPanelWrapper = styled.div`
     }
   }
 
-  & > div:nth-child(2),
-  div:nth-child(3),
-  div:nth-child(4),
-  div:nth-child(5) {
+  & > div:not(:first-child) {
     &::before {
       width: calc(100% - 50px);
     }

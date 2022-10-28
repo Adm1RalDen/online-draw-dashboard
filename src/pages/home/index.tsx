@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from 'store'
 import { userDataSelector } from 'store/selectors/user.selector'
-import { UserLogoutThunk } from 'store/thunks/user/authorization.thunk'
+import { userLogoutThunk } from 'store/thunks/user/authorization.thunk'
 import { Heading3 } from 'styles/typography/styles'
 import { ActiveRoom } from 'types/rooms'
 import { Portal } from 'utils/portal'
@@ -39,7 +39,8 @@ export const HomePage = () => {
   const dispatch = useAppDispatch()
   const { socket } = useSocket()
   const navigate = useNavigate()
-  const handleLogOut = () => UserLogoutThunk(dispatch)
+
+  const handleLogOut = () => dispatch(userLogoutThunk())
   const handleNavigateCabinet = () => navigate(CABINET_URL)
 
   useEffect(() => {

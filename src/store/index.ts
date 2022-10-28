@@ -1,24 +1,33 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import { Action, combineReducers, configureStore } from '@reduxjs/toolkit'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 
-import { TWOFA_SLICE_NAME, USER_SLICE_NAME } from './const'
-import { appApi } from './rtk/api'
-import { TwoFASlice } from './slices/twoFa.slice'
-import { UserSlice } from './slices/user.slice'
+import { resetStore } from './actions'
+import { RTK_API_NAME, TWOFA_SLICE_NAME, USER_SLICE_NAME } from './const'
+import { apiSlice } from './rtk/api'
+import TwoFaSlice from './slices/twoFa.slice'
+import UserSlice from './slices/user.slice'
 
-const RootReducer = combineReducers({
-  [USER_SLICE_NAME]: UserSlice.reducer,
-  [TWOFA_SLICE_NAME]: TwoFASlice.reducer,
-  [appApi.reducerPath]: appApi.reducer
+const combinedReducer = combineReducers({
+  [RTK_API_NAME]: apiSlice.reducer,
+  [USER_SLICE_NAME]: UserSlice,
+  [TWOFA_SLICE_NAME]: TwoFaSlice
 })
+
+const rootReducer = (state: RootState | undefined, action: Action) => {
+  if (action.type === resetStore.toString()) {
+    state = undefined
+  }
+
+  return combinedReducer(state, action)
+}
 
 export const store = configureStore({
-  reducer: RootReducer,
   devTools: true,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(appApi.middleware)
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware)
 })
 
-export type RootState = ReturnType<typeof store.getState>
+export type RootState = ReturnType<typeof combinedReducer>
 export type AppDispatch = typeof store.dispatch
 
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector

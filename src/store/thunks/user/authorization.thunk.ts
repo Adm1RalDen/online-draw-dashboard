@@ -1,7 +1,6 @@
-import { Dispatch, createAsyncThunk } from '@reduxjs/toolkit'
+import { createAsyncThunk } from '@reduxjs/toolkit'
 import { authorizeUser } from 'api/user/authorize'
 import { getProfile } from 'api/user/getProfile'
-import { logout } from 'api/user/logout'
 import { registrationUser } from 'api/user/registration'
 import { ErrorMessages } from 'const/enums'
 import { toast } from 'react-toastify'
@@ -11,17 +10,12 @@ import {
   saveRefreshToken,
   saveUserInStorage
 } from 'services/token.service'
+import { resetStore } from 'store/actions'
 import { USER_SLICE_NAME } from 'store/const'
-import { initializeUser, logoutAction, setUser2faAction } from 'store/slices/user.slice'
+import { LoginThunkParams } from 'store/types/user.types'
+import { AuthResponse, User2FALoginResponse, UserRegistrationData } from 'types'
 import { cryptoSha256 } from 'utils/cryptoPassord'
 import { errorHandler } from 'utils/errorHandler'
-
-import {
-  AuthResponse,
-  User2FALoginResponse,
-  UserLoginFormData,
-  UserRegistrationData
-} from '../../../types'
 
 export const updateAuthStatusThunk = createAsyncThunk(
   `${USER_SLICE_NAME}/updateAuthStatus-thunk`,
@@ -31,13 +25,12 @@ export const updateAuthStatusThunk = createAsyncThunk(
 
       if (savedUser) {
         const profile = await getProfile(savedUser.user.id)
-        dispatch(initializeUser(savedUser))
         return profile.data
       }
 
       throw new Error(ErrorMessages.UNAUTHORITHED_ERROR)
     } catch (e) {
-      await UserLogoutThunk(dispatch)
+      dispatch(userLogoutThunk())
       return rejectWithValue(ErrorMessages.UNAUTHORITHED_ERROR)
     }
   }
@@ -45,16 +38,17 @@ export const updateAuthStatusThunk = createAsyncThunk(
 
 export const loginThunk = createAsyncThunk(
   `${USER_SLICE_NAME}/login-thunk`,
-  async (data: UserLoginFormData, { dispatch }) => {
+  async ({ setAttemptsLeftCount, ...data }: LoginThunkParams, { dispatch }) => {
     try {
       const password = cryptoSha256(data.password)
-      const response = await authorizeUser({ ...data, password })
+      const response = await authorizeUser({ email: data.email, password })
 
-      if (!Object.hasOwn(response.data, 'isUse2FA')) {
-        return dispatch(saveUserDataThunk({ ...(response.data as AuthResponse) }))
+      if (Object.hasOwn(response.data, 'isUse2FA')) {
+        setAttemptsLeftCount((response.data as User2FALoginResponse).attemptsLeftCount)
+        return response.data as User2FALoginResponse
       }
 
-      dispatch(setUser2faAction(response.data as User2FALoginResponse))
+      dispatch(saveUserDataThunk({ ...(response.data as AuthResponse) }))
     } catch (e) {
       errorHandler(e)
     }
@@ -90,8 +84,10 @@ export const userRegistrationThunk = createAsyncThunk(
   }
 )
 
-export const UserLogoutThunk = async (dispatch: Dispatch) => {
-  await logout()
-  deleteSavedToken()
-  dispatch(logoutAction())
-}
+export const userLogoutThunk = createAsyncThunk(
+  `${USER_SLICE_NAME}/logout-thunk`,
+  async (_, { dispatch }) => {
+    deleteSavedToken()
+    dispatch(resetStore())
+  }
+)

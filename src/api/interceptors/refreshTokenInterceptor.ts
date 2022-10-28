@@ -1,5 +1,4 @@
 import { API_URL, getHeaders, setRefreshToken } from 'api/const'
-import { Instance } from 'api/instance'
 import axios, { AxiosError } from 'axios'
 import { NetworkStatus } from 'const/enums'
 import { getToken, saveUserInStorage } from 'services/token.service'
@@ -28,7 +27,7 @@ export const refreshTokenInterceptor = async (error: AxiosError) => {
           error.config.headers['authorization'] = `Bearer ${token}`
         }
 
-        return Instance.request(error.config)
+        return axios.request(error.config)
       }
     } catch (e) {
       /* will be dispatch(LogOut) in next pr DD-13 */

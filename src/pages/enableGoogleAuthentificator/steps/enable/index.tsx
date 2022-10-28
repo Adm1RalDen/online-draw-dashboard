@@ -1,8 +1,7 @@
 import { ErrorMessages } from 'const/enums'
 import { useFormik } from 'formik'
 import { FC, useEffect } from 'react'
-import { toast } from 'react-toastify'
-import { useConfirmCreating2FaMutation, useSendCodeOnEmailQuery } from 'store/rtk/api'
+import { useConfirmCreating2FaMutation, useSendCodeOnEmailQuery } from 'store/rtk/services/twoFa'
 import { Heading4, Paragraph } from 'styles/typography/styles'
 import { checkForNumbersInString } from 'utils/checkForNumbersInString'
 
@@ -14,14 +13,16 @@ import { AuthentificatorButtonsWrapper, AuthentificatorNextButton } from '../sty
 import { StepsProps } from '../types'
 import { initialValues, validationSchema } from './const'
 
+import { useToastError } from 'hooks/useToastError'
+
 export const EnableStep: FC<StepsProps> = ({ handleDeclineStep, handleIncreaseStep }) => {
   const [submit2FaData, { isSuccess, isLoading, isError }] = useConfirmCreating2FaMutation()
-  const {} = useSendCodeOnEmailQuery()
+  useSendCodeOnEmailQuery()
 
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: (data) => submit2FaData(data)
+    onSubmit: submit2FaData
   })
 
   useEffect(() => {
@@ -30,11 +31,7 @@ export const EnableStep: FC<StepsProps> = ({ handleDeclineStep, handleIncreaseSt
     }
   }, [isSuccess, handleIncreaseStep])
 
-  useEffect(() => {
-    if (isError) {
-      toast.error(ErrorMessages.OCCURED_ERROR)
-    }
-  }, [isError])
+  useToastError(isError)
 
   const handleSubmit = () => formik.handleSubmit()
   const handleChangeCodes = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -1,6 +1,4 @@
 import { SETTINGS_PRIVACY_URL } from 'const/urls'
-
-/* eslint-disable-next-line */
 import SuccessIcon from 'public/assets/success.svg'
 import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'

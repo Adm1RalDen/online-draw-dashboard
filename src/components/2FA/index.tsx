@@ -1,22 +1,25 @@
 import { XMarkIcon } from '@heroicons/react/24/solid'
 import { ErrorMessages, KeysCodes } from 'const/enums'
 import { FC, useEffect, useState } from 'react'
-import { useConfirmUser2FAMutation } from 'store/rtk/api'
+import { useAppDispatch, useAppSelector } from 'store'
+import { useConfirmUser2FAMutation } from 'store/rtk/services/twoFa'
+import { twoFaSelector } from 'store/selectors/twoFa.selector'
+import { decreseAttemptsLeftCountAction } from 'store/slices/twoFa.slice'
 import { Paragraph } from 'styles/typography/styles'
 import { AuthResponse, FunctionWithParams } from 'types'
 import { checkForNumbersInString } from 'utils/checkForNumbersInString'
 import { noopFunction } from 'utils/noop'
 
 import { Loader } from 'components/loader'
-import { SpanWrapper } from 'components/spanWrapper'
+import { TextWrapper } from 'components/spanWrapper'
 
 import {
   User2FAButton,
   User2FACloseModalButton,
   User2FAComponentBlock,
-  User2FAErrorSpan,
+  User2FAErrorText,
   User2FAInput,
-  User2FASuccessSpan,
+  User2FASuccessText,
   User2FAWrapper
 } from './styles'
 
@@ -33,22 +36,25 @@ export const User2FAComponent: FC<Props> = ({
   handleCloseModal,
   onErrorCallback = noopFunction
 }) => {
-  const [attemptLeftCount, setAttemptLeftCount] = useState(3)
+  const { attemptsLeftCount } = useAppSelector(twoFaSelector)
   const [secure2FACode, setSecure2FACode] = useState('')
   const [submit2faData, { isLoading, isError, isSuccess, data }] = useConfirmUser2FAMutation()
+  const dispatch = useAppDispatch()
+
+  const isDisabledSubmit = secure2FACode.length < 6 || isSuccess
 
   useEffect(() => {
-    if (attemptLeftCount <= 0) {
+    if (attemptsLeftCount <= 0) {
       handleCloseModal()
       onErrorCallback(ErrorMessages.FAILURE_AUTH_ERROR)
     }
-  }, [attemptLeftCount, onErrorCallback, handleCloseModal])
+  }, [attemptsLeftCount, onErrorCallback, handleCloseModal])
 
   useEffect(() => {
     if (isError) {
-      setAttemptLeftCount((prev) => --prev)
+      dispatch(decreseAttemptsLeftCountAction())
     }
-  }, [isError])
+  }, [isError, dispatch])
 
   useEffect(() => {
     let timerId: NodeJS.Timeout
@@ -94,18 +100,18 @@ export const User2FAComponent: FC<Props> = ({
         {isLoading ? (
           <Loader type='solid' color='black' />
         ) : (
-          <User2FAButton onClick={handleSubmit} disabled={secure2FACode.length < 6 || isSuccess}>
+          <User2FAButton onClick={handleSubmit} disabled={isDisabledSubmit}>
             Send
           </User2FAButton>
         )}
       </User2FAWrapper>
 
-      <SpanWrapper>
-        {isSuccess && <User2FASuccessSpan>Success</User2FASuccessSpan>}
+      <TextWrapper>
+        {isSuccess && <User2FASuccessText>Success</User2FASuccessText>}
         {isError && (
-          <User2FAErrorSpan>{`Invalid code you have ${attemptLeftCount} attempts`}</User2FAErrorSpan>
+          <User2FAErrorText>{`Invalid code you have ${attemptsLeftCount} attempts`}</User2FAErrorText>
         )}
-      </SpanWrapper>
+      </TextWrapper>
 
       <User2FACloseModalButton onClick={handleCloseModal} disabled={isLoading || isSuccess}>
         <XMarkIcon />

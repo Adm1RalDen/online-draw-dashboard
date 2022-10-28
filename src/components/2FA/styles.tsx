@@ -39,11 +39,11 @@ const User2FAButton = styled(Button)`
   border: none;
 `
 
-const User2FAErrorSpan = styled(Span)`
+const User2FAErrorText = styled(Span)`
   color: ${({ theme }) => theme.colors.red};
 `
 
-const User2FASuccessSpan = styled(User2FAErrorSpan)`
+const User2FASuccessText = styled(User2FAErrorText)`
   color: ${({ theme }) => theme.colors.green};
 `
 
@@ -79,7 +79,7 @@ export {
   User2FAInput,
   User2FAButton,
   User2FAWrapper,
-  User2FAErrorSpan,
-  User2FASuccessSpan,
+  User2FAErrorText,
+  User2FASuccessText,
   User2FACloseModalButton
 }

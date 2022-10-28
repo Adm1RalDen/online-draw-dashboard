@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const DisableAuthentificatorSection = styled.section`
+export const DisableAuthentificatorSection = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,7 +8,7 @@ const DisableAuthentificatorSection = styled.section`
   min-height: 100vh;
 `
 
-const DisableAuthentificatorWrapper = styled.div`
+export const DisableAuthentificatorWrapper = styled.div`
   width: 400px;
   height: 300px;
   padding: 30px 10px;
@@ -20,7 +20,7 @@ const DisableAuthentificatorWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
 `
 
-const SuccessWrapper = styled.div`
+export const SuccessWrapper = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -28,7 +28,7 @@ const SuccessWrapper = styled.div`
   text-align: center;
 `
 
-const DisableAuthentificatorForm = styled.form`
+export const DisableAuthentificatorForm = styled.form`
   padding: 5px;
 
   & > button {
@@ -36,17 +36,9 @@ const DisableAuthentificatorForm = styled.form`
   }
 `
 
-const SuccessIconWrapper = styled.div`
+export const SuccessIconWrapper = styled.div`
   & > svg {
     width: 50px;
     height: 50px;
   }
 `
-
-export {
-  DisableAuthentificatorWrapper,
-  DisableAuthentificatorForm,
-  SuccessIconWrapper,
-  DisableAuthentificatorSection,
-  SuccessWrapper
-}

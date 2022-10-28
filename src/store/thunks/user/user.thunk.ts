@@ -4,11 +4,18 @@ import { updateUser } from 'api/user/update'
 import { ErrorMessages } from 'const/enums'
 import { USER_SLICE_NAME } from 'store/const'
 
+import { userLogoutThunk } from './authorization.thunk'
+
 export const getUserProfileThunk = createAsyncThunk(
   `${USER_SLICE_NAME}/profile-thunk`,
-  async (id: string) => {
-    const response = await getProfile(id)
-    return response.data
+  async (id: string, { dispatch, rejectWithValue }) => {
+    try {
+      const response = await getProfile(id)
+      return response.data
+    } catch {
+      dispatch(userLogoutThunk())
+      return rejectWithValue(ErrorMessages.OCCURED_ERROR)
+    }
   }
 )
 
@@ -23,6 +30,7 @@ export const updateUserProfileThunk = createAsyncThunk(
       return response.data
     }
 
+    dispatch(userLogoutThunk())
     return rejectWithValue(ErrorMessages.OCCURED_ERROR)
   }
 )

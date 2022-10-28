@@ -1,11 +1,11 @@
 import { SETTINGS_URL } from 'const/urls'
 import { useFormik } from 'formik'
-// eslint-disable-next-line import/no-unresolved
 import SuccessIcon from 'public/assets/success.svg'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { useDisableTwoFAMutation } from 'store/rtk/api'
+import { useDisableTwoFAMutation } from 'store/rtk/services/twoFa'
+import { Disable2FAData } from 'store/rtk/types'
 import { userDataSelector } from 'store/selectors/user.selector'
 import { Heading2, Heading3, Paragraph } from 'styles/typography/styles'
 import { checkForNumbersInString } from 'utils/checkForNumbersInString'
@@ -28,9 +28,14 @@ import {
 import { validationSchema } from './utils'
 
 export const DisableAuthentificator = () => {
-  const [submitDisable, { isLoading, isError, error, isSuccess }] = useDisableTwoFAMutation()
+  const [submitDisable2Fa, { isLoading, isError, error, isSuccess }] = useDisableTwoFAMutation()
   const { isUse2FA } = useSelector(userDataSelector)
   const navigate = useNavigate()
+
+  const handleSubmit = ({ password, secure2FACode }: Disable2FAData) => {
+    const hash_password = cryptoSha256(password)
+    submitDisable2Fa({ secure2FACode, password: hash_password })
+  }
 
   useEffect(() => {
     if (!isUse2FA) {
@@ -47,7 +52,7 @@ export const DisableAuthentificator = () => {
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: (data) => submitDisable({ ...data, password: cryptoSha256(data.password).toString() })
+    onSubmit: handleSubmit
   })
 
   const handleNavigate = () => navigate(SETTINGS_URL)

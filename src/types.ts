@@ -71,6 +71,7 @@ export type VerifyRequestData = {
 export interface User2FALoginResponse {
   isUse2FA: boolean
   userId: string
+  attemptsLeftCount: number
 }
 
 export type ServerResponseError = {

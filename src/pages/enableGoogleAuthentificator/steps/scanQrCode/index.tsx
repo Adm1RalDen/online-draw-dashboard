@@ -2,7 +2,7 @@ import { ErrorMessages } from 'const/enums'
 import { FC, useEffect } from 'react'
 import { toast } from 'react-toastify'
 import { useAppSelector } from 'store'
-import { useCreateTwoFAQuery } from 'store/rtk/api'
+import { useCreateTwoFAQuery } from 'store/rtk/services/twoFa'
 import { twoFaSelector } from 'store/selectors/twoFa.selector'
 import { Heading4, Paragraph, Span } from 'styles/typography/styles'
 
@@ -12,6 +12,7 @@ import { AuthentificatorButtonsWrapper, AuthentificatorNextButton } from '../sty
 import { StepsProps } from '../types'
 import { ScanQrCodeStepLoading } from './components/loading'
 import { ScanQrCodeStepSuccess } from './components/success'
+import { useToastError } from 'hooks/useToastError'
 
 export const ScanQrCodeStep: FC<StepsProps> = ({ handleDeclineStep, handleIncreaseStep }) => {
   const { qrcode, secretKey, error } = useAppSelector(twoFaSelector)
@@ -19,11 +20,7 @@ export const ScanQrCodeStep: FC<StepsProps> = ({ handleDeclineStep, handleIncrea
     skip: !!((qrcode && secretKey) || error)
   })
 
-  useEffect(() => {
-    if (error) {
-      toast.error(ErrorMessages.OCCURED_ERROR)
-    }
-  }, [error])
+  useToastError(error)
 
   return (
     <>

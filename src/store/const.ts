@@ -2,6 +2,7 @@ import { UserReducerInitialTypes } from './types/user.types'
 
 export const USER_SLICE_NAME = 'user'
 export const TWOFA_SLICE_NAME = 'twoFa'
+export const RTK_API_NAME = 'splitApi'
 
 export const defaultUserData = {
   id: '',
