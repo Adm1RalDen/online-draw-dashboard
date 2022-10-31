@@ -1,8 +1,11 @@
-import { ErrorMessages } from 'const/enums'
 import { HOME_URL } from 'const/urls'
 import { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { saveUserInStorage } from 'services/token.service'
+import { SavedUserObject } from 'types'
+import { jsonParse } from 'utils/jsonParse'
+
+import { Loader } from 'components/loader'
 
 export const SuccessGoogleAuth = () => {
   const [searchParams] = useSearchParams()
@@ -11,16 +14,15 @@ export const SuccessGoogleAuth = () => {
     const user = searchParams.get('user')
 
     if (user) {
-      try {
-        const userObject = JSON.parse(user)
+      const userObject = jsonParse<SavedUserObject>(user)
+
+      if (userObject) {
         saveUserInStorage(userObject)
-      } catch (e) {
-        console.error(ErrorMessages.PARSING_ERROR)
       }
     }
 
     window.location.replace(HOME_URL)
   }, [searchParams])
 
-  return null
+  return <Loader position='absolute' />
 }

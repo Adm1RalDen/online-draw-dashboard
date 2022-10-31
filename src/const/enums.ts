@@ -5,6 +5,15 @@ export enum PLATFORMS {
   Android = 'android'
 }
 
+export enum NetworkStatus {
+  SUCCESS = 200,
+  NOT_FOUND = 404,
+  UNAUTHORITHED = 401,
+  FORBIDDEN = 403,
+  CONFLICT = 409,
+  INTERNAL = 500
+}
+
 export enum ErrorMessages {
   ERROR = 'Error',
   OCCURED_ERROR = 'Occured error',

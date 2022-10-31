@@ -5,7 +5,7 @@ import { FunctionWithParams } from 'types'
 
 import { FileInput } from 'components/fileInput'
 import { Input } from 'components/input'
-import { RadioButtons } from 'components/radioButton'
+import { RadioButtons } from 'components/radioButtons'
 
 import { MALE, WOMAN } from '../const'
 import { InitialStateTypes } from '../types'

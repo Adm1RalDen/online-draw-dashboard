@@ -5,7 +5,7 @@ import { useAppSelector } from 'store'
 import { userDataSelector } from 'store/selectors/user.selector'
 import { ChildrenProps } from 'types'
 
-import { Loader } from 'components/loaders/loader'
+import { Loader } from 'components/loader'
 
 import { checkUserInRoom } from './const'
 

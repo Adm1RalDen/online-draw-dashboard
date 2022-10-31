@@ -48,8 +48,7 @@ const inputKeys = [
   'gender',
   'color',
   'date',
-  'isUse2FA',
-  'qrcode'
+  'isUse2FA'
 ]
 
 export { setInitialValues, validationSchema, defaultUserValues, inputKeys }

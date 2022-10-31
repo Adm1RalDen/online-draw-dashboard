@@ -1,10 +1,10 @@
 import { ActionReducerMapBuilder } from '@reduxjs/toolkit'
 import { ErrorMessages } from 'const/enums'
-import { updateUserProfileThunk } from 'store/thunks/user/user.thunk'
-import { UserReducerInitialTypes } from 'store/types/user.types'
+import { UpdateUserProfileThunkType, UserReducerInitialTypes } from 'store/types/user.types'
 
-export const updateUserProfileBuilder = (
-  builder: ActionReducerMapBuilder<UserReducerInitialTypes>
+const updateUserProfileBuilder = (
+  builder: ActionReducerMapBuilder<UserReducerInitialTypes>,
+  updateUserProfileThunk: UpdateUserProfileThunkType
 ) => {
   builder.addCase(updateUserProfileThunk.pending, (state) => {
     state.isLoading = true
@@ -19,3 +19,5 @@ export const updateUserProfileBuilder = (
     state.error = ErrorMessages.OCCURED_ERROR
   })
 }
+
+export default updateUserProfileBuilder

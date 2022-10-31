@@ -1,17 +1,52 @@
 import styled from 'styled-components'
 
-const CheckBoxWrapper = styled.div`
-  display: flex;
-  gap: 10px;
-  align-items: center;
-`
 const CheckBoxLabel = styled.label`
-  font-size: 16px;
+  display: block;
+  position: relative;
+  padding: 5px 10px 5px 30px;
 `
+
+const Checkmark = styled.span`
+  position: absolute;
+  border-radius: 5px;
+  top: 0;
+  left: 0;
+  width: 25px;
+  height: 25px;
+  background-color: ${({ theme }) => theme.colors.gray};
+  pointer-events: none;
+
+  &::after {
+    content: '';
+    position: absolute;
+    opacity: 0;
+    width: 8px;
+    height: 14px;
+    top: 4px;
+    left: 9px;
+    border-bottom: 3px solid ${({ theme }) => theme.colors.white};
+    border-right: 3px solid ${({ theme }) => theme.colors.white};
+    transform: rotate(45deg);
+  }
+`
+
 const CheckBoxInput = styled.input.attrs(() => ({ type: 'checkbox' }))`
-  width: 20px;
-  height: 20px;
-  background-color: ${({ theme }) => theme.colors.white};
+  position: absolute;
   cursor: pointer;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  &:checked {
+    & + span {
+      background-color: ${({ theme }) => theme.colors.blue};
+      &::after {
+        opacity: 1;
+      }
+    }
+  }
 `
-export { CheckBoxInput, CheckBoxWrapper, CheckBoxLabel }
+
+export { CheckBoxInput, CheckBoxLabel, Checkmark }

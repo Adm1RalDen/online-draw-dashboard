@@ -5,7 +5,7 @@ import { useAppSelector } from 'store'
 import { userInfoSelector } from 'store/selectors/user.selector'
 import { setImageUrl } from 'utils/setImageUrl'
 
-import { LittleLoader } from 'components/loaders/littleLoader'
+import { Loader } from 'components/loader'
 
 import { ChatMessage } from '../types'
 import { DEFAULT_IMAGE, clearConnectionChat, setConnectionChat } from './const'
@@ -52,7 +52,7 @@ export const Chat = () => {
         {error ? (
           <span>{error}</span>
         ) : isLoadingChat ? (
-          <LittleLoader />
+          <Loader type='solid' />
         ) : (
           messages.map((msg: ChatMessage) => (
             <MessagesWrapper key={nanoid()}>
@@ -74,7 +74,7 @@ export const Chat = () => {
         )}
         {isMessageLoading && (
           <LoadIndicator>
-            <LittleLoader />
+            <Loader type='solid' />
           </LoadIndicator>
         )}
       </MessagesBlock>

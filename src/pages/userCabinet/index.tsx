@@ -9,7 +9,7 @@ import { toLocaleDateString } from 'utils/toLocaleDateString'
 
 import { Container } from 'components/container'
 import { HtmlText } from 'components/htmlText'
-import { Loader } from 'components/loaders/loader'
+import { Loader } from 'components/loader'
 
 import {
   Avatar,

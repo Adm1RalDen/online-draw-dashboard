@@ -1,28 +1,26 @@
-import { ActionReducerMapBuilder, PayloadAction } from '@reduxjs/toolkit'
+import { ActionReducerMapBuilder } from '@reduxjs/toolkit'
 import { ErrorMessages } from 'const/enums'
-import { getUserProfileThunk } from 'store/thunks/user/user.thunk'
-import { UserReducerInitialTypes } from 'store/types/user.types'
-import { AuthorizedUser } from 'types'
+import { GetUserProfileThunkType, UserReducerInitialTypes } from 'store/types/user.types'
 
-export const getUserProfileBuilder = (
-  builder: ActionReducerMapBuilder<UserReducerInitialTypes>
+const getUserProfileBuilder = (
+  builder: ActionReducerMapBuilder<UserReducerInitialTypes>,
+  getUserProfileThunk: GetUserProfileThunkType
 ) => {
   builder.addCase(getUserProfileThunk.pending, (state) => {
     state.isLoading = true
     state.error = ''
   })
 
-  builder.addCase(
-    getUserProfileThunk.fulfilled,
-    (state, { payload }: PayloadAction<AuthorizedUser>) => {
-      state.data = { ...payload }
-      state.isLoading = false
-      state.error = undefined
-    }
-  )
+  builder.addCase(getUserProfileThunk.fulfilled, (state, { payload }) => {
+    state.data = { ...payload }
+    state.isLoading = false
+    state.error = undefined
+  })
 
   builder.addCase(getUserProfileThunk.rejected, (state) => {
     state.isLoading = false
     state.error = ErrorMessages.OCCURED_ERROR
   })
 }
+
+export default getUserProfileBuilder

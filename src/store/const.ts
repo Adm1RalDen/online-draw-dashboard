@@ -1,6 +1,9 @@
 import { UserReducerInitialTypes } from './types/user.types'
 
-export const USER_REDUCER = 'user'
+export const USER_SLICE_NAME = 'user'
+export const TWOFA_SLICE_NAME = 'twoFa'
+export const RTK_API_NAME = 'splitApi'
+
 export const defaultUserData = {
   id: '',
   avatar: '',
@@ -15,8 +18,7 @@ export const defaultUserData = {
   gender: '',
   date: '',
   biography: '',
-  isUse2FA: false,
-  qrcode: ''
+  isUse2FA: false
 }
 
 export const userInitialState: UserReducerInitialTypes = {
@@ -39,7 +41,6 @@ export const userInitialState: UserReducerInitialTypes = {
     gender: '',
     date: '',
     biography: '',
-    isUse2FA: false,
-    qrcode: ''
+    isUse2FA: false
   }
 }

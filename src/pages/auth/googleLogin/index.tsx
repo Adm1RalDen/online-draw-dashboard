@@ -1,6 +1,4 @@
 import { API_URL } from 'api/const'
-
-/* eslint-disable-next-line */
 import GoogleIcon from 'public/assets/google-logo.svg'
 
 import { GoogleLink } from './styles'

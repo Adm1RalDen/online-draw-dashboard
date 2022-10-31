@@ -2,9 +2,11 @@ import { useFormik } from 'formik'
 import { toast } from 'react-toastify'
 import { useAppDispatch, useAppSelector } from 'store'
 import { userDataSelector, userInfoSelector } from 'store/selectors/user.selector'
+import { setAttemptsLeftCountAction } from 'store/slices/twoFa.slice'
 import { cancelUser2faAction } from 'store/slices/user.slice'
 import { loginThunk, saveUserDataThunk } from 'store/thunks/user/authorization.thunk'
 import { AuthResponse, UserLoginFormData } from 'types'
+import { capitalizeFirstLetter } from 'utils/capitalizeFirstLetter'
 import { Portal } from 'utils/portal'
 
 import { User2FAComponent } from 'components/2FA'
@@ -17,17 +19,18 @@ import { AuthorizationFileds, initialValues, validationSchema } from './const'
 export const LoginComponent = () => {
   const dispatch = useAppDispatch()
   const { isLoading } = useAppSelector(userInfoSelector)
-  const { id, qrcode, isUse2FA } = useAppSelector(userDataSelector)
+  const { id, isUse2FA } = useAppSelector(userDataSelector)
 
   const onSuccessCallback = (data: AuthResponse) => dispatch(saveUserDataThunk(data))
-  const handleSubmit = (data: UserLoginFormData) => dispatch(loginThunk(data))
   const onErrorCallback = (err: string) => toast.error(err)
   const handleCloseModal = () => dispatch(cancelUser2faAction())
+
+  const setAttemptsLeftCount = (count: number) => dispatch(setAttemptsLeftCountAction(count))
 
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: handleSubmit
+    onSubmit: (data) => dispatch(loginThunk({ ...data, setAttemptsLeftCount }))
   })
 
   return (
@@ -40,7 +43,7 @@ export const LoginComponent = () => {
               key={field}
               disabled={isLoading}
               margin='5px 0px 0px 0px'
-              label={field[0].toUpperCase() + field.slice(1)}
+              label={capitalizeFirstLetter(field)}
               name={field}
               type={field}
               value={formik.values[field as keyof UserLoginFormData]}
@@ -61,7 +64,6 @@ export const LoginComponent = () => {
       {isUse2FA && (
         <Portal>
           <User2FAComponent
-            qrcode={qrcode}
             userId={id}
             handleCloseModal={handleCloseModal}
             onSuccessCallback={onSuccessCallback}
