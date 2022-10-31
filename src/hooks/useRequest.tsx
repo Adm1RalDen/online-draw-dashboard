@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios'
 import { useState } from 'react'
 
-export const useRequest = (request: () => AxiosResponse) => {
+export const useRequest = (request: () => Promise<AxiosResponse>) => {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const [data, setData] = useState(null)

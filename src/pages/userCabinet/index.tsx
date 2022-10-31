@@ -1,6 +1,6 @@
 import { HOME_URL } from 'const/urls'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAppSelector } from 'store'
 import { userInfoSelector } from 'store/selectors/user.selector'
 import { setImageUrl } from 'utils/setImageUrl'
@@ -31,21 +31,17 @@ export const UserCabinet = () => {
   const { data, isLoading } = useAppSelector(userInfoSelector)
   const [editMode, setEditMode] = useState(false)
   const navigate = useNavigate()
+
   const handleEdit = () => setEditMode((prev) => !prev)
-  const handleNavigate = () => {
-    navigate(HOME_URL)
-  }
+  const handleNavigate = () => navigate(HOME_URL)
+
   const backgroundFonSrc = `${data.backgroundFon}?id=${Math.floor(Math.random() * 1000)}`
   const avatarSrc = `${data.avatar}?id=${Math.floor(Math.random() * 1000)}`
 
-  const userInfoFields = [
-    'name',
-    'country',
-    'city',
-    'color',
-    'gender',
-    'date'
-  ] as (keyof typeof data)[]
+  const userInfoFields = ['name', 'country', 'city', 'color', 'gender', 'date'] as Exclude<
+    keyof typeof data,
+    'isUse2FA'
+  >[]
 
   const setUserInfo = (key: string, value: string) => {
     switch (key) {
@@ -102,7 +98,9 @@ export const UserCabinet = () => {
             </UserInfoWrapper>
 
             <ButtonWrapper>
-              <CabinetButton onClick={handleEdit}>Edit</CabinetButton>
+              <CabinetButton onClick={handleEdit}>
+                <Link to='/settings'>Edit</Link>
+              </CabinetButton>
               <CabinetButton onClick={handleNavigate}>Back</CabinetButton>
             </ButtonWrapper>
           </Wrapper>

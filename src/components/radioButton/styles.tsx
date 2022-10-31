@@ -2,7 +2,9 @@ import styled from 'styled-components'
 
 const InputWrapper = styled.div``
 const Wrapper = styled.div`
+  display: inline-block;
   width: max-content;
+  margin-right: 10px;
 `
 const Input = styled.input`
   position: absolute;

@@ -1,10 +1,11 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { authorizedBuilder } from 'store/builders/authorizedBuilder'
 import { getUserProfileBuilder } from 'store/builders/getUserProfileBuilder'
+import { loginBuilder } from 'store/builders/loginBuilder'
+import { saveUserDataBuilder } from 'store/builders/saveUserDataBuilder'
+import { updateAuthStatusBuilder } from 'store/builders/updateAuthStatusBuilder'
 import { updateUserProfileBuilder } from 'store/builders/updateUserProfileBuilder'
-import { userLoginBuilder } from 'store/builders/userLoginBuilder'
 import { userRegistrationBuilder } from 'store/builders/userRegistrationBuilder'
-import { SavedUserObject } from 'types'
+import { SavedUserObject, User2FALoginResponse } from 'types'
 
 import { USER_REDUCER, defaultUserData, userInitialState } from '../const'
 
@@ -24,16 +25,27 @@ export const UserSlice = createSlice({
       state.isAuth = false
       state.error = undefined
       state.token = undefined
+    },
+
+    setUser2faAction: (state, { payload }: PayloadAction<User2FALoginResponse>) => {
+      const { userId, ...data } = payload
+      state.data = { ...state.data, ...data, id: userId }
+    },
+
+    cancelUser2faAction: (state) => {
+      state.data = defaultUserData
     }
   },
 
   extraReducers: (builder) => {
+    loginBuilder(builder)
     getUserProfileBuilder(builder)
-    userLoginBuilder(builder)
+    saveUserDataBuilder(builder)
     updateUserProfileBuilder(builder)
     userRegistrationBuilder(builder)
-    authorizedBuilder(builder)
+    updateAuthStatusBuilder(builder)
   }
 })
 
-export const { initializeUser, logoutAction } = UserSlice.actions
+export const { initializeUser, logoutAction, setUser2faAction, cancelUser2faAction } =
+  UserSlice.actions

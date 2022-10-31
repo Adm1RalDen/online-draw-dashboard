@@ -13,7 +13,8 @@ const defaultUserValues = {
   city: '',
   color: themes.colors.black,
   gender: '',
-  date: ''
+  date: '',
+  isUse2FA: false
 }
 
 const setInitialValues = (data: AuthorizedUser): InitialStateTypes => ({
@@ -22,7 +23,8 @@ const setInitialValues = (data: AuthorizedUser): InitialStateTypes => ({
   city: data.city,
   color: data.color,
   gender: data.gender,
-  date: data.date
+  date: data.date,
+  isUse2FA: data.isUse2FA
 })
 
 const validationSchema = yup.object().shape({
@@ -31,7 +33,8 @@ const validationSchema = yup.object().shape({
   city: yup.string(),
   color: yup.string(),
   gander: yup.string(),
-  date: yup.date()
+  date: yup.date(),
+  isUse2FA: yup.boolean()
 })
 
 const inputKeys = [
@@ -45,7 +48,8 @@ const inputKeys = [
   'gender',
   'color',
   'date',
-  'age'
+  'isUse2FA',
+  'qrcode'
 ]
 
 export { setInitialValues, validationSchema, defaultUserValues, inputKeys }

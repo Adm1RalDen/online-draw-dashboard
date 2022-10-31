@@ -3,7 +3,7 @@ import { authorizeUser } from 'api/user/authorize'
 import { getProfile } from 'api/user/getProfile'
 import { logout } from 'api/user/logout'
 import { registrationUser } from 'api/user/registration'
-import { AxiosError } from 'axios'
+import { ErrorMessages } from 'const/enums'
 import { toast } from 'react-toastify'
 import {
   deleteSavedToken,
@@ -12,48 +12,72 @@ import {
   saveUserInStorage
 } from 'services/token.service'
 import { USER_REDUCER } from 'store/const'
-import { initializeUser, logoutAction } from 'store/slices/user.slice'
+import { initializeUser, logoutAction, setUser2faAction } from 'store/slices/user.slice'
+import { cryptoSha256 } from 'utils/cryptoPassord'
+import { errorHandler } from 'utils/errorHandler'
 
-import { UserLoginFormData, UserRegistrationData } from '../../../types'
+import {
+  AuthResponse,
+  User2FALoginResponse,
+  UserLoginFormData,
+  UserRegistrationData
+} from '../../../types'
 
-export const AuthorizedThunk = createAsyncThunk(
-  `${USER_REDUCER}/authorize-thunk`,
+export const updateAuthStatusThunk = createAsyncThunk(
+  `${USER_REDUCER}/updateAuthStatus-thunk`,
   async (_, { dispatch, rejectWithValue }) => {
     try {
       const savedUser = getSavedUser()
+
       if (savedUser) {
         const profile = await getProfile(savedUser.user.id)
         dispatch(initializeUser(savedUser))
         return profile.data
       }
-      throw new Error('User is not authorized')
+
+      throw new Error(ErrorMessages.UNAUTHORITHED_ERROR)
     } catch (e) {
       await UserLogoutThunk(dispatch)
-      return rejectWithValue('User is not authorized')
+      return rejectWithValue(ErrorMessages.UNAUTHORITHED_ERROR)
     }
   }
 )
 
-export const UserLoginThunk = createAsyncThunk(
+export const loginThunk = createAsyncThunk(
   `${USER_REDUCER}/login-thunk`,
-  async (data: UserLoginFormData, { rejectWithValue }) => {
+  async (data: UserLoginFormData, { dispatch }) => {
     try {
-      const response = await authorizeUser(data)
-      saveUserInStorage(response.data)
-      saveRefreshToken(response.data.refreshToken)
-      const profile = await getProfile(response.data.user.id)
-      return { token: response.data.token, profile: profile.data }
-    } catch (e) {
-      if (e instanceof AxiosError) {
-        toast.error(e.response?.data.message)
-        return rejectWithValue(e.response?.data.message || 'Login error')
+      const password = cryptoSha256(data.password)
+      const response = await authorizeUser({ ...data, password })
+
+      if (!(response.data as User2FALoginResponse)?.isUse2FA) {
+        return dispatch(saveUserDataThunk({ ...(response.data as AuthResponse) }))
       }
-      return rejectWithValue('Login error')
+
+      dispatch(setUser2faAction(response.data as User2FALoginResponse))
+    } catch (e) {
+      errorHandler(e)
     }
   }
 )
 
-export const UserRegistrationThunk = createAsyncThunk(
+export const saveUserDataThunk = createAsyncThunk(
+  `${USER_REDUCER}/saveUserData-thunk`,
+  async (data: AuthResponse, { rejectWithValue }) => {
+    try {
+      saveUserInStorage({ token: data.token, user: data.user })
+      saveRefreshToken(data.refreshToken)
+
+      const profile = await getProfile(data.user.id)
+      return { token: data.token, profile: profile.data }
+    } catch (e) {
+      errorHandler(e)
+      return rejectWithValue(ErrorMessages.OCCURED_ERROR)
+    }
+  }
+)
+
+export const userRegistrationThunk = createAsyncThunk(
   `${USER_REDUCER}/registration-thunk`,
   async (data: UserRegistrationData, { rejectWithValue }) => {
     try {
@@ -61,11 +85,7 @@ export const UserRegistrationThunk = createAsyncThunk(
       toast.success(response.data.message)
       return response.data
     } catch (e) {
-      if (e instanceof AxiosError) {
-        toast.error(e.response?.data.message)
-        return rejectWithValue(e.response?.data.message || 'Registration error')
-      }
-      return rejectWithValue('Registration error')
+      return rejectWithValue(errorHandler(e, ErrorMessages.REGISTRATION_ERROR))
     }
   }
 )
