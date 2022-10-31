@@ -1,7 +1,10 @@
+import axios, { AxiosError } from 'axios'
+
 import { API_URL, SetHeaders, setRefreshToken } from 'api/const'
 import { Instance } from 'api/instance'
-import axios, { AxiosError } from 'axios'
+
 import { getToken, saveUserInStorage } from 'services/token.service'
+
 import { AuthResponse } from 'types'
 
 export const responseInterceptor = async (error: AxiosError) => {

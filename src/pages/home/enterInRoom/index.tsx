@@ -1,12 +1,14 @@
 import { useFormik } from 'formik'
-import { useSocket } from 'hooks/useSocket'
 import { FC } from 'react'
-import { useAppSelector } from 'store'
-import { userInfoSelector } from 'store/selectors/user.selector'
-import { Heading3 } from 'styles/typography/styles'
-import { FunctionWithParams } from 'types'
 
 import { ErrorSpan } from 'components/error-span'
+import { Heading3 } from 'styles/typography/styles'
+
+import { useSocket } from 'hooks/useSocket'
+import { useAppSelector } from 'store'
+import { userInfoSelector } from 'store/selectors/user.selector'
+
+import { FunctionWithParams } from 'types'
 
 import { RoomInput, RoomInputWrapper, RoomWrapper, SubmitButton } from '../styles'
 import { initialValues, onSubmit, validationSchema } from './const'

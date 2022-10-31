@@ -1,5 +1,6 @@
-import { API_URL } from 'api/const'
 import axios from 'axios'
+
+import { API_URL } from 'api/const'
 
 import { responseInterceptor } from './interceptors/response'
 

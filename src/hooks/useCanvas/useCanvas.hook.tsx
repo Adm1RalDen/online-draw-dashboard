@@ -1,9 +1,11 @@
 import { Tool } from 'canvas_classes'
-import { useSocket } from 'hooks/useSocket'
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+
+import { useSocket } from 'hooks/useSocket'
 import { useAppSelector } from 'store'
 import { userDataSelector } from 'store/selectors/user.selector'
+
 import { ToolsTypes } from 'types/canvas'
 
 import { handleSetTool, setCanvasHeight, setCanvasWidth } from './const'

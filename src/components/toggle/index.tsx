@@ -1,4 +1,5 @@
 import { FC, useState } from 'react'
+
 import { noopFunction } from 'utils/noop'
 
 import { ToggleInput, ToggleSpan, ToggleWrapper } from './styles'

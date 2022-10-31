@@ -1,4 +1,5 @@
 import { ActionReducerMapBuilder } from '@reduxjs/toolkit'
+
 import { ErrorMessages } from 'const/enums'
 import { updateUserProfileThunk } from 'store/thunks/user/user.thunk'
 import { UserReducerInitialTypes } from 'store/types/user.types'

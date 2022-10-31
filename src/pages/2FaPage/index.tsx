@@ -1,14 +1,17 @@
-import { ErrorMessages } from 'const/enums'
-import { HOME_URL } from 'const/urls'
 import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
-import { useAppDispatch } from 'store'
-import { saveUserDataThunk } from 'store/thunks/user/authorization.thunk'
-import { Heading1 } from 'styles/typography/styles'
-import { AuthResponse, User2FAData } from 'types'
-import { Portal } from 'utils/portal'
 
 import { User2FAComponent } from 'components/2FA'
+import { Heading1 } from 'styles/typography/styles'
+
+import { ErrorMessages } from 'const/enums'
+import { HOME_URL } from 'const/urls'
+import { useAppDispatch } from 'store'
+import { saveUserDataThunk } from 'store/thunks/user/authorization.thunk'
+
+import { Portal } from 'utils/portal'
+
+import { AuthResponse, User2FAData } from 'types'
 
 import { TwoFactorPageSection } from './styles'
 

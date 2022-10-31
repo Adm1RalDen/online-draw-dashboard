@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useAppSelector } from 'store'
+
 import { Heading2 } from 'styles/typography/styles'
 
 import { PrivacyAuthentificatorContent } from '../privacyContent'

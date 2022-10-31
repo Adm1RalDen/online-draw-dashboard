@@ -1,4 +1,5 @@
 import jwtDecode from 'jwt-decode'
+
 import { SavedUserObject } from 'types'
 
 const USER = 'user'

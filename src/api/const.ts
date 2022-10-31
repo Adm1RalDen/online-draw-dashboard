@@ -1,4 +1,5 @@
 import { DEFAULT_HOST_URL } from 'const/urls'
+
 import { getRefreshToken, getToken } from 'services/token.service'
 
 export const SOCKET_HOST_URL = process.env.SOCKET_HOST || DEFAULT_HOST_URL

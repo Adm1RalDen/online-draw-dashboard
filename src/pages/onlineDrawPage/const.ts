@@ -1,10 +1,13 @@
-import { checkRoom } from 'api/rooms/checkRoom'
 import { AxiosError } from 'axios'
+import { NavigateFunction } from 'react-router-dom'
+import { toast } from 'react-toastify'
+
+import { checkRoom } from 'api/rooms/checkRoom'
+
 import { ErrorMessages } from 'const/enums'
 import { JOIN_ACCESS_SOCKET } from 'const/sockets'
 import { CHECK_ROOM_PASSWORD_URL, HOME_URL } from 'const/urls'
-import { NavigateFunction } from 'react-router-dom'
-import { toast } from 'react-toastify'
+
 import { FunctionWithParams } from 'types'
 import { SocketApp } from 'types/socket'
 

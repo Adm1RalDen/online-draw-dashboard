@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react'
+
 import { Heading3 } from 'styles/typography/styles'
 
 import { DEFAULT_POPPER_TITLE, POPPER_AGREE, POPPER_DISAGREE } from './const'

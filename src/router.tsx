@@ -1,4 +1,5 @@
-import { WsContext } from 'context/ws.context'
+import { Navigate, useRoutes } from 'react-router-dom'
+
 import { TwoFactorPage } from 'pages/2FaPage'
 import { ActivationPage } from 'pages/activatePage'
 import { AuthPage } from 'pages/auth/index'
@@ -16,9 +17,11 @@ import { PrivacyMain } from 'pages/settings/components/privacyMain'
 import { PrivacySettings } from 'pages/settings/kategories/privacy'
 import { SuccessGoogleAuth } from 'pages/successGoogleAuth'
 import { UserCabinet } from 'pages/userCabinet'
-import { Navigate, useRoutes } from 'react-router-dom'
+
 import { useAppSelector } from 'store'
 import { userInfoSelector } from 'store/selectors/user.selector'
+
+import { WsContext } from 'context/ws.context'
 
 import { socket } from './utils/socket'
 

@@ -1,11 +1,14 @@
 import { XMarkIcon } from '@heroicons/react/24/solid'
 import { FC, useEffect, useState } from 'react'
-import { useConfirmUser2FAMutation } from 'store/rtk/api'
-import { Paragraph } from 'styles/typography/styles'
-import { AuthResponse, FunctionWithParams } from 'types'
-import { noopFunction } from 'utils/noop'
 
 import { LittleLoader } from 'components/loaders/littleLoader'
+import { Paragraph } from 'styles/typography/styles'
+
+import { useConfirmUser2FAMutation } from 'store/rtk/api'
+
+import { noopFunction } from 'utils/noop'
+
+import { AuthResponse, FunctionWithParams } from 'types'
 
 import { AUTH_FAILURE_MESSAGE } from './const'
 import {

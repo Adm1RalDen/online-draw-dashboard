@@ -1,8 +1,8 @@
-import { ErrorMessages } from 'const/enums'
-import { useCreateTwoFAQuery } from 'store/rtk/api'
+import { LittleLoader } from 'components/loaders/littleLoader'
 import { Heading4, Paragraph, Span } from 'styles/typography/styles'
 
-import { LittleLoader } from 'components/loaders/littleLoader'
+import { ErrorMessages } from 'const/enums'
+import { useCreateTwoFAQuery } from 'store/rtk/api'
 
 import { ScanQrCodeLoaderWrapper } from './styles'
 

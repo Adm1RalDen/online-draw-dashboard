@@ -1,10 +1,12 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+
 import { getUserProfileBuilder } from 'store/builders/getUserProfileBuilder'
 import { loginBuilder } from 'store/builders/loginBuilder'
 import { saveUserDataBuilder } from 'store/builders/saveUserDataBuilder'
 import { updateAuthStatusBuilder } from 'store/builders/updateAuthStatusBuilder'
 import { updateUserProfileBuilder } from 'store/builders/updateUserProfileBuilder'
 import { userRegistrationBuilder } from 'store/builders/userRegistrationBuilder'
+
 import { SavedUserObject, User2FALoginResponse } from 'types'
 
 import { USER_REDUCER, defaultUserData, userInitialState } from '../const'

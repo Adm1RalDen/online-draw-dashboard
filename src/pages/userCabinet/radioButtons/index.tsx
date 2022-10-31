@@ -1,11 +1,12 @@
 import { FormikProps } from 'formik'
 import { ChangeEvent, FC } from 'react'
-import { Heading4 } from 'styles/typography/styles'
-import { FunctionWithParams } from 'types'
 
 import { FileInput } from 'components/fileInput'
 import { Input } from 'components/input'
 import { RadioButtons } from 'components/radioButton'
+import { Heading4 } from 'styles/typography/styles'
+
+import { FunctionWithParams } from 'types'
 
 import { MALE, WOMAN } from '../const'
 import { InitialStateTypes } from '../types'

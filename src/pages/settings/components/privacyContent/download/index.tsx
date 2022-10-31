@@ -1,10 +1,13 @@
-import { PLATFORMS } from 'const/enums'
+import { useState } from 'react'
+
+import { Heading4, Heading6, Paragraph, Span } from 'styles/typography/styles'
+
 // eslint-disable-next-line import/no-unresolved
 import AndroidLogo from 'public/assets/android-logo.svg'
 // eslint-disable-next-line import/no-unresolved
 import AppleLogo from 'public/assets/apple-logo.svg'
-import { useState } from 'react'
-import { Heading4, Heading6, Paragraph, Span } from 'styles/typography/styles'
+
+import { PLATFORMS } from 'const/enums'
 
 import {
   DownloadStepPlatform,

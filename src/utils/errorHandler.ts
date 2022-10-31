@@ -1,6 +1,7 @@
 import { AxiosError } from 'axios'
-import { ErrorMessages } from 'const/enums'
 import { toast } from 'react-toastify'
+
+import { ErrorMessages } from 'const/enums'
 
 export const errorHandler = (e: unknown, errorMessage = ErrorMessages.OCCURED_ERROR) => {
   if (e instanceof AxiosError) {

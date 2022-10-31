@@ -1,6 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
+
 import { getProfile } from 'api/user/getProfile'
 import { updateUser } from 'api/user/update'
+
 import { USER_REDUCER } from 'store/const'
 
 export const getUserProfileThunk = createAsyncThunk(

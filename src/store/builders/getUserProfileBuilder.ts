@@ -1,7 +1,9 @@
 import { ActionReducerMapBuilder, PayloadAction } from '@reduxjs/toolkit'
+
 import { ErrorMessages } from 'const/enums'
 import { getUserProfileThunk } from 'store/thunks/user/user.thunk'
 import { UserReducerInitialTypes } from 'store/types/user.types'
+
 import { AuthorizedUser } from 'types'
 
 export const getUserProfileBuilder = (

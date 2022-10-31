@@ -1,18 +1,21 @@
 import { Dispatch, createAsyncThunk } from '@reduxjs/toolkit'
+import { toast } from 'react-toastify'
+
 import { authorizeUser } from 'api/user/authorize'
 import { getProfile } from 'api/user/getProfile'
 import { logout } from 'api/user/logout'
 import { registrationUser } from 'api/user/registration'
+
 import { ErrorMessages } from 'const/enums'
-import { toast } from 'react-toastify'
+import { USER_REDUCER } from 'store/const'
+import { initializeUser, logoutAction, setUser2faAction } from 'store/slices/user.slice'
+
 import {
   deleteSavedToken,
   getSavedUser,
   saveRefreshToken,
   saveUserInStorage
 } from 'services/token.service'
-import { USER_REDUCER } from 'store/const'
-import { initializeUser, logoutAction, setUser2faAction } from 'store/slices/user.slice'
 import { cryptoSha256 } from 'utils/cryptoPassord'
 import { errorHandler } from 'utils/errorHandler'
 

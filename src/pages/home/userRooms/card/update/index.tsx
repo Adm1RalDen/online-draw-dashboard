@@ -1,11 +1,14 @@
 import { useFormik } from 'formik'
-import { useSocket } from 'hooks/useSocket'
 import { FC } from 'react'
-import { FunctionWithParams } from 'types'
-import { ActiveRoom } from 'types/rooms'
-import { Portal } from 'utils/portal'
 
 import { Button } from 'components/button'
+
+import { useSocket } from 'hooks/useSocket'
+
+import { Portal } from 'utils/portal'
+
+import { FunctionWithParams } from 'types'
+import { ActiveRoom } from 'types/rooms'
 
 import { onSubmit } from './const'
 import {

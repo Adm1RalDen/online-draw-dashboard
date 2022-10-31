@@ -1,8 +1,11 @@
 import { ActionReducerMapBuilder, PayloadAction } from '@reduxjs/toolkit'
+
 import { ErrorMessages } from 'const/enums'
-import { getSavedUser } from 'services/token.service'
 import { updateAuthStatusThunk } from 'store/thunks/user/authorization.thunk'
 import { UserReducerInitialTypes } from 'store/types/user.types'
+
+import { getSavedUser } from 'services/token.service'
+
 import { AuthorizedUser, SavedUserObject } from 'types'
 
 export const updateAuthStatusBuilder = (

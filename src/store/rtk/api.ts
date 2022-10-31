@@ -1,5 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+
 import { API_URL } from 'api/const'
+
 import { AuthResponse, VerifyRequestData } from 'types'
 
 import { confirmUser2FAQueryObj } from './queriesObjects/confirmUser2Fa'

@@ -1,7 +1,6 @@
-import { Heading4 } from 'styles/typography/styles'
-
 import { Input } from 'components/input'
 import { Label } from 'components/label'
+import { Heading4 } from 'styles/typography/styles'
 
 export const EnableStep = () => {
   return (

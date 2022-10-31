@@ -1,7 +1,9 @@
 import { CHAT_ERROR_SOCKET, CHAT_MESSAGE_SOCKET, GET_CHAT_SOCKET } from 'const/sockets'
+
+import { setImageUrl } from 'utils/setImageUrl'
+
 import { FunctionWithParams } from 'types'
 import { SocketApp } from 'types/socket'
-import { setImageUrl } from 'utils/setImageUrl'
 
 import { ChatMessage } from '../types'
 

@@ -1,5 +1,5 @@
 import { ChevronLeftIcon } from '@heroicons/react/24/solid'
-import { FC, useState } from 'react'
+import { FC } from 'react'
 
 import { ButtonOutline } from 'components/button-outline'
 

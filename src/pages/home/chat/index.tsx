@@ -1,11 +1,13 @@
 import { nanoid } from '@reduxjs/toolkit'
-import { useSocket } from 'hooks/useSocket'
 import React, { useEffect, useRef, useState } from 'react'
-import { useAppSelector } from 'store'
-import { userInfoSelector } from 'store/selectors/user.selector'
-import { setImageUrl } from 'utils/setImageUrl'
 
 import { LittleLoader } from 'components/loaders/littleLoader'
+
+import { useSocket } from 'hooks/useSocket'
+import { useAppSelector } from 'store'
+import { userInfoSelector } from 'store/selectors/user.selector'
+
+import { setImageUrl } from 'utils/setImageUrl'
 
 import { ChatMessage } from '../types'
 import { DEFAULT_IMAGE, clearConnectionChat, setConnectionChat } from './const'

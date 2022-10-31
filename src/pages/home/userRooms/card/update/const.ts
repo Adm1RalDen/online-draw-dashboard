@@ -1,4 +1,5 @@
 import { UPDATE_USER_ROOM_SOCKET } from 'const/sockets'
+
 import { FunctionWithParams } from 'types'
 import { ActiveRoom } from 'types/rooms'
 import { SocketApp } from 'types/socket'

@@ -1,6 +1,7 @@
 import { ChangeEvent, FC } from 'react'
-import { FunctionWithParams } from 'types'
 import { v4 as uuidv4 } from 'uuid'
+
+import { FunctionWithParams } from 'types'
 
 import { Input, InputWrapper, Label, Span, Wrapper } from './styles'
 

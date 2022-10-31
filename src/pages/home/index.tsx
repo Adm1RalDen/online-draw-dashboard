@@ -1,18 +1,21 @@
 import { ArrowLeftOnRectangleIcon, UserIcon } from '@heroicons/react/24/outline'
-import { CABINET_URL } from 'const/urls'
-import { useSocket } from 'hooks/useSocket'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from 'store'
-import { userDataSelector } from 'store/selectors/user.selector'
-import { UserLogoutThunk } from 'store/thunks/user/authorization.thunk'
-import { Heading3 } from 'styles/typography/styles'
-import { ActiveRoom } from 'types/rooms'
-import { Portal } from 'utils/portal'
 
 import { Loader } from 'components/loaders/loader'
 import { Logo } from 'components/logo'
 import { Popper } from 'components/popper'
+import { Heading3 } from 'styles/typography/styles'
+
+import { CABINET_URL } from 'const/urls'
+import { useSocket } from 'hooks/useSocket'
+import { useAppDispatch, useAppSelector } from 'store'
+import { userDataSelector } from 'store/selectors/user.selector'
+import { UserLogoutThunk } from 'store/thunks/user/authorization.thunk'
+
+import { Portal } from 'utils/portal'
+
+import { ActiveRoom } from 'types/rooms'
 
 import { ActiveRooms } from './activeRooms'
 import { Chat } from './chat'

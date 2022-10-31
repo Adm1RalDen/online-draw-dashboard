@@ -1,4 +1,5 @@
 import { Circle, Eraser, Line, Pen, Square } from 'canvas_classes'
+
 import { SocketApp } from 'types/socket'
 
 import { ToolsEnum } from './types'

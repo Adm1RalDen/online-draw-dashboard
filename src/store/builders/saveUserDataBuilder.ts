@@ -1,7 +1,9 @@
 import { ActionReducerMapBuilder, PayloadAction } from '@reduxjs/toolkit'
+
 import { ErrorMessages } from 'const/enums'
 import { saveUserDataThunk } from 'store/thunks/user/authorization.thunk'
 import { UserReducerInitialTypes } from 'store/types/user.types'
+
 import { AuthorizedUser } from 'types'
 
 type UserPayload = {
