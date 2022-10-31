@@ -13,10 +13,10 @@ export const themes = {
     green: '#00be03',
     darkGreen: '#006900',
     light_gray: '#d6d6d6',
-    blue: '#0a87e1',
+    blue: '#0C79E2',
     gray: '#64646445',
     middleGray: '#888',
-    darkBlue: '#1176e2',
+    darkBlue: '#044C93',
     middleBlue: '#0c94f6',
     greenBackground: '#183333',
     greenLiteBackground: '#2d6969',
@@ -28,12 +28,15 @@ export const themes = {
     aquaGreen: '#3f6d78',
     red: '#ed1b1b',
     darkRed: '#930202',
-    lightBlue: '#b4dcff'
+    lightBlue: '#469CF0',
+    skyBlue: '#73B3F0'
   },
+
   zIndex: {
-    modal: 9999,
-    popper: 9998
+    popper: 9,
+    portal: 10
   },
+
   breakPoints: {
     desktop: '1400px',
     tablet: '800px',

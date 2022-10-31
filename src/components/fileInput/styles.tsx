@@ -1,90 +1,94 @@
 import styled, { keyframes } from 'styled-components'
 
-const spanAnimation = keyframes`
-  0%{
-    transform: translateX(-100px);
-  }
-  100%{
-    max-width: 200px;
-    opacity: 1;
-    transform: translateX(10px);
-    height: 100%;
-  }
-`
-
-const ContentWrapper = styled.div`
-  max-width: 100%;
-  height: 45px;
-  position: relative;
-`
-
-const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  width: 100%;
-`
-
-const SpanWrapper = styled.div`
-  max-width: 200px;
-  height: 100%;
-  position: relative;
-  z-index: 2;
+const closeIconAnimation = keyframes`
+95%{
   opacity: 0;
-  border: 4px solid ${(p) => p.theme.colors.darkBlue};
-  padding: 10px;
-  animation: ${spanAnimation} 0.5s linear forwards;
+}
+100%{
+  opacity: 1;
+  left: 100%;
+}
 `
 
-const FileName = styled.div`
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  width: 100%;
+const animation = keyframes`
+100%{
+  left: 130px;
+}
 `
 
-const CloseDiv = styled.div`
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background-color: ${({ theme }) => theme.colors.red};
-  color: ${({ theme }) => theme.colors.white};
-  border-radius: 50%;
-  right: -10px;
-  top: -10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid ${({ theme }) => theme.colors.darkBlue};
-  cursor: pointer;
-`
-const FileInputStyled = styled.input`
-  position: absolute;
-  display: block;
-  top: 0;
-  width: 0;
-  height: 0;
-`
-
-const LoadButton = styled.button`
-  max-width: 200px;
-  min-width: 100px;
-  height: 100%;
-  padding: 10px;
+const FileInputWrapper = styled.div`
+  width: 330px;
+  height: fit-content;
   position: relative;
-  z-index: 3;
-  background-color: ${({ theme }) => theme.colors.blue};
   color: ${({ theme }) => theme.colors.white};
-  appearance: none;
+
+  & svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  & > svg {
+    position: absolute;
+    opacity: 0;
+    left: 0;
+    top: 0;
+    cursor: pointer;
+    width: 15px;
+    height: 15px;
+    animation: 1s ${closeIconAnimation} forwards ease-out;
+  }
+`
+
+const FileInputLabel = styled.label`
+  width: 120px;
   display: flex;
-  align-items: center;
   justify-content: center;
+  text-align: center;
+  z-index: 1;
+  line-height: 22px;
+  position: relative;
+  gap: 5px;
+  border-radius: 5px;
+  padding: 10px 15px;
+  background-color: ${({ theme }) => theme.colors.blue};
+  transition: all 0.2s linear;
   cursor: pointer;
-  border: 4px solid ${({ theme }) => theme.colors.darkBlue};
-  transition: all 0.3s linear;
 
   &:hover {
+    background-color: ${({ theme }) => theme.colors.middleBlue};
+  }
+
+  &:active {
     background-color: ${({ theme }) => theme.colors.darkBlue};
   }
 `
 
-export { ContentWrapper, Wrapper, LoadButton, SpanWrapper, FileName, FileInputStyled, CloseDiv }
+const StyledFileInput = styled.input.attrs(() => ({ type: 'file' }))`
+  position: absolute;
+  visibility: hidden;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+`
+
+type Props = {
+  colorInfo: string | undefined
+}
+
+const FileInputFileInfo = styled.div<Props>`
+  width: 200px;
+  padding: 10px 10px 0px 0px;
+  overflow-x: hidden;
+  position: absolute;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  z-index: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  animation: 1s ${animation} forwards;
+  color: ${(p) => (p.colorInfo ? p.colorInfo : 'inherit')};
+`
+export { StyledFileInput, FileInputWrapper, FileInputFileInfo, FileInputLabel }

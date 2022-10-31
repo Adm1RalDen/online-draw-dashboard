@@ -1,33 +1,28 @@
+import { ArrowUpTrayIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { ChangeEvent, FC, useRef, useState } from 'react'
-import { toast } from 'react-toastify'
 import { FunctionWithParams } from 'types'
-import { countBytes } from 'utils/countBytes'
+import { isValidFileSize } from 'utils/isValidFileSize'
 
-import {
-  CloseDiv,
-  ContentWrapper,
-  FileInputStyled,
-  FileName,
-  LoadButton,
-  SpanWrapper,
-  Wrapper
-} from './styles'
+import { FileInputFileInfo, FileInputLabel, FileInputWrapper, StyledFileInput } from './styles'
 
 type FileInputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> &
   Required<{
     name: string
     onChange: FunctionWithParams<ChangeEvent<HTMLInputElement> | null>
-  }>
+  }> & {
+    colorInfo?: 'black' | 'white'
+  }
 
-export const FileInput: FC<FileInputProps> = ({ onChange, ...others }) => {
+export const FileInput: FC<FileInputProps> = ({ onChange, colorInfo, ...others }) => {
   const inputRef = useRef<HTMLInputElement>(null)
   const [file, setFile] = useState<File | null>(null)
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      if (e.target.files[0].size > countBytes(2, 'MB')) {
+      const isValid = isValidFileSize(e.target.files[0])
+
+      if (!isValid) {
         e.target.value = ''
-        toast.error('File is too big (should been less then 2Mb)')
         setFile(null)
       } else {
         setFile(e.target.files[0])
@@ -35,26 +30,31 @@ export const FileInput: FC<FileInputProps> = ({ onChange, ...others }) => {
       }
     }
   }
+
   const handleClose = () => {
-    setFile(null)
-    onChange(null)
+    if (inputRef.current) {
+      inputRef.current.value = ''
+      setFile(null)
+      onChange(null)
+    }
   }
-  const handleClick = () => inputRef.current?.click()
 
   return (
-    <ContentWrapper>
-      <Wrapper>
-        <LoadButton type='button' onClick={handleClick}>
-          Load file
-        </LoadButton>
-        {file && (
-          <SpanWrapper>
-            <FileName>{file.name}</FileName>
-            <CloseDiv onClick={handleClose}>x</CloseDiv>
-          </SpanWrapper>
-        )}
-      </Wrapper>
-      <FileInputStyled {...others} type='file' ref={inputRef} onChange={handleChange} />
-    </ContentWrapper>
+    <FileInputWrapper>
+      <FileInputLabel>
+        <ArrowUpTrayIcon />
+        <StyledFileInput {...others} type='file' ref={inputRef} onChange={handleChange} />
+        Upload
+      </FileInputLabel>
+
+      {file && (
+        <>
+          <FileInputFileInfo colorInfo={colorInfo}>
+            <span>{file.name}</span>
+          </FileInputFileInfo>
+          <XMarkIcon onClick={handleClose} />
+        </>
+      )}
+    </FileInputWrapper>
   )
 }
