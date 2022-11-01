@@ -5,21 +5,13 @@ import { KeysCodes } from 'const/enums'
 import { CHAT_MESSAGE_SOCKET } from 'const/sockets'
 import { useSocket } from 'hooks/useSocket'
 
-import { AuthorizedUser } from 'types'
+import { MessageControllProps } from '../types'
+import { MessageControllWrapper, MessageInput, SendMessageButton } from './styles'
 
-import { MessageInput, SendMessageButton } from './styles'
-
-type Props = {
-  isMessageLoading: boolean
-  setIsMessageLoading: React.Dispatch<React.SetStateAction<boolean>>
-  user: AuthorizedUser
-  isLoadingChat: boolean
-}
-
-export const MessageControll: FC<Props> = ({
-  isMessageLoading,
+export const MessageControll: FC<MessageControllProps> = ({
+  isLoadingMessage,
   user,
-  setIsMessageLoading,
+  setIsLoadingMessage,
   isLoadingChat
 }) => {
   const [message, setMessage] = useState('')
@@ -27,13 +19,15 @@ export const MessageControll: FC<Props> = ({
   const inputRef = useRef<HTMLInputElement>(null)
 
   const handleSendMessage = () => {
-    if (message && !isMessageLoading && !isLoadingChat) {
-      setIsMessageLoading(true)
+    if (message && !isLoadingMessage && !isLoadingChat) {
+      setIsLoadingMessage(true)
+
       socket.emit(CHAT_MESSAGE_SOCKET, {
         userId: user.id,
         name: user.name,
         message: message
       })
+
       inputRef?.current?.focus()
       setMessage('')
     }
@@ -47,7 +41,7 @@ export const MessageControll: FC<Props> = ({
   }
 
   return (
-    <div>
+    <MessageControllWrapper>
       <MessageInput
         disabled={isLoadingChat}
         ref={inputRef}
@@ -60,6 +54,6 @@ export const MessageControll: FC<Props> = ({
       <SendMessageButton onClick={handleSendMessage} disabled={isLoadingChat} isShow={message}>
         <PaperAirplaneIcon />
       </SendMessageButton>
-    </div>
+    </MessageControllWrapper>
   )
 }

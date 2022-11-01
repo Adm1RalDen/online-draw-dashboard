@@ -13,6 +13,7 @@ export type EnterInRoomType = {
 }
 
 export type ChatMessage = {
+  _id: string
   userId: string
   avatar: string
   name: string

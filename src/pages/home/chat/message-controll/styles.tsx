@@ -7,7 +7,16 @@ type ButtonProps = {
   isShow: string
 }
 
-const MessageInput = styled(Input)<ButtonProps>`
+export const MessageControllWrapper = styled.div`
+  margin-top: 5px;
+  border-radius: 5px;
+  background-color: ${({ theme }) => theme.colors.greenBackground};
+  display: flex;
+  align-items: center;
+  padding: 0px 10px;
+`
+
+export const MessageInput = styled(Input)<ButtonProps>`
   height: 30px;
   flex-grow: 1;
   transition: all 0.2s linear;
@@ -16,7 +25,8 @@ const MessageInput = styled(Input)<ButtonProps>`
   border-top-right-radius: ${({ isShow }) => (isShow ? '15px' : '5px')};
   border-bottom-right-radius: ${({ isShow }) => (isShow ? '15px' : '5px')};
 `
-const SendMessageButton = styled(ButtonImage)<ButtonProps>`
+
+export const SendMessageButton = styled(ButtonImage)<ButtonProps>`
   width: ${({ isShow }) => (isShow ? '35px' : '0px')};
   box-shadow: none;
   height: 30px;
@@ -28,9 +38,9 @@ const SendMessageButton = styled(ButtonImage)<ButtonProps>`
     width: inherit;
     height: inherit;
   }
+
   &:hover {
     background-color: transparent;
     box-shadow: none;
   }
 `
-export { MessageInput, SendMessageButton }
