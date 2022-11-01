@@ -1,9 +1,9 @@
 import styled from 'styled-components'
-import { Span } from 'styles/typography/styles'
 
 import { Button } from 'components/button'
 import { ButtonImage } from 'components/button-image'
 import { Input } from 'components/input'
+import { Span } from 'styles/typography/styles'
 
 const User2FAComponentBlock = styled.div`
   width: 400px;

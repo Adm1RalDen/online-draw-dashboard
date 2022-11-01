@@ -1,6 +1,8 @@
 import { updateUserProfileThunk } from 'store/thunks/user/user.thunk'
-import { AuthorizedUser } from 'types'
+
 import { createBlobFile } from 'utils/encodeBase64'
+
+import { AuthorizedUser } from 'types'
 
 import { SubmitParams } from './types'
 

@@ -1,10 +1,11 @@
 import { KeyIcon } from '@heroicons/react/24/outline'
 import { FC } from 'react'
-import { useAppSelector } from 'store'
-import { twoFaSelector } from 'store/selectors/twoFa.selector'
-import { Heading4, Paragraph, Span } from 'styles/typography/styles'
 
 import { BackButton } from 'components/backButton'
+import { Heading4, Paragraph, Span } from 'styles/typography/styles'
+
+import { useAppSelector } from 'store'
+import { twoFaSelector } from 'store/selectors/twoFa.selector'
 
 import { AuthentificatorButtonsWrapper, AuthentificatorNextButton } from '../styles'
 import { StepsProps } from '../types'

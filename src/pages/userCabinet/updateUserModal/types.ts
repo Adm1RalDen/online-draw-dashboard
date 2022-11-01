@@ -1,4 +1,5 @@
 import { AppDispatch } from 'store'
+
 import { AuthorizedUser } from 'types'
 
 import { InitialStateTypes } from '../types'

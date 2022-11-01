@@ -1,11 +1,13 @@
-import { useSocket } from 'hooks/useSocket'
 import { FC, useEffect, useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
-import { useAppSelector } from 'store'
-import { userDataSelector } from 'store/selectors/user.selector'
-import { ChildrenProps } from 'types'
 
 import { Loader } from 'components/loader'
+
+import { useSocket } from 'hooks/useSocket'
+import { useAppSelector } from 'store'
+import { userDataSelector } from 'store/selectors/user.selector'
+
+import { ChildrenProps } from 'types'
 
 import { checkUserInRoom } from './const'
 

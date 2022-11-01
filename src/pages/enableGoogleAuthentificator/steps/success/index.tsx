@@ -1,10 +1,12 @@
-import { SETTINGS_PRIVACY_URL } from 'const/urls'
-import SuccessIcon from 'public/assets/success.svg'
 import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Heading4, Span } from 'styles/typography/styles'
 
 import { Button } from 'components/button'
+import { Heading4, Span } from 'styles/typography/styles'
+
+import SuccessIcon from 'public/assets/success.svg'
+
+import { SETTINGS_PRIVACY_URL } from 'const/urls'
 
 import { StepsProps } from '../types'
 import { SuccessStepWrapper } from './styles'

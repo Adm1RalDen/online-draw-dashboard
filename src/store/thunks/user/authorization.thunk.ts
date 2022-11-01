@@ -1,21 +1,25 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
+import { toast } from 'react-toastify'
+
 import { authorizeUser } from 'api/user/authorize'
 import { getProfile } from 'api/user/getProfile'
 import { registrationUser } from 'api/user/registration'
+
 import { ErrorMessages } from 'const/enums'
-import { toast } from 'react-toastify'
+import { resetStore } from 'store/actions'
+import { USER_SLICE_NAME } from 'store/const'
+import { LoginThunkParams } from 'store/types/user.types'
+
 import {
   deleteSavedToken,
   getSavedUser,
   saveRefreshToken,
   saveUserInStorage
 } from 'services/token.service'
-import { resetStore } from 'store/actions'
-import { USER_SLICE_NAME } from 'store/const'
-import { LoginThunkParams } from 'store/types/user.types'
-import { AuthResponse, User2FALoginResponse, UserRegistrationData } from 'types'
 import { cryptoSha256 } from 'utils/cryptoPassord'
 import { errorHandler } from 'utils/errorHandler'
+
+import { AuthResponse, User2FALoginResponse, UserRegistrationData } from 'types'
 
 export const updateAuthStatusThunk = createAsyncThunk(
   `${USER_SLICE_NAME}/updateAuthStatus-thunk`,

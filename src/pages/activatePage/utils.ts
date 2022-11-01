@@ -1,7 +1,10 @@
-import { activationAccountApi } from 'api/user/activate-account'
 import { AxiosError } from 'axios'
-import { ErrorMessages } from 'const/enums'
 import { toast } from 'react-toastify'
+
+import { activationAccountApi } from 'api/user/activate-account'
+
+import { ErrorMessages } from 'const/enums'
+
 import { redirectHome } from 'utils/redirectHome'
 
 import { ACTIVATION_PAGE_SUCCESS_MESSAGE } from './const'

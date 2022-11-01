@@ -1,10 +1,11 @@
-import { DISABLE_GOOGLE_AUTH, ENABLE_GOOGLE_AUTH } from 'const/urls'
 import { useNavigate } from 'react-router-dom'
-import { useAppSelector } from 'store'
-import { userDataSelector } from 'store/selectors/user.selector'
 
 import { Button } from 'components/button'
 import { Label } from 'components/label'
+
+import { DISABLE_GOOGLE_AUTH, ENABLE_GOOGLE_AUTH } from 'const/urls'
+import { useAppSelector } from 'store'
+import { userDataSelector } from 'store/selectors/user.selector'
 
 import { PrivacyMainFieldset, PrivacyMainInput } from './styles'
 

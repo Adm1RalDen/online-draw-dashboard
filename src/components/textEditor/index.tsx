@@ -4,6 +4,7 @@ import htmlToDraft from 'html-to-draftjs'
 import { FC, useState } from 'react'
 import { Editor } from 'react-draft-wysiwyg'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
+
 import { FunctionWithParams } from 'types'
 
 import { EditorWrapper } from './styles'

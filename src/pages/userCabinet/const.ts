@@ -1,6 +1,8 @@
-import { themes } from 'styles/themes'
-import { AuthorizedUser } from 'types'
 import * as yup from 'yup'
+
+import { themes } from 'styles/themes'
+
+import { AuthorizedUser } from 'types'
 
 import { InitialStateTypes } from './types'
 

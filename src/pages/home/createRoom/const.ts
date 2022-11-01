@@ -1,7 +1,9 @@
+import * as yup from 'yup'
+
 import { CREATE_ROOM_SOCKET, GET_USER_ROOMS_SOCKET } from 'const/sockets'
+
 import { FunctionWithParams } from 'types'
 import { SocketApp } from 'types/socket'
-import * as yup from 'yup'
 
 import { CreateRoom } from '../types'
 

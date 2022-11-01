@@ -1,17 +1,20 @@
 import { XMarkIcon } from '@heroicons/react/24/solid'
-import { ErrorMessages, KeysCodes } from 'const/enums'
 import { FC, useEffect, useState } from 'react'
+
+import { Loader } from 'components/loader'
+import { TextWrapper } from 'components/spanWrapper'
+import { Paragraph } from 'styles/typography/styles'
+
+import { ErrorMessages, KeysCodes } from 'const/enums'
 import { useAppDispatch, useAppSelector } from 'store'
 import { useConfirmUser2FAMutation } from 'store/rtk/services/twoFa'
 import { twoFaSelector } from 'store/selectors/twoFa.selector'
 import { decreseAttemptsLeftCountAction } from 'store/slices/twoFa.slice'
-import { Paragraph } from 'styles/typography/styles'
-import { AuthResponse, FunctionWithParams } from 'types'
+
 import { checkForNumbersInString } from 'utils/checkForNumbersInString'
 import { noopFunction } from 'utils/noop'
 
-import { Loader } from 'components/loader'
-import { TextWrapper } from 'components/spanWrapper'
+import { AuthResponse, FunctionWithParams } from 'types'
 
 import {
   User2FAButton,

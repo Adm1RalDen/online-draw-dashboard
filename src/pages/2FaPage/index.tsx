@@ -1,15 +1,18 @@
-import { HOME_URL } from 'const/urls'
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
+
+import { User2FAComponent } from 'components/2FA'
+
+import { HOME_URL } from 'const/urls'
 import { useAppDispatch } from 'store'
 import { setAttemptsLeftCountAction } from 'store/slices/twoFa.slice'
 import { saveUserDataThunk } from 'store/thunks/user/authorization.thunk'
-import { AuthResponse } from 'types'
+
 import { decodeFromBase64 } from 'utils/decodeFromBase64'
 import { jsonParse } from 'utils/jsonParse'
 import { Portal } from 'utils/portal'
 
-import { User2FAComponent } from 'components/2FA'
+import { AuthResponse } from 'types'
 
 import { TwoFactorPageSection } from './styles'
 import { TwoFAUserDataType } from './types'

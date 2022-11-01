@@ -1,8 +1,8 @@
 import styled from 'styled-components'
-import { Heading1, Heading2 } from 'styles/typography/styles'
 
 import { Button } from 'components/button'
 import { Container as DefaultContainer } from 'components/container'
+import { Heading1, Heading2 } from 'styles/typography/styles'
 
 const AuthButton = styled(Button)`
   width: 100%;

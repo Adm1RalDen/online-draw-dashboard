@@ -1,7 +1,9 @@
 import { ActionReducerMapBuilder } from '@reduxjs/toolkit'
+
 import { ErrorMessages } from 'const/enums'
-import { getToken } from 'services/token.service'
 import { UpdateAuthStatusThunkType, UserReducerInitialTypes } from 'store/types/user.types'
+
+import { getToken } from 'services/token.service'
 
 const updateAuthStatusBuilder = (
   builder: ActionReducerMapBuilder<UserReducerInitialTypes>,

@@ -1,6 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
+
 import { getProfile } from 'api/user/getProfile'
 import { updateUser } from 'api/user/update'
+
 import { ErrorMessages } from 'const/enums'
 import { USER_SLICE_NAME } from 'store/const'
 

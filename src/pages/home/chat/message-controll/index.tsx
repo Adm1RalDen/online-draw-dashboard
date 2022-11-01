@@ -1,8 +1,10 @@
 import { PaperAirplaneIcon } from '@heroicons/react/24/solid'
+import { FC, useRef, useState } from 'react'
+
 import { KeysCodes } from 'const/enums'
 import { CHAT_MESSAGE_SOCKET } from 'const/sockets'
 import { useSocket } from 'hooks/useSocket'
-import { FC, useRef, useState } from 'react'
+
 import { AuthorizedUser } from 'types'
 
 import { MessageInput, SendMessageButton } from './styles'

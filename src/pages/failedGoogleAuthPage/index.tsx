@@ -1,7 +1,10 @@
-import { ErrorMessages } from 'const/enums'
 import { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
+
 import { Heading1 } from 'styles/typography/styles'
+
+import { ErrorMessages } from 'const/enums'
+
 import { redirectHome } from 'utils/redirectHome'
 
 import { FailedGoogleAuthPageSection } from './styles'

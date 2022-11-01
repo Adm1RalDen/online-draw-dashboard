@@ -1,10 +1,12 @@
-import { PLATFORMS } from 'const/enums'
-import AndroidLogo from 'public/assets/android-logo.svg'
-import AppleLogo from 'public/assets/apple-logo.svg'
 import { FC, useState } from 'react'
-import { Heading4, Heading6, Paragraph, Span } from 'styles/typography/styles'
 
 import { ButtonOutline } from 'components/button-outline'
+import { Heading4, Heading6, Paragraph, Span } from 'styles/typography/styles'
+
+import AndroidLogo from 'public/assets/android-logo.svg'
+import AppleLogo from 'public/assets/apple-logo.svg'
+
+import { PLATFORMS } from 'const/enums'
 
 import { AuthentificatorButtonsWrapper, AuthentificatorNextButton } from '../styles'
 import { StepsProps } from '../types'

@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+
 import {
   getUserProfileBuilder,
   loginBuilder,
@@ -16,6 +17,7 @@ import {
   userRegistrationThunk
 } from 'store/thunks/user/authorization.thunk'
 import { getUserProfileThunk, updateUserProfileThunk } from 'store/thunks/user/user.thunk'
+
 import { SavedUserObject } from 'types'
 
 import { USER_SLICE_NAME, defaultUserData, userInitialState } from '../const'

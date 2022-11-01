@@ -1,5 +1,6 @@
 import { DRAW_SOCKET, FINISH_DRAW_SOCKET } from 'const/sockets'
 import { ToolsEnum } from 'hooks/useCanvas/types'
+
 import { SocketApp } from 'types/socket'
 
 import { Tool } from './tool.class'

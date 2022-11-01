@@ -1,7 +1,11 @@
-import { API_URL, getHeaders, setRefreshToken } from 'api/const'
 import axios, { AxiosError } from 'axios'
+
+import { API_URL, getHeaders, setRefreshToken } from 'api/const'
+
 import { NetworkStatus } from 'const/enums'
+
 import { getToken, saveUserInStorage } from 'services/token.service'
+
 import { AuthResponse } from 'types'
 
 export const refreshTokenInterceptor = async (error: AxiosError) => {

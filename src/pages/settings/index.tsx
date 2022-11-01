@@ -1,10 +1,11 @@
 import { useEffect } from 'react'
 import { useOutlet } from 'react-router-dom'
+
+import { Loader } from 'components/loader'
+
 import { useAppDispatch, useAppSelector } from 'store'
 import { userDataSelector, userInfoSelector } from 'store/selectors/user.selector'
 import { getUserProfileThunk } from 'store/thunks/user/user.thunk'
-
-import { Loader } from 'components/loader'
 
 import { SettingsPageHeader } from './components/header'
 import { SettingsPageSideBar } from './components/sidebar'

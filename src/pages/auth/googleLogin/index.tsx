@@ -1,4 +1,5 @@
 import { API_URL } from 'api/const'
+
 import GoogleIcon from 'public/assets/google-logo.svg'
 
 import { GoogleLink } from './styles'

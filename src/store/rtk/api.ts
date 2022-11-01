@@ -6,13 +6,17 @@ import {
   createApi,
   fetchBaseQuery
 } from '@reduxjs/toolkit/query/react'
+
 import { API_URL } from 'api/const'
+
 import { NetworkStatus } from 'const/enums'
-import { getRefreshToken } from 'services/token.service'
 import { RootState } from 'store'
 import { RTK_API_NAME } from 'store/const'
 import { initializeUser } from 'store/slices/user.slice'
 import { userLogoutThunk } from 'store/thunks/user/authorization.thunk'
+
+import { getRefreshToken } from 'services/token.service'
+
 import { AuthResponse } from 'types'
 
 const baseQuery = fetchBaseQuery({

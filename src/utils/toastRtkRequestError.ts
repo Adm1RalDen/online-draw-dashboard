@@ -1,7 +1,9 @@
 import { SerializedError } from '@reduxjs/toolkit'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query'
-import { ErrorMessages } from 'const/enums'
 import { toast } from 'react-toastify'
+
+import { ErrorMessages } from 'const/enums'
+
 import { ServerResponseError } from 'types'
 
 type Parameters = FetchBaseQueryError | SerializedError | undefined

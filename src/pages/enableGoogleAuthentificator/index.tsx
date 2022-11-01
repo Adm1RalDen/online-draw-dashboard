@@ -1,11 +1,12 @@
-import { SETTINGS_URL } from 'const/urls'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAppSelector } from 'store'
-import { userDataSelector } from 'store/selectors/user.selector'
-import { Heading2 } from 'styles/typography/styles'
 
 import { Container } from 'components/container'
+import { Heading2 } from 'styles/typography/styles'
+
+import { SETTINGS_URL } from 'const/urls'
+import { useAppSelector } from 'store'
+import { userDataSelector } from 'store/selectors/user.selector'
 
 import { AuthentificatorSteps } from './steps'
 import { AuthentificatorStepsPanel } from './stepsPanel'

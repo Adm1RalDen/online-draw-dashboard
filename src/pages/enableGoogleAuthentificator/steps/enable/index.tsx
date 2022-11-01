@@ -1,19 +1,20 @@
-import { ErrorMessages } from 'const/enums'
 import { useFormik } from 'formik'
 import { FC, useEffect } from 'react'
-import { useConfirmCreating2FaMutation, useSendCodeOnEmailQuery } from 'store/rtk/services/twoFa'
-import { Heading4, Paragraph } from 'styles/typography/styles'
-import { checkForNumbersInString } from 'utils/checkForNumbersInString'
 
 import { BackButton } from 'components/backButton'
 import { Input } from 'components/input'
 import { Label } from 'components/label'
+import { Heading4, Paragraph } from 'styles/typography/styles'
+
+import { ErrorMessages } from 'const/enums'
+import { useToastError } from 'hooks/useToastError'
+import { useConfirmCreating2FaMutation, useSendCodeOnEmailQuery } from 'store/rtk/services/twoFa'
+
+import { checkForNumbersInString } from 'utils/checkForNumbersInString'
 
 import { AuthentificatorButtonsWrapper, AuthentificatorNextButton } from '../styles'
 import { StepsProps } from '../types'
 import { initialValues, validationSchema } from './const'
-
-import { useToastError } from 'hooks/useToastError'
 
 export const EnableStep: FC<StepsProps> = ({ handleDeclineStep, handleIncreaseStep }) => {
   const [submit2FaData, { isSuccess, isLoading, isError }] = useConfirmCreating2FaMutation()

@@ -1,21 +1,24 @@
-import { SETTINGS_URL } from 'const/urls'
 import { useFormik } from 'formik'
-import SuccessIcon from 'public/assets/success.svg'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { useDisableTwoFAMutation } from 'store/rtk/services/twoFa'
-import { Disable2FAData } from 'store/rtk/types'
-import { userDataSelector } from 'store/selectors/user.selector'
-import { Heading2, Heading3, Paragraph } from 'styles/typography/styles'
-import { checkForNumbersInString } from 'utils/checkForNumbersInString'
-import { cryptoSha256 } from 'utils/cryptoPassord'
-import { toastRtkRequestError } from 'utils/toastRtkRequestError'
 
 import { Button } from 'components/button'
 import { Container } from 'components/container'
 import { Input } from 'components/input'
 import { Label } from 'components/label'
+import { Heading2, Heading3, Paragraph } from 'styles/typography/styles'
+
+import SuccessIcon from 'public/assets/success.svg'
+
+import { SETTINGS_URL } from 'const/urls'
+import { useDisableTwoFAMutation } from 'store/rtk/services/twoFa'
+import { Disable2FAData } from 'store/rtk/types'
+import { userDataSelector } from 'store/selectors/user.selector'
+
+import { checkForNumbersInString } from 'utils/checkForNumbersInString'
+import { cryptoSha256 } from 'utils/cryptoPassord'
+import { toastRtkRequestError } from 'utils/toastRtkRequestError'
 
 import { initialValues } from './const'
 import {

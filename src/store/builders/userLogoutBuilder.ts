@@ -1,4 +1,5 @@
 import { ActionReducerMapBuilder } from '@reduxjs/toolkit'
+
 import { UserLogoutThunkType, UserReducerInitialTypes } from 'store/types/user.types'
 
 const userLogoutBuilder = (

@@ -1,16 +1,19 @@
 import { useFormik } from 'formik'
 import { toast } from 'react-toastify'
+
+import { User2FAComponent } from 'components/2FA'
+import { InputAnimation } from 'components/input-animation'
+
 import { useAppDispatch, useAppSelector } from 'store'
 import { userDataSelector, userInfoSelector } from 'store/selectors/user.selector'
 import { setAttemptsLeftCountAction } from 'store/slices/twoFa.slice'
 import { cancelUser2faAction } from 'store/slices/user.slice'
 import { loginThunk, saveUserDataThunk } from 'store/thunks/user/authorization.thunk'
-import { AuthResponse, UserLoginFormData } from 'types'
+
 import { capitalizeFirstLetter } from 'utils/capitalizeFirstLetter'
 import { Portal } from 'utils/portal'
 
-import { User2FAComponent } from 'components/2FA'
-import { InputAnimation } from 'components/input-animation'
+import { AuthResponse, UserLoginFormData } from 'types'
 
 import { GoogleLoginComponent } from '../googleLogin'
 import { AuthButton, Title } from '../styles'

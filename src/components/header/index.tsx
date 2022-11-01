@@ -1,11 +1,12 @@
-import { CABINET_URL } from 'const/urls'
-import { useSocket } from 'hooks/useSocket'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { useAppDispatch } from 'store'
-import { userLogoutThunk } from 'store/thunks/user/authorization.thunk'
 
 import { BurgerMenu } from 'components/burger-menu'
 import { Button } from 'components/button'
+
+import { CABINET_URL } from 'const/urls'
+import { useSocket } from 'hooks/useSocket'
+import { useAppDispatch } from 'store'
+import { userLogoutThunk } from 'store/thunks/user/authorization.thunk'
 
 import { Container } from '../container'
 import { LINKS } from './const'

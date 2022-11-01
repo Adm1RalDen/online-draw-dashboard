@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import {
   ArrowDownRightIcon,
   ArrowDownTrayIcon,
@@ -6,19 +7,23 @@ import {
   ChevronRightIcon,
   PencilIcon
 } from '@heroicons/react/24/outline'
-import { EXIT_SOCKET } from 'const/sockets'
-import { PaintContext } from 'context/paintContext'
-import { useSocket } from 'hooks/useSocket'
+import { MouseEvent, useContext } from 'react'
+import { useParams } from 'react-router-dom'
+
+import { InputColor } from 'components/input/color'
+
 import CircleIcon from 'public/assets/circle.svg'
 import EraserIcon from 'public/assets/eraser.svg'
 import SquareIcon from 'public/assets/square.svg'
-import { MouseEvent, useContext } from 'react'
-import { useParams } from 'react-router-dom'
+
+import { EXIT_SOCKET } from 'const/sockets'
+import { useSocket } from 'hooks/useSocket'
 import { useAppSelector } from 'store'
 import { userDataSelector } from 'store/selectors/user.selector'
-import { ToolsTypes } from 'types/canvas'
 
-import { InputColor } from 'components/input/color'
+import { PaintContext } from 'context/paintContext'
+
+import { ToolsTypes } from 'types/canvas'
 
 import { DrawToolsWrapper, SnapshotButtonsWrapper, StyledToolbar, ToolButton } from './styles'
 

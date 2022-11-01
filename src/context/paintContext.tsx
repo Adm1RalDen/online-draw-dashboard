@@ -1,7 +1,9 @@
 import React, { createContext } from 'react'
+
+import { noopFunction } from 'utils/noop'
+
 import { FunctionWithParams } from 'types'
 import { ToolsTypes } from 'types/canvas'
-import { noopFunction } from 'utils/noop'
 
 type PaintContextTypes = {
   canvasRef: React.Ref<HTMLCanvasElement>

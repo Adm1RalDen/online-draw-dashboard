@@ -1,11 +1,14 @@
-import { HOME_URL } from 'const/urls'
 import { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { saveUserInStorage } from 'services/token.service'
-import { SavedUserObject } from 'types'
-import { jsonParse } from 'utils/jsonParse'
 
 import { Loader } from 'components/loader'
+
+import { HOME_URL } from 'const/urls'
+
+import { saveUserInStorage } from 'services/token.service'
+import { jsonParse } from 'utils/jsonParse'
+
+import { SavedUserObject } from 'types'
 
 export const SuccessGoogleAuth = () => {
   const [searchParams] = useSearchParams()

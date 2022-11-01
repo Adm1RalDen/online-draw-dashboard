@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+
 import { ErrorMessages } from 'const/enums'
 import { TWOFA_SLICE_NAME } from 'store/const'
 import { twoFaApi } from 'store/rtk/services/twoFa'

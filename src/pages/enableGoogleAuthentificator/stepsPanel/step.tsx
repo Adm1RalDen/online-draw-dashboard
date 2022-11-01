@@ -1,4 +1,5 @@
 import { FC } from 'react'
+
 import { Heading6, Span } from 'styles/typography/styles'
 
 import { StepsPanelCircle, StepsPanelContainer } from './styles'

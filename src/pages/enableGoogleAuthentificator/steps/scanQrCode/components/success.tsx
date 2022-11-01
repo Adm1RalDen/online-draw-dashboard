@@ -1,4 +1,5 @@
 import { FC } from 'react'
+
 import { Paragraph } from 'styles/typography/styles'
 
 type Props = {

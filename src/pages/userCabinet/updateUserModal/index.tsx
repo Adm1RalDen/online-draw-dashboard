@@ -1,17 +1,20 @@
 import { useFormik } from 'formik'
 import { ChangeEvent, FC, useMemo, useState } from 'react'
-import { useAppDispatch } from 'store'
-import { Heading3 } from 'styles/typography/styles'
-import { AuthorizedUser } from 'types'
-import { filterObject } from 'utils/filterObject'
-import { Portal } from 'utils/portal'
-import { setImageUrl } from 'utils/setImageUrl'
-import { setInputTypes } from 'utils/setInputTypes'
 
 import { Checkbox } from 'components/checkbox'
 import { ErrorSpan } from 'components/error-span'
 import { ImageCrop } from 'components/image-crop'
 import { TextEditor } from 'components/textEditor'
+import { Heading3 } from 'styles/typography/styles'
+
+import { useAppDispatch } from 'store'
+
+import { filterObject } from 'utils/filterObject'
+import { Portal } from 'utils/portal'
+import { setImageUrl } from 'utils/setImageUrl'
+import { setInputTypes } from 'utils/setInputTypes'
+
+import { AuthorizedUser } from 'types'
 
 import { inputKeys, setInitialValues, validationSchema } from '../const'
 import { UserRadioButtons } from '../radioButtons'

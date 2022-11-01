@@ -6,6 +6,7 @@ import {
   userRegistrationThunk
 } from 'store/thunks/user/authorization.thunk'
 import { getUserProfileThunk, updateUserProfileThunk } from 'store/thunks/user/user.thunk'
+
 import { FunctionWithParams, UserLoginFormData } from 'types'
 
 export type UserReducerInitialTypes = {
