@@ -6,7 +6,7 @@ import { Heading1, Heading2 } from 'styles/typography/styles'
 
 const AuthButton = styled(Button)`
   width: 100%;
-  margin-top: 10px;
+  margin-top: 15px;
 
   &:disabled {
     background-color: transparent;
@@ -30,11 +30,7 @@ const Container = styled(DefaultContainer)`
 const Wrapper = styled.div`
   border-radius: 10px;
   border: 2px solid ${({ theme }) => theme.colors.white};
-  padding: 20px;
-
-  & > div:last-child {
-    margin-top: 20px;
-  }
+  padding: 30px 20px;
 `
 
 const Title = styled(Heading2)`
