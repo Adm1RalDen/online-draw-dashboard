@@ -1,6 +1,9 @@
 import { ArrowUpTrayIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { ChangeEvent, FC, useRef, useState } from 'react'
 
+import { FileTypes } from 'const/enums'
+
+import { checkFileType } from 'utils/checkFileType'
 import { isValidFileSize } from 'utils/isValidFileSize'
 
 import { FileInputFileInfo, FileInputLabel, FileInputWrapper, StyledFileInput } from './styles'
@@ -12,9 +15,14 @@ export const FileInput: FC<FileInputProps> = ({ onChange, colorInfo, ...others }
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      const isValid = isValidFileSize(e.target.files[0])
+      const isValidType = checkFileType(e.target.files[0], [
+        FileTypes.PNG,
+        FileTypes.JPEG,
+        FileTypes.JPG
+      ])
+      const isValidSize = isValidFileSize(e.target.files[0])
 
-      if (!isValid) {
+      if (!isValidSize || !isValidType) {
         e.target.value = ''
         setFile(null)
       } else {

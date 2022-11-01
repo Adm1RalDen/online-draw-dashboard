@@ -14,6 +14,17 @@ export enum NetworkStatus {
   INTERNAL = 500
 }
 
+export enum FileTypes {
+  PNG = 'png',
+  JPEG = 'jpeg',
+  JPG = 'jpg'
+}
+
+export enum MimeTypes {
+  IMAGE = 'image',
+  TEXT = 'text'
+}
+
 export enum ErrorMessages {
   ERROR = 'Error',
   OCCURED_ERROR = 'Occured error',
