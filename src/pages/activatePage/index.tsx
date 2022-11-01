@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
-import { Loader } from 'components/loaders/loader'
+import { Loader } from 'components/loader'
 import { Heading1 } from 'styles/typography/styles'
 
 import { HOME_URL } from 'const/urls'
@@ -22,7 +22,7 @@ export const ActivationPage = () => {
   return (
     <ActivationPageSection>
       {isLoading ? (
-        <Loader color='white' position='absolute' />
+        <Loader position='absolute' />
       ) : (
         <>
           {error ? (

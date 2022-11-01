@@ -6,7 +6,7 @@ import { Button } from 'components/button'
 import { CABINET_URL } from 'const/urls'
 import { useSocket } from 'hooks/useSocket'
 import { useAppDispatch } from 'store'
-import { logoutAction } from 'store/slices/user.slice'
+import { userLogoutThunk } from 'store/thunks/user/authorization.thunk'
 
 import { Container } from '../container'
 import { LINKS } from './const'
@@ -19,7 +19,7 @@ export const Header = () => {
 
   const handleLeave = () => {
     socket.disconnect()
-    dispatch(logoutAction())
+    dispatch(userLogoutThunk())
   }
 
   return (

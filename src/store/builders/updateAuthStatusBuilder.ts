@@ -1,32 +1,28 @@
-import { ActionReducerMapBuilder, PayloadAction } from '@reduxjs/toolkit'
+import { ActionReducerMapBuilder } from '@reduxjs/toolkit'
 
 import { ErrorMessages } from 'const/enums'
-import { updateAuthStatusThunk } from 'store/thunks/user/authorization.thunk'
-import { UserReducerInitialTypes } from 'store/types/user.types'
+import { UpdateAuthStatusThunkType, UserReducerInitialTypes } from 'store/types/user.types'
 
-import { getSavedUser } from 'services/token.service'
+import { getToken } from 'services/token.service'
 
-import { AuthorizedUser, SavedUserObject } from 'types'
-
-export const updateAuthStatusBuilder = (
-  builder: ActionReducerMapBuilder<UserReducerInitialTypes>
+const updateAuthStatusBuilder = (
+  builder: ActionReducerMapBuilder<UserReducerInitialTypes>,
+  updateAuthStatusThunk: UpdateAuthStatusThunkType
 ) => {
   builder.addCase(updateAuthStatusThunk.pending, (state) => {
     state.isLoading = true
   })
 
-  builder.addCase(
-    updateAuthStatusThunk.fulfilled,
-    (state, { payload }: PayloadAction<AuthorizedUser>) => {
-      const user = getSavedUser() as SavedUserObject
-      state.token = user.token
-      state.data = { ...payload }
-      state.isLoading = false
-      state.error = undefined
-      state.isAuth = true
-      state.hasUserStateLoaded = true
-    }
-  )
+  builder.addCase(updateAuthStatusThunk.fulfilled, (state, { payload }) => {
+    const token = getToken() || ''
+
+    state.token = token
+    state.data = payload
+    state.isLoading = false
+    state.error = undefined
+    state.isAuth = true
+    state.hasUserStateLoaded = true
+  })
 
   builder.addCase(updateAuthStatusThunk.rejected, (state, { payload }) => {
     state.isLoading = false
@@ -35,3 +31,5 @@ export const updateAuthStatusBuilder = (
     state.error = typeof payload === 'string' ? payload : ErrorMessages.OCCURED_ERROR
   })
 }
+
+export default updateAuthStatusBuilder

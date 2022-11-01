@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 
-import { Loader } from 'components/loaders/loader'
+import { Loader } from 'components/loader'
 
 import { useSocket } from 'hooks/useSocket'
 import { useAppSelector } from 'store'

@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-import { Loader } from 'components/loaders/loader'
+import { Loader } from 'components/loader'
 
 import { useAppDispatch, useAppSelector } from 'store'
 import { userInfoSelector } from 'store/selectors/user.selector'

@@ -1,11 +1,11 @@
 import { ActionReducerMapBuilder } from '@reduxjs/toolkit'
 
 import { ErrorMessages } from 'const/enums'
-import { userRegistrationThunk } from 'store/thunks/user/authorization.thunk'
-import { UserReducerInitialTypes } from 'store/types/user.types'
+import { UserReducerInitialTypes, UserRegistrationThunkType } from 'store/types/user.types'
 
-export const userRegistrationBuilder = (
-  builder: ActionReducerMapBuilder<UserReducerInitialTypes>
+const userRegistrationBuilder = (
+  builder: ActionReducerMapBuilder<UserReducerInitialTypes>,
+  userRegistrationThunk: UserRegistrationThunkType
 ) => {
   builder.addCase(userRegistrationThunk.pending, (state) => {
     state.isLoading = true
@@ -20,3 +20,5 @@ export const userRegistrationBuilder = (
     state.error = typeof payload === 'string' ? payload : ErrorMessages.OCCURED_ERROR
   })
 }
+
+export default userRegistrationBuilder

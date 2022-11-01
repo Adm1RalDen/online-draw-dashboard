@@ -1,14 +1,14 @@
-import { Dispatch, createAsyncThunk } from '@reduxjs/toolkit'
+import { createAsyncThunk } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify'
 
 import { authorizeUser } from 'api/user/authorize'
 import { getProfile } from 'api/user/getProfile'
-import { logout } from 'api/user/logout'
 import { registrationUser } from 'api/user/registration'
 
 import { ErrorMessages } from 'const/enums'
-import { USER_REDUCER } from 'store/const'
-import { initializeUser, logoutAction, setUser2faAction } from 'store/slices/user.slice'
+import { resetStore } from 'store/actions'
+import { USER_SLICE_NAME } from 'store/const'
+import { LoginThunkParams } from 'store/types/user.types'
 
 import {
   deleteSavedToken,
@@ -19,45 +19,40 @@ import {
 import { cryptoSha256 } from 'utils/cryptoPassord'
 import { errorHandler } from 'utils/errorHandler'
 
-import {
-  AuthResponse,
-  User2FALoginResponse,
-  UserLoginFormData,
-  UserRegistrationData
-} from '../../../types'
+import { AuthResponse, User2FALoginResponse, UserRegistrationData } from 'types'
 
 export const updateAuthStatusThunk = createAsyncThunk(
-  `${USER_REDUCER}/updateAuthStatus-thunk`,
+  `${USER_SLICE_NAME}/updateAuthStatus-thunk`,
   async (_, { dispatch, rejectWithValue }) => {
     try {
       const savedUser = getSavedUser()
 
       if (savedUser) {
         const profile = await getProfile(savedUser.user.id)
-        dispatch(initializeUser(savedUser))
         return profile.data
       }
 
       throw new Error(ErrorMessages.UNAUTHORITHED_ERROR)
     } catch (e) {
-      await UserLogoutThunk(dispatch)
+      dispatch(userLogoutThunk())
       return rejectWithValue(ErrorMessages.UNAUTHORITHED_ERROR)
     }
   }
 )
 
 export const loginThunk = createAsyncThunk(
-  `${USER_REDUCER}/login-thunk`,
-  async (data: UserLoginFormData, { dispatch }) => {
+  `${USER_SLICE_NAME}/login-thunk`,
+  async ({ setAttemptsLeftCount, ...data }: LoginThunkParams, { dispatch }) => {
     try {
       const password = cryptoSha256(data.password)
-      const response = await authorizeUser({ ...data, password })
+      const response = await authorizeUser({ email: data.email, password })
 
-      if (!(response.data as User2FALoginResponse)?.isUse2FA) {
-        return dispatch(saveUserDataThunk({ ...(response.data as AuthResponse) }))
+      if (Object.hasOwn(response.data, 'isUse2FA')) {
+        setAttemptsLeftCount((response.data as User2FALoginResponse).attemptsLeftCount)
+        return response.data as User2FALoginResponse
       }
 
-      dispatch(setUser2faAction(response.data as User2FALoginResponse))
+      dispatch(saveUserDataThunk({ ...(response.data as AuthResponse) }))
     } catch (e) {
       errorHandler(e)
     }
@@ -65,7 +60,7 @@ export const loginThunk = createAsyncThunk(
 )
 
 export const saveUserDataThunk = createAsyncThunk(
-  `${USER_REDUCER}/saveUserData-thunk`,
+  `${USER_SLICE_NAME}/saveUserData-thunk`,
   async (data: AuthResponse, { rejectWithValue }) => {
     try {
       saveUserInStorage({ token: data.token, user: data.user })
@@ -81,7 +76,7 @@ export const saveUserDataThunk = createAsyncThunk(
 )
 
 export const userRegistrationThunk = createAsyncThunk(
-  `${USER_REDUCER}/registration-thunk`,
+  `${USER_SLICE_NAME}/registration-thunk`,
   async (data: UserRegistrationData, { rejectWithValue }) => {
     try {
       const response = await registrationUser(data)
@@ -93,8 +88,10 @@ export const userRegistrationThunk = createAsyncThunk(
   }
 )
 
-export const UserLogoutThunk = async (dispatch: Dispatch) => {
-  await logout()
-  deleteSavedToken()
-  dispatch(logoutAction())
-}
+export const userLogoutThunk = createAsyncThunk(
+  `${USER_SLICE_NAME}/logout-thunk`,
+  async (_, { dispatch }) => {
+    deleteSavedToken()
+    dispatch(resetStore())
+  }
+)

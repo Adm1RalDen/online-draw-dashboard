@@ -1,4 +1,4 @@
-import { Loader } from 'components/loaders/loader'
+import { Loader } from 'components/loader'
 
 import { useAppSelector } from 'store'
 import { userInfoSelector } from 'store/selectors/user.selector'
@@ -21,7 +21,7 @@ export const AuthPage = () => {
           <RegistrationComponent />
           {isLoading && (
             <Portal>
-              <Loader color='white' />
+              <Loader />
             </Portal>
           )}
         </Wrapper>

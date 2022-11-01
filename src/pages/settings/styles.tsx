@@ -9,6 +9,7 @@ const SettingsPageWrapper = styled.section`
 
 const SettingsPageContainer = styled(Container)`
   display: grid;
+  position: relative;
   padding: 10px;
   min-height: 100vh;
   gap: 15px;

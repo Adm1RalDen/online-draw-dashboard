@@ -1,24 +1,68 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+// eslint-disable-next-line import/no-unresolved
+import { BaseQueryFn } from '@reduxjs/toolkit/dist/query/baseQueryTypes'
+import {
+  FetchArgs,
+  FetchBaseQueryError,
+  createApi,
+  fetchBaseQuery
+} from '@reduxjs/toolkit/query/react'
 
 import { API_URL } from 'api/const'
 
-import { AuthResponse, VerifyRequestData } from 'types'
+import { NetworkStatus } from 'const/enums'
+import { RootState } from 'store'
+import { RTK_API_NAME } from 'store/const'
+import { initializeUser } from 'store/slices/user.slice'
+import { userLogoutThunk } from 'store/thunks/user/authorization.thunk'
 
-import { confirmUser2FAQueryObj } from './queriesObjects/confirmUser2Fa'
-import { createTwoFaQueryObj } from './queriesObjects/createTwoFa'
+import { getRefreshToken } from 'services/token.service'
 
-type Response = {
-  code: string
-  qrcode: string
-}
+import { AuthResponse } from 'types'
 
-export const appApi = createApi({
-  reducerPath: 'appApi',
-  baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
-  endpoints: (builder) => ({
-    createTwoFA: builder.query<Response, void>(createTwoFaQueryObj),
-    confirmUser2FA: builder.mutation<AuthResponse, VerifyRequestData>(confirmUser2FAQueryObj)
-  })
+const baseQuery = fetchBaseQuery({
+  baseUrl: API_URL,
+  prepareHeaders: (headers, { getState }) => {
+    const token = (getState() as RootState).user.token
+
+    if (token) headers.set('authorization', `Bearer ${token}`)
+
+    return headers
+  }
 })
 
-export const { useCreateTwoFAQuery, useConfirmUser2FAMutation } = appApi
+const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
+  args,
+  api,
+  extraOptions
+) => {
+  let result = await baseQuery(args, api, extraOptions)
+
+  if (result.error?.status === NetworkStatus.UNAUTHORITHED) {
+    const refreshResult = await baseQuery(
+      {
+        url: '/user/refresh',
+        method: 'POST',
+        body: { refreshToken: getRefreshToken() }
+      },
+      api,
+      extraOptions
+    )
+
+    if (refreshResult.data) {
+      api.dispatch(initializeUser({ ...(refreshResult.data as AuthResponse) }))
+      result = await baseQuery(args, api, extraOptions)
+    } else {
+      api.dispatch(userLogoutThunk())
+      result.error.data
+    }
+  }
+
+  return result
+}
+
+export const apiSlice = createApi({
+  reducerPath: RTK_API_NAME,
+  baseQuery: baseQueryWithReauth,
+  tagTypes: ['TwoFa', 'User'],
+  endpoints: () => ({})
+})

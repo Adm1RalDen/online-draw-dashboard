@@ -1,7 +1,7 @@
 import { nanoid } from '@reduxjs/toolkit'
 import React, { useEffect, useRef, useState } from 'react'
 
-import { LittleLoader } from 'components/loaders/littleLoader'
+import { Loader } from 'components/loader'
 
 import { useSocket } from 'hooks/useSocket'
 import { useAppSelector } from 'store'
@@ -54,7 +54,7 @@ export const Chat = () => {
         {error ? (
           <span>{error}</span>
         ) : isLoadingChat ? (
-          <LittleLoader />
+          <Loader type='solid' />
         ) : (
           messages.map((msg: ChatMessage) => (
             <MessagesWrapper key={nanoid()}>
@@ -76,7 +76,7 @@ export const Chat = () => {
         )}
         {isMessageLoading && (
           <LoadIndicator>
-            <LittleLoader />
+            <Loader type='solid' />
           </LoadIndicator>
         )}
       </MessagesBlock>

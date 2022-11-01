@@ -2,10 +2,10 @@ import axios from 'axios'
 
 import { API_URL } from 'api/const'
 
-import { responseInterceptor } from './interceptors/response'
+import { applyTokenInterceptor } from './interceptors/applyTokenInterceptor'
+import { refreshTokenInterceptor } from './interceptors/refreshTokenInterceptor'
 
 export const Instance = axios.create({ baseURL: API_URL })
 
-Instance.interceptors.response.use(function (config) {
-  return config
-}, responseInterceptor)
+Instance.interceptors.request.use(applyTokenInterceptor, undefined)
+Instance.interceptors.response.use(undefined, refreshTokenInterceptor)

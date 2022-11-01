@@ -3,7 +3,7 @@ import { ChangeEvent, FC } from 'react'
 
 import { FileInput } from 'components/fileInput'
 import { Input } from 'components/input'
-import { RadioButtons } from 'components/radioButton'
+import { RadioButtons } from 'components/radioButtons'
 import { Heading4 } from 'styles/typography/styles'
 
 import { FunctionWithParams } from 'types'

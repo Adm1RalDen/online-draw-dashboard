@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 
 import { Container } from 'components/container'
 import { HtmlText } from 'components/htmlText'
-import { Loader } from 'components/loaders/loader'
+import { Loader } from 'components/loader'
 
 import { HOME_URL } from 'const/urls'
 import { useAppSelector } from 'store'

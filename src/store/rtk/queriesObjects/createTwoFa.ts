@@ -1,10 +1,8 @@
 import { FetchArgs } from '@reduxjs/toolkit/dist/query'
 
-import { SetHeaders } from 'api/const'
-
-export const createTwoFaQueryObj = {
+export const createTwoFaQueryObj: any = {
   query: (): FetchArgs => ({
-    url: '/user/create-twoFa',
-    ...SetHeaders()
-  })
+    url: '/user/create-twoFa'
+  }),
+  providesTags: ['TwoFa']
 }
