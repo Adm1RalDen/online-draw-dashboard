@@ -1,5 +1,6 @@
-import { UserRegistrationData } from 'types'
 import * as yup from 'yup'
+
+import { UserRegistrationData } from 'types'
 
 export const RegistrationFileds = ['name', 'email', 'password']
 

@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 type Props = {
-  isError?: boolean
+  isError?: boolean | string
 }
 
 export const Input = styled.input<Props>`
@@ -21,7 +21,7 @@ export const Input = styled.input<Props>`
     css`
       border-color: ${({ theme }) => theme.colors.red};
       outline: ${({ theme }) => theme.colors.red};
-      caret-color: ${({ theme }) => theme.colors.red}
+      caret-color: ${({ theme }) => theme.colors.red};
 
       &::placeholder {
         color: ${({ theme }) => theme.colors.red};

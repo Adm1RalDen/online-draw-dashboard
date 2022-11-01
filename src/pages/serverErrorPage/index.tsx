@@ -1,5 +1,6 @@
-import { HOME_URL } from 'const/urls'
 import { Link } from 'react-router-dom'
+
+import { HOME_URL } from 'const/urls'
 
 import { ServerErrorPageContent, ServerErrorPageWrapper } from './styles'
 

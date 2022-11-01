@@ -1,6 +1,8 @@
 /* eslint no-unused-vars:"off" */
-import { ChatMessage, CreateRoom } from 'pages/home/types'
 import { Socket } from 'socket.io-client'
+
+import { ChatMessage, CreateRoom } from 'pages/home/types'
+
 import { AuthorizedUser, DrawData } from 'types'
 
 import { ActiveRoom } from './rooms'

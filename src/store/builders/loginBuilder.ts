@@ -1,14 +1,21 @@
 import { ActionReducerMapBuilder } from '@reduxjs/toolkit'
-import { ErrorMessages } from 'const/enums'
-import { loginThunk } from 'store/thunks/user/authorization.thunk'
-import { UserReducerInitialTypes } from 'store/types/user.types'
 
-export const loginBuilder = (builder: ActionReducerMapBuilder<UserReducerInitialTypes>) => {
+import { ErrorMessages } from 'const/enums'
+import { LoginThunkType, UserReducerInitialTypes } from 'store/types/user.types'
+
+const loginBuilder = (
+  builder: ActionReducerMapBuilder<UserReducerInitialTypes>,
+  loginThunk: LoginThunkType
+) => {
   builder.addCase(loginThunk.pending, (state) => {
     state.isLoading = true
   })
 
-  builder.addCase(loginThunk.fulfilled, (state) => {
+  builder.addCase(loginThunk.fulfilled, (state, { payload }) => {
+    if (payload) {
+      state.data.id = payload.userId
+      state.data.isUse2FA = payload.isUse2FA
+    }
     state.isLoading = false
   })
 
@@ -17,3 +24,5 @@ export const loginBuilder = (builder: ActionReducerMapBuilder<UserReducerInitial
     state.error = typeof payload === 'string' ? payload : ErrorMessages.OCCURED_ERROR
   })
 }
+
+export default loginBuilder

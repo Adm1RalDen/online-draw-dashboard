@@ -1,3 +1,6 @@
+import { NavigateFunction } from 'react-router-dom'
+import { toast } from 'react-toastify'
+
 import {
   CREATE_ERROR_SOCKET,
   CREATE_SUCCESS_SOCKET,
@@ -11,8 +14,7 @@ import {
   UPDATE_USER_ROOM_SUCCESS_SOCKET
 } from 'const/sockets'
 import { DRAW_ONLINE_URL } from 'const/urls'
-import { NavigateFunction } from 'react-router-dom'
-import { toast } from 'react-toastify'
+
 import { FunctionWithParams } from 'types'
 import { ActiveRoom } from 'types/rooms'
 import { SocketApp } from 'types/socket'

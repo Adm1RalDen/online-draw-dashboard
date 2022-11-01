@@ -1,9 +1,10 @@
 import { useEffect } from 'react'
+
+import { Loader } from 'components/loader'
+
 import { useAppDispatch, useAppSelector } from 'store'
 import { userInfoSelector } from 'store/selectors/user.selector'
 import { updateAuthStatusThunk } from 'store/thunks/user/authorization.thunk'
-
-import { Loader } from 'components/loaders/loader'
 
 import { Router } from './router'
 

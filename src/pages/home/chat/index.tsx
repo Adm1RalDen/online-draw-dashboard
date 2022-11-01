@@ -1,11 +1,13 @@
 import { nanoid } from '@reduxjs/toolkit'
-import { useSocket } from 'hooks/useSocket'
 import React, { useEffect, useRef, useState } from 'react'
+
+import { Loader } from 'components/loader'
+
+import { useSocket } from 'hooks/useSocket'
 import { useAppSelector } from 'store'
 import { userInfoSelector } from 'store/selectors/user.selector'
-import { setImageUrl } from 'utils/setImageUrl'
 
-import { LittleLoader } from 'components/loaders/littleLoader'
+import { setImageUrl } from 'utils/setImageUrl'
 
 import { ChatMessage } from '../types'
 import { DEFAULT_IMAGE, clearConnectionChat, setConnectionChat } from './const'
@@ -52,7 +54,7 @@ export const Chat = () => {
         {error ? (
           <span>{error}</span>
         ) : isLoadingChat ? (
-          <LittleLoader />
+          <Loader type='solid' />
         ) : (
           messages.map((msg: ChatMessage) => (
             <MessagesWrapper key={nanoid()}>
@@ -74,7 +76,7 @@ export const Chat = () => {
         )}
         {isMessageLoading && (
           <LoadIndicator>
-            <LittleLoader />
+            <Loader type='solid' />
           </LoadIndicator>
         )}
       </MessagesBlock>

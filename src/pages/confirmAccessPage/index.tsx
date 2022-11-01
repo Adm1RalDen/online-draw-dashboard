@@ -1,13 +1,14 @@
+import { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+
+import { Input } from 'components/input'
+import { Loader } from 'components/loader'
+
 import { JOIN_ROOM_SOCKET } from 'const/sockets'
 import { HOME_URL } from 'const/urls'
 import { useSocket } from 'hooks/useSocket'
-import { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
 import { useAppSelector } from 'store'
 import { userDataSelector } from 'store/selectors/user.selector'
-
-import { Input } from 'components/input'
-import { Loader } from 'components/loaders/loader'
 
 import { ClearAccessPageConnection, SetAccessPageConnection } from './const'
 import {
@@ -42,13 +43,15 @@ export const PrivateRoom = () => {
       })
     }
   }
+
   const handleHomeNavigate = () => navigate(HOME_URL)
   const handleSetPassword = (e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)
+
   return (
     <ConfirmAccessPage>
       <ConfirmAccessPageMain>
         {isLoading ? (
-          <Loader position='absolute' color='white' />
+          <Loader position='absolute' />
         ) : (
           <>
             <ConfirmAccessPageInputWrapper>

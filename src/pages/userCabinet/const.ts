@@ -1,6 +1,8 @@
-import { themes } from 'styles/themes'
-import { AuthorizedUser } from 'types'
 import * as yup from 'yup'
+
+import { themes } from 'styles/themes'
+
+import { AuthorizedUser } from 'types'
 
 import { InitialStateTypes } from './types'
 
@@ -48,8 +50,7 @@ const inputKeys = [
   'gender',
   'color',
   'date',
-  'isUse2FA',
-  'qrcode'
+  'isUse2FA'
 ]
 
 export { setInitialValues, validationSchema, defaultUserValues, inputKeys }

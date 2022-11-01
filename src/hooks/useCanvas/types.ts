@@ -1,4 +1,5 @@
 import { NavigateFunction } from 'react-router-dom'
+
 import { SocketApp } from 'types/socket'
 
 /* eslint no-unused-vars:"off" */

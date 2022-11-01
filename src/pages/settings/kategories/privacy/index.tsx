@@ -1,7 +1,3 @@
-import { useOutlet } from 'react-router-dom'
+import { PrivacyMain } from 'pages/settings/components/privacyMain'
 
-export const PrivacySettings = () => {
-  const outlet = useOutlet()
-
-  return <>{outlet}</>
-}
+export const PrivacySettings = () => <PrivacyMain />

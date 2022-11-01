@@ -1,5 +1,13 @@
 {
-  "importOrder": ["^components/(.*)$", "^[./]"],
+  "importOrder": [
+    "^api",
+    "^(components|styles|pages)",
+    "^public",
+    "^(store|hooks|const)",
+    "^(context|services|utils)",
+    "^types",
+    "^[./]"
+  ],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true,
   "printWidth": 100,

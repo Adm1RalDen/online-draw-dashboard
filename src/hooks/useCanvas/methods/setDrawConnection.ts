@@ -1,4 +1,6 @@
 import { Circle, Eraser, Line, Pen, Square } from 'canvas_classes'
+import { toast } from 'react-toastify'
+
 import { USER_JOINED } from 'const/messages'
 import {
   CASE_EXIT_SOCKET,
@@ -10,7 +12,7 @@ import {
   SET_SNAPSHOT_SOCKET
 } from 'const/sockets'
 import { HOME_URL } from 'const/urls'
-import { toast } from 'react-toastify'
+
 import { SocketApp } from 'types/socket'
 
 import { DrawConnectionProps, ToolsEnum } from '../types'

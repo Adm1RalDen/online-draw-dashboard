@@ -1,9 +1,10 @@
 /* eslint @typescript-eslint/no-var-requires: "off" */
+const path = require('path')
+const CopyPlugin = require('copy-webpack-plugin')
+const Dotenv = require('dotenv-webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const path = require('path')
-const Dotenv = require('dotenv-webpack')
-const CopyPlugin = require('copy-webpack-plugin')
+const CircularDependencyPlugin = require('circular-dependency-plugin')
 
 const DEVELOPMENT_MODE = process.env.DEVELOPMENT_MODE
 
@@ -40,6 +41,13 @@ module.exports = {
     historyApiFallback: true
   },
   plugins: [
+    new CircularDependencyPlugin({
+      exclude: /a\.js|node_modules/,
+      include: /src/,
+      failOnError: true,
+      allowAsyncCycles: false,
+      cwd: process.cwd()
+    }),
     new Dotenv({
       path: './.env'
     }),

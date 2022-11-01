@@ -1,10 +1,11 @@
 import { FC, useState } from 'react'
 import Avatar from 'react-avatar-edit'
 import { toast } from 'react-toastify'
-import { countBytes } from 'utils/countBytes'
-import { EncodeBase64 } from 'utils/encodeBase64'
 
 import { Button } from 'components/button'
+
+import { countBytes } from 'utils/countBytes'
+import { EncodeBase64 } from 'utils/encodeBase64'
 
 import { AvatarEditWrapper } from './styles'
 import { ImageCropProps } from './types'

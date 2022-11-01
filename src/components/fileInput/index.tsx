@@ -1,7 +1,9 @@
 import { ArrowUpTrayIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { ChangeEvent, FC, useRef, useState } from 'react'
-import { FunctionWithParams } from 'types'
+
 import { isValidFileSize } from 'utils/isValidFileSize'
+
+import { FunctionWithParams } from 'types'
 
 import { FileInputFileInfo, FileInputLabel, FileInputWrapper, StyledFileInput } from './styles'
 

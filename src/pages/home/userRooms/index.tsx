@@ -1,5 +1,7 @@
 import { FC } from 'react'
+
 import { Heading3 } from 'styles/typography/styles'
+
 import { ActiveRoom } from 'types/rooms'
 
 import { UserRoomCard } from './card'

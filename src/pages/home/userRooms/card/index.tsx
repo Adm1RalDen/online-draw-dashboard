@@ -1,8 +1,10 @@
 import { PencilIcon, TrashIcon, UserPlusIcon } from '@heroicons/react/24/outline'
 import { EllipsisVerticalIcon, XMarkIcon } from '@heroicons/react/24/solid'
+import { FC, useState } from 'react'
+
 import { DELETE_USER_ROOM_SOCKET, JOIN_ROOM_SOCKET } from 'const/sockets'
 import { useSocket } from 'hooks/useSocket'
-import { FC, useState } from 'react'
+
 import { ActiveRoom } from 'types/rooms'
 
 import { CardButton, CardSettings, RoomCard } from './styles'

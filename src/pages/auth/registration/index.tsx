@@ -1,12 +1,16 @@
 import { useFormik } from 'formik'
+
+import { InputAnimation } from 'components/input-animation'
+
 import { useAppDispatch, useAppSelector } from 'store'
 import { userInfoSelector } from 'store/selectors/user.selector'
 import { userRegistrationThunk } from 'store/thunks/user/authorization.thunk'
-import { UserRegistrationData } from 'types'
+
+import { capitalizeFirstLetter } from 'utils/capitalizeFirstLetter'
 import { cryptoSha256 } from 'utils/cryptoPassord'
 import { setInputTypes } from 'utils/setInputTypes'
 
-import { InputAnimation } from 'components/input-animation'
+import { UserRegistrationData } from 'types'
 
 import { AuthButton, Title } from '../styles'
 import { RegistrationFileds, initialValues, validationSchema } from './const'
@@ -34,7 +38,7 @@ export const RegistrationComponent = () => {
           <InputAnimation
             key={field}
             margin='5px 0px 0px 0px'
-            label={field[0].toUpperCase() + field.slice(1)}
+            label={capitalizeFirstLetter(field)}
             name={field}
             type={setInputTypes(field)}
             value={formik.values[field as keyof UserRegistrationData]}

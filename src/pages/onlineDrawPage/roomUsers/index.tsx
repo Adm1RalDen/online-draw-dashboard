@@ -1,7 +1,9 @@
-import { GET_ROOM_SOCKET } from 'const/sockets'
-import { useSocket } from 'hooks/useSocket'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+
+import { GET_ROOM_SOCKET } from 'const/sockets'
+import { useSocket } from 'hooks/useSocket'
+
 import { UserInRoom } from 'types'
 
 import { RoomUserBlock, RoomUsersBlock } from './styles'

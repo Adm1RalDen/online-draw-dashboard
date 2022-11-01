@@ -1,15 +1,17 @@
-import { EXIT_SOCKET } from 'const/sockets'
-import { PaintContext } from 'context/paintContext'
-import { useCanvas } from 'hooks/useCanvas/useCanvas.hook'
-import { useSocket } from 'hooks/useSocket'
 import { useCallback, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { useAppSelector } from 'store'
-import { userDataSelector } from 'store/selectors/user.selector'
 
 import { Canvas } from 'components/canvas'
 import { SettingsBar } from 'components/settings'
 import { Toolbar } from 'components/toolbar'
+
+import { EXIT_SOCKET } from 'const/sockets'
+import { useCanvas } from 'hooks/useCanvas/useCanvas.hook'
+import { useSocket } from 'hooks/useSocket'
+import { useAppSelector } from 'store'
+import { userDataSelector } from 'store/selectors/user.selector'
+
+import { PaintContext } from 'context/paintContext'
 
 import { RoomUsers } from '../roomUsers'
 import { CanvasSection, Layout } from './styles'

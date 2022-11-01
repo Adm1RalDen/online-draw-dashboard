@@ -1,7 +1,9 @@
+import * as yup from 'yup'
+
 import { JOIN_ROOM_SOCKET } from 'const/sockets'
+
 import { FunctionWithParams } from 'types'
 import { SocketApp } from 'types/socket'
-import * as yup from 'yup'
 
 import { EnterInRoomType } from '../types'
 
