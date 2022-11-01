@@ -44,6 +44,7 @@ export const UserRadioButtons: FC<Props> = ({ formik, handleSaveBackground }) =>
       <div>
         <Heading4>Background image</Heading4>
         <FileInput
+          colorInfo='black'
           name='backgroundFon'
           onChange={handleSaveBackground}
           accept='image/png, image/jpeg'

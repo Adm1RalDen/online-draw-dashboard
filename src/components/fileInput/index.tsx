@@ -3,17 +3,8 @@ import { ChangeEvent, FC, useRef, useState } from 'react'
 
 import { isValidFileSize } from 'utils/isValidFileSize'
 
-import { FunctionWithParams } from 'types'
-
 import { FileInputFileInfo, FileInputLabel, FileInputWrapper, StyledFileInput } from './styles'
-
-type FileInputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> &
-  Required<{
-    name: string
-    onChange: FunctionWithParams<ChangeEvent<HTMLInputElement> | null>
-  }> & {
-    colorInfo?: 'black' | 'white'
-  }
+import { FileInputProps } from './types'
 
 export const FileInput: FC<FileInputProps> = ({ onChange, colorInfo, ...others }) => {
   const inputRef = useRef<HTMLInputElement>(null)
@@ -53,8 +44,8 @@ export const FileInput: FC<FileInputProps> = ({ onChange, colorInfo, ...others }
         <>
           <FileInputFileInfo colorInfo={colorInfo}>
             <span>{file.name}</span>
+            <XMarkIcon onClick={handleClose} />
           </FileInputFileInfo>
-          <XMarkIcon onClick={handleClose} />
         </>
       )}
     </FileInputWrapper>

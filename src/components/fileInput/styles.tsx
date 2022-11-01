@@ -1,14 +1,8 @@
 import styled, { keyframes } from 'styled-components'
 
-const closeIconAnimation = keyframes`
-95%{
-  opacity: 0;
+type Props = {
+  colorInfo: string | undefined
 }
-100%{
-  opacity: 1;
-  left: 100%;
-}
-`
 
 const animation = keyframes`
 100%{
@@ -17,26 +11,10 @@ const animation = keyframes`
 `
 
 const FileInputWrapper = styled.div`
-  width: 330px;
+  width: max-content;
   height: fit-content;
   position: relative;
   color: ${({ theme }) => theme.colors.white};
-
-  & svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  & > svg {
-    position: absolute;
-    opacity: 0;
-    left: 0;
-    top: 0;
-    cursor: pointer;
-    width: 15px;
-    height: 15px;
-    animation: 1s ${closeIconAnimation} forwards ease-out;
-  }
 `
 
 const FileInputLabel = styled.label`
@@ -53,6 +31,11 @@ const FileInputLabel = styled.label`
   background-color: ${({ theme }) => theme.colors.blue};
   transition: all 0.2s linear;
   cursor: pointer;
+
+  & > svg {
+    width: 20px;
+    height: 20px;
+  }
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.middleBlue};
@@ -73,12 +56,8 @@ const StyledFileInput = styled.input.attrs(() => ({ type: 'file' }))`
   right: 0;
 `
 
-type Props = {
-  colorInfo: string | undefined
-}
-
 const FileInputFileInfo = styled.div<Props>`
-  width: 200px;
+  max-width: 200px;
   padding: 10px 10px 0px 0px;
   overflow-x: hidden;
   position: absolute;
@@ -90,5 +69,15 @@ const FileInputFileInfo = styled.div<Props>`
   left: 0;
   animation: 1s ${animation} forwards;
   color: ${(p) => (p.colorInfo ? p.colorInfo : 'inherit')};
+
+  & > svg {
+    color: ${(p) => (p.colorInfo ? p.colorInfo : 'inherit')};
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+    width: 15px;
+    height: 15px;
+  }
 `
 export { StyledFileInput, FileInputWrapper, FileInputFileInfo, FileInputLabel }
