@@ -1,16 +1,20 @@
 import { toast } from 'react-toastify'
 
+import { DataSizes } from 'const/enums'
+
 import { countBytes } from './countBytes'
 
-export const isValidFileSize = (file: File, notify = true, defaultSize = 0) => {
-  const size = defaultSize || countBytes(2, 'MB')
+export const isValidFileSize = (file: File, defaultSize = 0, notify = true) => {
+  const maxSize = defaultSize || countBytes(2, DataSizes.MB)
+  const isValid = file.size <= maxSize
 
-  if (file.size > size) {
-    if (notify) {
-      toast.error('File is too big (should been less then 2Mb)')
-    }
-    return false
+  if (!isValid && notify) {
+    toast.error(
+      `File is too big (should been less then ${
+        defaultSize ? defaultSize / 1024 / 1024 + 'MB' : '2MB'
+      })`
+    )
   }
 
-  return true
+  return isValid
 }

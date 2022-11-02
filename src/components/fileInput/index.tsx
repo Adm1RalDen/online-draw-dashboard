@@ -6,7 +6,7 @@ import { FileTypes } from 'const/enums'
 import { checkFileType } from 'utils/checkFileType'
 import { isValidFileSize } from 'utils/isValidFileSize'
 
-import { FileInputFileInfo, FileInputLabel, FileInputWrapper, StyledFileInput } from './styles'
+import { FileInfoWrapper, FileInputLabel, FileInputWrapper, StyledFileInput } from './styles'
 import { FileInputProps } from './types'
 
 export const FileInput: FC<FileInputProps> = ({ onChange, colorInfo, ...others }) => {
@@ -15,12 +15,12 @@ export const FileInput: FC<FileInputProps> = ({ onChange, colorInfo, ...others }
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
+      const isValidSize = isValidFileSize(e.target.files[0])
       const isValidType = checkFileType(e.target.files[0], [
         FileTypes.PNG,
         FileTypes.JPEG,
         FileTypes.JPG
       ])
-      const isValidSize = isValidFileSize(e.target.files[0])
 
       if (!isValidSize || !isValidType) {
         e.target.value = ''
@@ -49,12 +49,10 @@ export const FileInput: FC<FileInputProps> = ({ onChange, colorInfo, ...others }
       </FileInputLabel>
 
       {file && (
-        <>
-          <FileInputFileInfo colorInfo={colorInfo}>
-            <span>{file.name}</span>
-            <XMarkIcon onClick={handleClose} />
-          </FileInputFileInfo>
-        </>
+        <FileInfoWrapper colorInfo={colorInfo}>
+          <span>{file.name}</span>
+          <XMarkIcon onClick={handleClose} />
+        </FileInfoWrapper>
       )}
     </FileInputWrapper>
   )

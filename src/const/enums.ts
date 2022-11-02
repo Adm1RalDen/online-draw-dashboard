@@ -39,3 +39,8 @@ export enum KeysCodes {
   ENTER = 'Enter',
   BACKSPACE = 'Backspace'
 }
+
+export enum DataSizes {
+  MB = 'MB',
+  KB = 'KB'
+}

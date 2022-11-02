@@ -1,8 +1,6 @@
 import styled, { keyframes } from 'styled-components'
 
-type Props = {
-  colorInfo: string | undefined
-}
+import { FileInfoProps } from './types'
 
 const animation = keyframes`
 100%{
@@ -10,14 +8,14 @@ const animation = keyframes`
 }
 `
 
-const FileInputWrapper = styled.div`
+export const FileInputWrapper = styled.div`
   width: max-content;
   height: fit-content;
   position: relative;
   color: ${({ theme }) => theme.colors.white};
 `
 
-const FileInputLabel = styled.label`
+export const FileInputLabel = styled.label`
   width: 120px;
   display: flex;
   justify-content: center;
@@ -46,7 +44,7 @@ const FileInputLabel = styled.label`
   }
 `
 
-const StyledFileInput = styled.input.attrs(() => ({ type: 'file' }))`
+export const StyledFileInput = styled.input.attrs(() => ({ type: 'file' }))`
   position: absolute;
   visibility: hidden;
   pointer-events: none;
@@ -56,7 +54,7 @@ const StyledFileInput = styled.input.attrs(() => ({ type: 'file' }))`
   right: 0;
 `
 
-const FileInputFileInfo = styled.div<Props>`
+export const FileInfoWrapper = styled.div<FileInfoProps>`
   max-width: 200px;
   padding: 10px 10px 0px 0px;
   overflow-x: hidden;
@@ -80,4 +78,3 @@ const FileInputFileInfo = styled.div<Props>`
     height: 15px;
   }
 `
-export { StyledFileInput, FileInputWrapper, FileInputFileInfo, FileInputLabel }

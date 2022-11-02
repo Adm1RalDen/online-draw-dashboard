@@ -1,8 +1,10 @@
-export const countBytes = (amount: number, type: 'MB' | 'KB') => {
+import { DataSizes } from 'const/enums'
+
+export const countBytes = (amount: number, type: keyof typeof DataSizes) => {
   switch (type) {
-    case 'MB':
+    case DataSizes.MB:
       return amount * 1024 ** 2
-    case 'KB':
+    case DataSizes.KB:
       return amount * 1024
     default:
       return amount
