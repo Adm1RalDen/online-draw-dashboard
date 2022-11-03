@@ -40,7 +40,12 @@ export enum KeysCodes {
   BACKSPACE = 'Backspace'
 }
 
-export enum DataSizes {
+export enum FIleInputSizes {
   MB = 'MB',
   KB = 'KB'
+}
+
+export enum Colors {
+  BLACK = 'black',
+  WHITE = 'white'
 }

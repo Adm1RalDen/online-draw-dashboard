@@ -6,7 +6,7 @@ import { FileTypes } from 'const/enums'
 import { checkFileType } from 'utils/checkFileType'
 import { isValidFileSize } from 'utils/isValidFileSize'
 
-import { FileInfoWrapper, FileInputLabel, FileInputWrapper, StyledFileInput } from './styles'
+import { FileInputInfoWrapper, FileInputLabel, FileInputWrapper, StyledFileInput } from './styles'
 import { FileInputProps } from './types'
 
 export const FileInput: FC<FileInputProps> = ({ onChange, colorInfo, ...others }) => {
@@ -22,12 +22,12 @@ export const FileInput: FC<FileInputProps> = ({ onChange, colorInfo, ...others }
         FileTypes.JPG
       ])
 
-      if (!isValidSize || !isValidType) {
-        e.target.value = ''
-        setFile(null)
-      } else {
+      if (isValidSize && isValidType) {
         setFile(e.target.files[0])
         onChange(e)
+      } else {
+        e.target.value = ''
+        setFile(null)
       }
     }
   }
@@ -49,10 +49,10 @@ export const FileInput: FC<FileInputProps> = ({ onChange, colorInfo, ...others }
       </FileInputLabel>
 
       {file && (
-        <FileInfoWrapper colorInfo={colorInfo}>
+        <FileInputInfoWrapper colorInfo={colorInfo}>
           <span>{file.name}</span>
           <XMarkIcon onClick={handleClose} />
-        </FileInfoWrapper>
+        </FileInputInfoWrapper>
       )}
     </FileInputWrapper>
   )

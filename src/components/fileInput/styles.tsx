@@ -1,7 +1,5 @@
 import styled, { keyframes } from 'styled-components'
 
-import { FileInfoProps } from './types'
-
 const animation = keyframes`
 100%{
   left: 130px;
@@ -54,9 +52,9 @@ export const StyledFileInput = styled.input.attrs(() => ({ type: 'file' }))`
   right: 0;
 `
 
-export const FileInfoWrapper = styled.div<FileInfoProps>`
+export const FileInputInfoWrapper = styled.div<{ colorInfo: string | undefined }>`
   max-width: 200px;
-  padding: 10px 10px 0px 0px;
+  padding: 10px 15px 0px 0px;
   overflow-x: hidden;
   position: absolute;
   white-space: nowrap;

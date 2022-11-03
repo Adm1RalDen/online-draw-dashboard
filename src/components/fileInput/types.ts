@@ -1,13 +1,11 @@
 import { ChangeEvent } from 'react'
 
+import { Colors } from 'const/enums'
+
 import { FunctionWithParams } from 'types'
 
-export type FileInputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> & {
+export interface FileInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
   name: string
   onChange: FunctionWithParams<ChangeEvent<HTMLInputElement> | null>
-  colorInfo?: 'black' | 'white'
-}
-
-export type FileInfoProps = {
-  colorInfo: string | undefined
+  colorInfo?: Colors
 }

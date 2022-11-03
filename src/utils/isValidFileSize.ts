@@ -1,11 +1,11 @@
 import { toast } from 'react-toastify'
 
-import { DataSizes } from 'const/enums'
+import { FIleInputSizes } from 'const/enums'
 
 import { countBytes } from './countBytes'
 
 export const isValidFileSize = (file: File, defaultSize = 0, notify = true) => {
-  const maxSize = defaultSize || countBytes(2, DataSizes.MB)
+  const maxSize = defaultSize || countBytes(2, FIleInputSizes.MB)
   const isValid = file.size <= maxSize
 
   if (!isValid && notify) {
