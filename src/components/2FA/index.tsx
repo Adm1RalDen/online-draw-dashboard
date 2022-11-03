@@ -14,6 +14,8 @@ import { decreseAttemptsLeftCountAction } from 'store/slices/twoFa.slice'
 import { checkForNumbersInString } from 'utils/checkForNumbersInString'
 import { noopFunction } from 'utils/noop'
 
+import { AuthResponse, FunctionWithParams } from 'types'
+
 import {
   User2FAButton,
   User2FACloseModalButton,
@@ -23,7 +25,13 @@ import {
   User2FASuccessText,
   User2FAWrapper
 } from './styles'
-import { User2FAComponentProps } from './types'
+
+interface User2FAComponentProps {
+  userId: string
+  handleCloseModal: VoidFunction
+  onSuccessCallback: FunctionWithParams<AuthResponse>
+  onErrorCallback?: FunctionWithParams<string>
+}
 
 export const User2FAComponent: FC<User2FAComponentProps> = ({
   userId,

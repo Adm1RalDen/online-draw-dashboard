@@ -1,5 +1,7 @@
 import { ChangeEvent, FC, useRef, useState } from 'react'
 
+import { FunctionWithParams } from 'types'
+
 import {
   CloseDiv,
   ContentWrapper,
@@ -9,7 +11,11 @@ import {
   SpanWrapper,
   Wrapper
 } from './styles'
-import { FileInputProps } from './types'
+
+interface FileInputProps {
+  name: string
+  onChange: FunctionWithParams<ChangeEvent<HTMLInputElement> | null>
+}
 
 export const FileInput: FC<FileInputProps> = ({ onChange, name }) => {
   const inputRef = useRef<HTMLInputElement>(null)

@@ -1,18 +1,18 @@
-export type CreateRoom = {
+export interface CreateRoom {
   userId: string
   userName: string
   roomName: string
   roomPassword: string
 }
 
-export type EnterInRoomType = {
+export interface EnterInRoomType {
   userId: string
   userName: string
   roomId: string
   roomPassword: string
 }
 
-export type ChatMessage = {
+export interface ChatMessageType {
   _id: string
   userId: string
   avatar: string
@@ -20,11 +20,11 @@ export type ChatMessage = {
   message: string
 }
 
-export type ChatError = {
+export interface ChatError {
   error: string
 }
 
-export type ChatType = {
+export interface ChatType {
   method: 'GET_CHAT' | 'MESSAGE' | 'ERROR'
-  data: ChatMessage[] | ChatMessage | ChatError
+  data: ChatMessageType[] | ChatMessageType | ChatError
 }

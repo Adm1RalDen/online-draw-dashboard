@@ -1,7 +1,10 @@
 import { FC, useState } from 'react'
 
 import { DropDownContainer } from './styles'
-import { DropDownProps } from './types'
+
+export interface DropDownProps {
+  list: string[]
+}
 
 export const DropDown: FC<DropDownProps> = ({ list }) => {
   const [isOpen, setIsOpen] = useState(false)

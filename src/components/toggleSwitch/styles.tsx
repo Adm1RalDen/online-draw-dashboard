@@ -1,8 +1,6 @@
 import styled from 'styled-components'
 
-import { WrapperProps } from './types'
-
-export const ToggleSwitchWrapper = styled.div<WrapperProps>`
+export const ToggleSwitchWrapper = styled.div<{ isChecked: boolean }>`
   width: 80px;
   height: 40px;
   position: relative;
@@ -13,7 +11,7 @@ export const ToggleSwitchWrapper = styled.div<WrapperProps>`
   transition: 0.5s;
 `
 
-export const ToggleSwitchText = styled.span<WrapperProps>`
+export const ToggleSwitchText = styled.span<{ isChecked: boolean }>`
   position: absolute;
   pointer-events: none;
   z-index: 3;
@@ -23,7 +21,7 @@ export const ToggleSwitchText = styled.span<WrapperProps>`
   right: 10px;
 `
 
-export const Input = styled.input`
+export const ToggleSwitchInput = styled.input`
   width: 100%;
   height: 100%;
   top: 0;

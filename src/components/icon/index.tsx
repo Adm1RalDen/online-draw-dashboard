@@ -1,7 +1,10 @@
 import { FC } from 'react'
 
 import { StyledIcon } from './styles'
-import { IconProps } from './types'
+
+interface IconProps extends Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'width' | 'height'> {
+  size: number
+}
 
 export const Icon: FC<IconProps> = ({ size, ...props }) => (
   <StyledIcon {...props} width={size} height={size} />

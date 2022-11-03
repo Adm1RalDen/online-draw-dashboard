@@ -5,8 +5,15 @@ import { FC, useState } from 'react'
 import { Editor } from 'react-draft-wysiwyg'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
+import { FunctionWithParams } from 'types'
+
 import { EditorWrapper } from './styles'
-import { TextEditorProps } from './types'
+
+interface TextEditorProps {
+  name: string
+  onChange: FunctionWithParams<string>
+  value: string
+}
 
 export const TextEditor: FC<TextEditorProps> = ({ name, onChange, value = '' }) => {
   const contentBlock = htmlToDraft(value)

@@ -4,7 +4,7 @@ import { SocketApp } from 'types/socket'
 
 import { ChatConnectionParams } from './types'
 
-export const setConnectionChat = (data: ChatConnectionParams) => {
+export const connectToChat = (data: ChatConnectionParams) => {
   const { setIsLoadingChat, setMessages, id, setIsLoadingMessage, setError, socket } = data
 
   socket.emit(GET_CHAT_SOCKET)
@@ -26,7 +26,7 @@ export const setConnectionChat = (data: ChatConnectionParams) => {
   })
 }
 
-export const clearConnectionChat = (socket: SocketApp) => {
+export const closeConnectionToChat = (socket: SocketApp) => {
   socket.off(CHAT_ERROR_SOCKET)
   socket.off(GET_CHAT_SOCKET)
   socket.off(CHAT_MESSAGE_SOCKET)

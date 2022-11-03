@@ -1,24 +1,21 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-import { Icon } from 'components/icon'
 import { Loader } from 'components/loader'
-import { Heading4, Paragraph } from 'styles/typography/styles'
 
 import { useSocket } from 'hooks/useSocket'
 import { useAppSelector } from 'store'
 import { userInfoSelector } from 'store/selectors/user.selector'
 
-import { setImageUrl } from 'utils/setImageUrl'
-
-import { ChatMessage } from '../types'
+import { ChatMessageType } from '../types'
 import { DEFAULT_IMAGE } from './const'
+import { ChatMessage } from './message'
 import { MessageControll } from './message-controll'
-import { ChatWrapper, LoadIndicator, Message, MessageWrapper, MessagesWrapper } from './styles'
-import { clearConnectionChat, setConnectionChat } from './utils'
+import { ChatWrapper, LoadIndicator, MessagesWrapper } from './styles'
+import { closeConnectionToChat, connectToChat } from './utils'
 
 export const Chat = () => {
   const [error, setError] = useState('')
-  const [messages, setMessages] = useState<ChatMessage[] | []>([])
+  const [messages, setMessages] = useState<ChatMessageType[] | []>([])
   const [isLoadingChat, setIsLoadingChat] = useState(true)
   const [isLoadingMessage, setIsLoadingMessage] = useState(false)
 
@@ -27,7 +24,7 @@ export const Chat = () => {
   const chatRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    setConnectionChat({
+    connectToChat({
       id: data.id,
       socket,
       setIsLoadingChat,
@@ -36,7 +33,7 @@ export const Chat = () => {
       setError
     })
 
-    return () => clearConnectionChat(socket)
+    return () => closeConnectionToChat(socket)
   }, [data.id, socket])
 
   useEffect(() => {
@@ -60,19 +57,8 @@ export const Chat = () => {
 
         {!error &&
           !isLoadingChat &&
-          messages.map((msg: ChatMessage) => (
-            <MessageWrapper key={msg._id}>
-              <Icon
-                src={setImageUrl(`users/${msg.userId}/${msg.userId}_avatar.png`)}
-                size={30}
-                alt={msg.name}
-                onError={onError}
-              />
-              <Message myMessage={msg.userId === data.id}>
-                <Heading4>{msg.name}</Heading4>
-                <Paragraph>{msg.message}</Paragraph>
-              </Message>
-            </MessageWrapper>
+          messages.map((msg: ChatMessageType) => (
+            <ChatMessage key={msg._id} msg={msg} userId={data.id} onError={onError} />
           ))}
 
         {isLoadingMessage && (

@@ -3,8 +3,6 @@ import styled, { css } from 'styled-components'
 import { ButtonImage } from 'components/button-image'
 import { FlexContainer } from 'components/flex-container'
 
-import { ToolButtonProps } from './types'
-
 export const StyledToolbar = styled(FlexContainer)`
   padding: 5px;
   grid-area: toolbar;
@@ -29,7 +27,7 @@ export const DrawToolsWrapper = styled.div`
   gap: 10px;
 `
 
-export const ToolButton = styled(ButtonImage)<ToolButtonProps>`
+export const ToolButton = styled(ButtonImage)<{ active?: boolean }>`
   width: 40px;
   height: 40px;
   background-color: transparent;

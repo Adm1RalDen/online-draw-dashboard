@@ -1,10 +1,8 @@
 import styled, { css, keyframes } from 'styled-components'
 
-import { StyledBurgerProps } from './types'
-
 export const BurgerWrapper = styled.div``
 
-export const Burger = styled.div<StyledBurgerProps>`
+export const Burger = styled.div<{ isOpen: boolean }>`
   width: 25px;
   height: 25px;
   position: relative;
@@ -59,7 +57,7 @@ const animationMenu = keyframes`
   }
 `
 
-export const NavigationMenu = styled.nav<StyledBurgerProps>`
+export const NavigationMenu = styled.nav<{ isOpen: boolean }>`
   width: 100%;
   padding-top: 50px;
   position: absolute;

@@ -1,12 +1,12 @@
 import { AuthorizedUser, FunctionWithParams } from 'types'
 import { SocketApp } from 'types/socket'
 
-import { ChatMessage } from '../types'
+import { ChatMessageType } from '../types'
 
 export interface ChatConnectionParams {
   socket: SocketApp
   setIsLoadingChat: FunctionWithParams<boolean>
-  setMessages: React.Dispatch<React.SetStateAction<[] | ChatMessage[]>>
+  setMessages: React.Dispatch<React.SetStateAction<[] | ChatMessageType[]>>
   setIsLoadingMessage: FunctionWithParams<boolean>
   setError: FunctionWithParams<string>
   id: string
