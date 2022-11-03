@@ -2,9 +2,7 @@ import styled, { keyframes } from 'styled-components'
 
 import { LoaderProps } from './types'
 
-type Props = Omit<LoaderProps, 'isLoading' | 'type'>
-
-const StyledLoaderWrapper = styled.div<Props>`
+export const StyledLoaderWrapper = styled.div<Omit<LoaderProps, 'isLoading' | 'type'>>`
   width: 100%;
   height: 100%;
   display: flex;
@@ -40,7 +38,7 @@ const lds_ellipsis3 = keyframes`
   }
 `
 
-const StyledDotsLoader = styled.div<Props>`
+export const StyledDotsLoader = styled.div<Omit<LoaderProps, 'isLoading' | 'type'>>`
   display: inline-block;
   position: relative;
   width: 80px;
@@ -83,7 +81,7 @@ const ldsRing = keyframes`
   }
 `
 
-const StyledSolidLoader = styled.div<Props>`
+export const StyledSolidLoader = styled.div<Omit<LoaderProps, 'isLoading' | 'type'>>`
   display: inline-block;
   position: relative;
   width: 30px;
@@ -110,5 +108,3 @@ const StyledSolidLoader = styled.div<Props>`
     animation-delay: -0.15s;
   }
 `
-
-export { StyledLoaderWrapper, StyledSolidLoader, StyledDotsLoader }

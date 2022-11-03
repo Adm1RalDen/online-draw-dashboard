@@ -4,14 +4,9 @@ import { Heading3 } from 'styles/typography/styles'
 
 import { DEFAULT_POPPER_TITLE, POPPER_AGREE, POPPER_DISAGREE } from './const'
 import { PopperButton, PopperButtonsWrapper, PopperModal, PopperWrapper } from './styles'
+import { PopperProps } from './types'
 
-type Props = {
-  children: React.ReactElement
-  title?: string
-  onAgreeAction: VoidFunction
-}
-
-export const Popper: FC<Props> = ({ children, onAgreeAction, title = '' }) => {
+export const Popper: FC<PopperProps> = ({ children, onAgreeAction, title = '' }) => {
   const [isShowPopper, setIsShowPopper] = useState(false)
   const handleShowPopper = () => setIsShowPopper(true)
   const handleHidePopper = () => setIsShowPopper(false)

@@ -12,19 +12,19 @@ const spanAnimation = keyframes`
   }
 `
 
-const ContentWrapper = styled.div`
+export const ContentWrapper = styled.div`
   max-width: 100%;
   height: 45px;
   position: relative;
 `
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
 `
 
-const SpanWrapper = styled.div`
+export const SpanWrapper = styled.div`
   max-width: 200px;
   height: 100%;
   position: relative;
@@ -35,14 +35,14 @@ const SpanWrapper = styled.div`
   animation: ${spanAnimation} 0.5s linear forwards;
 `
 
-const FileName = styled.div`
+export const FileName = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
   width: 100%;
 `
 
-const CloseDiv = styled.div`
+export const CloseDiv = styled.div`
   position: absolute;
   width: 20px;
   height: 20px;
@@ -57,7 +57,7 @@ const CloseDiv = styled.div`
   border: 2px solid ${({ theme }) => theme.colors.darkBlue};
   cursor: pointer;
 `
-const FileInputStyled = styled.input`
+export const FileInputStyled = styled.input`
   position: absolute;
   display: block;
   top: 0;
@@ -65,7 +65,7 @@ const FileInputStyled = styled.input`
   height: 0;
 `
 
-const LoadButton = styled.button`
+export const LoadButton = styled.button`
   max-width: 200px;
   min-width: 100px;
   height: 100%;
@@ -86,5 +86,3 @@ const LoadButton = styled.button`
     background-color: ${({ theme }) => theme.colors.darkBlue};
   }
 `
-
-export { ContentWrapper, Wrapper, LoadButton, SpanWrapper, FileName, FileInputStyled, CloseDiv }

@@ -1,12 +1,10 @@
 import styled, { css, keyframes } from 'styled-components'
 
-type Props = {
-  isOpen: boolean
-}
+import { StyledBurgerProps } from './types'
 
-const BurgerWrapper = styled.div``
+export const BurgerWrapper = styled.div``
 
-const Burger = styled.div<Props>`
+export const Burger = styled.div<StyledBurgerProps>`
   width: 25px;
   height: 25px;
   position: relative;
@@ -60,7 +58,8 @@ const animationMenu = keyframes`
     transform: translateX(0);
   }
 `
-const NavigationMenu = styled.nav<Props>`
+
+export const NavigationMenu = styled.nav<StyledBurgerProps>`
   width: 100%;
   padding-top: 50px;
   position: absolute;
@@ -91,5 +90,3 @@ const NavigationMenu = styled.nav<Props>`
     }
   }
 `
-
-export { Burger, BurgerWrapper, NavigationMenu }

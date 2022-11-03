@@ -1,12 +1,8 @@
 import styled, { css } from 'styled-components'
 
-type InputWrapperProps = {
-  isError: boolean
-  hasValue: boolean
-  margin?: string
-}
+import { InputWrapperProps } from './types'
 
-const ErrorSpan = styled.span`
+export const ErrorText = styled.span`
   position: absolute;
   width: 30px;
   overflow: hidden;
@@ -17,7 +13,7 @@ const ErrorSpan = styled.span`
   height: 30px;
   color: ${({ theme }) => theme.colors.red};
 `
-const InputWrapper = styled.div<InputWrapperProps>`
+export const InputWrapper = styled.div<InputWrapperProps>`
   position: relative;
   padding-top: 5px;
   ${(p) =>
@@ -96,5 +92,3 @@ const InputWrapper = styled.div<InputWrapperProps>`
       `}
   }
 `
-
-export { InputWrapper, ErrorSpan }

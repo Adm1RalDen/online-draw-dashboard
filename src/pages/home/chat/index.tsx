@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 
+import { Icon } from 'components/icon'
 import { Loader } from 'components/loader'
 import { Heading4, Paragraph } from 'styles/typography/styles'
 
@@ -12,14 +13,7 @@ import { setImageUrl } from 'utils/setImageUrl'
 import { ChatMessage } from '../types'
 import { DEFAULT_IMAGE } from './const'
 import { MessageControll } from './message-controll'
-import {
-  ChatWrapper,
-  LoadIndicator,
-  Message,
-  MessageWrapper,
-  MessagesWrapper,
-  UserIcon
-} from './styles'
+import { ChatWrapper, LoadIndicator, Message, MessageWrapper, MessagesWrapper } from './styles'
 import { clearConnectionChat, setConnectionChat } from './utils'
 
 export const Chat = () => {
@@ -68,10 +62,9 @@ export const Chat = () => {
           !isLoadingChat &&
           messages.map((msg: ChatMessage) => (
             <MessageWrapper key={msg._id}>
-              <UserIcon
+              <Icon
                 src={setImageUrl(`users/${msg.userId}/${msg.userId}_avatar.png`)}
-                width={30}
-                height={30}
+                size={30}
                 alt={msg.name}
                 onError={onError}
               />

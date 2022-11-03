@@ -3,7 +3,7 @@ import { SocketApp } from 'types/socket'
 
 import { ChatMessage } from '../types'
 
-export type ChatConnectionParams = {
+export interface ChatConnectionParams {
   socket: SocketApp
   setIsLoadingChat: FunctionWithParams<boolean>
   setMessages: React.Dispatch<React.SetStateAction<[] | ChatMessage[]>>
@@ -12,9 +12,13 @@ export type ChatConnectionParams = {
   id: string
 }
 
-export type MessageControllProps = {
+export interface MessageControllProps {
   isLoadingMessage: boolean
   setIsLoadingMessage: React.Dispatch<React.SetStateAction<boolean>>
   user: AuthorizedUser
   isLoadingChat: boolean
+}
+
+export interface ChatWrapperProps {
+  myMessage: boolean
 }

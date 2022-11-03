@@ -2,7 +2,7 @@ import { XMarkIcon } from '@heroicons/react/24/solid'
 import { FC, useEffect, useState } from 'react'
 
 import { Loader } from 'components/loader'
-import { TextWrapper } from 'components/spanWrapper'
+import { TextWrapper } from 'components/textWrapper'
 import { Paragraph } from 'styles/typography/styles'
 
 import { ErrorMessages, KeysCodes } from 'const/enums'
@@ -14,8 +14,6 @@ import { decreseAttemptsLeftCountAction } from 'store/slices/twoFa.slice'
 import { checkForNumbersInString } from 'utils/checkForNumbersInString'
 import { noopFunction } from 'utils/noop'
 
-import { AuthResponse, FunctionWithParams } from 'types'
-
 import {
   User2FAButton,
   User2FACloseModalButton,
@@ -25,15 +23,9 @@ import {
   User2FASuccessText,
   User2FAWrapper
 } from './styles'
+import { User2FAComponentProps } from './types'
 
-type Props = {
-  userId: string
-  handleCloseModal: VoidFunction
-  onSuccessCallback: FunctionWithParams<AuthResponse>
-  onErrorCallback?: FunctionWithParams<string>
-}
-
-export const User2FAComponent: FC<Props> = ({
+export const User2FAComponent: FC<User2FAComponentProps> = ({
   userId,
   onSuccessCallback,
   handleCloseModal,

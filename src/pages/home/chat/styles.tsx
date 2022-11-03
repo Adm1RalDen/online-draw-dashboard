@@ -2,9 +2,7 @@ import styled from 'styled-components'
 
 import { StyledScroll } from 'components/scroll/styles'
 
-type WrapperProps = {
-  myMessage: boolean
-}
+import { ChatWrapperProps } from './types'
 
 export const ChatWrapper = styled.div`
   height: calc(100% - 50px);
@@ -29,14 +27,7 @@ export const MessageWrapper = styled.div`
   padding-right: 10px;
 `
 
-export const UserIcon = styled.img`
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  object-fit: cover;
-`
-
-export const Message = styled.div<WrapperProps>`
+export const Message = styled.div<ChatWrapperProps>`
   flex-grow: 1;
   padding: 5px;
   background-color: ${(p) => (p.myMessage ? p.theme.colors.aquaMiddle : p.theme.colors.aquaGreen)};

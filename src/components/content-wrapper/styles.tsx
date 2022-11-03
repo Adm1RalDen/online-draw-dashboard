@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   display: grid;
   min-height: 100vh;
   grid-template: 50px 1fr 50px / 1fr;
@@ -8,4 +8,3 @@ const Wrapper = styled.div`
   align-items: stretch;
   background-color: ${({ theme }) => theme.colors.light_gray};
 `
-export { Wrapper }

@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 import { Input as DefaultInput } from 'components/input'
 
-const StyledSettings = styled.div`
+export const StyledSettings = styled.div`
   grid-area: settings;
   padding: 5px;
   display: flex;
@@ -19,7 +19,7 @@ const StyledSettings = styled.div`
   }
 `
 
-const Input = styled(DefaultInput)`
+export const Input = styled(DefaultInput)`
   width: 60px;
   padding: 0;
   &[type='number'] {
@@ -27,5 +27,3 @@ const Input = styled(DefaultInput)`
     padding: 0px 5px 0px 5px;
   }
 `
-
-export { StyledSettings, Input }

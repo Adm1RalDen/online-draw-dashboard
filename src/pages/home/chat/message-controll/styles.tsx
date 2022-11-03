@@ -3,10 +3,6 @@ import styled from 'styled-components'
 import { ButtonImage } from 'components/button-image'
 import { Input } from 'components/input'
 
-type ButtonProps = {
-  isShow: string
-}
-
 export const MessageControllWrapper = styled.div`
   margin-top: 5px;
   border-radius: 5px;
@@ -16,7 +12,7 @@ export const MessageControllWrapper = styled.div`
   padding: 0px 10px;
 `
 
-export const MessageInput = styled(Input)<ButtonProps>`
+export const MessageInput = styled(Input)<{ isShow: string }>`
   height: 30px;
   flex-grow: 1;
   transition: all 0.2s linear;
@@ -26,7 +22,7 @@ export const MessageInput = styled(Input)<ButtonProps>`
   border-bottom-right-radius: ${({ isShow }) => (isShow ? '15px' : '5px')};
 `
 
-export const SendMessageButton = styled(ButtonImage)<ButtonProps>`
+export const SendMessageButton = styled(ButtonImage)<{ isShow: string }>`
   width: ${({ isShow }) => (isShow ? '35px' : '0px')};
   box-shadow: none;
   height: 30px;

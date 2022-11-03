@@ -1,7 +1,5 @@
 import { ChangeEvent, FC, useRef, useState } from 'react'
 
-import { FunctionWithParams } from 'types'
-
 import {
   CloseDiv,
   ContentWrapper,
@@ -11,25 +9,22 @@ import {
   SpanWrapper,
   Wrapper
 } from './styles'
-
-type FileInputProps = {
-  name: string
-  onChange: FunctionWithParams<ChangeEvent<HTMLInputElement> | null>
-}
+import { FileInputProps } from './types'
 
 export const FileInput: FC<FileInputProps> = ({ onChange, name }) => {
   const inputRef = useRef<HTMLInputElement>(null)
   const [file, setFile] = useState<File | null>(null)
 
+  const handleClick = () => inputRef.current?.click()
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFile(e.target.files ? e.target.files[0] : null)
     onChange(e)
   }
+
   const handleClose = () => {
     setFile(null)
     onChange(null)
   }
-  const handleClick = () => inputRef.current?.click()
 
   return (
     <ContentWrapper>

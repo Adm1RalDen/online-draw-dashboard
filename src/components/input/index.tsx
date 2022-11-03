@@ -1,10 +1,8 @@
 import styled, { css } from 'styled-components'
 
-type Props = {
-  isError?: boolean | string
-}
+import { StyledInputProps } from './types'
 
-export const Input = styled.input<Props>`
+export const Input = styled.input<StyledInputProps>`
   width: 100%;
   height: 40px;
   padding: 0px 30px 0px 10px;

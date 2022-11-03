@@ -1,8 +1,6 @@
 import styled, { css, keyframes } from 'styled-components'
 
-type DropDownContainerProps = {
-  isOpen: boolean
-}
+import { StyledDropDownContainerProps } from './types'
 
 const dropDownAnimation = keyframes`
   0%{
@@ -12,7 +10,7 @@ const dropDownAnimation = keyframes`
     transform: translateY(50px);
   }
 `
-const DropDownContainer = styled.div<DropDownContainerProps>`
+export const DropDownContainer = styled.div<StyledDropDownContainerProps>`
   position: relative;
 
   & > div:first-child {
@@ -42,5 +40,3 @@ const DropDownContainer = styled.div<DropDownContainerProps>`
       }
     `}
 `
-
-export { DropDownContainer }

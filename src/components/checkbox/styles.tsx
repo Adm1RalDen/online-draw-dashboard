@@ -1,12 +1,12 @@
 import styled from 'styled-components'
 
-const CheckBoxLabel = styled.label`
+export const CheckBoxLabel = styled.label`
   display: block;
   position: relative;
   padding: 5px 10px 5px 30px;
 `
 
-const Checkmark = styled.span`
+export const Checkmark = styled.span`
   position: absolute;
   border-radius: 5px;
   top: 0;
@@ -30,7 +30,7 @@ const Checkmark = styled.span`
   }
 `
 
-const CheckBoxInput = styled.input.attrs(() => ({ type: 'checkbox' }))`
+export const CheckBoxInput = styled.input.attrs(() => ({ type: 'checkbox' }))`
   position: absolute;
   cursor: pointer;
   opacity: 0;
@@ -48,5 +48,3 @@ const CheckBoxInput = styled.input.attrs(() => ({ type: 'checkbox' }))`
     }
   }
 `
-
-export { CheckBoxInput, CheckBoxLabel, Checkmark }

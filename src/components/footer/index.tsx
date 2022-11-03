@@ -1,10 +1,8 @@
 import { Container } from '../container'
-import { Footer } from './styles'
+import { StyledFooter } from './styles'
 
-export const FooterComponent = () => {
-  return (
-    <Footer>
-      <Container></Container>
-    </Footer>
-  )
-}
+export const Footer = () => (
+  <StyledFooter>
+    <Container></Container>
+  </StyledFooter>
+)

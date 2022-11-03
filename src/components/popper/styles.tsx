@@ -1,10 +1,11 @@
 import styled from 'styled-components'
 
-const PopperWrapper = styled.div`
+export const PopperWrapper = styled.div`
   position: relative;
   display: inline-block;
 `
-const PopperModal = styled.div`
+
+export const PopperModal = styled.div`
   color: ${({ theme }) => theme.colors.black};
   position: absolute;
   border-radius: 5px;
@@ -17,13 +18,15 @@ const PopperModal = styled.div`
   z-index: ${({ theme }) => theme.zIndex.popper};
   box-shadow: 1px 1px 14px -2px ${({ theme }) => theme.colors.middleGray};
 `
-const PopperButtonsWrapper = styled.div`
+
+export const PopperButtonsWrapper = styled.div`
   margin-top: 15px;
   display: flex;
   justify-content: right;
   gap: 5px;
 `
-const PopperButton = styled.button`
+
+export const PopperButton = styled.button`
   text-transform: uppercase;
   background-color: transparent;
   border-radius: 2px;
@@ -37,4 +40,3 @@ const PopperButton = styled.button`
     background-color: ${({ theme }) => theme.colors.lightBlue};
   }
 `
-export { PopperWrapper, PopperModal, PopperButtonsWrapper, PopperButton }

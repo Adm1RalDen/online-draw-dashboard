@@ -3,12 +3,9 @@ import { FC, useState } from 'react'
 import { noopFunction } from 'utils/noop'
 
 import { Input, ToggleSwitchText, ToggleSwitchWrapper } from './styles'
+import { ToggleSwitchProps } from './types'
 
-type Props = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> & {
-  isShowSpan?: boolean
-}
-
-export const ToggleSwitch: FC<Props> = ({
+export const ToggleSwitch: FC<ToggleSwitchProps> = ({
   isShowSpan = true,
   checked = false,
   onChange = noopFunction,
