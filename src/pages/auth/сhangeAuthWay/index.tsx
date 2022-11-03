@@ -1,13 +1,9 @@
 import { FC } from 'react'
 
 import { AuthButton, AuthParagraph } from './styles'
+import { ChangeAuthWayProps } from './types'
 
-type Props = {
-  isLogin: boolean
-  setIsLogin: React.Dispatch<React.SetStateAction<boolean>>
-}
-
-export const ChangeAuthWay: FC<Props> = ({ isLogin, setIsLogin }) => {
+export const ChangeAuthWay: FC<ChangeAuthWayProps> = ({ isLogin, setIsLogin }) => {
   const handleChangeToLogin = () => setIsLogin(true)
   const handleChangeToRegistration = () => setIsLogin(false)
 

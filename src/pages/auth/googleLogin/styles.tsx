@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 
-const GoogleLoginWrapper = styled.div`
+export const GoogleLoginWrapper = styled.div`
   margin-top: 10px;
 `
-const GoogleLink = styled.a`
+export const GoogleLink = styled.a`
   display: flex;
   align-items: center;
   gap: 10px;
@@ -17,4 +17,3 @@ const GoogleLink = styled.a`
     background-color: ${({ theme }) => theme.colors.whiteGray};
   }
 `
-export { GoogleLoginWrapper, GoogleLink }

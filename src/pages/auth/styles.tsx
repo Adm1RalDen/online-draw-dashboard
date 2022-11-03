@@ -4,7 +4,7 @@ import { Button } from 'components/button'
 import { Container as DefaultContainer } from 'components/container'
 import { Heading1, Heading2 } from 'styles/typography/styles'
 
-const AuthButton = styled(Button)`
+export const AuthButton = styled(Button)`
   width: 100%;
   margin-top: 15px;
 
@@ -13,12 +13,12 @@ const AuthButton = styled(Button)`
   }
 `
 
-const AuthSection = styled.section`
+export const AuthSection = styled.section`
   height: 100vh;
   background-color: ${(p) => p.theme.colors.greenBackground};
 `
 
-const Container = styled(DefaultContainer)`
+export const Container = styled(DefaultContainer)`
   display: grid;
   height: inherit;
   grid-template-columns: auto minmax(300px, 500px);
@@ -27,19 +27,17 @@ const Container = styled(DefaultContainer)`
   gap: 50px;
 `
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   border-radius: 10px;
   border: 2px solid ${({ theme }) => theme.colors.white};
   padding: 30px 20px;
 `
 
-const Title = styled(Heading2)`
+export const Title = styled(Heading2)`
   color: ${({ theme }) => theme.colors.white};
 `
 
-const Logo = styled(Heading1)`
+export const Logo = styled(Heading1)`
   font-size: ${({ theme }) => theme.fontSizes.large};
   color: ${({ theme }) => theme.colors.white};
 `
-
-export { AuthSection, Container, Logo, Wrapper, Title, AuthButton }

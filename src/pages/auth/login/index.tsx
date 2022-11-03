@@ -39,7 +39,7 @@ export const LoginComponent = () => {
   return (
     <>
       <Title>Login</Title>
-      <form onSubmit={formik.handleSubmit} autoComplete='off'>
+      <form onSubmit={formik.handleSubmit}>
         {AuthorizationFileds.map((field) => (
           <InputAnimation
             key={field}
