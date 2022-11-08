@@ -4,7 +4,7 @@ import { toast } from 'react-toastify'
 
 import { Button } from 'components/button'
 
-import { FIleInputSizes } from 'const/enums'
+import { FileInputSizes } from 'const/enums'
 
 import { countBytes } from 'utils/countBytes'
 import { EncodeBase64 } from 'utils/encodeBase64'
@@ -28,7 +28,7 @@ export const ImageCrop: FC<ImageCropProps> = ({
   const onCrop = (preview: string) => setCropedImg(preview)
   const onBeforeFileLoad = (elem: React.ChangeEvent<HTMLInputElement>) => {
     if (elem.target.files) {
-      if (elem.target.files[0].size > countBytes(2, FIleInputSizes.MB)) {
+      if (elem.target.files[0].size > countBytes(2, FileInputSizes.MB)) {
         toast.error('File is too big (should been less then 2Mb)')
         elem.target.value = ''
       }
