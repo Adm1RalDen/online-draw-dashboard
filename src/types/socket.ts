@@ -1,4 +1,3 @@
-/* eslint no-unused-vars:"off" */
 import { Socket } from 'socket.io-client'
 
 import { ChatMessageType, CreateRoom } from 'pages/home/types'

@@ -1,16 +1,18 @@
+import { InputTypes } from 'const/enums'
+
 export const setInputTypes = (name: string) => {
   switch (name) {
     case 'email':
-      return 'email'
+      return InputTypes.EMAIL
     case 'password':
-      return 'password'
+      return InputTypes.PASSWORD
     case 'date':
-      return 'date'
+      return InputTypes.DATE
     case 'age':
-      return 'number'
+      return InputTypes.NUMBER
     case 'color':
-      return 'color'
+      return InputTypes.COLOR
     default:
-      return 'text'
+      return InputTypes.TEXT
   }
 }

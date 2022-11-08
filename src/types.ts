@@ -33,7 +33,6 @@ export interface SavedUserObject {
   user: Pick<AuthorizedUser, 'name' | 'role' | 'id'>
 }
 
-/* eslint no-unused-vars: "off" */
 export interface FunctionWithParams<T> {
   (e: T): void
 }

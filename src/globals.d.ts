@@ -1,4 +1,4 @@
 declare module 'public/assets/*.svg' {
-  const content: string
+  const content: React.SVG
   export default content
 }

@@ -1,6 +1,6 @@
 import { useFormik } from 'formik'
 
-import { InputAnimation } from 'components/input-animation'
+import { AnimationInput } from 'components/input-animation'
 
 import { useAppDispatch, useAppSelector } from 'store'
 import { userInfoSelector } from 'store/selectors/user.selector'
@@ -13,7 +13,8 @@ import { setInputTypes } from 'utils/setInputTypes'
 import { UserRegistrationData } from 'types'
 
 import { AuthButton, Title } from '../styles'
-import { RegistrationFileds, initialValues, validationSchema } from './const'
+import { registrationValidationSchema } from '../utils'
+import { RegistrationFileds, initialValues } from './const'
 
 export const RegistrationComponent = () => {
   const dispatch = useAppDispatch()
@@ -26,7 +27,7 @@ export const RegistrationComponent = () => {
 
   const formik = useFormik({
     initialValues,
-    validationSchema,
+    validationSchema: registrationValidationSchema,
     onSubmit: handleSubmit
   })
 
@@ -35,21 +36,15 @@ export const RegistrationComponent = () => {
       <Title>Registration</Title>
       <form onSubmit={formik.handleSubmit}>
         {RegistrationFileds.map((field) => (
-          <InputAnimation
+          <AnimationInput
             key={field}
-            margin='10px 0px 0px 0px'
             label={capitalizeFirstLetter(field)}
             name={field}
             type={setInputTypes(field)}
-            value={formik.values[field as keyof UserRegistrationData]}
+            value={formik.values[field]}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            error={
-              formik.errors[field as keyof UserRegistrationData] &&
-              formik.touched[field as keyof UserRegistrationData]
-                ? formik.errors[field as keyof UserRegistrationData]
-                : ''
-            }
+            error={formik.errors[field] && formik.touched[field] ? formik.errors[field] : ''}
           />
         ))}
         <AuthButton disabled={!formik.isValid || isLoading}>Sign up</AuthButton>

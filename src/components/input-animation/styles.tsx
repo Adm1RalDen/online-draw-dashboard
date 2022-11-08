@@ -1,94 +1,127 @@
-import styled, { css } from 'styled-components'
+import styled, { css, keyframes } from 'styled-components'
 
-import { InputWrapperProps } from './types'
+import { Input } from 'components/input'
+import { Label } from 'components/label'
+import { Heading6, Span } from 'styles/typography/styles'
 
-export const ErrorText = styled.span`
-  position: absolute;
-  width: 30px;
-  overflow: hidden;
-  background: url('/assets/warning.png') no-repeat;
-  background-size: 30px 30px;
-  top: 10px;
-  right: 5px;
-  height: 30px;
-  color: ${({ theme }) => theme.colors.red};
+const errorAnimation = keyframes`
+ 0%{
+  height: 0px;
+ }
+  100%{
+    height: 20px;
+  }
 `
-export const InputWrapper = styled.div<InputWrapperProps>`
+
+export const AnimationInputWrapper = styled(Label)<{ isError: boolean; hasValue: boolean }>`
+  width: 100%;
   position: relative;
-  padding-top: 5px;
+  margin: 15px 0px 10px 0px;
+
   ${(p) =>
-    p.margin &&
+    p.hasValue &&
     css`
-      margin: ${p.margin};
-    `};
-
-  & > input {
-    height: 40px;
-    position: relative;
-    caret-color: ${({ theme }) => theme.colors.blue};
-    border: 2px solid ${(p) => p.theme.colors.light_gray};
-    border-radius: 5px;
-    outline: none;
-    ${(p) =>
-      p.isError &&
-      css`
-        border: 2px solid red;
-        caret-color: ${({ theme }) => theme.colors.red};
-      `}
-
-    &:focus {
-      box-shadow: 0px 0px 1px 1px ${({ theme }) => theme.colors.middleBlue};
-      border: 2px solid ${({ theme }) => theme.colors.blue};
-
-      ${(p) =>
-        p.isError &&
-        css`
-          border-color: ${({ theme }) => theme.colors.red};
-          box-shadow: 0px 0px 1px 1px red;
-        `}
-    }
-
-    &:focus ~ label {
-      top: -10px;
-      color: ${({ theme }) => theme.colors.blue};
-      ${(p) =>
-        p.hasValue &&
-        css`
-          opacity: 1;
-        `}
-      background-color: ${({ theme }) => theme.colors.white};
-      border-left: 2px solid ${({ theme }) => theme.colors.blue};
-      border-right: 2px solid ${({ theme }) => theme.colors.blue};
-      border-top: 2px solid ${({ theme }) => theme.colors.blue};
-      border-bottom: 2px solid ${({ theme }) => theme.colors.blue};
-      padding: 2px 4px;
-      ${(p) =>
-        p.isError &&
-        css`
-          border-color: ${({ theme }) => theme.colors.red};
-          color: ${({ theme }) => theme.colors.red};
-        `}
-    }
-  }
-  & > label {
-    transition: 0.3s;
-    position: absolute;
-    top: 19px;
-    left: 5px;
-    font-size: ${({ theme }) => theme.fontSizes.small};
-    color: ${({ theme }) => theme.colors.middleGray};
-
-    ${(p) =>
-      p.hasValue &&
-      css`
+      & > h6 {
         opacity: 0;
-      `}
-    font-weight: 400;
-    pointer-events: none;
-    ${(p) =>
-      p.isError &&
-      css`
+      }
+    `}
+
+  ${(p) =>
+    !p.hasValue &&
+    !p.isError &&
+    css`
+      & > input:focus {
+        & + h6 {
+          color: ${({ theme }) => theme.colors.white};
+        }
+      }
+    `}
+
+  ${(p) =>
+    !p.isError &&
+    p.hasValue &&
+    css`
+      & > input {
+        border: 2px solid ${({ theme }) => theme.colors.blue};
+        caret-color: ${({ theme }) => theme.colors.blue};
+      }
+
+      & > h6 {
+        color: ${({ theme }) => theme.colors.blue};
+      }
+    `}
+
+
+  ${(p) =>
+    p.isError &&
+    css`
+      & > input {
+        border: 2px solid ${({ theme }) => theme.colors.red};
+        caret-color: ${({ theme }) => theme.colors.red};
+      }
+
+      & > h6 {
+        opacity: 1;
         color: ${({ theme }) => theme.colors.red};
-      `}
+        top: -20px;
+        left: 0;
+      }
+
+      & > span {
+        animation: 0.3s ${errorAnimation} forwards;
+      }
+    `}
+`
+
+export const AnimationInputTitle = styled(Heading6)`
+  transition: all 0.3s;
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  font-weight: 300;
+  font-size: ${({ theme }) => theme.fontSizes.small};
+`
+
+export const AnimationInputField = styled(Input)`
+  position: relative;
+  border-radius: 5px;
+  outline: none;
+
+  &:-webkit-autofill {
+    border: 2px solid ${({ theme }) => theme.colors.blue};
+    caret-color: ${({ theme }) => theme.colors.blue};
+
+    & + h6 {
+      color: ${({ theme }) => theme.colors.blue};
+      opacity: 1;
+      top: -20px;
+      left: 0;
+    }
   }
+
+  &:focus {
+    & + h6 {
+      opacity: 1;
+      top: -20px;
+      left: 0;
+    }
+  }
+
+  &:disabled {
+    & + h6 {
+      pointer-events: none;
+    }
+  }
+`
+
+export const AnimationInputErrorText = styled(Span)`
+  width: 100%;
+  display: block;
+  position: absolute;
+  padding-top: 5px;
+  text-align: right;
+  overflow: hidden;
+  transform: all 0.5s ease;
+  font-size: 13px;
+  color: ${({ theme }) => theme.colors.red};
 `

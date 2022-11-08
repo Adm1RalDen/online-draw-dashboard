@@ -2,7 +2,6 @@ import { NavigateFunction } from 'react-router-dom'
 
 import { SocketApp } from 'types/socket'
 
-/* eslint no-unused-vars:"off" */
 export enum ToolsEnum {
   pen = 'pen',
   square = 'square',
@@ -11,7 +10,7 @@ export enum ToolsEnum {
   line = 'line'
 }
 
-export type DrawConnectionProps = {
+export interface DrawConnectionProps {
   socket: SocketApp
   canvasRef: React.MutableRefObject<HTMLCanvasElement>
   roomId: string

@@ -1,14 +1,24 @@
 import { FC } from 'react'
 
-import { Input } from 'components/input'
+import { InputTypes } from 'const/enums'
 
-import { ErrorText, InputWrapper } from './styles'
-import { AnimationInputProps } from './types'
+import {
+  AnimationInputErrorText,
+  AnimationInputField,
+  AnimationInputTitle,
+  AnimationInputWrapper
+} from './styles'
 
-export const InputAnimation: FC<AnimationInputProps> = ({ label, ...rest }) => (
-  <InputWrapper isError={!!rest.error} hasValue={!!rest.value} margin={rest.margin}>
-    <Input {...rest} type={rest.type} />
-    <label>{label}</label>
-    {rest.error && <ErrorText title={rest.error}></ErrorText>}
-  </InputWrapper>
+interface AnimationInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  type: InputTypes
+  label: string
+  error?: string
+}
+
+export const AnimationInput: FC<AnimationInputProps> = ({ label, ...rest }) => (
+  <AnimationInputWrapper isError={!!rest.error} hasValue={!!rest.value}>
+    <AnimationInputField {...rest} />
+    <AnimationInputTitle>{label}</AnimationInputTitle>
+    <AnimationInputErrorText>{rest.error}</AnimationInputErrorText>
+  </AnimationInputWrapper>
 )

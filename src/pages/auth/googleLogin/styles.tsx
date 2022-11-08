@@ -8,7 +8,7 @@ export const GoogleLink = styled.a`
   align-items: center;
   gap: 10px;
   width: inherit;
-  margin-top: 15px;
+  margin: 15px 0px 10px 0px;
   padding: 8px 20px;
   background-color: ${({ theme }) => theme.colors.white};
   border-radius: 5px;

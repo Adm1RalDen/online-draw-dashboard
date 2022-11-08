@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-
 export enum PLATFORMS {
   Apple = 'apple',
   Android = 'android'
@@ -48,4 +46,13 @@ export enum FileInputSizes {
 export enum Colors {
   BLACK = 'black',
   WHITE = 'white'
+}
+
+export enum InputTypes {
+  EMAIL = 'email',
+  PASSWORD = 'password',
+  TEXT = 'text',
+  NUMBER = 'number',
+  COLOR = 'color',
+  DATE = 'date'
 }

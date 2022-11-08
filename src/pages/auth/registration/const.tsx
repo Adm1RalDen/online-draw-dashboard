@@ -1,14 +1,12 @@
-import * as yup from 'yup'
-
 import { UserRegistrationData } from 'types'
 
-export const RegistrationFileds = ['name', 'email', 'password']
+enum FieldsEnum {
+  EMAIL = 'email',
+  NAME = 'name',
+  PASSWORD = 'password'
+}
 
-export const validationSchema = yup.object().shape({
-  name: yup.string().min(2, 'min 2 symbols').required('Required'),
-  email: yup.string().email('Not valid email').required('Required'),
-  password: yup.string().min(6, 'min 6').required('Required')
-})
+export const RegistrationFileds = [FieldsEnum.NAME, FieldsEnum.EMAIL, FieldsEnum.PASSWORD]
 
 export const initialValues: UserRegistrationData = {
   name: '',
