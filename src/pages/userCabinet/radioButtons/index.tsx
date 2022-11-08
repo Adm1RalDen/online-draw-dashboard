@@ -6,6 +6,8 @@ import { Input } from 'components/input'
 import { RadioButtons } from 'components/radioButtons'
 import { Heading4 } from 'styles/typography/styles'
 
+import { Colors } from 'const/enums'
+
 import { FunctionWithParams } from 'types'
 
 import { MALE, WOMAN } from '../const'
@@ -43,7 +45,12 @@ export const UserRadioButtons: FC<Props> = ({ formik, handleSaveBackground }) =>
 
       <div>
         <Heading4>Background image</Heading4>
-        <FileInput name='backgroundFon' onChange={handleSaveBackground} />
+        <FileInput
+          colorInfo={Colors.BLACK}
+          name='backgroundFon'
+          onChange={handleSaveBackground}
+          accept='image/png, image/jpeg'
+        />
       </div>
     </RadioButtonsWrapper>
   )

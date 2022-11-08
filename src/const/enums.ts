@@ -14,6 +14,17 @@ export enum NetworkStatus {
   INTERNAL = 500
 }
 
+export enum FileTypes {
+  PNG = 'png',
+  JPEG = 'jpeg',
+  JPG = 'jpg'
+}
+
+export enum MimeTypes {
+  IMAGE = 'image',
+  TEXT = 'text'
+}
+
 export enum ErrorMessages {
   ERROR = 'Error',
   OCCURED_ERROR = 'Occured error',
@@ -27,4 +38,14 @@ export enum ErrorMessages {
 export enum KeysCodes {
   ENTER = 'Enter',
   BACKSPACE = 'Backspace'
+}
+
+export enum FileInputSizes {
+  MB = 'MB',
+  KB = 'KB'
+}
+
+export enum Colors {
+  BLACK = 'black',
+  WHITE = 'white'
 }
