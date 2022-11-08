@@ -1,4 +1,3 @@
-import { nanoid } from '@reduxjs/toolkit'
 import React, { useEffect, useRef, useState } from 'react'
 
 import { Loader } from 'components/loader'
@@ -7,33 +6,34 @@ import { useSocket } from 'hooks/useSocket'
 import { useAppSelector } from 'store'
 import { userInfoSelector } from 'store/selectors/user.selector'
 
-import { setImageUrl } from 'utils/setImageUrl'
-
-import { ChatMessage } from '../types'
-import { DEFAULT_IMAGE, clearConnectionChat, setConnectionChat } from './const'
+import { ChatMessageType } from '../types'
+import { DEFAULT_IMAGE } from './const'
+import { ChatMessage } from './message'
 import { MessageControll } from './message-controll'
-import { ChatWrapper, LoadIndicator, Message, MessagesBlock, MessagesWrapper } from './styles'
+import { ChatWrapper, LoadIndicator, MessagesWrapper } from './styles'
+import { closeConnectionToChat, connectToChat } from './utils'
 
 export const Chat = () => {
-  const { socket } = useSocket()
-  const [messages, setMessages] = useState<ChatMessage[] | []>([])
-  const [isLoadingChat, setIsLoadingChat] = useState(true)
-  const [isMessageLoading, setIsMessageLoading] = useState(false)
   const [error, setError] = useState('')
+  const [messages, setMessages] = useState<ChatMessageType[] | []>([])
+  const [isLoadingChat, setIsLoadingChat] = useState(true)
+  const [isLoadingMessage, setIsLoadingMessage] = useState(false)
+
   const { data } = useAppSelector(userInfoSelector)
+  const { socket } = useSocket()
   const chatRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    setConnectionChat({
+    connectToChat({
       id: data.id,
       socket,
       setIsLoadingChat,
-      setIsMessageLoading,
+      setIsLoadingMessage,
       setMessages,
       setError
     })
 
-    return () => clearConnectionChat(socket)
+    return () => closeConnectionToChat(socket)
   }, [data.id, socket])
 
   useEffect(() => {
@@ -50,40 +50,28 @@ export const Chat = () => {
 
   return (
     <ChatWrapper>
-      <MessagesBlock ref={chatRef}>
-        {error ? (
-          <span>{error}</span>
-        ) : isLoadingChat ? (
-          <Loader type='solid' />
-        ) : (
-          messages.map((msg: ChatMessage) => (
-            <MessagesWrapper key={nanoid()}>
-              <div>
-                <img
-                  src={setImageUrl(`users/${msg.userId}/${msg.userId}_avatar.png`)}
-                  width={30}
-                  height={30}
-                  alt={msg.name}
-                  onError={onError}
-                />
-              </div>
-              <Message myMessage={msg.userId === data.id}>
-                <h4>{msg.name}</h4>
-                <p>{msg.message}</p>
-              </Message>
-            </MessagesWrapper>
-          ))
-        )}
-        {isMessageLoading && (
+      <MessagesWrapper ref={chatRef}>
+        {error && <span>{error}</span>}
+
+        {!error && isLoadingChat && <Loader type='solid' />}
+
+        {!error &&
+          !isLoadingChat &&
+          messages.map((msg: ChatMessageType) => (
+            <ChatMessage key={msg._id} msg={msg} userId={data.id} onError={onError} />
+          ))}
+
+        {isLoadingMessage && (
           <LoadIndicator>
             <Loader type='solid' />
           </LoadIndicator>
         )}
-      </MessagesBlock>
+      </MessagesWrapper>
+
       <MessageControll
         isLoadingChat={isLoadingChat}
-        isMessageLoading={isMessageLoading}
-        setIsMessageLoading={setIsMessageLoading}
+        isLoadingMessage={isLoadingMessage}
+        setIsLoadingMessage={setIsLoadingMessage}
         user={data}
       />
     </ChatWrapper>

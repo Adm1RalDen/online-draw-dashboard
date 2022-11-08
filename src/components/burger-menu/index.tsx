@@ -1,22 +1,23 @@
 import { FC, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 
-import { Burger, BurgerWrapper, NavigationMenu } from './styles'
+import { Burger, NavigationMenu } from './styles'
 
-type ListItem = {
+interface BurgerListItem {
   url: string
   label: string
 }
-interface BurgerProps {
-  list: ListItem[]
+
+interface BurgerMenuProps {
+  list: BurgerListItem[]
 }
 
-export const BurgerMenu: FC<BurgerProps> = ({ list = [] }) => {
+export const BurgerMenu: FC<BurgerMenuProps> = ({ list }) => {
   const [isOpen, setIsOpen] = useState(false)
   const handleClick = () => setIsOpen(!isOpen)
 
   return (
-    <BurgerWrapper>
+    <div>
       <Burger isOpen={isOpen} onClick={handleClick} role='navigation'>
         <span />
       </Burger>
@@ -32,6 +33,6 @@ export const BurgerMenu: FC<BurgerProps> = ({ list = [] }) => {
           </ul>
         ) : null}
       </NavigationMenu>
-    </BurgerWrapper>
+    </div>
   )
 }

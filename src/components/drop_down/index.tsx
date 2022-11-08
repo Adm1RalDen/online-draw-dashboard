@@ -2,19 +2,18 @@ import { FC, useState } from 'react'
 
 import { DropDownContainer } from './styles'
 
-type DropDownTypes = {
+export interface DropDownProps {
   list: string[]
 }
 
-export const DropDown: FC<DropDownTypes> = ({ list }) => {
+export const DropDown: FC<DropDownProps> = ({ list }) => {
   const [isOpen, setIsOpen] = useState(false)
 
   const handleOpen = () => setIsOpen(!isOpen)
+
   return (
     <DropDownContainer isOpen={isOpen}>
-      <div className='alert' onClick={handleOpen}>
-        {isOpen ? 'close' : 'open'}
-      </div>
+      <div onClick={handleOpen}>{isOpen ? 'close' : 'open'}</div>
 
       <div>
         {isOpen && (

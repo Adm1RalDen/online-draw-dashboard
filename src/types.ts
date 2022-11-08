@@ -49,7 +49,7 @@ export interface RoomType {
   _id: string
 }
 
-export type ChildrenProps = {
+export interface ChildrenProps {
   children: React.ReactNode
 }
 export interface UserInRoom {
@@ -63,7 +63,7 @@ export interface AuthResponse {
   user: Pick<AuthorizedUser, 'name' | 'role' | 'id'>
 }
 
-export type VerifyRequestData = {
+export interface VerifyRequestData {
   userId: string
   secure2FACode: string
 }
@@ -74,7 +74,7 @@ export interface User2FALoginResponse {
   attemptsLeftCount: number
 }
 
-export type ServerResponseError = {
+export interface ServerResponseError {
   data: {
     message: string
   }
@@ -95,6 +95,6 @@ export interface DrawData {
   tool?: keyof typeof ToolsEnum
 }
 
-export type CustomRefObject<T> = {
+export interface CustomRefObject<T> {
   readonly current: T
 }

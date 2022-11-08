@@ -2,7 +2,7 @@ import { XMarkIcon } from '@heroicons/react/24/solid'
 import { FC, useEffect, useState } from 'react'
 
 import { Loader } from 'components/loader'
-import { TextWrapper } from 'components/spanWrapper'
+import { TextWrapper } from 'components/textWrapper'
 import { Paragraph } from 'styles/typography/styles'
 
 import { ErrorMessages, KeysCodes } from 'const/enums'
@@ -26,14 +26,14 @@ import {
   User2FAWrapper
 } from './styles'
 
-type Props = {
+interface User2FAComponentProps {
   userId: string
   handleCloseModal: VoidFunction
   onSuccessCallback: FunctionWithParams<AuthResponse>
   onErrorCallback?: FunctionWithParams<string>
 }
 
-export const User2FAComponent: FC<Props> = ({
+export const User2FAComponent: FC<User2FAComponentProps> = ({
   userId,
   onSuccessCallback,
   handleCloseModal,

@@ -9,7 +9,7 @@ import { FunctionWithParams } from 'types'
 
 import { EditorWrapper } from './styles'
 
-type TextEditorProps = {
+interface TextEditorProps {
   name: string
   onChange: FunctionWithParams<string>
   value: string

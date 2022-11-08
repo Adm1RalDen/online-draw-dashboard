@@ -3,11 +3,7 @@ import styled, { css } from 'styled-components'
 import { ButtonImage } from 'components/button-image'
 import { FlexContainer } from 'components/flex-container'
 
-type ToolButtonProps = {
-  active?: boolean
-}
-
-const StyledToolbar = styled(FlexContainer)`
+export const StyledToolbar = styled(FlexContainer)`
   padding: 5px;
   grid-area: toolbar;
   justify-content: space-between;
@@ -15,7 +11,7 @@ const StyledToolbar = styled(FlexContainer)`
   border-bottom: 2px solid ${({ theme }) => theme.colors.black};
 `
 
-const SnapshotButtonsWrapper = styled.div`
+export const SnapshotButtonsWrapper = styled.div`
   display: flex;
   gap: 5px;
   & > button {
@@ -26,12 +22,12 @@ const SnapshotButtonsWrapper = styled.div`
   }
 `
 
-const DrawToolsWrapper = styled.div`
+export const DrawToolsWrapper = styled.div`
   display: flex;
   gap: 10px;
 `
 
-const ToolButton = styled(ButtonImage)<ToolButtonProps>`
+export const ToolButton = styled(ButtonImage)<{ active?: boolean }>`
   width: 40px;
   height: 40px;
   background-color: transparent;
@@ -46,5 +42,3 @@ const ToolButton = styled(ButtonImage)<ToolButtonProps>`
       background-color: ${({ theme }) => theme.colors.aquaMiddle};
     `};
 `
-
-export { ToolButton, StyledToolbar, SnapshotButtonsWrapper, DrawToolsWrapper }

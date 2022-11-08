@@ -1,7 +1,7 @@
 /* eslint no-unused-vars:"off" */
 import { Socket } from 'socket.io-client'
 
-import { ChatMessage, CreateRoom } from 'pages/home/types'
+import { ChatMessageType, CreateRoom } from 'pages/home/types'
 
 import { AuthorizedUser, DrawData } from 'types'
 
@@ -49,8 +49,8 @@ export interface ServerToClientEvents {
   UPDATE_USER_ROOM_SUCCESS: VoidFunction
   UPDATE_USER_ROOM_ERROR: (e: string) => void
   CHAT_ERROR: (data: string) => void
-  GET_CHAT: (data: ChatMessage[]) => void
-  CHAT_MESSAGE: (data: ChatMessage) => void
+  GET_CHAT: (data: ChatMessageType[]) => void
+  CHAT_MESSAGE: (data: ChatMessageType) => void
   GET_ROOM: (data: Omit<ActiveRoom, 'roomPassword'>) => void
 }
 

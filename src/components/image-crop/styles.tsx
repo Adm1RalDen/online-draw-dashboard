@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const AvatarEditWrapper = styled.div`
+export const AvatarEditWrapper = styled.div`
   padding-top: 10px;
   display: flex;
   flex-direction: column;
@@ -10,5 +10,3 @@ const AvatarEditWrapper = styled.div`
     box-shadow: 2px 2px 5px 1px ${({ theme }) => theme.colors.darkGray};
   }
 `
-
-export { AvatarEditWrapper }

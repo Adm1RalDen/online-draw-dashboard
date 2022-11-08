@@ -5,7 +5,7 @@ import { ButtonImage } from 'components/button-image'
 import { Input } from 'components/input'
 import { Span } from 'styles/typography/styles'
 
-const User2FAComponentBlock = styled.div`
+export const User2FAComponentBlock = styled.div`
   width: 400px;
   background-color: ${({ theme }) => theme.colors.white};
   position: relative;
@@ -13,7 +13,7 @@ const User2FAComponentBlock = styled.div`
   padding: 45px 15px 25px 15px;
 `
 
-const User2FAWrapper = styled.div`
+export const User2FAWrapper = styled.div`
   margin-top: 20px;
   display: flex;
   gap: 5px;
@@ -23,7 +23,7 @@ const User2FAWrapper = styled.div`
   }
 `
 
-const User2FAInput = styled(Input)`
+export const User2FAInput = styled(Input)`
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -35,19 +35,19 @@ const User2FAInput = styled(Input)`
   flex-grow: 1;
 `
 
-const User2FAButton = styled(Button)`
+export const User2FAButton = styled(Button)`
   border: none;
 `
 
-const User2FAErrorText = styled(Span)`
+export const User2FAErrorText = styled(Span)`
   color: ${({ theme }) => theme.colors.red};
 `
 
-const User2FASuccessText = styled(User2FAErrorText)`
+export const User2FASuccessText = styled(User2FAErrorText)`
   color: ${({ theme }) => theme.colors.green};
 `
 
-const User2FACloseModalButton = styled(ButtonImage)`
+export const User2FACloseModalButton = styled(ButtonImage)`
   position: absolute;
   right: 10px;
   top: 10px;
@@ -74,12 +74,3 @@ const User2FACloseModalButton = styled(ButtonImage)`
     height: 25px;
   }
 `
-export {
-  User2FAComponentBlock,
-  User2FAInput,
-  User2FAButton,
-  User2FAWrapper,
-  User2FAErrorText,
-  User2FASuccessText,
-  User2FACloseModalButton
-}

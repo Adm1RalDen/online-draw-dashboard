@@ -1,14 +1,14 @@
 import styled from 'styled-components'
 
-const RadioButtonsWrapper = styled.div``
+export const RadioButtonsWrapper = styled.div``
 
-const StyledRadioButton = styled.div`
+export const StyledRadioButton = styled.div`
   display: inline-block;
   width: max-content;
   margin-right: 10px;
 `
 
-const Input = styled.input.attrs(() => ({ type: 'radio' }))`
+export const Input = styled.input.attrs(() => ({ type: 'radio' }))`
   position: absolute;
   opacity: 0;
   cursor: pointer;
@@ -23,7 +23,7 @@ const Input = styled.input.attrs(() => ({ type: 'radio' }))`
   }
 `
 
-const BackgroundCircle = styled.span`
+export const BackgroundCircle = styled.span`
   position: absolute;
   top: 0;
   left: 0;
@@ -48,7 +48,7 @@ const BackgroundCircle = styled.span`
   }
 `
 
-const Label = styled.label`
+export const Label = styled.label`
   display: block;
   position: relative;
   padding-left: 35px;
@@ -60,5 +60,3 @@ const Label = styled.label`
   -ms-user-select: none;
   user-select: none;
 `
-
-export { RadioButtonsWrapper, StyledRadioButton, Label, Input, BackgroundCircle }

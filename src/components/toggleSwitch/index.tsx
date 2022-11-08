@@ -2,13 +2,13 @@ import { FC, useState } from 'react'
 
 import { noopFunction } from 'utils/noop'
 
-import { Input, ToggleSwitchText, ToggleSwitchWrapper } from './styles'
+import { ToggleSwitchInput, ToggleSwitchText, ToggleSwitchWrapper } from './styles'
 
-type Props = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> & {
+interface ToggleSwitchProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
   isShowSpan?: boolean
 }
 
-export const ToggleSwitch: FC<Props> = ({
+export const ToggleSwitch: FC<ToggleSwitchProps> = ({
   isShowSpan = true,
   checked = false,
   onChange = noopFunction,
@@ -23,7 +23,7 @@ export const ToggleSwitch: FC<Props> = ({
 
   return (
     <ToggleSwitchWrapper isChecked={isChecked}>
-      <Input {...others} type='checkbox' onChange={handleChange} checked={isChecked} />
+      <ToggleSwitchInput {...others} type='checkbox' onChange={handleChange} checked={isChecked} />
       {isShowSpan && (
         <ToggleSwitchText isChecked={isChecked}>{isChecked ? 'on' : 'off'}</ToggleSwitchText>
       )}

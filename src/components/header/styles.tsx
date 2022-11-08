@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const HeaderComponent = styled.header`
+export const HeaderComponent = styled.header`
   background-color: ${({ theme }) => theme.colors.dark};
   color: ${({ theme }) => theme.colors.white};
 
@@ -12,14 +12,14 @@ const HeaderComponent = styled.header`
   }
 `
 
-const BurgerWrapper = styled.div`
+export const BurgerWrapper = styled.div`
   display: none;
   @media screen and (max-width: ${(p) => p.theme.breakPoints.tablet}) {
     display: block;
   }
 `
 
-const HeaderNavigation = styled.nav`
+export const HeaderNavigation = styled.nav`
   @media screen and (max-width: ${(p) => p.theme.breakPoints.tablet}) {
     display: none;
   }
@@ -38,8 +38,6 @@ const HeaderNavigation = styled.nav`
   }
 `
 
-const HeaderUserBlock = styled.div`
+export const HeaderUserBlock = styled.div`
   display: flex;
 `
-
-export { HeaderComponent, BurgerWrapper, HeaderNavigation, HeaderUserBlock }
