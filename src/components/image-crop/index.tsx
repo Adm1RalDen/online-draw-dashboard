@@ -1,11 +1,14 @@
 import { FC, useState } from 'react'
 import Avatar from 'react-avatar-edit'
+import { toast } from 'react-toastify'
 
 import { Button } from 'components/button'
 
+import { FileInputSizes } from 'const/enums'
+
+import { countBytes } from 'utils/countBytes'
 import { EncodeBase64 } from 'utils/encodeBase64'
 
-import { SIZE_2MB } from './const'
 import { AvatarEditWrapper } from './styles'
 import { ImageCropProps } from './types'
 
@@ -25,8 +28,8 @@ export const ImageCrop: FC<ImageCropProps> = ({
   const onCrop = (preview: string) => setCropedImg(preview)
   const onBeforeFileLoad = (elem: React.ChangeEvent<HTMLInputElement>) => {
     if (elem.target.files) {
-      if (elem.target.files[0].size > SIZE_2MB) {
-        alert('File is too big!')
+      if (elem.target.files[0].size > countBytes(2, FileInputSizes.MB)) {
+        toast.error('File is too big (should been less then 2Mb)')
         elem.target.value = ''
       }
     }

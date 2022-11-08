@@ -7,7 +7,7 @@ const ChildrenWrapper = styled.div`
   width: 100%;
   background: ${({ theme }) => theme.colors.portalBackground};
   height: 100vh;
-  z-index: 9998;
+  z-index: ${({ theme }) => theme.zIndex.portal};
   backdrop-filter: blur(3px);
   top: 0;
   display: flex;
