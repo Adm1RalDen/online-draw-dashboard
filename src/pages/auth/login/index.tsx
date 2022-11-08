@@ -38,32 +38,31 @@ export const LoginComponent = () => {
 
   return (
     <>
-      <div>
-        <Title>Login</Title>
-        <form onSubmit={formik.handleSubmit}>
-          {AuthorizationFileds.map((field) => (
-            <InputAnimation
-              key={field}
-              disabled={isLoading}
-              margin='5px 0px 0px 0px'
-              label={capitalizeFirstLetter(field)}
-              name={field}
-              type={field}
-              value={formik.values[field as keyof UserLoginFormData]}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              error={
-                formik.errors[field as keyof UserLoginFormData] &&
-                formik.touched[field as keyof UserLoginFormData]
-                  ? formik.errors[field as keyof UserLoginFormData]
-                  : ''
-              }
-            />
-          ))}
-          <GoogleLoginComponent />
-          <AuthButton disabled={!formik.isValid || isLoading}>Send</AuthButton>
-        </form>
-      </div>
+      <Title>Login</Title>
+      <form onSubmit={formik.handleSubmit}>
+        {AuthorizationFileds.map((field) => (
+          <InputAnimation
+            key={field}
+            disabled={isLoading}
+            margin='10px 0px 0px 0px'
+            label={capitalizeFirstLetter(field)}
+            name={field}
+            type={field}
+            value={formik.values[field as keyof UserLoginFormData]}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={
+              formik.errors[field as keyof UserLoginFormData] &&
+              formik.touched[field as keyof UserLoginFormData]
+                ? formik.errors[field as keyof UserLoginFormData]
+                : ''
+            }
+          />
+        ))}
+        <GoogleLoginComponent />
+        <AuthButton disabled={!formik.isValid || isLoading}>Sing in</AuthButton>
+      </form>
+
       {isUse2FA && (
         <Portal>
           <User2FAComponent

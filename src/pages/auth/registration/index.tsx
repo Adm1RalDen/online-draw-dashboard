@@ -31,13 +31,13 @@ export const RegistrationComponent = () => {
   })
 
   return (
-    <div>
+    <>
       <Title>Registration</Title>
       <form onSubmit={formik.handleSubmit}>
         {RegistrationFileds.map((field) => (
           <InputAnimation
             key={field}
-            margin='5px 0px 0px 0px'
+            margin='10px 0px 0px 0px'
             label={capitalizeFirstLetter(field)}
             name={field}
             type={setInputTypes(field)}
@@ -52,8 +52,8 @@ export const RegistrationComponent = () => {
             }
           />
         ))}
-        <AuthButton disabled={!formik.isValid || isLoading}>Send</AuthButton>
+        <AuthButton disabled={!formik.isValid || isLoading}>Sign up</AuthButton>
       </form>
-    </div>
+    </>
   )
 }
