@@ -1,6 +1,6 @@
 import { FileInputSizes } from 'const/enums'
 
-export const countBytes = (amount: number, type: keyof typeof FileInputSizes) => {
+export const countBytes = (amount: number, type: FileInputSizes) => {
   switch (type) {
     case FileInputSizes.MB:
       return amount * 1024 ** 2
