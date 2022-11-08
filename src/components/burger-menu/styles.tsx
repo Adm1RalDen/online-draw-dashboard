@@ -1,7 +1,5 @@
 import styled, { css, keyframes } from 'styled-components'
 
-export const BurgerWrapper = styled.div``
-
 export const Burger = styled.div<{ isOpen: boolean }>`
   width: 25px;
   height: 25px;
