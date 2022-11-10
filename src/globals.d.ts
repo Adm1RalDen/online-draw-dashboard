@@ -1,4 +1,4 @@
-declare module 'public/assets/*.svg' {
+declare module '*.svg' {
   const content: React.SVG
   export default content
 }

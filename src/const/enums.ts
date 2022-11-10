@@ -30,7 +30,9 @@ export enum ErrorMessages {
   FAILURE_AUTH_ERROR = 'Authentification is failed',
   PARSING_ERROR = 'Parsing Error',
   UNAUTHORITHED_ERROR = 'User is not authorized',
-  NETWORK_ERROR = 'Network error'
+  NETWORK_ERROR = 'Network error',
+  REQUIRED = 'Required',
+  INVALID = 'Invalid'
 }
 
 export enum KeysCodes {

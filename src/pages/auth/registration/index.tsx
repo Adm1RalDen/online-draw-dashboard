@@ -1,6 +1,6 @@
-import { useFormik } from 'formik'
+import { FormikProvider, useFormik } from 'formik'
 
-import { AnimationInput } from 'components/input-animation'
+import { AnimatedInputField } from 'components/animatedInputField'
 
 import { useAppDispatch, useAppSelector } from 'store'
 import { userInfoSelector } from 'store/selectors/user.selector'
@@ -28,27 +28,28 @@ export const RegistrationComponent = () => {
   const formik = useFormik({
     initialValues,
     validationSchema: registrationValidationSchema,
+    validateOnBlur: true,
+    validateOnChange: true,
     onSubmit: handleSubmit
   })
 
   return (
     <>
       <Title>Registration</Title>
-      <form onSubmit={formik.handleSubmit}>
-        {RegistrationFileds.map((field) => (
-          <AnimationInput
-            key={field}
-            label={capitalizeFirstLetter(field)}
-            name={field}
-            type={setInputTypes(field)}
-            value={formik.values[field]}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={formik.errors[field] && formik.touched[field] ? formik.errors[field] : ''}
-          />
-        ))}
-        <AuthButton disabled={!formik.isValid || isLoading}>Sign up</AuthButton>
-      </form>
+      <FormikProvider value={formik}>
+        <form onSubmit={formik.handleSubmit}>
+          {RegistrationFileds.map((field) => (
+            <AnimatedInputField
+              key={field}
+              label={capitalizeFirstLetter(field)}
+              name={field}
+              type={setInputTypes(field)}
+              value={formik.values[field]}
+            />
+          ))}
+          <AuthButton disabled={!formik.isValid || isLoading}>Sign up</AuthButton>
+        </form>
+      </FormikProvider>
     </>
   )
 }
