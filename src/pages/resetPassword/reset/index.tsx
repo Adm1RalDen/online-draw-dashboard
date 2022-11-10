@@ -18,13 +18,13 @@ import { cryptoSha256 } from 'utils/cryptoPassord'
 import { getRtkRequestError } from 'utils/getRtkRequestError'
 
 import { resetPasswordInitialValues } from '../const'
-import { SuccessReset } from '../success'
-import { resetPasswordValidationSchema } from '../utils'
 import {
   ResetPasswordButtonsWrapper,
   ResetPasswordContentWrapper,
   ResetPasswordForm
-} from './styles'
+} from '../styles'
+import { SuccessReset } from '../success/reset'
+import { resetPasswordValidationSchema } from '../utils'
 
 export const ResetPasswordContent = () => {
   const [handleResetPassword, { isLoading, isSuccess, error, isError }] = useResetPasswordMutation()

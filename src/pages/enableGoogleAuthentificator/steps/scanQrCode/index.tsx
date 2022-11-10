@@ -20,7 +20,7 @@ export const ScanQrCodeStep: FC<StepsProps> = ({ handleDeclineStep, handleIncrea
     skip: !!((qrcode && secretKey) || error)
   })
 
-  useToastError(error)
+  useToastError(error, ErrorMessages.OCCURED_ERROR)
 
   return (
     <>

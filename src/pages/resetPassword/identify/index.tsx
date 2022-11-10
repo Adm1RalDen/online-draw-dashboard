@@ -14,21 +14,24 @@ import { useRecoverPasswordMutation } from 'store/rtk/services/user'
 
 import { getRtkRequestError } from 'utils/getRtkRequestError'
 
-import { SuccessSubmit } from '../success'
-import { recoverPasswordValidationSchema } from '../utils'
-import { ButtonsWrapper, RecoverPasswordContentWrapper, StyledForm } from './styles'
+import { identifyInitialValues } from '../const'
+import {
+  ResetPasswordButtonsWrapper,
+  ResetPasswordContentWrapper,
+  ResetPasswordForm
+} from '../styles'
+import { SuccessIdentify } from '../success/identify'
+import { identifydValidationSchema } from '../utils'
 
-export const RecoverPasswordContent = () => {
+export const ResetPasswordIdentify = () => {
   const [handleResetPassword, { isLoading, isSuccess, error, isError }] =
     useRecoverPasswordMutation()
   const navigate = useNavigate()
 
   const formik = useFormik({
-    validationSchema: recoverPasswordValidationSchema,
+    validationSchema: identifydValidationSchema,
     onSubmit: handleResetPassword,
-    initialValues: {
-      email: ''
-    }
+    initialValues: identifyInitialValues
   })
 
   const handleBackNavigate = () => navigate(HOME_URL, { replace: true })
@@ -37,11 +40,11 @@ export const RecoverPasswordContent = () => {
   useToastSuccess(isSuccess, 'Letter was send in your email')
 
   return (
-    <RecoverPasswordContentWrapper>
+    <ResetPasswordContentWrapper>
       {isSuccess ? (
-        <SuccessSubmit handleBackNavigate={handleBackNavigate} />
+        <SuccessIdentify handleBackNavigate={handleBackNavigate} />
       ) : (
-        <StyledForm onSubmit={formik.handleSubmit}>
+        <ResetPasswordForm onSubmit={formik.handleSubmit}>
           <LockClosedIcon width={40} />
           <Heading3>Can`t login?</Heading3>
           <Paragraph>
@@ -57,16 +60,16 @@ export const RecoverPasswordContent = () => {
             isError={formik.touched.email && formik.errors.email}
             disabled={isLoading}
           />
-          <ButtonsWrapper>
+          <ResetPasswordButtonsWrapper>
             <ButtonOutline type='button' onClick={handleBackNavigate} disabled={isLoading}>
               <ChevronLeftIcon /> Back
             </ButtonOutline>
             <Button type='submit' disabled={!formik.dirty || !formik.isValid || isLoading}>
               Get link for login
             </Button>
-          </ButtonsWrapper>
-        </StyledForm>
+          </ResetPasswordButtonsWrapper>
+        </ResetPasswordForm>
       )}
-    </RecoverPasswordContentWrapper>
+    </ResetPasswordContentWrapper>
   )
 }

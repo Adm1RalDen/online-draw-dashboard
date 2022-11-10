@@ -11,7 +11,7 @@ import { Heading2, Heading3, Paragraph } from 'styles/typography/styles'
 import SuccessIcon from 'public/assets/success.svg'
 
 import { SETTINGS_URL } from 'const/urls'
-import { useAppNavigate } from 'hooks/useAppNavigate'
+import { useRedirect } from 'hooks/useRedirect'
 import { useToastError } from 'hooks/useToastError'
 import { useDisableTwoFAMutation } from 'store/rtk/services/twoFa'
 import { Disable2FAData } from 'store/rtk/types'
@@ -36,7 +36,7 @@ export const DisableAuthentificator = () => {
   const { isUse2FA } = useSelector(userDataSelector)
   const navigate = useNavigate()
 
-  useAppNavigate(!isUse2FA, SETTINGS_URL)
+  useRedirect(!isUse2FA, SETTINGS_URL)
   useToastError(isError, getRtkRequestError(error))
 
   const handleSubmit = ({ password, secure2FACode }: Disable2FAData) => {

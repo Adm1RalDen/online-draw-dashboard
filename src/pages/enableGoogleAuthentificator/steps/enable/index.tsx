@@ -32,7 +32,7 @@ export const EnableStep: FC<StepsProps> = ({ handleDeclineStep, handleIncreaseSt
     }
   }, [isSuccess, handleIncreaseStep])
 
-  useToastError(isError)
+  useToastError(isError, ErrorMessages.OCCURED_ERROR)
 
   const handleSubmit = () => formik.handleSubmit()
   const handleChangeCodes = (e: React.ChangeEvent<HTMLInputElement>) => {

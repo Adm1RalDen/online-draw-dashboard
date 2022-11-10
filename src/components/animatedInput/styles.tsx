@@ -4,7 +4,7 @@ import { Input } from 'components/input'
 import { Label } from 'components/label'
 import { Heading6, Span } from 'styles/typography/styles'
 
-const errorAnimation = keyframes`
+const animatedError = keyframes`
  0%{
   height: 0px;
  }
@@ -13,7 +13,7 @@ const errorAnimation = keyframes`
   }
 `
 
-export const AnimationInputWrapper = styled(Label)<{ isError: boolean; hasValue: boolean }>`
+export const AnimatedInputWrapper = styled(Label)<{ isError: boolean; hasValue: boolean }>`
   width: 100%;
   position: relative;
   margin: 15px 0px 10px 0px;
@@ -68,12 +68,12 @@ export const AnimationInputWrapper = styled(Label)<{ isError: boolean; hasValue:
       }
 
       & > span {
-        animation: 0.3s ${errorAnimation} forwards;
+        animation: 0.3s ${animatedError} forwards;
       }
     `}
 `
 
-export const AnimationInputTitle = styled(Heading6)`
+export const AnimatedInputTitle = styled(Heading6)`
   transition: all 0.3s;
   position: absolute;
   top: 12px;
@@ -82,7 +82,7 @@ export const AnimationInputTitle = styled(Heading6)`
   font-size: ${({ theme }) => theme.fontSizes.small};
 `
 
-export const AnimationInputField = styled(Input)`
+export const AnimatedInputStyledField = styled(Input)`
   position: relative;
   border-radius: 5px;
   outline: none;
@@ -114,7 +114,7 @@ export const AnimationInputField = styled(Input)`
   }
 `
 
-export const AnimationInputErrorText = styled(Span)`
+export const AnimatedInputErrorText = styled(Span)`
   width: 100%;
   display: block;
   position: absolute;

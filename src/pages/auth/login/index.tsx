@@ -1,11 +1,11 @@
-import { useFormik } from 'formik'
+import { FormikProvider, useFormik } from 'formik'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { User2FAComponent } from 'components/2FA'
-import { AnimationInput } from 'components/input-animation'
+import { AnimatedInputField } from 'components/animatedInputField'
 
-import { RECOVER_PASSWORD_URL } from 'const/urls'
+import { RESET_PASSWORD_URL } from 'const/urls'
 import { useAppDispatch, useAppSelector } from 'store'
 import { userDataSelector, userInfoSelector } from 'store/selectors/user.selector'
 import { setAttemptsLeftCountAction } from 'store/slices/twoFa.slice'
@@ -36,31 +36,30 @@ export const LoginComponent = () => {
   const formik = useFormik({
     initialValues,
     validationSchema: loginValidationSchema,
+    validateOnBlur: true,
+    validateOnChange: true,
     onSubmit: (data) => dispatch(loginThunk({ ...data, setAttemptsLeftCount }))
   })
 
   return (
     <>
       <Title>Login</Title>
-      <form onSubmit={formik.handleSubmit}>
-        {LoginFileds.map((field) => (
-          <AnimationInput
-            key={field}
-            label={capitalizeFirstLetter(field)}
-            name={field}
-            type={field}
-            disabled={isLoading}
-            value={formik.values[field]}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={formik.errors[field] && formik.touched[field] ? formik.errors[field] : ''}
-          />
-        ))}
-        <Link to={RECOVER_PASSWORD_URL}>Forgot a password?</Link>
-        <GoogleLoginComponent />
-        <AuthButton disabled={!formik.isValid || isLoading}>Sing in</AuthButton>
-      </form>
-
+      <FormikProvider value={formik}>
+        <form onSubmit={formik.handleSubmit}>
+          {LoginFileds.map((field) => (
+            <AnimatedInputField
+              key={field}
+              label={capitalizeFirstLetter(field)}
+              name={field}
+              type={field}
+              disabled={isLoading}
+            />
+          ))}
+          <Link to={RESET_PASSWORD_URL}>Forgot password</Link>
+          <GoogleLoginComponent />
+          <AuthButton disabled={!formik.isValid || isLoading}>Sing in</AuthButton>
+        </form>
+      </FormikProvider>
       {isUse2FA && (
         <Portal>
           <User2FAComponent

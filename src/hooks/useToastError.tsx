@@ -1,9 +1,7 @@
 import { useEffect } from 'react'
 import { toast } from 'react-toastify'
 
-import { ErrorMessages } from 'const/enums'
-
-export const useToastError = (isError: unknown, message: string = ErrorMessages.OCCURED_ERROR) => {
+export const useToastError = (isError: unknown, message: string) => {
   useEffect(() => {
     if (isError) {
       toast.error(message)
