@@ -1,10 +1,10 @@
-import { Disable2FAData } from '../types'
+import { Disable2FAData, ServiceName } from '../types'
 
-export const disableTwoFaQueryObj: any = {
+export const disableTwoFaQueryObj = {
   query: (data: Disable2FAData) => ({
     url: '/user/disable-2fa',
     method: 'POST',
     body: data
   }),
-  invalidatesTags: ['TwoFa']
+  invalidatesTags: [ServiceName.TWOFA]
 }
