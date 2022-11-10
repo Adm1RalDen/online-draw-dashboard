@@ -1,14 +1,15 @@
 import { ChevronLeftIcon, LockClosedIcon } from '@heroicons/react/24/outline'
-import { useFormik } from 'formik'
+import { FormikProvider, useFormik } from 'formik'
 import { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
 import { Button } from 'components/button'
 import { ButtonOutline } from 'components/button-outline'
-import { Input } from 'components/input'
+import { InputField } from 'components/inputField'
 import { Loader } from 'components/loader'
 import { Heading3, Paragraph } from 'styles/typography/styles'
 
+import { InputTypes } from 'const/enums'
 import { HOME_URL } from 'const/urls'
 import { useToastError } from 'hooks/useToastError'
 import { useToastSuccess } from 'hooks/useToastSuccess'
@@ -36,6 +37,8 @@ export const ResetPasswordContent = () => {
   const formik = useFormik({
     initialValues: resetPasswordInitialValues,
     validationSchema: resetPasswordValidationSchema,
+    validateOnBlur: true,
+    validateOnChange: true,
     onSubmit: ({ password, confirmPassword }) =>
       handleResetPassword({
         password: cryptoSha256(password),
@@ -66,39 +69,35 @@ export const ResetPasswordContent = () => {
       {isSuccess ? (
         <SuccessReset handleBackNavigate={handleBackNavigate} />
       ) : (
-        <ResetPasswordForm onSubmit={formik.handleSubmit}>
-          <LockClosedIcon width={40} />
-          <Heading3>Reset password</Heading3>
-          <Paragraph>Create your new password and confirm it</Paragraph>
-          <Input
-            name='password'
-            type='password'
-            placeholder='Password'
-            value={formik.values.password}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            isError={formik.touched.password && formik.errors.password}
-            disabled={isLoading}
-          />
-          <Input
-            name='confirmPassword'
-            type='password'
-            placeholder='Confirm password'
-            value={formik.values.confirmPassword}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            isError={formik.touched.confirmPassword && formik.errors.confirmPassword}
-            disabled={isLoading}
-          />
-          <ResetPasswordButtonsWrapper>
-            <ButtonOutline type='button' onClick={handleBackNavigate}>
-              <ChevronLeftIcon /> Back
-            </ButtonOutline>
-            <Button type='submit' disabled={!formik.dirty || !formik.isValid || isLoading}>
-              Create new password
-            </Button>
-          </ResetPasswordButtonsWrapper>
-        </ResetPasswordForm>
+        <FormikProvider value={formik}>
+          <ResetPasswordForm onSubmit={formik.handleSubmit}>
+            <LockClosedIcon width={40} />
+            <Heading3>Reset password</Heading3>
+            <Paragraph>Create your new password and confirm it</Paragraph>
+            <InputField
+              name='password'
+              type={InputTypes.PASSWORD}
+              placeholder='Password'
+              value={formik.values.password}
+              disabled={isLoading}
+            />
+            <InputField
+              name='confirmPassword'
+              type={InputTypes.PASSWORD}
+              placeholder='Confirm password'
+              value={formik.values.confirmPassword}
+              disabled={isLoading}
+            />
+            <ResetPasswordButtonsWrapper>
+              <ButtonOutline type='button' onClick={handleBackNavigate}>
+                <ChevronLeftIcon /> Back
+              </ButtonOutline>
+              <Button type='submit' disabled={!formik.dirty || !formik.isValid || isLoading}>
+                Create new password
+              </Button>
+            </ResetPasswordButtonsWrapper>
+          </ResetPasswordForm>
+        </FormikProvider>
       )}
     </ResetPasswordContentWrapper>
   )

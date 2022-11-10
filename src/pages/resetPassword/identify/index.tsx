@@ -1,12 +1,13 @@
 import { ChevronLeftIcon, LockClosedIcon } from '@heroicons/react/24/outline'
-import { useFormik } from 'formik'
+import { FormikProvider, useFormik } from 'formik'
 import { useNavigate } from 'react-router-dom'
 
 import { Button } from 'components/button'
 import { ButtonOutline } from 'components/button-outline'
-import { Input } from 'components/input'
+import { InputField } from 'components/inputField'
 import { Heading3, Paragraph } from 'styles/typography/styles'
 
+import { InputTypes } from 'const/enums'
 import { HOME_URL } from 'const/urls'
 import { useToastError } from 'hooks/useToastError'
 import { useToastSuccess } from 'hooks/useToastSuccess'
@@ -30,8 +31,10 @@ export const ResetPasswordIdentify = () => {
 
   const formik = useFormik({
     validationSchema: identifydValidationSchema,
-    onSubmit: handleResetPassword,
-    initialValues: identifyInitialValues
+    initialValues: identifyInitialValues,
+    validateOnBlur: true,
+    validateOnChange: true,
+    onSubmit: handleResetPassword
   })
 
   const handleBackNavigate = () => navigate(HOME_URL, { replace: true })
@@ -44,31 +47,31 @@ export const ResetPasswordIdentify = () => {
       {isSuccess ? (
         <SuccessIdentify handleBackNavigate={handleBackNavigate} />
       ) : (
-        <ResetPasswordForm onSubmit={formik.handleSubmit}>
-          <LockClosedIcon width={40} />
-          <Heading3>Can`t login?</Heading3>
-          <Paragraph>
-            Enter your email address and we will send you a link to restore access to your account.
-          </Paragraph>
-          <Input
-            name='email'
-            type='email'
-            placeholder='Email'
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            isError={formik.touched.email && formik.errors.email}
-            disabled={isLoading}
-          />
-          <ResetPasswordButtonsWrapper>
-            <ButtonOutline type='button' onClick={handleBackNavigate} disabled={isLoading}>
-              <ChevronLeftIcon /> Back
-            </ButtonOutline>
-            <Button type='submit' disabled={!formik.dirty || !formik.isValid || isLoading}>
-              Get link for login
-            </Button>
-          </ResetPasswordButtonsWrapper>
-        </ResetPasswordForm>
+        <FormikProvider value={formik}>
+          <ResetPasswordForm onSubmit={formik.handleSubmit}>
+            <LockClosedIcon width={40} />
+            <Heading3>Can`t login?</Heading3>
+            <Paragraph>
+              Enter your email address and we will send you a link to restore access to your
+              account.
+            </Paragraph>
+            <InputField
+              name='email'
+              type={InputTypes.EMAIL}
+              placeholder='Email'
+              value={formik.values.email}
+              disabled={isLoading}
+            />
+            <ResetPasswordButtonsWrapper>
+              <ButtonOutline type='button' onClick={handleBackNavigate} disabled={isLoading}>
+                <ChevronLeftIcon /> Back
+              </ButtonOutline>
+              <Button type='submit' disabled={!formik.dirty || !formik.isValid || isLoading}>
+                Get link for login
+              </Button>
+            </ResetPasswordButtonsWrapper>
+          </ResetPasswordForm>
+        </FormikProvider>
       )}
     </ResetPasswordContentWrapper>
   )
