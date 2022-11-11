@@ -6,8 +6,8 @@ import { Input } from 'components/input'
 import { Label } from 'components/label'
 import { Heading4, Paragraph } from 'styles/typography/styles'
 
-import { ErrorMessages } from 'const/enums'
-import { useToastError } from 'hooks/useToastError'
+import { ErrorMessages, NotifyType } from 'const/enums'
+import { useNotify } from 'hooks/useNotify'
 import { useConfirmCreating2FaMutation, useSendCodeOnEmailQuery } from 'store/rtk/services/twoFa'
 
 import { checkForNumbersInString } from 'utils/checkForNumbersInString'
@@ -32,7 +32,7 @@ export const EnableStep: FC<StepsProps> = ({ handleDeclineStep, handleIncreaseSt
     }
   }, [isSuccess, handleIncreaseStep])
 
-  useToastError(isError)
+  useNotify(isError, ErrorMessages.OCCURED_ERROR, NotifyType.ERROR)
 
   const handleSubmit = () => formik.handleSubmit()
   const handleChangeCodes = (e: React.ChangeEvent<HTMLInputElement>) => {

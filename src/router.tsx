@@ -12,6 +12,8 @@ import { LayoutComponent } from 'pages/layout'
 import { NotFoundPage } from 'pages/notfoundPage'
 import { OnlineDrawPage } from 'pages/onlineDrawPage'
 import { OnlineCanvas } from 'pages/onlineDrawPage/canvas'
+import { ResetPassword } from 'pages/resetPassword'
+import { ResetPasswordIdentify } from 'pages/resetPassword/identify'
 import { ServerErrorPage } from 'pages/serverErrorPage'
 import { SettingsPage } from 'pages/settings'
 import { PrivacySettings } from 'pages/settings/kategories/privacy'
@@ -66,6 +68,11 @@ const setRoutes = (isAuth: boolean) =>
         { path: '/auth/google/success', element: <SuccessGoogleAuth /> },
         { path: '/auth/google/failure', element: <FailedGoogleAuthPage /> },
         { path: '/auth/google/twoFactor', element: <TwoFactorPage /> },
+        {
+          path: '/reset-password',
+          element: <ResetPassword />,
+          children: [{ path: 'identify', element: <ResetPasswordIdentify /> }]
+        },
         { path: '*', element: <Navigate to='/authorization' /> }
       ]
 

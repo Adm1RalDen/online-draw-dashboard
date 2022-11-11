@@ -1,9 +1,11 @@
 import { FormikProvider, useFormik } from 'formik'
+import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { User2FAComponent } from 'components/2FA'
 import { AnimatedInputField } from 'components/animatedInputField'
 
+import { RESET_PASSWORD_URL } from 'const/urls'
 import { useAppDispatch, useAppSelector } from 'store'
 import { userDataSelector, userInfoSelector } from 'store/selectors/user.selector'
 import { setAttemptsLeftCountAction } from 'store/slices/twoFa.slice'
@@ -53,7 +55,7 @@ export const LoginComponent = () => {
               disabled={isLoading}
             />
           ))}
-
+          <Link to={RESET_PASSWORD_URL}>Forgot password</Link>
           <GoogleLoginComponent />
           <AuthButton disabled={!formik.isValid || isLoading}>Sing in</AuthButton>
         </form>

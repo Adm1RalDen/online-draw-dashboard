@@ -58,3 +58,9 @@ export enum InputTypes {
   COLOR = 'color',
   DATE = 'date'
 }
+
+export enum NotifyType {
+  ERROR = 'error',
+  SUCCESS = 'success',
+  WARN = 'warn'
+}
