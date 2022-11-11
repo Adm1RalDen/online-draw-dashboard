@@ -9,10 +9,9 @@ import { InputField } from 'components/inputField'
 import { Loader } from 'components/loader'
 import { Heading3, Paragraph } from 'styles/typography/styles'
 
-import { InputTypes } from 'const/enums'
+import { InputTypes, NotifyType } from 'const/enums'
 import { HOME_URL } from 'const/urls'
-import { useToastError } from 'hooks/useToastError'
-import { useToastSuccess } from 'hooks/useToastSuccess'
+import { useNotify } from 'hooks/useNotify'
 import { useResetPasswordMutation } from 'store/rtk/services/user'
 
 import { cryptoSha256 } from 'utils/cryptoPassord'
@@ -57,8 +56,8 @@ export const ResetPasswordContent = () => {
     }
   }, [searchParams, setIsReady, navigate])
 
-  useToastError(isError, getRtkRequestError(error))
-  useToastSuccess(isSuccess, 'Reset password is successfully')
+  useNotify(isError, getRtkRequestError(error), NotifyType.ERROR)
+  useNotify(isSuccess, 'Reset password is successfully', NotifyType.SUCCESS)
 
   const handleBackNavigate = () => navigate(HOME_URL, { replace: true })
 

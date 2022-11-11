@@ -7,10 +7,9 @@ import { ButtonOutline } from 'components/button-outline'
 import { InputField } from 'components/inputField'
 import { Heading3, Paragraph } from 'styles/typography/styles'
 
-import { InputTypes } from 'const/enums'
+import { InputTypes, NotifyType } from 'const/enums'
 import { HOME_URL } from 'const/urls'
-import { useToastError } from 'hooks/useToastError'
-import { useToastSuccess } from 'hooks/useToastSuccess'
+import { useNotify } from 'hooks/useNotify'
 import { useRecoverPasswordMutation } from 'store/rtk/services/user'
 
 import { getRtkRequestError } from 'utils/getRtkRequestError'
@@ -39,8 +38,8 @@ export const ResetPasswordIdentify = () => {
 
   const handleBackNavigate = () => navigate(HOME_URL, { replace: true })
 
-  useToastError(isError, getRtkRequestError(error))
-  useToastSuccess(isSuccess, 'Letter was send in your email')
+  useNotify(isError, getRtkRequestError(error), NotifyType.ERROR)
+  useNotify(isSuccess, 'Letter was send in your email', NotifyType.SUCCESS)
 
   return (
     <ResetPasswordContentWrapper>
