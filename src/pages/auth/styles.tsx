@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 import { Button } from 'components/button'
-import { Container as DefaultContainer } from 'components/container'
+import { Container } from 'components/container'
 import { Heading1, Heading2 } from 'styles/typography/styles'
 
 export const AuthButton = styled(Button)`
@@ -18,7 +18,7 @@ export const AuthSection = styled.section`
   background-color: ${(p) => p.theme.colors.greenBackground};
 `
 
-export const Container = styled(DefaultContainer)`
+export const AuthContainer = styled(Container)`
   display: grid;
   height: inherit;
   grid-template-columns: auto minmax(300px, 500px);
@@ -27,7 +27,7 @@ export const Container = styled(DefaultContainer)`
   gap: 50px;
 `
 
-export const Wrapper = styled.div`
+export const AuthWrapper = styled.div`
   border-radius: 10px;
   border: 2px solid ${({ theme }) => theme.colors.white};
   padding: 30px 20px;
@@ -35,6 +35,7 @@ export const Wrapper = styled.div`
 
 export const Title = styled(Heading2)`
   color: ${({ theme }) => theme.colors.white};
+  margin-bottom: 10px;
 `
 
 export const Logo = styled(Heading1)`

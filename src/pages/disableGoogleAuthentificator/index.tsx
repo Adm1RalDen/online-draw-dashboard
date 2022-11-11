@@ -1,5 +1,4 @@
 import { useFormik } from 'formik'
-import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
@@ -11,14 +10,17 @@ import { Heading2, Heading3, Paragraph } from 'styles/typography/styles'
 
 import SuccessIcon from 'public/assets/success.svg'
 
+import { NotifyType } from 'const/enums'
 import { SETTINGS_URL } from 'const/urls'
+import { useNotify } from 'hooks/useNotify'
+import { useRedirect } from 'hooks/useRedirect'
 import { useDisableTwoFAMutation } from 'store/rtk/services/twoFa'
 import { Disable2FAData } from 'store/rtk/types'
 import { userDataSelector } from 'store/selectors/user.selector'
 
 import { checkForNumbersInString } from 'utils/checkForNumbersInString'
 import { cryptoSha256 } from 'utils/cryptoPassord'
-import { toastRtkRequestError } from 'utils/toastRtkRequestError'
+import { getRtkRequestError } from 'utils/getRtkRequestError'
 
 import { initialValues } from './const'
 import {
@@ -35,22 +37,13 @@ export const DisableAuthentificator = () => {
   const { isUse2FA } = useSelector(userDataSelector)
   const navigate = useNavigate()
 
+  useRedirect(!isUse2FA, SETTINGS_URL)
+  useNotify(isError, getRtkRequestError(error), NotifyType.ERROR)
+
   const handleSubmit = ({ password, secure2FACode }: Disable2FAData) => {
     const hash_password = cryptoSha256(password)
     submitDisable2Fa({ secure2FACode, password: hash_password })
   }
-
-  useEffect(() => {
-    if (!isUse2FA) {
-      navigate(SETTINGS_URL)
-    }
-  }, [navigate, isUse2FA])
-
-  useEffect(() => {
-    if (isError) {
-      toastRtkRequestError(error)
-    }
-  }, [isError, error])
 
   const formik = useFormik({
     initialValues,

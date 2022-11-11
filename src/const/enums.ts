@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-
 export enum PLATFORMS {
   Apple = 'apple',
   Android = 'android'
@@ -32,7 +30,9 @@ export enum ErrorMessages {
   FAILURE_AUTH_ERROR = 'Authentification is failed',
   PARSING_ERROR = 'Parsing Error',
   UNAUTHORITHED_ERROR = 'User is not authorized',
-  NETWORK_ERROR = 'Network error'
+  NETWORK_ERROR = 'Network error',
+  REQUIRED = 'Required',
+  INVALID = 'Invalid'
 }
 
 export enum KeysCodes {
@@ -48,4 +48,19 @@ export enum FileInputSizes {
 export enum Colors {
   BLACK = 'black',
   WHITE = 'white'
+}
+
+export enum InputTypes {
+  EMAIL = 'email',
+  PASSWORD = 'password',
+  TEXT = 'text',
+  NUMBER = 'number',
+  COLOR = 'color',
+  DATE = 'date'
+}
+
+export enum NotifyType {
+  ERROR = 'error',
+  SUCCESS = 'success',
+  WARN = 'warn'
 }

@@ -3,8 +3,8 @@ import { FC } from 'react'
 import { BackButton } from 'components/backButton'
 import { Heading4, Paragraph, Span } from 'styles/typography/styles'
 
-import { ErrorMessages } from 'const/enums'
-import { useToastError } from 'hooks/useToastError'
+import { ErrorMessages, NotifyType } from 'const/enums'
+import { useNotify } from 'hooks/useNotify'
 import { useAppSelector } from 'store'
 import { useCreateTwoFAQuery } from 'store/rtk/services/twoFa'
 import { twoFaSelector } from 'store/selectors/twoFa.selector'
@@ -20,7 +20,7 @@ export const ScanQrCodeStep: FC<StepsProps> = ({ handleDeclineStep, handleIncrea
     skip: !!((qrcode && secretKey) || error)
   })
 
-  useToastError(error)
+  useNotify(!!error, ErrorMessages.OCCURED_ERROR, NotifyType.ERROR)
 
   return (
     <>

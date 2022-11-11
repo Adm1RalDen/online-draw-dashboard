@@ -9,18 +9,18 @@ import { Portal } from 'utils/portal'
 
 import { LoginComponent } from './login'
 import { RegistrationComponent } from './registration'
-import { AuthSection, Container, Logo, Wrapper } from './styles'
+import { AuthContainer, AuthSection, AuthWrapper, Logo } from './styles'
 import { ChangeAuthWay } from './сhangeAuthWay'
 
 export const AuthPage = () => {
   const { isLoading } = useAppSelector(userInfoSelector)
-  const [isLogin, setIsLogin] = useState(false)
+  const [isLogin, setIsLogin] = useState(true)
 
   return (
     <AuthSection>
-      <Container>
+      <AuthContainer>
         <Logo>Draw online</Logo>
-        <Wrapper>
+        <AuthWrapper>
           {isLogin ? <LoginComponent /> : <RegistrationComponent />}
           <ChangeAuthWay isLogin={isLogin} setIsLogin={setIsLogin} />
           {isLoading && (
@@ -28,8 +28,8 @@ export const AuthPage = () => {
               <Loader />
             </Portal>
           )}
-        </Wrapper>
-      </Container>
+        </AuthWrapper>
+      </AuthContainer>
     </AuthSection>
   )
 }

@@ -6,9 +6,11 @@ export const Input = styled.input<{ isError?: boolean | string }>`
   padding: 0px 30px 0px 10px;
   border-radius: 2px;
   background-color: ${(p) => p.theme.colors.white};
-  border: 2px solid ${(p) => p.theme.colors.light_gray};
+  border: 2px solid ${(p) => p.theme.colors.gray};
 
   &:disabled {
+    border-color: ${({ theme }) => theme.colors.light_gray};
+    background-color: ${({ theme }) => theme.colors.light_gray};
     cursor: no-drop;
   }
 

@@ -39,7 +39,7 @@
         "jsxSingleQuote": true
       }
     ],
-    "no-unused-vars": "warn",
+    "no-unused-vars": "off",
     "no-var": "error",
     "react/react-in-jsx-scope": 0,
     "quotes": [
@@ -52,6 +52,7 @@
     ],
     "linebreak-style": ["error", "unix"],
     "object-curly-spacing": ["error", "always"],
+    "@typescript-eslint/no-unused-vars": ["error"],
     "spaced-comment": "error",
     "import/default": "error",
     "import/no-named-as-default-member": "error",

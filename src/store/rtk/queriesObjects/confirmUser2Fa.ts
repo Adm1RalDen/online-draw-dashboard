@@ -1,10 +1,12 @@
 import { VerifyRequestData } from 'types'
 
-export const confirmUser2FAQueryObj: any = {
+import { ServiceName } from '../types'
+
+export const confirmUser2FAQueryObj = {
   query: (data: VerifyRequestData) => ({
     url: '/user/verify',
     method: 'POST',
     body: data
   }),
-  invalidatesTags: ['TwoFa']
+  invalidatesTags: [ServiceName.TWOFA]
 }

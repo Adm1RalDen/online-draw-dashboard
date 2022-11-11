@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const ButtonOutline = styled.button`
   border-radius: 5px;
-  display: flex;
+  display: inline-flex;
   cursor: pointer;
   align-items: center;
   color: ${({ theme }) => theme.colors.black};

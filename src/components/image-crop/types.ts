@@ -1,6 +1,4 @@
-/* eslint no-unused-vars: "off" */
-
-export type ImageCropProps = {
+export interface ImageCropProps {
   fullImg: string
   savedPreviewImg: string
   width: number

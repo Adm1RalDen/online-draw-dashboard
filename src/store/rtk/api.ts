@@ -19,6 +19,8 @@ import { getRefreshToken } from 'services/token.service'
 
 import { AuthResponse } from 'types'
 
+import { ServiceName } from './types'
+
 const baseQuery = fetchBaseQuery({
   baseUrl: API_URL,
   prepareHeaders: (headers, { getState }) => {
@@ -63,6 +65,6 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 export const apiSlice = createApi({
   reducerPath: RTK_API_NAME,
   baseQuery: baseQueryWithReauth,
-  tagTypes: ['TwoFa', 'User'],
+  tagTypes: [ServiceName.TWOFA, ServiceName.USER],
   endpoints: () => ({})
 })

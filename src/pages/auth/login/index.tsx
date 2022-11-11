@@ -1,9 +1,11 @@
-import { useFormik } from 'formik'
+import { FormikProvider, useFormik } from 'formik'
+import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { User2FAComponent } from 'components/2FA'
-import { InputAnimation } from 'components/input-animation'
+import { AnimatedInputField } from 'components/animatedInputField'
 
+import { RESET_PASSWORD_URL } from 'const/urls'
 import { useAppDispatch, useAppSelector } from 'store'
 import { userDataSelector, userInfoSelector } from 'store/selectors/user.selector'
 import { setAttemptsLeftCountAction } from 'store/slices/twoFa.slice'
@@ -13,11 +15,12 @@ import { loginThunk, saveUserDataThunk } from 'store/thunks/user/authorization.t
 import { capitalizeFirstLetter } from 'utils/capitalizeFirstLetter'
 import { Portal } from 'utils/portal'
 
-import { AuthResponse, UserLoginFormData } from 'types'
+import { AuthResponse } from 'types'
 
 import { GoogleLoginComponent } from '../googleLogin'
 import { AuthButton, Title } from '../styles'
-import { AuthorizationFileds, initialValues, validationSchema } from './const'
+import { loginValidationSchema } from '../utils'
+import { LoginFileds, initialValues } from './const'
 
 export const LoginComponent = () => {
   const dispatch = useAppDispatch()
@@ -32,37 +35,31 @@ export const LoginComponent = () => {
 
   const formik = useFormik({
     initialValues,
-    validationSchema,
+    validationSchema: loginValidationSchema,
+    validateOnBlur: true,
+    validateOnChange: true,
     onSubmit: (data) => dispatch(loginThunk({ ...data, setAttemptsLeftCount }))
   })
 
   return (
     <>
       <Title>Login</Title>
-      <form onSubmit={formik.handleSubmit}>
-        {AuthorizationFileds.map((field) => (
-          <InputAnimation
-            key={field}
-            disabled={isLoading}
-            margin='10px 0px 0px 0px'
-            label={capitalizeFirstLetter(field)}
-            name={field}
-            type={field}
-            value={formik.values[field as keyof UserLoginFormData]}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={
-              formik.errors[field as keyof UserLoginFormData] &&
-              formik.touched[field as keyof UserLoginFormData]
-                ? formik.errors[field as keyof UserLoginFormData]
-                : ''
-            }
-          />
-        ))}
-        <GoogleLoginComponent />
-        <AuthButton disabled={!formik.isValid || isLoading}>Sing in</AuthButton>
-      </form>
-
+      <FormikProvider value={formik}>
+        <form onSubmit={formik.handleSubmit}>
+          {LoginFileds.map((field) => (
+            <AnimatedInputField
+              key={field}
+              label={capitalizeFirstLetter(field)}
+              name={field}
+              type={field}
+              disabled={isLoading}
+            />
+          ))}
+          <Link to={RESET_PASSWORD_URL}>Forgot password</Link>
+          <GoogleLoginComponent />
+          <AuthButton disabled={!formik.isValid || isLoading}>Sing in</AuthButton>
+        </form>
+      </FormikProvider>
       {isUse2FA && (
         <Portal>
           <User2FAComponent
