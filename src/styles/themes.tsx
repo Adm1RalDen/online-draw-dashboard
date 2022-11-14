@@ -18,13 +18,13 @@ export const themes = {
     middleGray: '#888',
     darkBlue: '#044C93',
     middleBlue: '#0c94f6',
-    greenBackground: '#183333',
+    greenBackground: '#042e31',
     greenLiteBackground: '#2d6969',
     darkGray: '#3b3b3b',
-    aqua: '#016a84',
-    lightAqua: '#009cc3',
+    aqua: '#004445',
+    lightAqua: '#004445',
     darkAqua: '#00596f',
-    aquaMiddle: '#0092b6',
+    aquaMiddle: '#027d9c',
     aquaGreen: '#3f6d78',
     red: '#ed1b1b',
     darkRed: '#930202',
@@ -40,7 +40,7 @@ export const themes = {
   breakPoints: {
     desktop: '1400px',
     tablet: '800px',
-    mobile: '400px'
+    mobile: '450px'
   },
 
   shadows: {

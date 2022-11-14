@@ -97,3 +97,5 @@ export interface DrawData {
 export interface CustomRefObject<T> {
   readonly current: T
 }
+
+export type ChangeStateAction<T> = React.Dispatch<React.SetStateAction<T>>
