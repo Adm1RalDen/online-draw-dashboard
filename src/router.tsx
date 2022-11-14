@@ -1,3 +1,4 @@
+import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
 import { Navigate, useRoutes } from 'react-router-dom'
 
 import { TwoFactorPage } from 'pages/2FaPage'
@@ -20,6 +21,7 @@ import { PrivacySettings } from 'pages/settings/kategories/privacy'
 import { SuccessGoogleAuth } from 'pages/successGoogleAuth'
 import { UserCabinet } from 'pages/userCabinet'
 
+import { reCaptchaConfig } from 'const/reCaptcha'
 import { useAppSelector } from 'store'
 import { userInfoSelector } from 'store/selectors/user.selector'
 
@@ -63,7 +65,14 @@ const setRoutes = (isAuth: boolean) =>
       ]
     : [
         { path: '/', element: <Navigate to='/authorization' /> },
-        { path: '/authorization', element: <AuthPage /> },
+        {
+          path: '/authorization',
+          element: (
+            <GoogleReCaptchaProvider {...reCaptchaConfig}>
+              <AuthPage />
+            </GoogleReCaptchaProvider>
+          )
+        },
         { path: '/activate/:link', element: <ActivationPage /> },
         { path: '/auth/google/success', element: <SuccessGoogleAuth /> },
         { path: '/auth/google/failure', element: <FailedGoogleAuthPage /> },
