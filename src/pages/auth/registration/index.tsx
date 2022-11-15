@@ -31,13 +31,18 @@ export const RegistrationComponent = () => {
     onSubmit: noopFunction
   })
 
-  const handleSubmit = useCallback(() => {
+  const handleSubmit = useCallback(async () => {
     if (!executeRecaptcha) {
-      toast.error(ErrorMessages.INVALID_RECAPTCHA)
-      return
+      return toast.error(ErrorMessages.INVALID_RECAPTCHA)
     }
 
-    dispatch(userRegistrationThunk({ ...formik.values, executeRecaptcha }))
+    const captcha = await executeRecaptcha('login')
+
+    if (!captcha) {
+      return toast.error(ErrorMessages.INVALID_RECAPTCHA)
+    }
+
+    dispatch(userRegistrationThunk({ ...formik.values, captcha }))
   }, [executeRecaptcha, dispatch, formik])
 
   return (

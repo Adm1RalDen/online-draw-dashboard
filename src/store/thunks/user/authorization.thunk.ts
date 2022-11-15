@@ -3,12 +3,13 @@ import { toast } from 'react-toastify'
 
 import { authorizeUser } from 'api/user/authorize'
 import { getProfile } from 'api/user/getProfile'
-import { registrationUser } from 'api/user/registration'
+import { createUser } from 'api/user/registration'
+
+import { UserLoginData, UserRegistrationData } from 'pages/auth/types'
 
 import { ErrorMessages } from 'const/enums'
 import { resetStore } from 'store/actions'
 import { USER_SLICE_NAME } from 'store/const'
-import { LoginThunkParams, RegistrationThunkParams } from 'store/types/user.types'
 
 import {
   deleteSavedToken,
@@ -42,18 +43,9 @@ export const updateAuthStatusThunk = createAsyncThunk(
 
 export const loginThunk = createAsyncThunk(
   `${USER_SLICE_NAME}/login-thunk`,
-  async (
-    { email, password, setAttemptsLeftCount, executeRecaptcha }: LoginThunkParams,
-    { dispatch }
-  ) => {
+  async ({ email, password, captcha }: UserLoginData, { dispatch }) => {
     try {
       const hashPassword = cryptoSha256(password)
-      const captcha = await executeRecaptcha('login')
-
-      if (!captcha) {
-        throw 'error'
-      }
-
       const response = await authorizeUser({
         email,
         password: hashPassword,
@@ -61,8 +53,6 @@ export const loginThunk = createAsyncThunk(
       })
 
       if (Object.hasOwn(response.data, 'isUse2FA')) {
-        setAttemptsLeftCount((response.data as User2FALoginResponse).attemptsLeftCount)
-
         return response.data as User2FALoginResponse
       }
 
@@ -91,16 +81,10 @@ export const saveUserDataThunk = createAsyncThunk(
 
 export const userRegistrationThunk = createAsyncThunk(
   `${USER_SLICE_NAME}/registration-thunk`,
-  async ({ password, executeRecaptcha, ...data }: RegistrationThunkParams, { rejectWithValue }) => {
+  async ({ password, ...data }: UserRegistrationData, { rejectWithValue }) => {
     try {
       const hash_password = cryptoSha256(password)
-      const captcha = await executeRecaptcha('login')
-
-      if (!captcha) {
-        throw 'error'
-      }
-
-      const response = await registrationUser({ ...data, password: hash_password, captcha })
+      const response = await createUser({ ...data, password: hash_password })
 
       toast.success(response.data.message)
 

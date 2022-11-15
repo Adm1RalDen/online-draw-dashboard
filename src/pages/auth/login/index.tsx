@@ -49,13 +49,24 @@ export const LoginComponent = () => {
     [dispatch]
   )
 
-  const handleSubmit = useCallback(() => {
+  const handleSubmit = useCallback(async () => {
     if (!executeRecaptcha) {
-      toast.error(ErrorMessages.INVALID_RECAPTCHA)
-      return
+      return toast.error(ErrorMessages.INVALID_RECAPTCHA)
     }
 
-    dispatch(loginThunk({ ...formik.values, setAttemptsLeftCount, executeRecaptcha }))
+    const captcha = await executeRecaptcha('login')
+
+    if (!captcha) {
+      return toast.error(ErrorMessages.INVALID_RECAPTCHA)
+    }
+
+    dispatch(loginThunk({ ...formik.values, captcha }))
+      .unwrap()
+      .then((res) => {
+        if (res?.isUse2FA) {
+          setAttemptsLeftCount(res.attemptsLeftCount)
+        }
+      })
   }, [executeRecaptcha, dispatch, setAttemptsLeftCount, formik])
 
   return (

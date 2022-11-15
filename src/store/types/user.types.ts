@@ -7,8 +7,6 @@ import {
 } from 'store/thunks/user/authorization.thunk'
 import { getUserProfileThunk, updateUserProfileThunk } from 'store/thunks/user/user.thunk'
 
-import { FunctionWithParams, UserLoginFormData, UserRegistrationData } from 'types'
-
 export interface UserReducerInitialTypes {
   isAuth: boolean
   isLoading: boolean
@@ -31,15 +29,6 @@ export interface UserReducerInitialTypes {
     biography: string
     isUse2FA: boolean
   }
-}
-
-export interface LoginThunkParams extends UserLoginFormData {
-  setAttemptsLeftCount: FunctionWithParams<number>
-  executeRecaptcha: (action: string | undefined) => Promise<string> | undefined
-}
-
-export interface RegistrationThunkParams extends UserRegistrationData {
-  executeRecaptcha: (action: string) => Promise<string> | undefined
 }
 
 export type GetUserProfileThunkType = typeof getUserProfileThunk

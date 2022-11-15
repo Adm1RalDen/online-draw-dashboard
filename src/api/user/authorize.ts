@@ -1,6 +1,8 @@
 import { Instance } from 'api/instance'
 
-import { AuthResponse, User2FALoginResponse, UserLoginFormData } from 'types'
+import { UserLoginData } from 'pages/auth/types'
 
-export const authorizeUser = async (data: UserLoginFormData & { captcha: string }) =>
+import { AuthResponse, User2FALoginResponse } from 'types'
+
+export const authorizeUser = async (data: UserLoginData) =>
   Instance.post<AuthResponse | User2FALoginResponse>('/user/login', data)
