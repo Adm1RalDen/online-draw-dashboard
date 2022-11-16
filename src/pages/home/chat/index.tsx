@@ -58,7 +58,7 @@ export const Chat = () => {
         {!error &&
           !isLoadingChat &&
           messages.map((msg: ChatMessageType) => (
-            <ChatMessage key={msg._id} msg={msg} userId={data.id} onError={onError} />
+            <ChatMessage key={msg._id} msg={msg} id={data.id} onError={onError} />
           ))}
 
         {isLoadingMessage && (

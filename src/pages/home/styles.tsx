@@ -48,9 +48,9 @@ const HomePageWrapper = styled.div`
 
 const HomeHeader = styled.header`
   grid-area: header;
-  box-shadow: 0px 0px 2px 1px ${({ theme }) => theme.border.liteGreen};
+  box-shadow: 0px 0px 2px 1px ${({ theme }) => theme.colors.greenGray};
   background-color: ${({ theme }) => theme.colors.aqua};
-  padding: 5px;
+  padding: ${({ theme }) => theme.spacing.tiny};
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -66,8 +66,8 @@ const HomeHeader = styled.header`
 const ActiveRoomsWrapper = styled(StyledScroll)`
   grid-area: activeRooms;
   overflow: auto;
-  box-shadow: 0px 0px 2px 1px ${({ theme }) => theme.border.liteGreen};
-  padding: 10px;
+  box-shadow: 0px 0px 2px 1px ${({ theme }) => theme.colors.greenGray};
+  padding: ${({ theme }) => theme.spacing.s};
   background-color: ${({ theme }) => theme.colors.aqua};
 
   & > h3,

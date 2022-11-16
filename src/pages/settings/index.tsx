@@ -12,7 +12,7 @@ import { SettingsPageSideBar } from './components/sidebar'
 import { SettingsPageContainer, SettingsPageMain, SettingsPageSection } from './styles'
 
 export const SettingsPage = () => {
-  const [isMobileAside, toggleMobileAside] = useState(true)
+  const [isCollapsedNavigation, toggleCollapseNavigation] = useState(true)
   const { isLoading } = useAppSelector(userInfoSelector)
   const { id } = useAppSelector(userDataSelector)
   const dispatch = useAppDispatch()
@@ -24,14 +24,14 @@ export const SettingsPage = () => {
 
   return (
     <SettingsPageSection>
-      <SettingsPageContainer isMobileAside={isMobileAside}>
+      <SettingsPageContainer isCollapsedNavigation={isCollapsedNavigation}>
         <SettingsPageSideBar />
         <SettingsPageMain>
           {isLoading ? (
             <Loader type='solid' />
           ) : (
             <>
-              <SettingsPageHeader toggleMobileAside={toggleMobileAside} />
+              <SettingsPageHeader toggleCollapseNavigation={toggleCollapseNavigation} />
               {outlet}
             </>
           )}

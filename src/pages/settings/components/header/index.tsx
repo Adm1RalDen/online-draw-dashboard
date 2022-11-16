@@ -14,17 +14,17 @@ import { ChangeStateAction } from 'types'
 import { SettingsPageHeaderWrapper } from './styles'
 
 interface SettingsPageHeaderProps {
-  toggleMobileAside: ChangeStateAction<boolean>
+  toggleCollapseNavigation: ChangeStateAction<boolean>
 }
 
-export const SettingsPageHeader: FC<SettingsPageHeaderProps> = ({ toggleMobileAside }) => {
+export const SettingsPageHeader: FC<SettingsPageHeaderProps> = ({ toggleCollapseNavigation }) => {
   const { avatar, name } = useAppSelector(userDataSelector)
 
-  const handleToggleMobileAside = () => toggleMobileAside((prev) => !prev)
+  const toggleIsCollapsedNavigation = () => toggleCollapseNavigation((prev) => !prev)
 
   return (
     <SettingsPageHeaderWrapper>
-      <Bars3Icon onClick={handleToggleMobileAside} />
+      <Bars3Icon onClick={toggleIsCollapsedNavigation} />
       <SearchInput />
       <Icon src={getImageUrl(avatar)} size={35} alt={name} />
     </SettingsPageHeaderWrapper>

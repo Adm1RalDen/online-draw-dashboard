@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 export const SettingsPageSideBarWrapper = styled.aside`
   overflow: hidden;
   position: sticky;
-  padding: ${({ theme }) => theme.spacing.s} 0px;
+  padding: ${({ theme }) => theme.spacing.s} 0;
   height: 100vh;
   width: 100%;
   top: 0;

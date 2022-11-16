@@ -11,11 +11,11 @@ import { Heading4, Paragraph } from 'styles/typography/styles'
 
 import { DISABLE_GOOGLE_AUTH, ENABLE_GOOGLE_AUTH } from 'const/urls'
 import { useAppSelector } from 'store'
-import { userDataSelector } from 'store/selectors/user.selector'
+import { userIsUse2FaSelector } from 'store/selectors/user.selector'
 
 export const SecurityChangeTwoFa = () => {
   const navigate = useNavigate()
-  const { isUse2FA } = useAppSelector(userDataSelector)
+  const isUse2FA = useAppSelector(userIsUse2FaSelector)
 
   const handleNavigateEnable2FA = () => navigate(ENABLE_GOOGLE_AUTH)
   const handleNavigateDisable2FA = () => navigate(DISABLE_GOOGLE_AUTH)
@@ -28,7 +28,7 @@ export const SecurityChangeTwoFa = () => {
         <Heading4>
           {isUse2FA ? (
             <>
-              Two factor authentication is enabled yet. <br /> You can disable it.
+              Two factor authentication has been already enabled. <br /> You can disable it.
             </>
           ) : (
             'Two factor authentication is not enabled yet.'

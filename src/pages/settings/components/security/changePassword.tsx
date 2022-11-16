@@ -9,6 +9,8 @@ import {
 
 import { InputTypes } from 'const/enums'
 
+import { noopFunction } from 'utils/noop'
+
 import { changePasswordInitialValues } from './const'
 import { changePasswordValidationSchema } from './utils'
 
@@ -18,7 +20,7 @@ export const SecurityChangePassword = () => {
     validationSchema: changePasswordValidationSchema,
     validateOnChange: true,
     validateOnBlur: false,
-    onSubmit: (data) => console.log(data)
+    onSubmit: noopFunction
   })
 
   return (
