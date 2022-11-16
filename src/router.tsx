@@ -64,7 +64,10 @@ const setRoutes = (isAuth: boolean) =>
       ]
     : [
         { path: '/', element: <Navigate to='/authorization' /> },
-        { path: '/authorization', element: <AuthPage /> },
+        {
+          path: '/authorization',
+          element: <AuthPage />
+        },
         { path: '/activate/:link', element: <ActivationPage /> },
         { path: '/auth/google/success', element: <SuccessGoogleAuth /> },
         { path: '/auth/google/failure', element: <FailedGoogleAuthPage /> },

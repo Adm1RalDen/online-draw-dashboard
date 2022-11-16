@@ -1,7 +1,9 @@
 import { useState } from 'react'
+import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
 
 import { Loader } from 'components/loader'
 
+import { reCaptchaConfig } from 'const/reCaptcha'
 import { useAppSelector } from 'store'
 import { userInfoSelector } from 'store/selectors/user.selector'
 
@@ -17,19 +19,21 @@ export const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true)
 
   return (
-    <AuthSection>
-      <AuthContainer>
-        <Logo>Draw online</Logo>
-        <AuthWrapper>
-          {isLogin ? <LoginComponent /> : <RegistrationComponent />}
-          <ChangeAuthWay isLogin={isLogin} setIsLogin={setIsLogin} />
-          {isLoading && (
-            <Portal>
-              <Loader />
-            </Portal>
-          )}
-        </AuthWrapper>
-      </AuthContainer>
-    </AuthSection>
+    <GoogleReCaptchaProvider {...reCaptchaConfig}>
+      <AuthSection>
+        <AuthContainer>
+          <Logo>Draw online</Logo>
+          <AuthWrapper>
+            {isLogin ? <LoginComponent /> : <RegistrationComponent />}
+            <ChangeAuthWay isLogin={isLogin} setIsLogin={setIsLogin} />
+            {isLoading && (
+              <Portal>
+                <Loader />
+              </Portal>
+            )}
+          </AuthWrapper>
+        </AuthContainer>
+      </AuthSection>
+    </GoogleReCaptchaProvider>
   )
 }

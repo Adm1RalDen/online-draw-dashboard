@@ -5,7 +5,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 
 import { Button } from 'components/button'
 import { ButtonOutline } from 'components/button-outline'
-import { Field } from 'components/field'
+import { InputField } from 'components/input-field'
 import { Loader } from 'components/loader'
 import { Heading3, Paragraph } from 'styles/typography/styles'
 
@@ -73,14 +73,14 @@ export const ResetPasswordContent = () => {
             <LockClosedIcon width={40} />
             <Heading3>Reset password</Heading3>
             <Paragraph>Create your new password and confirm it</Paragraph>
-            <Field
+            <InputField
               name='password'
               type={InputTypes.PASSWORD}
               placeholder='Password'
               value={formik.values.password}
               disabled={isLoading}
             />
-            <Field
+            <InputField
               name='confirmPassword'
               type={InputTypes.PASSWORD}
               placeholder='Confirm password'

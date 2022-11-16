@@ -7,9 +7,7 @@ import {
 } from 'store/thunks/user/authorization.thunk'
 import { getUserProfileThunk, updateUserProfileThunk } from 'store/thunks/user/user.thunk'
 
-import { FunctionWithParams, UserLoginFormData } from 'types'
-
-export type UserReducerInitialTypes = {
+export interface UserReducerInitialTypes {
   isAuth: boolean
   isLoading: boolean
   error: undefined | string
@@ -31,10 +29,6 @@ export type UserReducerInitialTypes = {
     biography: string
     isUse2FA: boolean
   }
-}
-
-export type LoginThunkParams = UserLoginFormData & {
-  setAttemptsLeftCount: FunctionWithParams<number>
 }
 
 export type GetUserProfileThunkType = typeof getUserProfileThunk

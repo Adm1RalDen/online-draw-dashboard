@@ -4,9 +4,12 @@ export interface UserLoginFormData {
   email: string
   password: string
 }
-export interface UserRegistrationData extends UserLoginFormData {
+export interface UserRegistrationFormData {
+  email: string
+  password: string
   name: string
 }
+
 export interface AuthorizedUser {
   id: string
   name: string

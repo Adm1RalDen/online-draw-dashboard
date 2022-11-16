@@ -1,5 +1,5 @@
 import styled from 'styled-components'
 
-export const FieldWrapper = styled.div`
+export const InputFieldWrapper = styled.div`
   margin-bottom: ${({ theme }) => theme.spacing.tiny};
 `

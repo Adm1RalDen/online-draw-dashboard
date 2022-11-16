@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 import { Button } from 'components/button'
 import { Container } from 'components/container'
-import { Field } from 'components/field'
+import { InputField } from 'components/input-field'
 import { Heading3 } from 'styles/typography/styles'
 
 export const SettingsPageSection = styled.section`
@@ -55,7 +55,7 @@ export const SettingsPageFlexContainer = styled.div`
   gap: 10px;
 `
 
-export const SettingsPageField = styled(Field)`
+export const SettingsPageField = styled(InputField)`
   height: 30px;
   max-width: 300px;
   margin-bottom: ${({ theme }) => theme.spacing.s};

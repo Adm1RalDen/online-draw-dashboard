@@ -1,37 +1,49 @@
 import { FormikProvider, useFormik } from 'formik'
+import { useCallback } from 'react'
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
+import { toast } from 'react-toastify'
 
 import { AnimatedInputField } from 'components/animatedInputField'
 
+import { ErrorMessages } from 'const/enums'
 import { useAppDispatch, useAppSelector } from 'store'
 import { userInfoSelector } from 'store/selectors/user.selector'
 import { userRegistrationThunk } from 'store/thunks/user/authorization.thunk'
 
 import { capitalizeFirstLetter } from 'utils/capitalizeFirstLetter'
-import { cryptoSha256 } from 'utils/cryptoPassord'
+import { noopFunction } from 'utils/noop'
 import { setInputTypes } from 'utils/setInputTypes'
-
-import { UserRegistrationData } from 'types'
 
 import { AuthButton, Title } from '../styles'
 import { registrationValidationSchema } from '../utils'
 import { RegistrationFileds, initialValues } from './const'
 
 export const RegistrationComponent = () => {
-  const dispatch = useAppDispatch()
   const { isLoading } = useAppSelector(userInfoSelector)
-
-  const handleSubmit = (data: UserRegistrationData) => {
-    const password = cryptoSha256(data.password)
-    dispatch(userRegistrationThunk({ ...data, password }))
-  }
+  const { executeRecaptcha } = useGoogleReCaptcha()
+  const dispatch = useAppDispatch()
 
   const formik = useFormik({
     initialValues,
     validationSchema: registrationValidationSchema,
     validateOnBlur: true,
     validateOnChange: true,
-    onSubmit: handleSubmit
+    onSubmit: noopFunction
   })
+
+  const handleSubmit = useCallback(async () => {
+    if (!executeRecaptcha) {
+      return toast.error(ErrorMessages.INVALID_RECAPTCHA)
+    }
+
+    const captcha = await executeRecaptcha('login')
+
+    if (!captcha) {
+      return toast.error(ErrorMessages.INVALID_RECAPTCHA)
+    }
+
+    dispatch(userRegistrationThunk({ ...formik.values, captcha }))
+  }, [executeRecaptcha, dispatch, formik])
 
   return (
     <>
@@ -47,7 +59,9 @@ export const RegistrationComponent = () => {
               value={formik.values[field]}
             />
           ))}
-          <AuthButton disabled={!formik.isValid || isLoading}>Sign up</AuthButton>
+          <AuthButton disabled={!formik.isValid || isLoading} onClick={handleSubmit} type='button'>
+            Sign up
+          </AuthButton>
         </form>
       </FormikProvider>
     </>

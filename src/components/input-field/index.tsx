@@ -7,23 +7,23 @@ import { Label } from 'styles/typography/styles'
 
 import { InputTypes } from 'const/enums'
 
-import { FieldWrapper } from './styles'
+import { InputFieldWrapper } from './styles'
 
-interface FieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
   type: InputTypes
   name: string
   label?: string
   showError?: boolean
 }
 
-export const Field: FC<FieldProps> = ({ showError = true, label, ...props }) => {
+export const InputField: FC<InputFieldProps> = ({ showError = true, label, ...props }) => {
   const [field, meta] = useField(props)
 
   return (
-    <FieldWrapper>
+    <InputFieldWrapper>
       {label && <Label htmlFor={props.name}>{label}</Label>}
       <Input isError={meta.error && meta.touched} {...field} {...props} />
       {showError && <ErrorText>{meta.touched && meta.error}</ErrorText>}
-    </FieldWrapper>
+    </InputFieldWrapper>
   )
 }
