@@ -1,10 +1,11 @@
-import LogoIcon from 'public/assets/logo.svg'
+import { themes } from 'styles/themes'
+import { Heading2 } from 'styles/typography/styles'
 
-import { Heading } from './styles'
+import { StyledLogo } from './styles'
 
 export const Logo = () => (
-  <Heading>
-    <LogoIcon />
+  <Heading2 color={themes.colors.white}>
+    <StyledLogo />
     Draw online
-  </Heading>
+  </Heading2>
 )

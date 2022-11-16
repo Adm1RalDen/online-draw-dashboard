@@ -9,10 +9,10 @@ import { getUserProfileThunk } from 'store/thunks/user/user.thunk'
 
 import { SettingsPageHeader } from './components/header'
 import { SettingsPageSideBar } from './components/sidebar'
-import { SettingsPageContainer, SettingsPageMain, SettingsPageWrapper } from './styles'
+import { SettingsPageContainer, SettingsPageMain, SettingsPageSection } from './styles'
 
 export const SettingsPage = () => {
-  const [isCollapsedSideBar, setIsCollapsedSideBar] = useState(true)
+  const [isMobileAside, toggleMobileAside] = useState(true)
   const { isLoading } = useAppSelector(userInfoSelector)
   const { id } = useAppSelector(userDataSelector)
   const dispatch = useAppDispatch()
@@ -23,20 +23,20 @@ export const SettingsPage = () => {
   }, [dispatch, id])
 
   return (
-    <SettingsPageWrapper>
-      <SettingsPageContainer isCollapsedSideBar={isCollapsedSideBar}>
+    <SettingsPageSection>
+      <SettingsPageContainer isMobileAside={isMobileAside}>
         <SettingsPageSideBar />
         <SettingsPageMain>
           {isLoading ? (
             <Loader type='solid' />
           ) : (
             <>
-              <SettingsPageHeader setIsCollapsedSideBar={setIsCollapsedSideBar} />
+              <SettingsPageHeader toggleMobileAside={toggleMobileAside} />
               {outlet}
             </>
           )}
         </SettingsPageMain>
       </SettingsPageContainer>
-    </SettingsPageWrapper>
+    </SettingsPageSection>
   )
 }

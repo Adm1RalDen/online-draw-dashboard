@@ -32,7 +32,8 @@ export enum ErrorMessages {
   UNAUTHORITHED_ERROR = 'User is not authorized',
   NETWORK_ERROR = 'Network error',
   REQUIRED = 'Required',
-  INVALID = 'Invalid'
+  INVALID = 'Invalid',
+  NOT_MATCHED_PASSWORDS = 'Passwords is not matches'
 }
 
 export enum KeysCodes {

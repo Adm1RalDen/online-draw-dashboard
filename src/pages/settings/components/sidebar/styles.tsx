@@ -1,27 +1,27 @@
 import styled, { css } from 'styled-components'
 
-export const SettingsPageSideBarAside = styled.aside`
+export const SettingsPageSideBarWrapper = styled.aside`
   overflow: hidden;
   position: sticky;
-  padding: 10px 0px;
+  padding: ${({ theme }) => theme.spacing.s} 0px;
   height: 100vh;
   width: 100%;
   top: 0;
 
   & > h2 {
-    margin-bottom: 30px;
-    padding-left: 5px;
+    margin-bottom: ${({ theme }) => theme.spacing.lg};
+    padding-left: ${({ theme }) => theme.spacing.tiny};
     white-space: nowrap;
   }
 `
 
-export const SettingsPageSideBarLi = styled.li<{ isActive: boolean }>`
+export const SettingsPageSideBarItem = styled.li<{ isActive: boolean }>`
   display: grid;
   grid-template: 1fr / 20px 1fr;
   position: relative;
-  font-size: 16px;
+  font-size: ${({ theme }) => theme.fontSizes.small};
   gap: 10px;
-  padding: 10px 10px 10px 10px;
+  padding: ${({ theme }) => theme.spacing.s};
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
   cursor: pointer;
@@ -68,14 +68,14 @@ export const SettingsPageSideBarLi = styled.li<{ isActive: boolean }>`
 
   & > svg {
     position: relative;
-    z-index: 1;
+    z-index: ${({ theme }) => theme.zIndex.element};
     width: 20px;
     height: 20px;
   }
 
   & > a {
     position: absolute;
-    z-index: 2;
+    z-index: ${({ theme }) => theme.zIndex.overElement};
     top: 0;
     left: 0;
     right: 0;

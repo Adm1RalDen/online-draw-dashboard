@@ -9,11 +9,11 @@ const TwoFactorPageSection = styled.section`
 
   & h1 {
     color: ${({ theme }) => theme.colors.white};
-    margin: 5px 0px;
+    margin: ${({ theme }) => theme.spacing.tiny} 0px;
   }
 
   & a {
-    font-size: 20px;
+    font-size: ${({ theme }) => theme.fontSizes.middle};
     font-weight: 400;
   }
 `

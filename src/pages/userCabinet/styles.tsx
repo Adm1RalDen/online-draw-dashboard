@@ -101,11 +101,10 @@ const InfoWrapper = styled.div`
   }
 
   & > p {
-    font-size: 18px;
+    font-size: ${({ theme }) => theme.fontSizes.smallUp};
     display: inline-block;
     min-width: 100px;
     font-weight: 400;
-    font-size: ${({ theme }) => theme.fontSizes.smallUp};
 
     & > span {
       margin-left: 5px;

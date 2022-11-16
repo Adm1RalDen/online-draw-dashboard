@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { Button } from 'components/button'
 import { ButtonOutline } from 'components/button-outline'
-import { InputField } from 'components/inputField'
+import { Field } from 'components/field'
 import { Heading3, Paragraph } from 'styles/typography/styles'
 
 import { InputTypes, NotifyType } from 'const/enums'
@@ -54,7 +54,7 @@ export const ResetPasswordIdentify = () => {
               Enter your email address and we will send you a link to restore access to your
               account.
             </Paragraph>
-            <InputField
+            <Field
               name='email'
               type={InputTypes.EMAIL}
               placeholder='Email'

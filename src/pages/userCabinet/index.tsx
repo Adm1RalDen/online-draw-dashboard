@@ -9,7 +9,7 @@ import { HOME_URL } from 'const/urls'
 import { useAppSelector } from 'store'
 import { userInfoSelector } from 'store/selectors/user.selector'
 
-import { setImageUrl } from 'utils/setImageUrl'
+import { getImageUrl } from 'utils/getImageUrl'
 import { setLargeFirstLetter } from 'utils/setLargeFirstLetter'
 import { toLocaleDateString } from 'utils/toLocaleDateString'
 
@@ -76,10 +76,10 @@ export const UserCabinet = () => {
         ) : (
           <Wrapper>
             <ImagesWrapper>
-              <img src={setImageUrl(backgroundFonSrc)} alt={data.name} />
+              <img src={getImageUrl(backgroundFonSrc)} alt={data.name} />
               <AvatarWrapper>
                 <Avatar>
-                  <img src={setImageUrl(avatarSrc)} alt={data.name} />
+                  <img src={getImageUrl(avatarSrc)} alt={data.name} />
                 </Avatar>
                 <div>{data.name}</div>
               </AvatarWrapper>

@@ -9,14 +9,15 @@ const ActivationPageSection = styled.section`
 
   & h1 {
     color: ${({ theme }) => theme.colors.white};
-    margin-bottom: 10px;
-  }
-  & a {
-    font-size: 20px;
+    margin-bottom: ${({ theme }) => theme.spacing.s};
   }
 
-  @media screen and (max-width: 400px) {
-    padding: 5px;
+  & a {
+    font-size: ${({ theme }) => theme.fontSizes.middle};
+  }
+
+  @media ${({ theme }) => theme.devices.mobile} {
+    padding: ${({ theme }) => theme.spacing.tiny};
   }
 `
 export { ActivationPageSection }

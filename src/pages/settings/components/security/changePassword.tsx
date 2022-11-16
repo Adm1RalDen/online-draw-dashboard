@@ -1,23 +1,52 @@
-import { Button } from 'components/button'
-import { Label } from 'components/label'
-import { Heading3 } from 'styles/typography/styles'
+import { FormikProvider, useFormik } from 'formik'
 
-import { ChangePasswordField, ChangePasswordWrapper } from './styles'
+import {
+  SettingsHeading3,
+  SettingsPageContantWrapper,
+  SettingsPageField,
+  SettingsSubmitButton
+} from 'pages/settings/styles'
 
-export const SecurityChangePassword = () => (
-  <ChangePasswordWrapper>
-    <Heading3>Change Password</Heading3>
-    <form>
-      <Label>Old password </Label>
-      <ChangePasswordField />
+import { InputTypes } from 'const/enums'
 
-      <Label>New Password</Label>
-      <ChangePasswordField />
+import { changePasswordInitialValues } from './const'
+import { changePasswordValidationSchema } from './utils'
 
-      <Label>Confirm new password </Label>
-      <ChangePasswordField />
+export const SecurityChangePassword = () => {
+  const formik = useFormik({
+    initialValues: changePasswordInitialValues,
+    validationSchema: changePasswordValidationSchema,
+    validateOnChange: true,
+    validateOnBlur: false,
+    onSubmit: (data) => console.log(data)
+  })
 
-      <Button disabled={true}>Update password</Button>
-    </form>
-  </ChangePasswordWrapper>
-)
+  return (
+    <SettingsPageContantWrapper>
+      <SettingsHeading3>Change Password</SettingsHeading3>
+      <FormikProvider value={formik}>
+        <form onSubmit={formik.handleSubmit}>
+          <SettingsPageField
+            name='oldPassword'
+            type={InputTypes.PASSWORD}
+            label='Old password'
+            showError
+          />
+          <SettingsPageField
+            name='newPassword'
+            type={InputTypes.PASSWORD}
+            label='New Password'
+            showError
+          />
+          <SettingsPageField
+            name='confirmPassword'
+            type={InputTypes.PASSWORD}
+            label='Confirm new password'
+            showError
+          />
+          <SettingsSubmitButton type='submit'>Update password</SettingsSubmitButton>
+        </form>
+      </FormikProvider>
+    </SettingsPageContantWrapper>
+  )
+}
