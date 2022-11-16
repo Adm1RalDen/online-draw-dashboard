@@ -3,12 +3,13 @@ import { toast } from 'react-toastify'
 
 import { authorizeUser } from 'api/user/authorize'
 import { getProfile } from 'api/user/getProfile'
-import { registrationUser } from 'api/user/registration'
+import { createUser } from 'api/user/registration'
+
+import { UserLoginData, UserRegistrationData } from 'pages/auth/types'
 
 import { ErrorMessages } from 'const/enums'
 import { resetStore } from 'store/actions'
 import { USER_SLICE_NAME } from 'store/const'
-import { LoginThunkParams } from 'store/types/user.types'
 
 import {
   deleteSavedToken,
@@ -19,7 +20,7 @@ import {
 import { cryptoSha256 } from 'utils/cryptoPassord'
 import { errorHandler } from 'utils/errorHandler'
 
-import { AuthResponse, User2FALoginResponse, UserRegistrationData } from 'types'
+import { AuthResponse, User2FALoginResponse } from 'types'
 
 export const updateAuthStatusThunk = createAsyncThunk(
   `${USER_SLICE_NAME}/updateAuthStatus-thunk`,
@@ -42,13 +43,16 @@ export const updateAuthStatusThunk = createAsyncThunk(
 
 export const loginThunk = createAsyncThunk(
   `${USER_SLICE_NAME}/login-thunk`,
-  async ({ setAttemptsLeftCount, ...data }: LoginThunkParams, { dispatch }) => {
+  async ({ email, password, captcha }: UserLoginData, { dispatch }) => {
     try {
-      const password = cryptoSha256(data.password)
-      const response = await authorizeUser({ email: data.email, password })
+      const hashPassword = cryptoSha256(password)
+      const response = await authorizeUser({
+        email,
+        password: hashPassword,
+        captcha
+      })
 
       if (Object.hasOwn(response.data, 'isUse2FA')) {
-        setAttemptsLeftCount((response.data as User2FALoginResponse).attemptsLeftCount)
         return response.data as User2FALoginResponse
       }
 
@@ -77,10 +81,13 @@ export const saveUserDataThunk = createAsyncThunk(
 
 export const userRegistrationThunk = createAsyncThunk(
   `${USER_SLICE_NAME}/registration-thunk`,
-  async (data: UserRegistrationData, { rejectWithValue }) => {
+  async ({ password, ...data }: UserRegistrationData, { rejectWithValue }) => {
     try {
-      const response = await registrationUser(data)
+      const hash_password = cryptoSha256(password)
+      const response = await createUser({ ...data, password: hash_password })
+
       toast.success(response.data.message)
+
       return response.data
     } catch (e) {
       return rejectWithValue(errorHandler(e, ErrorMessages.REGISTRATION_ERROR))
