@@ -41,7 +41,6 @@ export const LoginComponent = () => {
   })
 
   const onSuccessCallback = (data: AuthResponse) => dispatch(saveUserDataThunk(data))
-  const onErrorCallback = (err: string) => toast.error(err)
   const handleCloseModal = () => dispatch(cancelUser2faAction())
 
   const setAttemptsLeftCount = useCallback(
@@ -96,7 +95,7 @@ export const LoginComponent = () => {
             userId={id}
             handleCloseModal={handleCloseModal}
             onSuccessCallback={onSuccessCallback}
-            onErrorCallback={onErrorCallback}
+            onErrorCallback={toast.error}
           />
         </Portal>
       )}

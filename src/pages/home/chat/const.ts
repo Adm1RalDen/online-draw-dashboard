@@ -1,3 +1,3 @@
-import { setImageUrl } from 'utils/setImageUrl'
+import { getImageUrl } from 'utils/getImageUrl'
 
-export const DEFAULT_IMAGE = setImageUrl('users/defaultUserImage.png')
+export const DEFAULT_IMAGE = getImageUrl('users/defaultUserImage.png')

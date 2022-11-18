@@ -10,8 +10,8 @@ import { Heading3 } from 'styles/typography/styles'
 import { useAppDispatch } from 'store'
 
 import { filterObject } from 'utils/filterObject'
+import { getImageUrl } from 'utils/getImageUrl'
 import { Portal } from 'utils/portal'
-import { setImageUrl } from 'utils/setImageUrl'
 import { setInputTypes } from 'utils/setInputTypes'
 
 import { AuthorizedUser } from 'types'
@@ -90,8 +90,8 @@ export const UpdateUserModal: FC<UpdateUserModalTypes> = ({ userData, handleEdit
         <AvatarWrapper>
           <Heading3>Avatar</Heading3>
           <ImageCrop
-            savedPreviewImg={setImageUrl(avatarSrc)}
-            fullImg={setImageUrl(originalAvatarSrc)}
+            savedPreviewImg={getImageUrl(avatarSrc)}
+            fullImg={getImageUrl(originalAvatarSrc)}
             width={350}
             height={220}
             handleSavePhoto={handleSaveAvatar}

@@ -16,7 +16,7 @@ import { ResetPassword } from 'pages/resetPassword'
 import { ResetPasswordIdentify } from 'pages/resetPassword/identify'
 import { ServerErrorPage } from 'pages/serverErrorPage'
 import { SettingsPage } from 'pages/settings'
-import { PrivacySettings } from 'pages/settings/kategories/privacy'
+import { SecuritySettings } from 'pages/settings/components/security'
 import { SuccessGoogleAuth } from 'pages/successGoogleAuth'
 import { UserCabinet } from 'pages/userCabinet'
 
@@ -51,12 +51,13 @@ const setRoutes = (isAuth: boolean) =>
           path: '/settings',
           element: <SettingsPage />,
           children: [
+            { path: 'dashboard', element: <div>dashboard</div> },
             { path: 'account', element: <div>account</div> },
-            {
-              path: 'privacy&security',
-              element: <PrivacySettings />
-            },
-            { path: '*', element: <Navigate to='/settings' /> }
+            { path: 'help', element: <div>help</div> },
+            { path: 'messages', element: <div>message</div> },
+            { path: 'security', element: <SecuritySettings /> },
+            { index: true, element: <Navigate to='/settings/dashboard' /> },
+            { path: '*', element: <Navigate to='/settings/dashboard' /> }
           ]
         },
         { path: '*', element: <NotFoundPage /> }

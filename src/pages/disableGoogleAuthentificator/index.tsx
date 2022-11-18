@@ -5,8 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { Button } from 'components/button'
 import { Container } from 'components/container'
 import { Input } from 'components/input'
-import { Label } from 'components/label'
-import { Heading2, Heading3, Paragraph } from 'styles/typography/styles'
+import { Heading2, Heading3, Label, Paragraph } from 'styles/typography/styles'
 
 import SuccessIcon from 'public/assets/success.svg'
 

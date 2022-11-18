@@ -3,8 +3,7 @@ import { FC, useEffect } from 'react'
 
 import { BackButton } from 'components/backButton'
 import { Input } from 'components/input'
-import { Label } from 'components/label'
-import { Heading4, Paragraph } from 'styles/typography/styles'
+import { Heading4, Label, Paragraph } from 'styles/typography/styles'
 
 import { ErrorMessages, NotifyType } from 'const/enums'
 import { useNotify } from 'hooks/useNotify'

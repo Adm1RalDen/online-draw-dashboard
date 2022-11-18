@@ -4,7 +4,7 @@ import { Icon } from 'components/icon'
 import { ChatMessageType } from 'pages/home/types'
 import { Heading4, Paragraph } from 'styles/typography/styles'
 
-import { setImageUrl } from 'utils/setImageUrl'
+import { getImageUrl } from 'utils/getImageUrl'
 
 import { FunctionWithParams } from 'types'
 
@@ -13,20 +13,24 @@ import { Message, MessageWrapper } from '../styles'
 interface ChatMessageProps {
   msg: ChatMessageType
   onError: FunctionWithParams<React.SyntheticEvent<HTMLImageElement, Event>>
-  userId: string
+  currentUserId: string
 }
 
-export const ChatMessage: FC<ChatMessageProps> = ({ msg, onError, userId }) => (
+export const ChatMessage: FC<ChatMessageProps> = ({
+  msg: { userId, name, message },
+  onError,
+  currentUserId
+}) => (
   <MessageWrapper>
     <Icon
-      src={setImageUrl(`users/${msg.userId}/${msg.userId}_avatar.png`)}
+      src={getImageUrl(`users/${userId}/${userId}_avatar.png`)}
       size={30}
-      alt={msg.name}
+      alt={name}
       onError={onError}
     />
-    <Message myMessage={msg.userId === userId}>
-      <Heading4>{msg.name}</Heading4>
-      <Paragraph>{msg.message}</Paragraph>
+    <Message myMessage={userId === currentUserId}>
+      <Heading4>{name}</Heading4>
+      <Paragraph>{message}</Paragraph>
     </Message>
   </MessageWrapper>
 )

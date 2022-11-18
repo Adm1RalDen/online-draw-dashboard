@@ -33,6 +33,7 @@ export enum ErrorMessages {
   NETWORK_ERROR = 'Network error',
   REQUIRED = 'Required',
   INVALID = 'Invalid',
+  NOT_MATCHED_PASSWORDS = 'Passwords is not matches',
   INVALID_RECAPTCHA = 'Invalid reCaptcha'
 }
 

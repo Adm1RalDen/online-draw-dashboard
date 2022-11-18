@@ -1,8 +1,7 @@
 import styled, { css, keyframes } from 'styled-components'
 
 import { Input } from 'components/input'
-import { Label } from 'components/label'
-import { Heading6, Span } from 'styles/typography/styles'
+import { Heading6, Label, Span } from 'styles/typography/styles'
 
 const animatedError = keyframes`
  0%{
@@ -16,7 +15,7 @@ const animatedError = keyframes`
 export const AnimatedInputWrapper = styled(Label)<{ isError: boolean; hasValue: boolean }>`
   width: 100%;
   position: relative;
-  margin: 15px 0px 10px 0px;
+  margin: ${({ theme }) => `${theme.spacing.md} 0px ${theme.spacing.s} 0px`};
 
   ${(p) =>
     p.hasValue &&
@@ -118,10 +117,10 @@ export const AnimatedInputErrorText = styled(Span)`
   width: 100%;
   display: block;
   position: absolute;
-  padding-top: 5px;
+  padding-top: ${({ theme }) => theme.spacing.tiny};
   text-align: right;
   overflow: hidden;
   transform: all 0.5s ease;
-  font-size: 13px;
+  font-size: ${({ theme }) => theme.fontSizes.small};
   color: ${({ theme }) => theme.colors.red};
 `
