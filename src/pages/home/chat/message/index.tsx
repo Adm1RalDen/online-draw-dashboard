@@ -13,13 +13,13 @@ import { Message, MessageWrapper } from '../styles'
 interface ChatMessageProps {
   msg: ChatMessageType
   onError: FunctionWithParams<React.SyntheticEvent<HTMLImageElement, Event>>
-  id: string
+  currentUserId: string
 }
 
 export const ChatMessage: FC<ChatMessageProps> = ({
   msg: { userId, name, message },
   onError,
-  id
+  currentUserId
 }) => (
   <MessageWrapper>
     <Icon
@@ -28,7 +28,7 @@ export const ChatMessage: FC<ChatMessageProps> = ({
       alt={name}
       onError={onError}
     />
-    <Message myMessage={userId === id}>
+    <Message myMessage={userId === currentUserId}>
       <Heading4>{name}</Heading4>
       <Paragraph>{message}</Paragraph>
     </Message>
