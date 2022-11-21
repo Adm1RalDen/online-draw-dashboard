@@ -5,13 +5,11 @@ import { FC, useState } from 'react'
 import { Editor } from 'react-draft-wysiwyg'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
-import { FunctionWithParams } from 'types'
-
-import { EditorWrapper } from './styles'
+import '../../styles/wysiwig.scss'
 
 interface TextEditorProps {
+  onChange: (name: string, value: string) => void
   name: string
-  onChange: FunctionWithParams<string>
   value: string
 }
 
@@ -23,22 +21,16 @@ export const TextEditor: FC<TextEditorProps> = ({ name, onChange, value = '' }) 
 
   const onEditorStateChange = (editorState: EditorState) => {
     setTextState(editorState)
-    onChange(draftToHtml(convertToRaw(editorState.getCurrentContent())))
+    onChange(name, draftToHtml(convertToRaw(editorState.getCurrentContent())))
   }
 
   return (
-    <EditorWrapper>
-      <Editor
-        editorState={textState}
-        wrapperClassName='demo-wrapper'
-        editorClassName='demo-editor'
-        onEditorStateChange={onEditorStateChange}
-      />
-      <textarea
-        disabled
-        name={name}
-        value={draftToHtml(convertToRaw(textState.getCurrentContent()))}
-      />
-    </EditorWrapper>
+    <Editor
+      toolbarClassName='custom__wysiwig__toolbar__styles'
+      editorClassName='custom__wysiwig__editor__styles'
+      wrapperClassName='custom__wysiwig__wrapper__styles'
+      editorState={textState}
+      onEditorStateChange={onEditorStateChange}
+    />
   )
 }

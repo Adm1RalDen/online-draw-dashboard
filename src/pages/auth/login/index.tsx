@@ -5,12 +5,16 @@ import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { User2FAComponent } from 'components/2FA'
-import { AnimatedInputField } from 'components/animatedInputField'
+import { AnimatedInputField } from 'components/field/animated'
 
 import { ErrorMessages } from 'const/enums'
 import { RESET_PASSWORD_URL } from 'const/urls'
 import { useAppDispatch, useAppSelector } from 'store'
-import { userDataSelector, userInfoSelector } from 'store/selectors/user.selector'
+import {
+  userIdSelector,
+  userIsLoadingSelector,
+  userIsUse2FaSelector
+} from 'store/selectors/user.selector'
 import { setAttemptsLeftCountAction } from 'store/slices/twoFa.slice'
 import { cancelUser2faAction } from 'store/slices/user.slice'
 import { loginThunk, saveUserDataThunk } from 'store/thunks/user/authorization.thunk'
@@ -29,8 +33,10 @@ import { LoginFileds, initialValues } from './const'
 export const LoginComponent = () => {
   const dispatch = useAppDispatch()
   const { executeRecaptcha } = useGoogleReCaptcha()
-  const { isLoading } = useAppSelector(userInfoSelector)
-  const { id, isUse2FA } = useAppSelector(userDataSelector)
+
+  const isLoading = useAppSelector(userIsLoadingSelector)
+  const isUse2FA = useAppSelector(userIsUse2FaSelector)
+  const id = useAppSelector(userIdSelector)
 
   const formik = useFormik({
     initialValues,

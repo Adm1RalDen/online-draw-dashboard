@@ -22,6 +22,15 @@ export const GlobalStyles = createGlobalStyle`
     font-family: Roboto;
     min-height: 100vh;
     background-color: ${({ theme }) => theme.colors.greenBackground};
+
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: ${({ theme }) => theme.colors.aquaGreen};
+      border-radius: 30px;
+    }
   }
 
   li{
@@ -31,11 +40,6 @@ export const GlobalStyles = createGlobalStyle`
   a{
     text-decoration: none;
     color: #6363fa;
-  }
-
-  .image_default_styles{
-    object-fit: cover;
-    aspect-ratio: 1/1;
   }
 
   ${normalize}

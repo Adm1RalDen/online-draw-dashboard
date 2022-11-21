@@ -1,99 +1,116 @@
+import { PencilIcon } from '@heroicons/react/24/outline'
 import { FC, useState } from 'react'
 import Avatar from 'react-avatar-edit'
-import { toast } from 'react-toastify'
 
 import { Button } from 'components/button'
+import { CloseIcon } from 'components/close-icon'
+import { colors } from 'styles/colors'
 
-import { FileInputSizes } from 'const/enums'
-
-import { countBytes } from 'utils/countBytes'
 import { EncodeBase64 } from 'utils/encodeBase64'
+import { isValidFileSize } from 'utils/isValidFileSize'
+import { Portal } from 'utils/portal'
 
-import { AvatarEditWrapper } from './styles'
-import { ImageCropProps } from './types'
+import {
+  CroppedImageWrapper,
+  EditIconButton,
+  ImageCropEditWrapper,
+  ImageCropTitle,
+  ImageCropWrapper,
+  StyledCroppedImage
+} from './styles'
+
+interface ImageCropProps {
+  fullPicture: string
+  savedPreviewPicture: string
+  width: number
+  height: number
+  handleSavePictures: (crop: string, originalImage: string) => void
+}
 
 export const ImageCrop: FC<ImageCropProps> = ({
-  fullImg,
-  savedPreviewImg,
-  height = 200,
-  width = 300,
-  handleSavePhoto
+  fullPicture,
+  savedPreviewPicture,
+  height = 250,
+  width = 350,
+  handleSavePictures
 }) => {
-  const [editMode, setEditMode] = useState(false)
-  const [originalImg, setOriginalImage] = useState<string>('')
-  const [cropedImg, setCropedImg] = useState<string>('')
-  const [preview, setPreview] = useState<string>('')
+  const [isOpenEditor, setIsOpenEditor] = useState(false)
+  const [originalPicture, setOriginalPicture] = useState('')
+  const [cropedPicture, setCropedPicture] = useState('')
+  const [preview, setPreview] = useState('')
 
-  const onClose = () => setCropedImg('')
-  const onCrop = (preview: string) => setCropedImg(preview)
+  const onCloseEditor = () => setCropedPicture('')
+  const handleCloseEditor = () => setIsOpenEditor(false)
+  const handleOpenEditor = () => setIsOpenEditor(true)
+
   const onBeforeFileLoad = (elem: React.ChangeEvent<HTMLInputElement>) => {
     if (elem.target.files) {
-      if (elem.target.files[0].size > countBytes(2, FileInputSizes.MB)) {
-        toast.error('File is too big (should been less then 2Mb)')
+      const isValidSize = isValidFileSize(elem.target.files[0])
+
+      if (!isValidSize) {
         elem.target.value = ''
       }
     }
   }
 
-  const onSave = () => {
-    if (cropedImg) {
-      handleSavePhoto(cropedImg, originalImg)
-      setPreview(cropedImg)
-      setEditMode(false)
+  const handleSave = () => {
+    if (cropedPicture) {
+      handleSavePictures(cropedPicture, originalPicture)
+      setPreview(cropedPicture)
+      setIsOpenEditor(false)
     }
   }
 
-  const onFileLoad = (file: React.ChangeEvent<HTMLInputElement> | File) => {
+  const onPictureLoad = (file: React.ChangeEvent<HTMLInputElement> | File) => {
     if (file instanceof File) {
       EncodeBase64(file).then((res) => {
-        setOriginalImage(res)
+        setOriginalPicture(res)
       })
     }
   }
 
-  const handleEditModeOff = () => setEditMode(false)
-  const handleEditModeOn = () => {
-    setPreview('')
-    setEditMode(true)
-  }
   return (
-    <AvatarEditWrapper>
-      {editMode ? (
-        <>
-          <Avatar
-            src={fullImg}
-            width={width}
-            height={height}
-            onCrop={onCrop}
-            onClose={onClose}
-            label={'Choose Avatar'}
-            onBeforeFileLoad={onBeforeFileLoad}
-            onFileLoad={onFileLoad}
-          />
-          <div>
-            <Button onClick={onSave} type='button'>
-              save
-            </Button>
-            <Button onClick={handleEditModeOff} type='button'>
-              cancel
-            </Button>
-          </div>
-        </>
-      ) : (
-        <div>
-          <img
-            src={preview || savedPreviewImg || fullImg}
-            width={120}
-            height={120}
-            className='image_default_styles'
-          />
-          <div>
-            <Button onClick={handleEditModeOn} type='button'>
-              Edit avatar
-            </Button>
-          </div>
-        </div>
+    <ImageCropWrapper>
+      {isOpenEditor && (
+        <Portal>
+          <ImageCropEditWrapper>
+            <ImageCropTitle>Crop your new profile picture</ImageCropTitle>
+            <div>
+              <Avatar
+                src={fullPicture}
+                imageWidth={width}
+                width={width}
+                height={height}
+                shadingColor={colors.black}
+                shadingOpacity={0.4}
+                onCrop={setCropedPicture}
+                onClose={onCloseEditor}
+                label={'Click to choose picture'}
+                onBeforeFileLoad={onBeforeFileLoad}
+                onFileLoad={onPictureLoad}
+                exportQuality={1}
+              />
+
+              <Button onClick={handleSave} type='button'>
+                Set new profile picture
+              </Button>
+            </div>
+            <CloseIcon onClick={handleCloseEditor} />
+          </ImageCropEditWrapper>
+        </Portal>
       )}
-    </AvatarEditWrapper>
+      <CroppedImageWrapper>
+        <StyledCroppedImage
+          src={preview || savedPreviewPicture || fullPicture}
+          width={170}
+          height={170}
+        />
+
+        <EditIconButton onClick={handleOpenEditor}>
+          <PencilIcon width={15} height={15} />
+          Edit
+        </EditIconButton>
+      </CroppedImageWrapper>
+    </ImageCropWrapper>
   )
 }

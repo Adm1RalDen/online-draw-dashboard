@@ -28,7 +28,6 @@ export const updateUserProfileThunk = createAsyncThunk(
 
     if (typeof id === 'string') {
       const response = await updateUser(data)
-      dispatch(getUserProfileThunk(id))
       return response.data
     }
 

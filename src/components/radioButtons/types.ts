@@ -1,6 +1,6 @@
 import { FunctionWithParams } from 'types'
 
-export interface RadioButtonsProps {
+export interface RadioButtonsProps extends React.InputHTMLAttributes<HTMLInputElement> {
   defaultValue: string
   values: string[]
   name: string

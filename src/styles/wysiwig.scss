@@ -1,0 +1,29 @@
+.custom__wysiwig__wrapper__styles {
+  border-radius: 10px;
+  background-color: white;
+  padding: 10px;
+}
+
+.custom__wysiwig__toolbar__styles {
+  box-shadow: 0px 0px 0px 1px rgb(224, 224, 224);
+  color: black;
+}
+
+.custom__wysiwig__editor__styles {
+  height: 200px;
+  overflow: auto;
+  padding: 0px 10px;
+  background-color: white;
+  caret-color: black;
+  color: black;
+  box-shadow: 0px 0px 0px 1px rgb(224, 224, 224);
+
+  &::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgb(186, 186, 186);
+    border-radius: 3px;
+  }
+}
