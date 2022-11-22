@@ -2,8 +2,8 @@ import { FormikProvider, useFormik } from 'formik'
 import { useState } from 'react'
 
 import { InputField } from 'components/field'
-import { InputColorField } from 'components/field/color'
-import { InputDateField } from 'components/field/date'
+import { ColorInputField } from 'components/field/color'
+import { DateInputField } from 'components/field/date'
 import { FieldWrapper } from 'components/field/field-wrapper'
 import { RadioButtonsField } from 'components/field/radioButtons'
 import { TextEditor } from 'components/textEditor'
@@ -24,9 +24,9 @@ import {
 import { handleSubmit, validationSchema } from './utils'
 
 export const AccountSettings = () => {
-  const { ...userData } = useAppSelector(userDataSelector)
-  const [originalAvatar, setOriginalAvatar] = useState(userData.originalAvatar)
-  const [cropedAvatar, setCropedAvatar] = useState(userData.avatar)
+  const userData = useAppSelector(userDataSelector)
+  const [originalAvatar, setOriginalAvatar] = useState('')
+  const [cropedAvatar, setCropedAvatar] = useState('')
   const dispatch = useAppDispatch()
 
   const handleSavePictures = (croped: string, originalImage: string) => {
@@ -42,7 +42,7 @@ export const AccountSettings = () => {
     enableReinitialize: true,
     onSubmit: (data) =>
       handleSubmit({
-        data,
+        updatedUserData: data,
         cropedAvatar,
         originalAvatar,
         userData,
@@ -54,8 +54,8 @@ export const AccountSettings = () => {
     <AccountSettingsSection>
       <Heading3>Public profile</Heading3>
       <AccountSettingsAvatar
-        avatarSrc={userData.avatar}
-        originalAvatarSrc={originalAvatar}
+        cropedPicture={cropedAvatar || userData.avatar}
+        originalPicture={originalAvatar || userData.originalAvatar}
         handleSavePictures={handleSavePictures}
       />
 
@@ -66,7 +66,7 @@ export const AccountSettings = () => {
           ))}
 
           <AccountSettingsFlexWrapper>
-            <InputDateField name='date' label='Date of birthday' />
+            <DateInputField name='date' label='Date of birthday' />
             <RadioButtonsField
               name='gender'
               onChange={formik.handleChange}
@@ -74,7 +74,7 @@ export const AccountSettings = () => {
               defaultValue={formik.values.gender}
               label='Gender'
             />
-            <InputColorField name='color' label='Favorite color' />
+            <ColorInputField name='color' label='Favorite color' />
           </AccountSettingsFlexWrapper>
 
           <FieldWrapper>

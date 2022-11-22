@@ -38,7 +38,7 @@ const UserSlice = createSlice({
     },
 
     unauthorize: (state) => {
-      state.hasUserStateLoaded = true
+      state.isUserStateLoaded = true
       state.data = defaultUserData
     }
   },

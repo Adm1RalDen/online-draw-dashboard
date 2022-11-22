@@ -5,7 +5,7 @@ import { updateUserProfileThunk } from 'store/thunks/user/user.thunk'
 
 import { createBlobFile } from 'utils/encodeBase64'
 
-import { ChangedDataKeys, SubmitParams } from './types'
+import { InitialStateTypes, SubmitParams } from './types'
 
 export const validationSchema = yup.object().shape({
   name: yup
@@ -21,40 +21,29 @@ export const validationSchema = yup.object().shape({
 })
 
 export const handleSubmit = async (params: SubmitParams) => {
-  const { userData, data, cropedAvatar, originalAvatar, dispatch } = params
+  const { userData, updatedUserData, cropedAvatar, originalAvatar, dispatch } = params
 
-  const changedData = {
-    ...data,
-    id: userData.id,
-    avatar: cropedAvatar,
-    originalAvatar
-  }
+  const keys = Object.keys(updatedUserData) as (keyof InitialStateTypes)[]
 
-  const keys = Object.keys(changedData) as (keyof ChangedDataKeys)[]
+  const changedKeys = keys.filter((key) => updatedUserData[key] !== userData[key])
 
-  const changedKeys = keys.filter((key) => changedData[key] !== userData[key])
-
-  if (changedKeys.length) {
+  if (changedKeys.length || cropedAvatar) {
     const formData = new FormData()
 
-    if (changedKeys.includes('avatar')) {
-      const { originalAvatar, avatar } = changedData
-
-      const avatarFile = await createBlobFile(avatar, 'avatar')
+    if (cropedAvatar && cropedAvatar !== userData.avatar) {
+      const avatarFile = await createBlobFile(cropedAvatar, 'avatar')
 
       if (originalAvatar && originalAvatar !== userData.originalAvatar) {
-        const originalAvatarImage = await createBlobFile(originalAvatar, 'originalAvatar')
+        const originalAvatarFile = await createBlobFile(originalAvatar, 'originalAvatar')
 
-        formData.append('originalAvatar', originalAvatarImage)
+        formData.append('originalAvatar', originalAvatarFile)
       }
 
       formData.append('avatar', avatarFile)
     }
 
     changedKeys.forEach((key) => {
-      if (key !== 'avatar' && key !== 'originalAvatar') {
-        formData.append(key, changedData[key])
-      }
+      formData.append(key, updatedUserData[key])
     })
 
     formData.append('id', userData.id)

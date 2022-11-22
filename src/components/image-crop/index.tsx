@@ -10,6 +10,7 @@ import { EncodeBase64 } from 'utils/encodeBase64'
 import { isValidFileSize } from 'utils/isValidFileSize'
 import { Portal } from 'utils/portal'
 
+import { CROPPED_PICTURE_HEIGTH, CROPPED_PICTURE_WIDTH } from './const'
 import {
   CroppedImageWrapper,
   EditIconButton,
@@ -21,7 +22,7 @@ import {
 
 interface ImageCropProps {
   fullPicture: string
-  savedPreviewPicture: string
+  cropedPreview: string
   width: number
   height: number
   handleSavePictures: (crop: string, originalImage: string) => void
@@ -29,7 +30,7 @@ interface ImageCropProps {
 
 export const ImageCrop: FC<ImageCropProps> = ({
   fullPicture,
-  savedPreviewPicture,
+  cropedPreview,
   height = 250,
   width = 350,
   handleSavePictures
@@ -37,7 +38,6 @@ export const ImageCrop: FC<ImageCropProps> = ({
   const [isOpenEditor, setIsOpenEditor] = useState(false)
   const [originalPicture, setOriginalPicture] = useState('')
   const [cropedPicture, setCropedPicture] = useState('')
-  const [preview, setPreview] = useState('')
 
   const onCloseEditor = () => setCropedPicture('')
   const handleCloseEditor = () => setIsOpenEditor(false)
@@ -56,8 +56,7 @@ export const ImageCrop: FC<ImageCropProps> = ({
   const handleSave = () => {
     if (cropedPicture) {
       handleSavePictures(cropedPicture, originalPicture)
-      setPreview(cropedPicture)
-      setIsOpenEditor(false)
+      handleCloseEditor()
     }
   }
 
@@ -101,9 +100,9 @@ export const ImageCrop: FC<ImageCropProps> = ({
       )}
       <CroppedImageWrapper>
         <StyledCroppedImage
-          src={preview || savedPreviewPicture || fullPicture}
-          width={170}
-          height={170}
+          src={cropedPreview}
+          width={CROPPED_PICTURE_WIDTH}
+          height={CROPPED_PICTURE_HEIGTH}
         />
 
         <EditIconButton onClick={handleOpenEditor}>

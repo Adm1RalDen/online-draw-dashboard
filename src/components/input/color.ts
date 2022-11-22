@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const InputColor = styled.input.attrs(() => ({ type: 'color' }))`
+export const ColorInput = styled.input.attrs(() => ({ type: 'color' }))`
   appearance: none;
   width: 32px;
   height: 32px;

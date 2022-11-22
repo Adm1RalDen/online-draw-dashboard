@@ -1,0 +1,2 @@
+export const CROPPED_PICTURE_WIDTH = 170
+export const CROPPED_PICTURE_HEIGTH = 170

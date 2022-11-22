@@ -9,7 +9,7 @@ import {
 import { MouseEvent, useContext } from 'react'
 import { useParams } from 'react-router-dom'
 
-import { InputColor } from 'components/input/color'
+import { ColorInput } from 'components/input/color'
 
 import CircleIcon from 'public/assets/circle.svg'
 import EraserIcon from 'public/assets/eraser.svg'
@@ -79,7 +79,7 @@ export const Toolbar = () => {
         <ToolButton data-tool='line' active={tool === 'line'}>
           <ArrowDownRightIcon />
         </ToolButton>
-        <InputColor type='color' name='color' onChange={handleChangeFillStyle} />
+        <ColorInput type='color' name='color' onChange={handleChangeFillStyle} />
       </DrawToolsWrapper>
 
       <SnapshotButtonsWrapper>

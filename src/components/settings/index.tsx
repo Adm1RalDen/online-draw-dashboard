@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import { InputColor } from 'components/input/color'
+import { ColorInput } from 'components/input/color'
 
 import { PaintContext } from '../../context/paintContext'
 import { Input, StyledSettings } from './styles'
@@ -27,7 +27,7 @@ export const SettingsBar = () => {
       </div>
       <div>
         <label htmlFor='borderColor'>Border color</label>
-        <InputColor
+        <ColorInput
           type='color'
           id='borderColor'
           name='borderColor'

@@ -2,6 +2,8 @@ import { createGlobalStyle } from 'styled-components'
 import normalize from 'styled-normalize'
 
 export const GlobalStyles = createGlobalStyle`
+  ${normalize}
+
   *{
     box-sizing: border-box;
     padding: 0;
@@ -39,8 +41,39 @@ export const GlobalStyles = createGlobalStyle`
 
   a{
     text-decoration: none;
-    color: #6363fa;
+    color: ${({ theme }) => theme.colors.link};
   }
 
-  ${normalize}
+  .custom__wysiwig__wrapper__styles {
+  border-radius: 10px;
+  background-color: ${({ theme }) => theme.colors.white};
+  padding: ${({ theme }) => theme.spacing.s};
+}
+
+.custom__wysiwig__toolbar__styles {
+  box-shadow: 0px 0px 0px 1px ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.black};
+}
+
+.custom__wysiwig__editor__styles {
+  height: 200px;
+  overflow: auto;
+  padding: ${({ theme }) => `0 ${theme.spacing.s}`};
+  background-color: ${({ theme }) => theme.colors.white};
+  caret-color: ${({ theme }) => theme.colors.black};
+  color: ${({ theme }) => theme.colors.black};
+  box-shadow: 0px 0px 0px 1px ${({ theme }) => theme.colors.white};
+
+  &::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: ${({ theme }) => theme.colors.light_gray};
+    border-radius: 3px;
+  }
+}
+
+
+
 `

@@ -5,8 +5,6 @@ import { FC, useState } from 'react'
 import { Editor } from 'react-draft-wysiwyg'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
-import '../../styles/wysiwig.scss'
-
 interface TextEditorProps {
   onChange: (name: string, value: string) => void
   name: string

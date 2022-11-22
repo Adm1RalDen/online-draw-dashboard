@@ -12,7 +12,7 @@ export interface UserReducerInitialTypes {
   isLoading: boolean
   error: undefined | string
   token: undefined | string
-  hasUserStateLoaded: boolean
+  isUserStateLoaded: boolean
   data: {
     id: string
     avatar: string
