@@ -5,7 +5,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 
 import { Button } from 'components/button'
 import { ButtonOutline } from 'components/button-outline'
-import { InputField } from 'components/input-field'
+import { InputField } from 'components/field'
 import { Loader } from 'components/loader'
 import { Heading3, Paragraph } from 'styles/typography/styles'
 

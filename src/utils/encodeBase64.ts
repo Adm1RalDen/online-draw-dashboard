@@ -6,9 +6,10 @@ export const EncodeBase64 = (file: File): Promise<string> =>
     reader.onerror = (error) => rej(error)
   })
 
-export const createBlobFile = async (str: string, name: string, type: string) => {
+export const createBlobFile = async (str: string, name: string) => {
   const res = await fetch(str)
   const blob = await res.blob()
-  const file = new File([blob], name, { type })
+
+  const file = new File([blob], name, { type: blob.type })
   return file
 }

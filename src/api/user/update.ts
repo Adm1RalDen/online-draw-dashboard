@@ -1,3 +1,6 @@
 import { Instance } from 'api/instance'
 
-export const updateUser = async (data: FormData) => Instance.put('/user/update', data)
+import { AuthorizedUser } from 'types'
+
+export const updateUser = async (data: FormData) =>
+  Instance.put<AuthorizedUser>('/user/update', data)

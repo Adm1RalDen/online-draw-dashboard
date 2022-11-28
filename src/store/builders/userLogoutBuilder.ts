@@ -7,7 +7,7 @@ const userLogoutBuilder = (
   userLogoutThunk: UserLogoutThunkType
 ) => {
   builder.addCase(userLogoutThunk.fulfilled, (state) => {
-    state.hasUserStateLoaded = true
+    state.isUserStateLoaded = true
   })
 }
 

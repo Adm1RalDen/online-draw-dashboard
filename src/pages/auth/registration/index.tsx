@@ -3,11 +3,11 @@ import { useCallback } from 'react'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 import { toast } from 'react-toastify'
 
-import { AnimatedInputField } from 'components/animatedInputField'
+import { AnimatedInputField } from 'components/field/animated'
 
 import { ErrorMessages } from 'const/enums'
 import { useAppDispatch, useAppSelector } from 'store'
-import { userInfoSelector } from 'store/selectors/user.selector'
+import { userIsLoadingSelector } from 'store/selectors/user.selector'
 import { userRegistrationThunk } from 'store/thunks/user/authorization.thunk'
 
 import { capitalizeFirstLetter } from 'utils/capitalizeFirstLetter'
@@ -19,9 +19,10 @@ import { registrationValidationSchema } from '../utils'
 import { RegistrationFileds, initialValues } from './const'
 
 export const RegistrationComponent = () => {
-  const { isLoading } = useAppSelector(userInfoSelector)
   const { executeRecaptcha } = useGoogleReCaptcha()
   const dispatch = useAppDispatch()
+
+  const isLoading = useAppSelector(userIsLoadingSelector)
 
   const formik = useFormik({
     initialValues,

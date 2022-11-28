@@ -9,10 +9,13 @@ const updateUserProfileBuilder = (
 ) => {
   builder.addCase(updateUserProfileThunk.pending, (state) => {
     state.isLoading = true
+    state.error = ''
   })
 
-  builder.addCase(updateUserProfileThunk.fulfilled, (state) => {
+  builder.addCase(updateUserProfileThunk.fulfilled, (state, { payload }) => {
+    state.data = { ...state.data, ...payload }
     state.isLoading = false
+    state.error = undefined
   })
 
   builder.addCase(updateUserProfileThunk.rejected, (state) => {

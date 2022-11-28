@@ -14,16 +14,20 @@ import { ChangeStateAction } from 'types'
 import { SettingsPageHeaderWrapper } from './styles'
 
 interface SettingsPageHeaderProps {
+  isCollapsedNavigation: boolean
   toggleCollapseNavigation: ChangeStateAction<boolean>
 }
 
-export const SettingsPageHeader: FC<SettingsPageHeaderProps> = ({ toggleCollapseNavigation }) => {
+export const SettingsPageHeader: FC<SettingsPageHeaderProps> = ({
+  toggleCollapseNavigation,
+  isCollapsedNavigation
+}) => {
   const { avatar, name } = useAppSelector(userDataSelector)
 
   const toggleIsCollapsedNavigation = () => toggleCollapseNavigation((prev) => !prev)
 
   return (
-    <SettingsPageHeaderWrapper>
+    <SettingsPageHeaderWrapper isCollapsedNavigation={isCollapsedNavigation}>
       <Bars3Icon onClick={toggleIsCollapsedNavigation} />
       <SearchInput />
       <Icon src={getImageUrl(avatar)} size={35} alt={name} />

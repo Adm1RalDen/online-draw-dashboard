@@ -2,6 +2,8 @@ import { createGlobalStyle } from 'styled-components'
 import normalize from 'styled-normalize'
 
 export const GlobalStyles = createGlobalStyle`
+  ${normalize}
+
   *{
     box-sizing: border-box;
     padding: 0;
@@ -22,6 +24,15 @@ export const GlobalStyles = createGlobalStyle`
     font-family: Roboto;
     min-height: 100vh;
     background-color: ${({ theme }) => theme.colors.greenBackground};
+
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: ${({ theme }) => theme.colors.aquaGreen};
+      border-radius: 30px;
+    }
   }
 
   li{
@@ -30,13 +41,36 @@ export const GlobalStyles = createGlobalStyle`
 
   a{
     text-decoration: none;
-    color: #6363fa;
+    color: ${({ theme }) => theme.colors.link};
   }
 
-  .image_default_styles{
-    object-fit: cover;
-    aspect-ratio: 1/1;
+  .custom__wysiwig__wrapper {
+  border-radius: 10px;
+  background-color: ${({ theme }) => theme.colors.white};
+  padding: ${({ theme }) => theme.spacing.s};
+}
+
+.custom__wysiwig__toolbar {
+  box-shadow: 0px 0px 0px 1px ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.black};
+}
+
+.custom__wysiwig__editor{
+  height: 200px;
+  overflow: auto;
+  padding: ${({ theme }) => `0 ${theme.spacing.s}`};
+  background-color: ${({ theme }) => theme.colors.white};
+  caret-color: ${({ theme }) => theme.colors.black};
+  color: ${({ theme }) => theme.colors.black};
+  box-shadow: 0px 0px 0px 1px ${({ theme }) => theme.colors.white};
+
+  &::-webkit-scrollbar {
+    width: 7px;
   }
 
-  ${normalize}
+  &::-webkit-scrollbar-thumb {
+    background-color: ${({ theme }) => theme.colors.light_gray};
+    border-radius: 3px;
+  }
+}
 `

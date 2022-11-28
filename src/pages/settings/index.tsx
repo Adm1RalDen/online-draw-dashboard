@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useOutlet } from 'react-router-dom'
 
 import { Loader } from 'components/loader'
 
-import { useAppDispatch, useAppSelector } from 'store'
-import { userDataSelector, userInfoSelector } from 'store/selectors/user.selector'
-import { getUserProfileThunk } from 'store/thunks/user/user.thunk'
+import { useAppSelector } from 'store'
+import { userIsLoadingSelector } from 'store/selectors/user.selector'
 
 import { SettingsPageHeader } from './components/header'
 import { SettingsPageSideBar } from './components/sidebar'
@@ -13,14 +12,8 @@ import { SettingsPageContainer, SettingsPageMain, SettingsPageSection } from './
 
 export const SettingsPage = () => {
   const [isCollapsedNavigation, toggleCollapseNavigation] = useState(true)
-  const { isLoading } = useAppSelector(userInfoSelector)
-  const { id } = useAppSelector(userDataSelector)
-  const dispatch = useAppDispatch()
+  const isLoading = useAppSelector(userIsLoadingSelector)
   const outlet = useOutlet()
-
-  useEffect(() => {
-    dispatch(getUserProfileThunk(id))
-  }, [dispatch, id])
 
   return (
     <SettingsPageSection>
@@ -31,7 +24,10 @@ export const SettingsPage = () => {
             <Loader type='solid' />
           ) : (
             <>
-              <SettingsPageHeader toggleCollapseNavigation={toggleCollapseNavigation} />
+              <SettingsPageHeader
+                isCollapsedNavigation={isCollapsedNavigation}
+                toggleCollapseNavigation={toggleCollapseNavigation}
+              />
               {outlet}
             </>
           )}

@@ -21,12 +21,12 @@ const updateAuthStatusBuilder = (
     state.isLoading = false
     state.error = undefined
     state.isAuth = true
-    state.hasUserStateLoaded = true
+    state.isUserStateLoaded = true
   })
 
   builder.addCase(updateAuthStatusThunk.rejected, (state, { payload }) => {
     state.isLoading = false
-    state.hasUserStateLoaded = true
+    state.isUserStateLoaded = true
     state.isAuth = false
     state.error = typeof payload === 'string' ? payload : ErrorMessages.OCCURED_ERROR
   })

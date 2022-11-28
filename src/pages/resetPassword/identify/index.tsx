@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { Button } from 'components/button'
 import { ButtonOutline } from 'components/button-outline'
-import { InputField } from 'components/input-field'
+import { InputField } from 'components/field'
 import { Heading3, Paragraph } from 'styles/typography/styles'
 
 import { InputTypes, NotifyType } from 'const/enums'

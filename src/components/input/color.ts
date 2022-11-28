@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
-export const InputColor = styled.input`
-  -webkit-appearance: none;
+export const ColorInput = styled.input.attrs(() => ({ type: 'color' }))`
   appearance: none;
   width: 32px;
   height: 32px;
@@ -14,6 +13,7 @@ export const InputColor = styled.input`
   &::-webkit-color-swatch-wrapper {
     padding: 0;
   }
+
   &::-webkit-color-swatch {
     border: none;
   }

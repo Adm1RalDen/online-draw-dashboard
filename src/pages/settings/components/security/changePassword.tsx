@@ -28,23 +28,12 @@ export const SecurityChangePassword = () => {
       <SettingsHeading3>Change Password</SettingsHeading3>
       <FormikProvider value={formik}>
         <form onSubmit={formik.handleSubmit}>
-          <SettingsPageField
-            name='oldPassword'
-            type={InputTypes.PASSWORD}
-            label='Old password'
-            showError
-          />
-          <SettingsPageField
-            name='newPassword'
-            type={InputTypes.PASSWORD}
-            label='New Password'
-            showError
-          />
+          <SettingsPageField name='oldPassword' type={InputTypes.PASSWORD} label='Old password' />
+          <SettingsPageField name='newPassword' type={InputTypes.PASSWORD} label='New Password' />
           <SettingsPageField
             name='confirmPassword'
             type={InputTypes.PASSWORD}
             label='Confirm new password'
-            showError
           />
           <SettingsSubmitButton type='submit'>Update password</SettingsSubmitButton>
         </form>

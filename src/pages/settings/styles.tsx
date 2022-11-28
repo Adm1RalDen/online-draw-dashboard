@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 import { Button } from 'components/button'
 import { Container } from 'components/container'
-import { InputField } from 'components/input-field'
+import { InputField } from 'components/field'
 import { Heading3 } from 'styles/typography/styles'
 
 export const SettingsPageSection = styled.section`
@@ -13,16 +13,16 @@ export const SettingsPageSection = styled.section`
 export const SettingsPageContainer = styled(Container)<{ isCollapsedNavigation: boolean }>`
   display: grid;
   min-height: 100vh;
-  grid-template-columns: ${(p) => (p.isCollapsedNavigation ? '180px' : '45px')} 1fr;
+  grid-template-columns: ${(p) => (p.isCollapsedNavigation ? '220px' : '45px')} 1fr;
   grid-template-rows: 1fr;
-  transition: all 300ms;
+  transition: all 400ms;
 
-  @media screen and (max-width: ${({ theme }) => theme.breakPoints.tablet}) {
+  @media ${({ theme }) => theme.devices.tablet} {
     grid-template-columns: ${(p) => (p.isCollapsedNavigation ? '45px' : '180px')} 1fr;
   }
 
-  @media screen and (max-width: ${({ theme }) => theme.breakPoints.mobile}) {
-    grid-template-columns: ${(p) => (p.isCollapsedNavigation ? '0px' : '180px')} 1fr;
+  @media ${({ theme }) => theme.devices.mobile} {
+    grid-template-columns: ${(p) => (p.isCollapsedNavigation ? '0px 1fr' : '100% 0px')};
   }
 `
 

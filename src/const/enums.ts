@@ -66,3 +66,8 @@ export enum NotifyType {
   SUCCESS = 'success',
   WARN = 'warn'
 }
+
+export enum Gender {
+  MALE = 'male',
+  WOMAN = 'woman'
+}
