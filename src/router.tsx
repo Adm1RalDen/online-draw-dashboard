@@ -8,7 +8,6 @@ import { DisableAuthentificator } from 'pages/disableGoogleAuthentificator'
 import { EnableAuthentificator } from 'pages/enableGoogleAuthentificator'
 import { FailedGoogleAuthPage } from 'pages/failedGoogleAuthPage'
 import { HomePage } from 'pages/home'
-import { LayoutComponent } from 'pages/layout'
 import { NotFoundPage } from 'pages/notfoundPage'
 import { OnlineDrawPage } from 'pages/onlineDrawPage'
 import { OnlineCanvas } from 'pages/onlineDrawPage/canvas'
@@ -17,12 +16,12 @@ import { ResetPasswordIdentify } from 'pages/resetPassword/identify'
 import { ServerErrorPage } from 'pages/serverErrorPage'
 import { SettingsPage } from 'pages/settings'
 import { AccountSettings } from 'pages/settings/components/account'
+import { UserDashboard } from 'pages/settings/components/dashboard'
 import { SecuritySettings } from 'pages/settings/components/security'
 import { SuccessGoogleAuth } from 'pages/successGoogleAuth'
-import { UserCabinet } from 'pages/userCabinet'
 
 import { useAppSelector } from 'store'
-import { userInfoSelector } from 'store/selectors/user.selector'
+import { userIsAuthSelector } from 'store/selectors/user.selector'
 
 import { WsContext } from 'context/ws.context'
 
@@ -32,7 +31,6 @@ const setRoutes = (isAuth: boolean) =>
   isAuth
     ? [
         { path: '/', element: <HomePage /> },
-        { path: '/draw', element: <LayoutComponent /> },
         {
           path: '/draw_online/:roomId',
           element: (
@@ -42,7 +40,6 @@ const setRoutes = (isAuth: boolean) =>
           )
         },
         { path: '/checkRoompassword/:roomId', element: <PrivateRoom /> },
-        { path: '/cabinet', element: <UserCabinet /> },
         { path: '/server-error', element: <ServerErrorPage /> },
         { path: '/authorization', element: <Navigate to='/' /> },
         { path: '/auth/google/twoFactor', element: <Navigate to='/' /> },
@@ -52,7 +49,7 @@ const setRoutes = (isAuth: boolean) =>
           path: '/settings',
           element: <SettingsPage />,
           children: [
-            { path: 'dashboard', element: <div>dashboard</div> },
+            { path: 'dashboard', element: <UserDashboard /> },
             { path: 'account', element: <AccountSettings /> },
             { path: 'help', element: <div>help</div> },
             { path: 'messages', element: <div>message</div> },
@@ -82,7 +79,7 @@ const setRoutes = (isAuth: boolean) =>
       ]
 
 export const Router = () => {
-  const { isAuth } = useAppSelector(userInfoSelector)
+  const isAuth = useAppSelector(userIsAuthSelector)
   const routes = useRoutes(setRoutes(isAuth))
 
   if (isAuth) {

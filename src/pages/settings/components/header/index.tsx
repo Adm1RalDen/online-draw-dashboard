@@ -1,9 +1,12 @@
 import { Bars3Icon } from '@heroicons/react/24/outline'
 import { FC } from 'react'
+import { Link } from 'react-router-dom'
 
+import { FlexVrWrapper } from 'components/flex'
 import { Icon } from 'components/icon'
 import { SearchInput } from 'components/search-input'
 
+import { HOME_URL } from 'const/urls'
 import { useAppSelector } from 'store'
 import { userDataSelector } from 'store/selectors/user.selector'
 
@@ -30,7 +33,10 @@ export const SettingsPageHeader: FC<SettingsPageHeaderProps> = ({
     <SettingsPageHeaderWrapper isCollapsedNavigation={isCollapsedNavigation}>
       <Bars3Icon onClick={toggleIsCollapsedNavigation} />
       <SearchInput />
-      <Icon src={getImageUrl(avatar)} size={35} alt={name} />
+      <FlexVrWrapper>
+        <Link to={HOME_URL}>Back home</Link>
+        <Icon src={getImageUrl(avatar)} size={35} alt={name} />
+      </FlexVrWrapper>
     </SettingsPageHeaderWrapper>
   )
 }
