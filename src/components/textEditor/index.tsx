@@ -24,9 +24,9 @@ export const TextEditor: FC<TextEditorProps> = ({ name, onChange, value = '' }) 
 
   return (
     <Editor
-      toolbarClassName='custom__wysiwig__toolbar__styles'
-      editorClassName='custom__wysiwig__editor__styles'
-      wrapperClassName='custom__wysiwig__wrapper__styles'
+      toolbarClassName='custom__wysiwig__toolbar'
+      editorClassName='custom__wysiwig__editor'
+      wrapperClassName='custom__wysiwig__wrapper'
       editorState={textState}
       onEditorStateChange={onEditorStateChange}
     />

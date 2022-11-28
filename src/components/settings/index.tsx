@@ -27,12 +27,7 @@ export const SettingsBar = () => {
       </div>
       <div>
         <label htmlFor='borderColor'>Border color</label>
-        <ColorInput
-          type='color'
-          id='borderColor'
-          name='borderColor'
-          onChange={handleChangeStrokeStyle}
-        />
+        <ColorInput id='borderColor' name='borderColor' onChange={handleChangeStrokeStyle} />
       </div>
     </StyledSettings>
   )

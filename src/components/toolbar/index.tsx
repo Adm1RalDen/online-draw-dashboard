@@ -79,7 +79,7 @@ export const Toolbar = () => {
         <ToolButton data-tool='line' active={tool === 'line'}>
           <ArrowDownRightIcon />
         </ToolButton>
-        <ColorInput type='color' name='color' onChange={handleChangeFillStyle} />
+        <ColorInput name='color' onChange={handleChangeFillStyle} />
       </DrawToolsWrapper>
 
       <SnapshotButtonsWrapper>

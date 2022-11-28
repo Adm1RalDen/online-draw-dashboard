@@ -44,18 +44,18 @@ export const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.colors.link};
   }
 
-  .custom__wysiwig__wrapper__styles {
+  .custom__wysiwig__wrapper {
   border-radius: 10px;
   background-color: ${({ theme }) => theme.colors.white};
   padding: ${({ theme }) => theme.spacing.s};
 }
 
-.custom__wysiwig__toolbar__styles {
+.custom__wysiwig__toolbar {
   box-shadow: 0px 0px 0px 1px ${({ theme }) => theme.colors.white};
   color: ${({ theme }) => theme.colors.black};
 }
 
-.custom__wysiwig__editor__styles {
+.custom__wysiwig__editor{
   height: 200px;
   overflow: auto;
   padding: ${({ theme }) => `0 ${theme.spacing.s}`};
@@ -73,7 +73,4 @@ export const GlobalStyles = createGlobalStyle`
     border-radius: 3px;
   }
 }
-
-
-
 `

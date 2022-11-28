@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 import { Button } from 'components/button'
 import { Container } from 'components/container'
-import { InputField } from 'components/input-field'
+import { InputField } from 'components/field'
 import { Heading3 } from 'styles/typography/styles'
 
 export const SettingsPageSection = styled.section`

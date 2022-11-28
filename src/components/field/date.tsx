@@ -2,7 +2,6 @@ import { useField } from 'formik'
 import { FC } from 'react'
 
 import { DateInput } from 'components/input/date'
-import { Label, Span } from 'styles/typography/styles'
 
 import { InputTypes } from 'const/enums'
 
@@ -13,10 +12,8 @@ export const DateInputField: FC<InputFieldProps> = ({ label, subtitle, ...props 
   const [field] = useField(props)
 
   return (
-    <FieldWrapper>
-      {label && <Label htmlFor={props.name}>{label}</Label>}
+    <FieldWrapper label={label} subtitle={subtitle} name={props.name}>
       <DateInput {...props} {...field} type={InputTypes.DATE} />
-      {subtitle && <Span>{subtitle}</Span>}
     </FieldWrapper>
   )
 }

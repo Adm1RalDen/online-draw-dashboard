@@ -1,9 +1,9 @@
 import { PencilIcon } from '@heroicons/react/24/outline'
+import { XMarkIcon } from '@heroicons/react/24/solid'
 import { FC, useState } from 'react'
 import Avatar from 'react-avatar-edit'
 
 import { Button } from 'components/button'
-import { CloseIcon } from 'components/close-icon'
 import { colors } from 'styles/colors'
 
 import { EncodeBase64 } from 'utils/encodeBase64'
@@ -94,7 +94,8 @@ export const ImageCrop: FC<ImageCropProps> = ({
                 Set new profile picture
               </Button>
             </div>
-            <CloseIcon onClick={handleCloseEditor} />
+
+            <XMarkIcon onClick={handleCloseEditor} />
           </ImageCropEditWrapper>
         </Portal>
       )}

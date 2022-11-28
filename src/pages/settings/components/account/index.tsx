@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { InputField } from 'components/field'
 import { ColorInputField } from 'components/field/color'
 import { DateInputField } from 'components/field/date'
-import { FieldWrapper } from 'components/field/field-wrapper'
+import { StyledFieldWrapper } from 'components/field/field-wrapper/styles'
 import { RadioButtonsField } from 'components/field/radioButtons'
 import { TextEditor } from 'components/textEditor'
 import { Heading3, Label } from 'styles/typography/styles'
@@ -77,14 +77,14 @@ export const AccountSettings = () => {
             <ColorInputField name='color' label='Favorite color' />
           </AccountSettingsFlexWrapper>
 
-          <FieldWrapper>
+          <StyledFieldWrapper>
             <Label>Biography</Label>
             <TextEditor
               name='biography'
               onChange={formik.setFieldValue}
               value={formik.values.biography}
             />
-          </FieldWrapper>
+          </StyledFieldWrapper>
 
           <AccountSettingsSubmitButton type='submit'>Update profile</AccountSettingsSubmitButton>
         </AccountSettingsForm>
