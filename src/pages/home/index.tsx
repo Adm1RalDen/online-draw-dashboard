@@ -7,7 +7,7 @@ import { Logo } from 'components/logo'
 import { Popper } from 'components/popper'
 import { Heading3 } from 'styles/typography/styles'
 
-import { CABINET_URL } from 'const/urls'
+import { SETTINGS_URL } from 'const/urls'
 import { useSocket } from 'hooks/useSocket'
 import { useAppDispatch, useAppSelector } from 'store'
 import { userDataSelector } from 'store/selectors/user.selector'
@@ -44,7 +44,7 @@ export const HomePage = () => {
   const navigate = useNavigate()
 
   const handleLogOut = () => dispatch(userLogoutThunk())
-  const handleNavigateCabinet = () => navigate(CABINET_URL)
+  const handleNavigateSettings = () => navigate(SETTINGS_URL)
 
   useEffect(() => {
     SetRoomsConnection({
@@ -65,7 +65,7 @@ export const HomePage = () => {
           <HomeHeader>
             <Logo />
             <div>
-              <UserCabinetButton onClick={handleNavigateCabinet}>
+              <UserCabinetButton onClick={handleNavigateSettings}>
                 <UserIcon />
               </UserCabinetButton>
               <Popper onAgree={handleLogOut} title='Are you shure to handle leave from app?'>

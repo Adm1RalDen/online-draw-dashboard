@@ -1,5 +1,4 @@
-import { PencilIcon } from '@heroicons/react/24/outline'
-import { XMarkIcon } from '@heroicons/react/24/solid'
+import { XMarkIcon } from '@heroicons/react/24/outline'
 import { FC, useState } from 'react'
 import Avatar from 'react-avatar-edit'
 
@@ -106,10 +105,7 @@ export const ImageCrop: FC<ImageCropProps> = ({
           height={CROPPED_PICTURE_HEIGTH}
         />
 
-        <EditIconButton onClick={handleOpenEditor}>
-          <PencilIcon width={15} height={15} />
-          Edit
-        </EditIconButton>
+        <EditIconButton onClick={handleOpenEditor} />
       </CroppedImageWrapper>
     </ImageCropWrapper>
   )

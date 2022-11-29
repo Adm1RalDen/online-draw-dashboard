@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 
+import { EditButton } from 'components/edit-button'
 import { StyledIcon } from 'components/icon/styles'
 import { Heading6 } from 'styles/typography/styles'
 
@@ -54,24 +55,8 @@ export const StyledCroppedImage = styled(StyledIcon)`
   box-shadow: 2px 2px 5px 1px ${({ theme }) => theme.colors.darkGray};
 `
 
-export const EditIconButton = styled.button`
+export const EditIconButton = styled(EditButton)`
   position: absolute;
-  cursor: pointer;
-  transition: all 0.3s;
   bottom: 15px;
   left: 5px;
-  padding: ${({ theme }) => theme.spacing.tiny};
-  width: 60px;
-  height: 30px;
-  background-color: ${({ theme }) => theme.colors.white};
-  border: 2px solid ${({ theme }) => theme.colors.gray};
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  font-size: ${({ theme }) => theme.fontSizes.small};
-  gap: 3px;
-
-  &:active {
-    background-color: ${({ theme }) => theme.colors.whiteGray};
-  }
 `
