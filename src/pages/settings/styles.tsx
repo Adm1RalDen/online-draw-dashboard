@@ -28,14 +28,14 @@ export const SettingsPageContainer = styled(Container)<{ isCollapsedNavigation: 
 
 export const SettingsPageMain = styled.main`
   overflow-x: hidden;
-  background-color: ${({ theme }) => theme.colors.aqua};
+  background-color: ${({ theme }) => theme.colors.darkSlateGray};
   padding: ${({ theme }) => `${theme.spacing.s} ${theme.spacing.sm}`};
 `
 
 export const SettingsHeading3 = styled(Heading3)`
   margin-bottom: ${({ theme }) => theme.spacing.sm};
   padding-bottom: ${({ theme }) => theme.spacing.tiny};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.light_gray};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.lightGray};
 `
 
 export const SettingsSubmitButton = styled(Button)`

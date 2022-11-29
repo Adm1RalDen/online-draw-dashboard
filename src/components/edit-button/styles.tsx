@@ -9,7 +9,7 @@ export const StyledEditButton = styled.button`
   transition: all 0.3s;
   padding: ${({ theme }) => theme.spacing.tiny};
   background-color: ${({ theme }) => theme.colors.white};
-  border: 2px solid ${({ theme }) => theme.colors.gray};
+  border: 2px solid ${({ theme }) => theme.colors.whiteSmoke};
   border-radius: 5px;
   font-size: ${({ theme }) => theme.fontSizes.small};
   color: ${({ theme }) => theme.colors.black};
@@ -21,6 +21,6 @@ export const StyledEditButton = styled.button`
   }
 
   &:active {
-    background-color: ${({ theme }) => theme.colors.whiteGray};
+    background-color: ${({ theme }) => theme.colors.whiteSmoke};
   }
 `

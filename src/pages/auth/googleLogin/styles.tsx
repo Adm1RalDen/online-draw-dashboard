@@ -14,6 +14,6 @@ export const GoogleLink = styled.a`
   border-radius: 5px;
 
   &:active {
-    background-color: ${({ theme }) => theme.colors.whiteGray};
+    background-color: ${({ theme }) => theme.colors.whiteSmoke};
   }
 `

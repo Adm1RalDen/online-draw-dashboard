@@ -24,7 +24,7 @@ export const FileInputLabel = styled.label`
   gap: 5px;
   border-radius: 5px;
   padding: 10px 15px;
-  background-color: ${({ theme }) => theme.colors.blue};
+  background-color: ${({ theme }) => theme.colors.royalBlue};
   transition: all 0.2s linear;
   cursor: pointer;
 
@@ -34,7 +34,7 @@ export const FileInputLabel = styled.label`
   }
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.middleBlue};
+    background-color: ${({ theme }) => theme.colors.dodgerBlue};
   }
 
   &:active {

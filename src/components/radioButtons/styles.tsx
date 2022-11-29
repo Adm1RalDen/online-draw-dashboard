@@ -16,7 +16,7 @@ export const Input = styled.input.attrs(() => ({ type: 'radio' }))`
   width: 0;
 
   &:checked ~ span {
-    background-color: ${({ theme }) => theme.colors.blue};
+    background-color: ${({ theme }) => theme.colors.royalBlue};
   }
   &:checked ~ span:after {
     display: block;
@@ -29,7 +29,7 @@ export const BackgroundCircle = styled.span`
   left: 0;
   height: 25px;
   width: 25px;
-  background-color: ${({ theme }) => theme.colors.whiteGray};
+  background-color: ${({ theme }) => theme.colors.whiteSmoke};
   border-radius: 50%;
 
   &:after {

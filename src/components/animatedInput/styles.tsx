@@ -41,12 +41,12 @@ export const AnimatedInputWrapper = styled(Label)<{ isError: boolean; hasValue: 
     p.hasValue &&
     css`
       & > input {
-        border: 2px solid ${({ theme }) => theme.colors.blue};
-        caret-color: ${({ theme }) => theme.colors.blue};
+        border: 2px solid ${({ theme }) => theme.colors.royalBlue};
+        caret-color: ${({ theme }) => theme.colors.royalBlue};
       }
 
       & > h6 {
-        color: ${({ theme }) => theme.colors.blue};
+        color: ${({ theme }) => theme.colors.royalBlue};
       }
     `}
 
@@ -87,11 +87,11 @@ export const AnimatedInputStyledField = styled(Input)`
   outline: none;
 
   &:-webkit-autofill {
-    border: 2px solid ${({ theme }) => theme.colors.blue};
-    caret-color: ${({ theme }) => theme.colors.blue};
+    border: 2px solid ${({ theme }) => theme.colors.royalBlue};
+    caret-color: ${({ theme }) => theme.colors.royalBlue};
 
     & + h6 {
-      color: ${({ theme }) => theme.colors.blue};
+      color: ${({ theme }) => theme.colors.royalBlue};
       opacity: 1;
       top: -20px;
       left: 0;

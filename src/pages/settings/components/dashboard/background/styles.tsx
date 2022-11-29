@@ -52,7 +52,7 @@ export const BackgroundEditModalWrapper = styled.div`
     transition: all 0.1s;
 
     &:hover {
-      fill: ${({ theme }) => theme.colors.blue};
+      fill: ${({ theme }) => theme.colors.royalBlue};
     }
   }
 `
@@ -64,5 +64,5 @@ export const BackgroundEditModalImage = styled.img`
 export const BackgroundEditModalTitle = styled(Heading5)`
   background-color: ${({ theme }) => theme.colors.white};
   padding: ${({ theme }) => theme.spacing.base};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.light_gray};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.lightGray};
 `

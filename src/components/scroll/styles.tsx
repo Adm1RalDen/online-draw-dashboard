@@ -4,8 +4,9 @@ export const StyledScroll = styled.div`
   &::-webkit-scrollbar {
     width: 5px;
   }
+
   &::-webkit-scrollbar-thumb {
-    background-color: ${({ theme }) => theme.colors.aquaMiddle};
+    background-color: ${({ theme }) => theme.colors.lightGreen};
     border-radius: 30px;
   }
 `

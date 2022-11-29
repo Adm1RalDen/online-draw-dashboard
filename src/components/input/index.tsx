@@ -9,13 +9,13 @@ export const Input = styled.input<{ isError?: boolean | string }>`
   border: 2px solid ${(p) => p.theme.colors.gray};
 
   &:disabled {
-    border-color: ${({ theme }) => theme.colors.light_gray};
-    background-color: ${({ theme }) => theme.colors.light_gray};
+    border-color: ${({ theme }) => theme.colors.lightGray};
+    background-color: ${({ theme }) => theme.colors.lightGray};
     cursor: no-drop;
   }
 
   &:focus {
-    outline-color: ${({ theme }) => theme.colors.blue};
+    outline-color: ${({ theme }) => theme.colors.royalBlue};
     box-shadow: 0px 0px 2px 3px ${({ theme }) => theme.colors.darkBlue};
   }
 

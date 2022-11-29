@@ -65,8 +65,8 @@ const StepsPanelCircle = styled(FlexContainer)`
   margin: 10px auto auto auto;
   border-radius: 50%;
   border: 2px solid white;
-  background-color: ${({ theme }) => theme.colors.light_gray};
-  color: ${({ theme }) => theme.colors.middleGray};
+  background-color: ${({ theme }) => theme.colors.lightGray};
+  color: ${({ theme }) => theme.colors.silver};
 
   & > span {
     pointer-events: none;
