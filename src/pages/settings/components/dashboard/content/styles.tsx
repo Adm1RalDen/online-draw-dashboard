@@ -23,7 +23,7 @@ export const DashboardContentWrapper = styled.div`
 
 export const PropertiesWrapper = styled.div`
   flex-grow: 1;
-  min-width: 250px;
+  width: 250px;
   overflow: hidden;
   border-radius: 10px;
   background-color: ${({ theme }) => theme.colors.white};

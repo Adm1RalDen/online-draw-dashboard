@@ -35,7 +35,7 @@ export const DashboardEditButtton = styled(EditButton)`
   bottom: 40px;
 `
 
-export const DashboardModalWrapper = styled.div`
+export const BackgroundEditModalWrapper = styled.div`
   width: 350px;
   position: relative;
   padding: ${({ theme }) => theme.spacing.s};
@@ -57,11 +57,11 @@ export const DashboardModalWrapper = styled.div`
   }
 `
 
-export const DashboardModalImage = styled.img`
+export const BackgroundEditModalImage = styled.img`
   width: 100%;
 `
 
-export const DashboardModalTitle = styled(Heading5)`
+export const BackgroundEditModalTitle = styled(Heading5)`
   background-color: ${({ theme }) => theme.colors.white};
   padding: ${({ theme }) => theme.spacing.base};
   border-bottom: 1px solid ${({ theme }) => theme.colors.light_gray};

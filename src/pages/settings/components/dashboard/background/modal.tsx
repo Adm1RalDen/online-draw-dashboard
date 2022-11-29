@@ -10,14 +10,18 @@ import { updateUserProfileThunk } from 'store/thunks/user/user.thunk'
 
 import { Portal } from 'utils/portal'
 
-import { DashboardModalImage, DashboardModalTitle, DashboardModalWrapper } from './styles'
+import {
+  BackgroundEditModalImage,
+  BackgroundEditModalTitle,
+  BackgroundEditModalWrapper
+} from './styles'
 
 interface DashboardModalProps {
   handleCloseModal: VoidFunction
   userId: string
 }
 
-export const DashboardModal: FC<DashboardModalProps> = ({ handleCloseModal, userId }) => {
+export const BackgroundEditModal: FC<DashboardModalProps> = ({ handleCloseModal, userId }) => {
   const [backgroundUrl, setBackgroundUrl] = useState('')
   const [backgroundFile, setBackgroundFile] = useState<File | null>(null)
 
@@ -43,9 +47,9 @@ export const DashboardModal: FC<DashboardModalProps> = ({ handleCloseModal, user
 
   return (
     <Portal>
-      <DashboardModalWrapper>
-        <DashboardModalTitle>Profile background</DashboardModalTitle>
-        {backgroundUrl && <DashboardModalImage src={backgroundUrl} />}
+      <BackgroundEditModalWrapper>
+        <BackgroundEditModalTitle>Profile background</BackgroundEditModalTitle>
+        {backgroundUrl && <BackgroundEditModalImage src={backgroundUrl} />}
         <FileInput
           name='backgroundFon'
           onChange={handleChangeBackground}
@@ -55,7 +59,7 @@ export const DashboardModal: FC<DashboardModalProps> = ({ handleCloseModal, user
           <Button onClick={handleSaveBackground}> Set new background picture</Button>
         )}
         <XMarkIcon width={20} height={20} onClick={handleCloseModal} />
-      </DashboardModalWrapper>
+      </BackgroundEditModalWrapper>
     </Portal>
   )
 }

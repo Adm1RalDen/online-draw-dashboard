@@ -7,7 +7,7 @@ import { userDataSelector } from 'store/selectors/user.selector'
 
 import { getImageUrl } from 'utils/getImageUrl'
 
-import { DashboardModal } from './modal'
+import { BackgroundEditModal } from './modal'
 import {
   DashboardAvatar,
   DashboardAvatarWrapper,
@@ -37,7 +37,9 @@ export const DashboardBackground = () => {
       </DashboardAvatarWrapper>
       <DashboardEditButtton onClick={handleOpenModal} />
 
-      {isOpenModal && <DashboardModal handleCloseModal={handleCloseModal} userId={userData.id} />}
+      {isOpenModal && (
+        <BackgroundEditModal handleCloseModal={handleCloseModal} userId={userData.id} />
+      )}
     </DashboardBackgroundWrapper>
   )
 }

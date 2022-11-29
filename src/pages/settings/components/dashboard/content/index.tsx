@@ -4,11 +4,11 @@ import { HtmlText } from 'components/htmlText'
 import { useAppSelector } from 'store'
 import { userDataSelector } from 'store/selectors/user.selector'
 
+import { DasboardProperty } from './property'
 import {
   DashboardContentWrapper,
   PropertiesTitle,
   PropertiesWrapper,
-  PropertyText,
   PropertyWrapper
 } from './styles'
 
@@ -19,30 +19,18 @@ export const DashboardContent = () => {
     <DashboardContentWrapper>
       <PropertiesWrapper>
         <PropertiesTitle>Location</PropertiesTitle>
-        <PropertyWrapper>
-          <strong>Country</strong> <PropertyText>{userData.country}</PropertyText>
-        </PropertyWrapper>
-        <PropertyWrapper>
-          <strong>City</strong> <PropertyText>{userData.city}</PropertyText>
-        </PropertyWrapper>
+        <DasboardProperty property='Country' value={userData.country} />
+        <DasboardProperty property='City' value={userData.city} />
       </PropertiesWrapper>
 
       <PropertiesWrapper>
         <PropertiesTitle>About</PropertiesTitle>
-        <PropertyWrapper>
-          <strong>Date of birthday</strong> <PropertyText>{userData.date}</PropertyText>
-        </PropertyWrapper>
-
-        <PropertyWrapper>
-          <strong>Favorite color</strong>
-          <PropertyText>
-            <ColorCircle color={userData.color} />
-          </PropertyText>
-        </PropertyWrapper>
-
-        <PropertyWrapper>
-          <strong>Gender</strong> <PropertyText>{userData.gender}</PropertyText>
-        </PropertyWrapper>
+        <DasboardProperty property='Date of birthday' value={userData.date} />
+        <DasboardProperty
+          property='Favorite color'
+          value={<ColorCircle color={userData.color} />}
+        />
+        <DasboardProperty property='Gender' value={userData.gender} />
       </PropertiesWrapper>
 
       <PropertiesWrapper>
