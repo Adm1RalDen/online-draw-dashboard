@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const ActivationPageSection = styled.section`
-  background-color: ${({ theme }) => theme.colors.greenBackground};
+  background-color: ${({ theme }) => theme.colors.background};
   height: 100vh;
   display: flex;
   align-items: center;

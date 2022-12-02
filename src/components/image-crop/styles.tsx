@@ -36,7 +36,7 @@ export const ImageCropEditWrapper = styled.div`
     transition: all 0.1s;
 
     &:hover {
-      fill: ${({ theme }) => theme.colors.royalBlue};
+      fill: ${({ theme }) => theme.colors.blue.blue600};
     }
   }
 `
@@ -44,7 +44,7 @@ export const ImageCropEditWrapper = styled.div`
 export const ImageCropTitle = styled(Heading6)`
   background-color: ${({ theme }) => theme.colors.white};
   padding: ${({ theme }) => theme.spacing.base};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.lightGray};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.gray.gray300};
 `
 
 export const CroppedImageWrapper = styled.div`
@@ -52,7 +52,7 @@ export const CroppedImageWrapper = styled.div`
 `
 
 export const StyledCroppedImage = styled(StyledIcon)`
-  box-shadow: 2px 2px 5px 1px ${({ theme }) => theme.colors.dimGray};
+  box-shadow: 2px 2px 5px 1px ${({ theme }) => theme.colors.gray.gray600};
 `
 
 export const EditIconButton = styled(EditButton)`

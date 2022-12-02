@@ -6,7 +6,7 @@ import { InputField } from 'components/field'
 import { Heading3 } from 'styles/typography/styles'
 
 export const SettingsPageSection = styled.section`
-  background-color: ${({ theme }) => theme.colors.greenBackground};
+  background-color: ${({ theme }) => theme.colors.background};
   color: ${({ theme }) => theme.colors.white};
 `
 
@@ -28,14 +28,14 @@ export const SettingsPageContainer = styled(Container)<{ isCollapsedNavigation: 
 
 export const SettingsPageMain = styled.main`
   overflow-x: hidden;
-  background-color: ${({ theme }) => theme.colors.darkSlateGray};
+  background-color: ${({ theme }) => theme.colors.teal.teal900};
   padding: ${({ theme }) => `${theme.spacing.s} ${theme.spacing.sm}`};
 `
 
 export const SettingsHeading3 = styled(Heading3)`
   margin-bottom: ${({ theme }) => theme.spacing.sm};
   padding-bottom: ${({ theme }) => theme.spacing.tiny};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.lightGray};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.gray.gray300};
 `
 
 export const SettingsSubmitButton = styled(Button)`

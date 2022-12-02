@@ -15,7 +15,7 @@ export const AuthButton = styled(Button)`
 
 export const AuthSection = styled.section`
   height: 100vh;
-  background-color: ${(p) => p.theme.colors.greenBackground};
+  background-color: ${(p) => p.theme.colors.background};
 `
 
 export const AuthContainer = styled(Container)`

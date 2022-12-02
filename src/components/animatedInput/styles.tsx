@@ -41,12 +41,12 @@ export const AnimatedInputWrapper = styled(Label)<{ isError: boolean; hasValue: 
     p.hasValue &&
     css`
       & > input {
-        border: 2px solid ${({ theme }) => theme.colors.royalBlue};
-        caret-color: ${({ theme }) => theme.colors.royalBlue};
+        border: 2px solid ${({ theme }) => theme.colors.blue.blue600};
+        caret-color: ${({ theme }) => theme.colors.blue.blue600};
       }
 
       & > h6 {
-        color: ${({ theme }) => theme.colors.royalBlue};
+        color: ${({ theme }) => theme.colors.blue.blue600};
       }
     `}
 
@@ -55,13 +55,13 @@ export const AnimatedInputWrapper = styled(Label)<{ isError: boolean; hasValue: 
     p.isError &&
     css`
       & > input {
-        border: 2px solid ${({ theme }) => theme.colors.red};
-        caret-color: ${({ theme }) => theme.colors.red};
+        border: 2px solid ${({ theme }) => theme.colors.red.red600};
+        caret-color: ${({ theme }) => theme.colors.red.red600};
       }
 
       & > h6 {
         opacity: 1;
-        color: ${({ theme }) => theme.colors.red};
+        color: ${({ theme }) => theme.colors.red.red600};
         top: -20px;
         left: 0;
       }
@@ -87,11 +87,11 @@ export const AnimatedInputStyledField = styled(Input)`
   outline: none;
 
   &:-webkit-autofill {
-    border: 2px solid ${({ theme }) => theme.colors.royalBlue};
-    caret-color: ${({ theme }) => theme.colors.royalBlue};
+    border: 2px solid ${({ theme }) => theme.colors.blue.blue600};
+    caret-color: ${({ theme }) => theme.colors.blue.blue600};
 
     & + h6 {
-      color: ${({ theme }) => theme.colors.royalBlue};
+      color: ${({ theme }) => theme.colors.blue.blue600};
       opacity: 1;
       top: -20px;
       left: 0;
@@ -122,5 +122,5 @@ export const AnimatedInputErrorText = styled(Span)`
   overflow: hidden;
   transform: all 0.5s ease;
   font-size: ${({ theme }) => theme.fontSizes.small};
-  color: ${({ theme }) => theme.colors.red};
+  color: ${({ theme }) => theme.colors.red.red600};
 `

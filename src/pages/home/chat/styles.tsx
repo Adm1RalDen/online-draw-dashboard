@@ -14,7 +14,7 @@ export const MessagesWrapper = styled(StyledScroll)`
   position: relative;
   max-height: 100%;
   overflow: auto;
-  background-color: ${({ theme }) => theme.colors.greenBackground};
+  background-color: ${({ theme }) => theme.colors.background};
   border-radius: 5px;
   padding: 10px;
 `
@@ -31,11 +31,11 @@ export const Message = styled.div<ChatWrapperProps>`
   flex-grow: 1;
   padding: 5px;
   background-color: ${(p) =>
-    p.myMessage ? p.theme.colors.darkSlateGray : p.theme.colors.greenLiteBackground};
+    p.myMessage ? p.theme.colors.teal.teal700 : p.theme.colors.teal.teal900};
   border-radius: 10px;
 
   & > h4 {
-    color: ${({ theme }) => theme.colors.gold};
+    color: ${({ theme }) => theme.colors.amber.amber400};
   }
 
   & > p {

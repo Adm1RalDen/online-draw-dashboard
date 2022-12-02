@@ -20,7 +20,7 @@ const DownloadStepPlatform = styled.div<Props>`
   ${(p) =>
     p.isActive &&
     css`
-      box-shadow: 0px 0px 5px 0px ${({ theme }) => theme.colors.silver};
+      box-shadow: 0px 0px 5px 0px ${({ theme }) => theme.colors.gray.gray400};
     `}
 
   & > svg {

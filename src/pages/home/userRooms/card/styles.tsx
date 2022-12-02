@@ -19,17 +19,17 @@ const RoomCard = styled.div<{ active: boolean }>`
   flex-grow: 1;
   padding: 10px;
   border-radius: 5px;
-  color: ${({ theme }) => theme.colors.lightGray};
+  color: ${({ theme }) => theme.colors.gray.gray300};
   font-weight: 300;
   background-color: ${(p) =>
-    p.active ? p.theme.colors.greenLiteBackground : p.theme.colors.darkSlateGray};
+    p.active ? p.theme.colors.teal.teal700 : p.theme.colors.teal.teal900};
   transition: 0.3s all;
   position: relative;
   cursor: pointer;
 
   &:hover {
     color: ${({ theme }) => theme.colors.white};
-    background-color: ${({ theme }) => theme.colors.greenLiteBackground};
+    background-color: ${({ theme }) => theme.colors.teal.teal700};
   }
   &:hover span {
     display: block;
@@ -55,7 +55,7 @@ const CardSettingsButton = styled(ButtonImage)`
   box-shadow: none;
 
   &:hover {
-    box-shadow: 0px 0px 5px 1px ${({ theme }) => theme.colors.dimGray};
+    box-shadow: 0px 0px 5px 1px ${({ theme }) => theme.colors.gray.gray600};
     background-color: transparent;
   }
   & > svg {

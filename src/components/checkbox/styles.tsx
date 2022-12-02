@@ -13,7 +13,7 @@ export const Checkmark = styled.span`
   left: 0;
   width: 25px;
   height: 25px;
-  background-color: ${({ theme }) => theme.colors.gray};
+  background-color: ${({ theme }) => theme.colors.gray.gray500};
   pointer-events: none;
 
   &::after {
@@ -41,7 +41,7 @@ export const CheckBoxInput = styled.input.attrs(() => ({ type: 'checkbox' }))`
 
   &:checked {
     & + span {
-      background-color: ${({ theme }) => theme.colors.royalBlue};
+      background-color: ${({ theme }) => theme.colors.blue.blue600};
       &::after {
         opacity: 1;
       }

@@ -5,7 +5,7 @@ import { FlexContainer } from 'components/flex-container'
 
 const ConfirmAccessPage = styled(FlexContainer)`
   height: 100vh;
-  background-color: ${({ theme }) => theme.colors.greenBackground};
+  background-color: ${({ theme }) => theme.colors.background};
 `
 
 const ConfirmAccessPageButton = styled(Button)`
@@ -28,7 +28,7 @@ const ConfirmAccessPageButtonsWrapper = styled.div`
 `
 
 const ConfirmAccessPageMain = styled.div`
-  border: 2px solid ${({ theme }) => theme.colors.gray};
+  border: 2px solid ${({ theme }) => theme.colors.gray.gray500};
   border-radius: 10px;
   padding: 10px;
   width: 350px;

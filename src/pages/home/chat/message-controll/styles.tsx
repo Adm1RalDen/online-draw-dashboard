@@ -6,7 +6,7 @@ import { Input } from 'components/input'
 export const MessageControllWrapper = styled.div`
   margin-top: 5px;
   border-radius: 5px;
-  background-color: ${({ theme }) => theme.colors.greenBackground};
+  background-color: ${({ theme }) => theme.colors.background};
   display: flex;
   align-items: center;
   padding: 0px 10px;

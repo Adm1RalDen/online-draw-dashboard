@@ -3,8 +3,8 @@ import styled from 'styled-components'
 export const ButtonImage = styled.button`
   width: 40px;
   height: 40px;
-  background-color: ${({ theme }) => theme.colors.darkSlateGray};
-  box-shadow: 0px 0px 2px 1px ${({ theme }) => theme.colors.lightGreen};
+  background-color: ${({ theme }) => theme.colors.teal.teal900};
+  box-shadow: 0px 0px 2px 1px ${({ theme }) => theme.colors.teal.teal700};
   cursor: pointer;
   transition: all 0.3s linear;
   border-radius: 5px;
@@ -20,12 +20,12 @@ export const ButtonImage = styled.button`
   }
 
   &:disabled {
-    background-color: ${(p) => p.theme.colors.darkCyan};
+    background-color: ${(p) => p.theme.colors.cyan.cyan900};
     cursor: no-drop;
   }
 
   &:hover {
-    background-color: ${(p) => p.theme.colors.darkSlateGray};
+    background-color: ${(p) => p.theme.colors.teal.teal900};
     box-shadow: 0px 0px 2px 1px ${({ theme }) => theme.colors.white};
   }
 `

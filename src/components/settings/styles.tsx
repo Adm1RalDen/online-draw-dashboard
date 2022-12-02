@@ -7,7 +7,7 @@ export const StyledSettings = styled.div`
   padding: 5px;
   display: flex;
   align-items: center;
-  background-color: ${({ theme }) => theme.colors.darkSlateGray};
+  background-color: ${({ theme }) => theme.colors.teal.teal900};
   gap: 20px;
   border-bottom: 2px solid ${({ theme }) => theme.colors.black};
   color: ${({ theme }) => theme.colors.white};

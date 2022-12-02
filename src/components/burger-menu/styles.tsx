@@ -80,7 +80,7 @@ export const NavigationMenu = styled.nav<{ isOpen: boolean }>`
     border-bottom: 1px solid ${({ theme }) => theme.colors.black};
 
     & > a {
-      color: ${({ theme }) => theme.colors.gold};
+      color: ${({ theme }) => theme.colors.amber.amber400};
       font-size: ${({ theme }) => theme.fontSizes.middle};
       font-weight: 400;
     }
