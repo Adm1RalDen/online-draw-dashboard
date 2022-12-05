@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 
-const EnableAuthentificatorSection = styled.section`
+import { DisableAuthentificatorWrapper } from 'pages/disableGoogleAuthentificator/styles'
+
+export const EnableAuthentificatorSection = styled.section`
   min-height: 100vh;
   background-color: ${({ theme }) => theme.colors.greenBackground};
   display: flex;
@@ -8,9 +10,10 @@ const EnableAuthentificatorSection = styled.section`
   justify-content: center;
 `
 
-const EnableAuthentificatorWrapper = styled.div`
+export const EnableAuthentificatorWrapper = styled.div`
   width: 800px;
   padding: 10px;
+  position: relative;
   background-color: ${({ theme }) => theme.colors.white};
   display: grid;
   grid-template: auto auto 450px / 1fr;
@@ -23,4 +26,4 @@ const EnableAuthentificatorWrapper = styled.div`
   }
 `
 
-export { EnableAuthentificatorSection, EnableAuthentificatorWrapper }
+export const SuccessEnableAuthentificatorWrapper = styled(DisableAuthentificatorWrapper)``

@@ -4,7 +4,8 @@ import { ServiceName } from '../types'
 
 export const sendCodeOnEmailQueryObj = {
   query: (): FetchArgs => ({
-    url: '/user/send-code-on-mail'
+    url: '/user/send-code-on-mail',
+    method: 'GET'
   }),
-  providesTags: [ServiceName.TWOFA]
+  invalidatesTags: [ServiceName.TWOFA]
 }

@@ -40,6 +40,14 @@ const UserSlice = createSlice({
     unauthorize: (state) => {
       state.isUserStateLoaded = true
       state.data = defaultUserData
+    },
+
+    enable2Fa: (state) => {
+      state.data.isUse2FA = true
+    },
+
+    disable2Fa: (state) => {
+      state.data.isUse2FA = false
     }
   },
 
@@ -54,6 +62,7 @@ const UserSlice = createSlice({
   }
 })
 
-export const { initializeUser, cancelUser2faAction, unauthorize } = UserSlice.actions
+export const { initializeUser, cancelUser2faAction, unauthorize, disable2Fa, enable2Fa } =
+  UserSlice.actions
 
 export default UserSlice.reducer

@@ -10,7 +10,8 @@ const TwoFaSlice = createSlice({
     qrcode: '',
     secretKey: '',
     error: '',
-    attemptsLeftCount: 3
+    attemptsLeftCount: 3,
+    hasLetterSent: false
   },
   reducers: {
     setAttemptsLeftCountAction: (state, { payload }: PayloadAction<number>) => {
@@ -24,12 +25,17 @@ const TwoFaSlice = createSlice({
     builder.addMatcher(twoFaApi.endpoints.createTwoFA.matchFulfilled, (state, { payload }) => {
       state.qrcode = payload.qrcode
       state.secretKey = payload.secretKey
-    }),
-      builder.addMatcher(twoFaApi.endpoints.createTwoFA.matchRejected, (state) => {
-        state.error = ErrorMessages.OCCURED_ERROR
-        state.qrcode = ''
-        state.secretKey = ''
-      })
+    })
+
+    builder.addMatcher(twoFaApi.endpoints.createTwoFA.matchRejected, (state) => {
+      state.error = ErrorMessages.OCCURED_ERROR
+      state.qrcode = ''
+      state.secretKey = ''
+    })
+
+    builder.addMatcher(twoFaApi.endpoints.sendCodeOnEmail.matchFulfilled, (state) => {
+      state.hasLetterSent = true
+    })
   }
 })
 

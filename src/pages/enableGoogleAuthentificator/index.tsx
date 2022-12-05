@@ -1,27 +1,31 @@
-import { useEffect, useState } from 'react'
+import { XMarkIcon } from '@heroicons/react/24/outline'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import { AbsoluteIconWrapper } from 'components/absolute-icon-wrapper'
 import { Container } from 'components/container'
 import { Heading2 } from 'styles/typography/styles'
 
-import { SETTINGS_URL } from 'const/urls'
+import { SETTINGS_SECURITY_URL } from 'const/urls'
 import { useAppSelector } from 'store'
-import { userDataSelector } from 'store/selectors/user.selector'
+import { userIsUse2FaSelector } from 'store/selectors/user.selector'
 
 import { AuthentificatorSteps } from './steps'
+import { SuccessQrCodeStep } from './steps/success'
 import { AuthentificatorStepsPanel } from './stepsPanel'
-import { EnableAuthentificatorSection, EnableAuthentificatorWrapper } from './styles'
+import {
+  EnableAuthentificatorSection,
+  EnableAuthentificatorWrapper,
+  SuccessEnableAuthentificatorWrapper
+} from './styles'
 
 export const EnableAuthentificator = () => {
-  const { isUse2FA } = useAppSelector(userDataSelector)
   const [currentStep, setCurrentStep] = useState(1)
+  const isUse2FA = useAppSelector(userIsUse2FaSelector)
+
   const navigate = useNavigate()
 
-  useEffect(() => {
-    if (isUse2FA) {
-      navigate(SETTINGS_URL)
-    }
-  }, [isUse2FA, navigate])
+  const handleNavigateToSettings = () => navigate(SETTINGS_SECURITY_URL, { replace: true })
 
   const handleDeclineStep = () => {
     if (currentStep > 1) {
@@ -35,20 +39,27 @@ export const EnableAuthentificator = () => {
     }
   }
 
-  if (isUse2FA) return null
-
   return (
     <EnableAuthentificatorSection>
       <Container>
-        <EnableAuthentificatorWrapper>
-          <Heading2>Enable Google Authentification</Heading2>
-          <AuthentificatorStepsPanel currentStep={currentStep} />
-          <AuthentificatorSteps
-            currentStep={currentStep}
-            handleIncreaseStep={handleIncreaseStep}
-            handleDeclineStep={handleDeclineStep}
-          />
-        </EnableAuthentificatorWrapper>
+        {isUse2FA && currentStep < 5 ? (
+          <SuccessEnableAuthentificatorWrapper>
+            <SuccessQrCodeStep />
+          </SuccessEnableAuthentificatorWrapper>
+        ) : (
+          <EnableAuthentificatorWrapper>
+            <Heading2>Enable Google Authentification</Heading2>
+            <AuthentificatorStepsPanel currentStep={currentStep} />
+            <AuthentificatorSteps
+              currentStep={currentStep}
+              handleIncreaseStep={handleIncreaseStep}
+              handleDeclineStep={handleDeclineStep}
+            />
+            <AbsoluteIconWrapper>
+              <XMarkIcon onClick={handleNavigateToSettings} />
+            </AbsoluteIconWrapper>
+          </EnableAuthentificatorWrapper>
+        )}
       </Container>
     </EnableAuthentificatorSection>
   )

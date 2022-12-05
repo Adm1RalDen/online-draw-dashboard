@@ -1,11 +1,7 @@
-import * as yup from 'yup'
+export const SUCCESS_SENT_CODE = 'Check your email, security code has been sent'
+export const FAILED_SENT_CODE = 'Occured error, try later'
 
 export const initialValues = {
   emailCode: '',
   secure2FACode: ''
 }
-
-export const validationSchema = yup.object().shape({
-  emailCode: yup.string().required('Required'),
-  secure2FACode: yup.number().required('Required')
-})

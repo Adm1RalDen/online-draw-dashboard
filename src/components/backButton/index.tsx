@@ -3,7 +3,7 @@ import React, { FC } from 'react'
 
 import { ButtonOutline } from 'components/button-outline'
 
-export const BackButton: FC<React.HTMLAttributes<HTMLButtonElement>> = (props) => (
+export const BackButton: FC<React.ButtonHTMLAttributes<HTMLButtonElement>> = (props) => (
   <ButtonOutline {...props}>
     <ChevronLeftIcon />
     back

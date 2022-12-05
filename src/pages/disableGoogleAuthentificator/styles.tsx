@@ -11,7 +11,8 @@ export const DisableAuthentificatorSection = styled.section`
 export const DisableAuthentificatorWrapper = styled.div`
   width: 400px;
   height: 300px;
-  padding: 30px 10px;
+  position: relative;
+  padding: ${({ theme: { spacing } }) => `${spacing.lg} ${spacing.s}`};
   display: flex;
   flex-direction: column;
   justify-content: center;

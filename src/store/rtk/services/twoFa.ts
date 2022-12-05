@@ -13,7 +13,7 @@ export const twoFaApi = apiSlice.injectEndpoints({
     createTwoFA: builder.query<Create2FARequestData, void>(createTwoFaQueryObj),
     confirmUser2FA: builder.mutation<AuthResponse, VerifyRequestData>(confirmUser2FAQueryObj),
     confirmCreating2Fa: builder.mutation<void, ConfirmCreating2FaData>(confirmCreating2FaQueryObj),
-    sendCodeOnEmail: builder.query<void, void>(sendCodeOnEmailQueryObj),
+    sendCodeOnEmail: builder.mutation<void, void>(sendCodeOnEmailQueryObj),
     disableTwoFA: builder.mutation<void, Disable2FAData>(disableTwoFaQueryObj)
   })
 })
@@ -22,6 +22,6 @@ export const {
   useCreateTwoFAQuery,
   useConfirmCreating2FaMutation,
   useConfirmUser2FAMutation,
-  useSendCodeOnEmailQuery,
+  useSendCodeOnEmailMutation,
   useDisableTwoFAMutation
 } = twoFaApi
