@@ -5,7 +5,7 @@ import { Container } from 'components/container'
 const CanvasSection = styled.section`
   padding-top: 10px;
   min-height: 100vh;
-  background-color: ${({ theme }) => theme.colors.background};
+  background-color: ${({ theme }) => theme.colors.greenBackground};
 `
 
 const Layout = styled(Container)`

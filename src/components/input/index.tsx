@@ -6,28 +6,28 @@ export const Input = styled.input<{ isError?: boolean | string }>`
   padding: ${({ theme: { spacing } }) => `0 ${spacing.lg} 0 ${spacing.s}`};
   border-radius: 5px;
   background-color: ${(p) => p.theme.colors.white};
-  border: 2px solid ${(p) => p.theme.colors.gray.gray500};
+  border: 2px solid ${(p) => p.theme.colors.gray};
 
   &:disabled {
-    border-color: ${({ theme }) => theme.colors.gray.gray300};
-    background-color: ${({ theme }) => theme.colors.gray.gray300};
+    border-color: ${({ theme }) => theme.colors.lightGray};
+    background-color: ${({ theme }) => theme.colors.lightGray};
     cursor: no-drop;
   }
 
   &:focus {
-    outline-color: ${({ theme }) => theme.colors.blue.blue600};
-    box-shadow: 0px 0px 2px 3px ${({ theme }) => theme.colors.blue.blue800};
+    outline-color: ${({ theme }) => theme.colors.royalBlue};
+    box-shadow: 0px 0px 2px 3px ${({ theme }) => theme.colors.darkBlue};
   }
 
   ${({ isError }) =>
     isError &&
     css`
-      border-color: ${({ theme }) => theme.colors.red.red600};
-      outline: ${({ theme }) => theme.colors.red.red600};
-      caret-color: ${({ theme }) => theme.colors.red.red600};
+      border-color: ${({ theme }) => theme.colors.red};
+      outline: ${({ theme }) => theme.colors.red};
+      caret-color: ${({ theme }) => theme.colors.red};
 
       &::placeholder {
-        color: ${({ theme }) => theme.colors.red.red600};
+        color: ${({ theme }) => theme.colors.red};
       }
     `}
 `

@@ -23,14 +23,14 @@ export const GlobalStyles = createGlobalStyle`
     overflow-x: hidden;
     font-family: Roboto;
     min-height: 100vh;
-    background-color: ${({ theme }) => theme.colors.background};
+    background-color: ${({ theme }) => theme.colors.greenBackground};
 
     &::-webkit-scrollbar {
       width: 5px;
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: ${({ theme }) => theme.colors.teal.teal900};
+      background-color: ${({ theme }) => theme.colors.darkSlateGray};
       border-radius: 30px;
     }
   }
@@ -41,7 +41,7 @@ export const GlobalStyles = createGlobalStyle`
 
   a{
     text-decoration: none;
-    color: ${({ theme }) => theme.colors.blue.blue500};
+    color: ${({ theme }) => theme.colors.dodgerBlue};
   }
 
   .custom__wysiwig__wrapper {
@@ -69,7 +69,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: ${({ theme }) => theme.colors.gray.gray300};
+    background-color: ${({ theme }) => theme.colors.lightGray};
     border-radius: 3px;
   }
 }

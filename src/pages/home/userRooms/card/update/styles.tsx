@@ -38,15 +38,15 @@ const UpdateModalButtonsWrapper = styled.div`
   }
 
   & > button:first-child {
-    background-color: ${({ theme }) => theme.colors.teal.teal700};
+    background-color: ${({ theme }) => theme.colors.darkGreen};
     &:hover {
-      background-color: ${({ theme }) => theme.colors.green.green500};
+      background-color: ${({ theme }) => theme.colors.green};
     }
   }
   & > button:last-child {
-    background-color: ${({ theme }) => theme.colors.red.red900};
+    background-color: ${({ theme }) => theme.colors.darkRed};
     &:hover {
-      background-color: ${({ theme }) => theme.colors.red.red600};
+      background-color: ${({ theme }) => theme.colors.red};
     }
   }
 `

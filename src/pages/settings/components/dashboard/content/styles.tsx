@@ -33,14 +33,14 @@ export const PropertiesWrapper = styled.div`
 export const PropertiesTitle = styled(Heading4)`
   font-weight: 400;
   padding: ${({ theme }) => theme.spacing.s};
-  background-color: ${({ theme }) => theme.colors.gray.gray300};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.gray.gray500};
+  background-color: ${({ theme }) => theme.colors.whiteSmoke};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.gray};
 `
 
 export const PropertyWrapper = styled(Paragraph)`
   display: block;
   padding: ${({ theme: { spacing } }) => `${spacing.s} ${spacing.tiny}`};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.gray.gray500};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.gray};
 `
 
 export const PropertyText = styled.b`

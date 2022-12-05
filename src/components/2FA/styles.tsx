@@ -40,11 +40,11 @@ export const User2FAButton = styled(Button)`
 `
 
 export const User2FAErrorText = styled(Span)`
-  color: ${({ theme }) => theme.colors.red.red600};
+  color: ${({ theme }) => theme.colors.red};
 `
 
 export const User2FASuccessText = styled(User2FAErrorText)`
-  color: ${({ theme }) => theme.colors.green.green500};
+  color: ${({ theme }) => theme.colors.green};
 `
 
 export const User2FACloseModalButton = styled(ButtonImage)`

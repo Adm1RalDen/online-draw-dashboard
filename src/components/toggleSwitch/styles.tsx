@@ -7,7 +7,7 @@ export const ToggleSwitchWrapper = styled.div<{ isChecked: boolean }>`
   z-index: 2;
   border: 3px solid ${({ theme }) => theme.colors.white};
   background-color: ${(p) =>
-    p.isChecked ? p.theme.colors.teal.teal900 : p.theme.colors.cyan.cyan900};
+    p.isChecked ? p.theme.colors.darkSlateGray : p.theme.colors.darkCyan};
   border-radius: 30px;
   transition: 0.5s;
 `
@@ -42,14 +42,14 @@ export const ToggleSwitchInput = styled.input`
     top: calc(50% - 14px);
     left: 10px;
     z-index: 4;
-    background-color: ${({ theme }) => theme.colors.cyan.cyan900};
+    background-color: ${({ theme }) => theme.colors.darkCyan};
     border: 3px solid ${({ theme }) => theme.colors.white};
     transition: 0.5s;
   }
 
   &:checked {
     &::before {
-      background-color: ${({ theme }) => theme.colors.teal.teal900};
+      background-color: ${({ theme }) => theme.colors.darkSlateGray};
       transform: translateX(25px);
     }
   }

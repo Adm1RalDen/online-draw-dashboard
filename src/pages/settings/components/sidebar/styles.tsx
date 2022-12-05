@@ -47,18 +47,18 @@ export const SettingsPageSideBarItem = styled.li<{ isActive: boolean }>`
 
   &::before {
     top: -50px;
-    box-shadow: 25px 25px 0px 2px ${({ theme }) => theme.colors.teal.teal900};
+    box-shadow: 25px 25px 0px 2px ${({ theme }) => theme.colors.darkSlateGray};
   }
 
   &::after {
     bottom: -50px;
-    box-shadow: 25px -25px 0px 2px ${({ theme }) => theme.colors.teal.teal900};
+    box-shadow: 25px -25px 0px 2px ${({ theme }) => theme.colors.darkSlateGray};
   }
 
   ${(p) =>
     p.isActive &&
     css`
-      background-color: ${({ theme }) => theme.colors.teal.teal900};
+      background-color: ${({ theme }) => theme.colors.darkSlateGray};
 
       &::before,
       &::after {

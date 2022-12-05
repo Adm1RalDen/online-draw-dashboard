@@ -12,9 +12,9 @@ export const ResetPasswordSection = styled.section`
 `
 
 export const ResetPasswordContentWrapper = styled.div`
-  border: 2px solid ${({ theme }) => theme.colors.gray.gray500};
+  border: 2px solid ${({ theme }) => theme.colors.gray};
   background-color: ${({ theme }) => theme.colors.white};
-  box-shadow: 0px 0px 3px 1px ${({ theme }) => theme.colors.gray.gray600};
+  box-shadow: 0px 0px 3px 1px ${({ theme }) => theme.colors.dimGray};
   width: 350px;
   height: 350px;
   border-radius: 5px;

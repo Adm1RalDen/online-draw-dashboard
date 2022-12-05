@@ -11,7 +11,7 @@ const SubmitButton = styled(Button)`
   border: none;
 
   &:disabled {
-    background-color: ${({ theme }) => theme.colors.cyan.cyan900};
+    background-color: ${({ theme }) => theme.colors.darkCyan};
     &:disabled {
       cursor: not-allowed;
     }
@@ -25,7 +25,7 @@ const UserCabinetButton = styled(ButtonImage)`
 
 const HomePageSection = styled.section`
   min-height: 100vh;
-  background-color: ${({ theme }) => theme.colors.background};
+  background-color: ${({ theme }) => theme.colors.greenBackground};
 `
 
 const HomePageWrapper = styled.div`
@@ -48,8 +48,8 @@ const HomePageWrapper = styled.div`
 
 const HomeHeader = styled.header`
   grid-area: header;
-  box-shadow: 0px 0px 2px 1px ${({ theme }) => theme.colors.teal.teal700};
-  background-color: ${({ theme }) => theme.colors.teal.teal900};
+  box-shadow: 0px 0px 2px 1px ${({ theme }) => theme.colors.lightGreen};
+  background-color: ${({ theme }) => theme.colors.darkSlateGray};
   padding: ${({ theme }) => theme.spacing.tiny};
   border-radius: 10px;
   display: flex;
@@ -66,9 +66,9 @@ const HomeHeader = styled.header`
 const ActiveRoomsWrapper = styled(StyledScroll)`
   grid-area: activeRooms;
   overflow: auto;
-  box-shadow: 0px 0px 2px 1px ${({ theme }) => theme.colors.teal.teal700};
+  box-shadow: 0px 0px 2px 1px ${({ theme }) => theme.colors.lightGreen};
   padding: ${({ theme }) => theme.spacing.s};
-  background-color: ${({ theme }) => theme.colors.teal.teal900};
+  background-color: ${({ theme }) => theme.colors.darkSlateGray};
 
   & > h3,
   p {
@@ -84,7 +84,7 @@ const ActiveRoomsWrapper = styled(StyledScroll)`
 const Wrapper = styled.div`
   grid-area: wrapper;
   padding: 20px;
-  box-shadow: 0px 0px 2px 1px ${({ theme }) => theme.colors.teal.teal900};
+  box-shadow: 0px 0px 2px 1px ${({ theme }) => theme.colors.darkSlateGray};
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -96,7 +96,7 @@ const Wrapper = styled.div`
 
 const ChatWrapper = styled(ActiveRoomsWrapper)`
   grid-area: chat;
-  background-color: ${({ theme }) => theme.colors.teal.teal900};
+  background-color: ${({ theme }) => theme.colors.darkSlateGray};
 `
 
 const RoomWrapper = styled.div`

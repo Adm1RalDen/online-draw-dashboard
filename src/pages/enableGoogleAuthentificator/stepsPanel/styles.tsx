@@ -44,7 +44,7 @@ const StepsPanelContainer = styled.div<Props>`
     isActive &&
     css`
       & > div {
-        background-color: ${({ theme }) => theme.colors.amber.amber400};
+        background-color: ${({ theme }) => theme.colors.gold};
         color: ${({ theme }) => theme.colors.black};
       }
 
@@ -54,7 +54,7 @@ const StepsPanelContainer = styled.div<Props>`
       }
 
       &::before {
-        background-color: ${({ theme }) => theme.colors.amber.amber400};
+        background-color: ${({ theme }) => theme.colors.gold};
       }
     `}
 `
@@ -65,8 +65,8 @@ const StepsPanelCircle = styled(FlexContainer)`
   margin: 10px auto auto auto;
   border-radius: 50%;
   border: 2px solid white;
-  background-color: ${({ theme }) => theme.colors.gray.gray300};
-  color: ${({ theme }) => theme.colors.gray.gray400};
+  background-color: ${({ theme }) => theme.colors.lightGray};
+  color: ${({ theme }) => theme.colors.silver};
 
   & > span {
     pointer-events: none;

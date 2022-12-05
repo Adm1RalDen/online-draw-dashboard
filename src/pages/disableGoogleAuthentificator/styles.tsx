@@ -4,7 +4,7 @@ export const DisableAuthentificatorSection = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${({ theme }) => theme.colors.background};
+  background-color: ${({ theme }) => theme.colors.greenBackground};
   min-height: 100vh;
 `
 

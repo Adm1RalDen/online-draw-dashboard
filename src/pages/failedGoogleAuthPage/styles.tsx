@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const FailedGoogleAuthPageSection = styled.section`
-  background-color: ${({ theme }) => theme.colors.background};
+  background-color: ${({ theme }) => theme.colors.greenBackground};
   height: 100vh;
   color: ${({ theme }) => theme.colors.white};
   display: flex;

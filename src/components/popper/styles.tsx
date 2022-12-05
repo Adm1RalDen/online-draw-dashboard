@@ -16,7 +16,7 @@ export const PopperModal = styled.div`
   min-height: 110px;
   background-color: ${({ theme }) => theme.colors.white};
   z-index: ${({ theme }) => theme.zIndex.popper};
-  box-shadow: 1px 1px 14px -2px ${({ theme }) => theme.colors.gray.gray400};
+  box-shadow: 1px 1px 14px -2px ${({ theme }) => theme.colors.silver};
 `
 
 export const PopperButtonsWrapper = styled.div`
@@ -32,11 +32,11 @@ export const PopperButton = styled.button`
   border-radius: 2px;
   padding: 5px 10px;
   border: none;
-  color: ${({ theme }) => theme.colors.blue.blue800};
+  color: ${({ theme }) => theme.colors.darkBlue};
   transition: all 0.3s ease;
   cursor: pointer;
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.sky.sky400};
+    background-color: ${({ theme }) => theme.colors.deepSkyBlue};
   }
 `

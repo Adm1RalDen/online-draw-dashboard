@@ -11,7 +11,7 @@ export const StyledSearchInput = styled(Input).attrs(() => ({ type: 'text' }))`
   background-repeat: no-repeat;
   background-position: 5px center;
   background-size: 20px 20px;
-  border: 2px solid ${({ theme }) => theme.colors.gray.gray500};
+  border: 2px solid ${({ theme }) => theme.colors.gray};
 
   &::placeholder {
     font-size: ${({ theme }) => theme.fontSizes.small};

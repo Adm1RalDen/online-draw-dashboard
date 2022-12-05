@@ -6,7 +6,7 @@ export const UserRoomsWrapper = styled(StyledScroll)`
   grid-area: myRooms;
   overflow: auto;
   padding: 20px;
-  box-shadow: 0px 0px 2px 1px ${({ theme }) => theme.colors.teal.teal900};
+  box-shadow: 0px 0px 2px 1px ${({ theme }) => theme.colors.darkSlateGray};
 
   & > h3 {
     color: ${({ theme }) => theme.colors.white};

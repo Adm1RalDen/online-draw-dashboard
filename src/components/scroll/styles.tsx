@@ -6,7 +6,7 @@ export const StyledScroll = styled.div`
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: ${({ theme }) => theme.colors.teal.teal700};
+    background-color: ${({ theme }) => theme.colors.lightGreen};
     border-radius: 30px;
   }
 `

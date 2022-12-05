@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 const EnableAuthentificatorSection = styled.section`
   min-height: 100vh;
-  background-color: ${({ theme }) => theme.colors.background};
+  background-color: ${({ theme }) => theme.colors.greenBackground};
   display: flex;
   align-items: center;
   justify-content: center;

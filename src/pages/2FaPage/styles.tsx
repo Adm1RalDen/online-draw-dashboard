@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const TwoFactorPageSection = styled.section`
-  background-color: ${({ theme }) => theme.colors.background};
+  background-color: ${({ theme }) => theme.colors.greenBackground};
   min-height: 100vh;
   display: flex;
   align-items: center;
