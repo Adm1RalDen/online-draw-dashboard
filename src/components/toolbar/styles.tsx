@@ -7,7 +7,7 @@ export const StyledToolbar = styled(FlexContainer)`
   padding: 5px;
   grid-area: toolbar;
   justify-content: space-between;
-  background-color: ${({ theme }) => theme.colors.aqua};
+  background-color: ${({ theme }) => theme.colors.darkSlateGray};
   border-bottom: 2px solid ${({ theme }) => theme.colors.black};
 `
 
@@ -15,7 +15,7 @@ export const SnapshotButtonsWrapper = styled.div`
   display: flex;
   gap: 5px;
   & > button {
-    background-color: ${({ theme }) => theme.colors.aquaMiddle};
+    background-color: ${({ theme }) => theme.colors.darkSlateGray};
     & > svg {
       color: ${({ theme }) => theme.colors.white};
     }
@@ -39,6 +39,6 @@ export const ToolButton = styled(ButtonImage)<{ active?: boolean }>`
     p.active &&
     css`
       border: 2px solid ${({ theme }) => theme.colors.white};
-      background-color: ${({ theme }) => theme.colors.aquaMiddle};
+      background-color: ${({ theme }) => theme.colors.darkSlateGray};
     `};
 `

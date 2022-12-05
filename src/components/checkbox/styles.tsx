@@ -41,7 +41,7 @@ export const CheckBoxInput = styled.input.attrs(() => ({ type: 'checkbox' }))`
 
   &:checked {
     & + span {
-      background-color: ${({ theme }) => theme.colors.blue};
+      background-color: ${({ theme }) => theme.colors.royalBlue};
       &::after {
         opacity: 1;
       }

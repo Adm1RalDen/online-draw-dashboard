@@ -30,7 +30,7 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: ${({ theme }) => theme.colors.aquaGreen};
+      background-color: ${({ theme }) => theme.colors.darkSlateGray};
       border-radius: 30px;
     }
   }
@@ -41,7 +41,7 @@ export const GlobalStyles = createGlobalStyle`
 
   a{
     text-decoration: none;
-    color: ${({ theme }) => theme.colors.link};
+    color: ${({ theme }) => theme.colors.dodgerBlue};
   }
 
   .custom__wysiwig__wrapper {
@@ -69,7 +69,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: ${({ theme }) => theme.colors.light_gray};
+    background-color: ${({ theme }) => theme.colors.lightGray};
     border-radius: 3px;
   }
 }

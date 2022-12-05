@@ -31,7 +31,7 @@ export const Message = styled.div<ChatWrapperProps>`
   flex-grow: 1;
   padding: 5px;
   background-color: ${(p) =>
-    p.myMessage ? p.theme.colors.aquaMiddle : p.theme.colors.greenLiteBackground};
+    p.myMessage ? p.theme.colors.darkSlateGray : p.theme.colors.greenLiteBackground};
   border-radius: 10px;
 
   & > h4 {

@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Button = styled.button`
   padding: 7px 20px;
-  background-color: ${(p) => p.theme.colors.aqua};
+  background-color: ${(p) => p.theme.colors.darkSlateGray};
   font-weight: 400;
   color: ${(p) => p.theme.colors.white};
   border-radius: 5px;
@@ -11,11 +11,11 @@ export const Button = styled.button`
   cursor: pointer;
 
   &:not([disabled]):hover {
-    background-color: ${(p) => p.theme.colors.lightAqua};
+    background-color: ${(p) => p.theme.colors.darkSlateGray};
   }
 
   &:disabled {
-    background-color: ${({ theme }) => theme.colors.darkAqua};
+    background-color: ${({ theme }) => theme.colors.darkCyan};
     cursor: auto;
   }
 `

@@ -25,7 +25,7 @@ export const AccountSettingsForm = styled.form`
 
 export const AccountSettingsField = styled(Input)`
   border-radius: 10px;
-  background-color: ${({ theme }) => theme.colors.whiteGray};
+  background-color: ${({ theme }) => theme.colors.whiteSmoke};
 `
 
 export const AccountSettingsAvatarWrapper = styled.div`
@@ -46,5 +46,5 @@ export const AccountSettingsFlexWrapper = styled.div`
 
 export const AccountSettingsSubmitButton = styled(Button)`
   margin-top: ${({ theme }) => theme.spacing.sm};
-  background-color: ${({ theme }) => theme.colors.blue};
+  background-color: ${({ theme }) => theme.colors.dodgerBlue};
 `

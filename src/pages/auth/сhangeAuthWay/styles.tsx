@@ -11,5 +11,5 @@ export const AuthParagraph = styled(Paragraph)`
 export const AuthButton = styled(ButtonOutline)`
   display: inline-flex;
   margin-left: 5px;
-  color: ${({ theme }) => theme.colors.blue};
+  color: ${({ theme }) => theme.colors.royalBlue};
 `

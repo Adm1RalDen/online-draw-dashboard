@@ -1,17 +1,15 @@
 import styled from 'styled-components'
 
-const RoomUsersBlock = styled.div`
+export const RoomUsersBlock = styled.div`
   grid-area: roomUsers;
   padding: 5px;
-  background-color: ${({ theme }) => theme.colors.aqua};
+  background-color: ${({ theme }) => theme.colors.darkSlateGray};
 `
 
-const RoomUserBlock = styled.div`
+export const RoomUserBlock = styled.div`
   padding: 10px;
-  background-color: ${({ theme }) => theme.colors.aquaMiddle};
-  box-shadow: 1px 2px 3px 2px ${({ theme }) => theme.colors.darkAqua};
+  background-color: ${({ theme }) => theme.colors.darkSlateGray};
+  box-shadow: 1px 2px 3px 2px ${({ theme }) => theme.colors.darkCyan};
   border-radius: 5px;
   color: ${({ theme }) => theme.colors.white};
 `
-
-export { RoomUserBlock, RoomUsersBlock }

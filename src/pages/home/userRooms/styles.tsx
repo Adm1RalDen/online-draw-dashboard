@@ -1,10 +1,12 @@
 import styled from 'styled-components'
 
-const UserRoomsWrapper = styled.div`
+import { StyledScroll } from 'components/scroll/styles'
+
+export const UserRoomsWrapper = styled(StyledScroll)`
   grid-area: myRooms;
-  padding: 20px;
-  box-shadow: 0px 0px 2px 1px ${({ theme }) => theme.colors.aqua};
   overflow: auto;
+  padding: 20px;
+  box-shadow: 0px 0px 2px 1px ${({ theme }) => theme.colors.darkSlateGray};
 
   & > h3 {
     color: ${({ theme }) => theme.colors.white};
@@ -14,10 +16,8 @@ const UserRoomsWrapper = styled.div`
   }
 `
 
-const UserCardsWrapper = styled.div`
+export const UserCardsWrapper = styled.div`
   display: flex;
   flex-flow: column;
   gap: 10px;
 `
-
-export { UserRoomsWrapper, UserCardsWrapper }

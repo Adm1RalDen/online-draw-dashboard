@@ -33,7 +33,7 @@ export const PropertiesWrapper = styled.div`
 export const PropertiesTitle = styled(Heading4)`
   font-weight: 400;
   padding: ${({ theme }) => theme.spacing.s};
-  background-color: ${({ theme }) => theme.colors.whiteGray};
+  background-color: ${({ theme }) => theme.colors.whiteSmoke};
   border-bottom: 1px solid ${({ theme }) => theme.colors.gray};
 `
 

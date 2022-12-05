@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const CanvasWrapper = styled.div`
   grid-area: canvas;
-  background: ${({ theme }) => theme.colors.aqua};
+  background: ${({ theme }) => theme.colors.darkSlateGray};
   border-right: 2px solid ${({ theme }) => theme.colors.black};
   padding: 10px 10px 2px 10px;
   & > canvas {
