@@ -6,7 +6,7 @@ import { NetworkStatus } from 'const/enums'
 
 import { getToken, saveUserInStorage } from 'services/token.service'
 
-import { AuthResponse } from 'types'
+import { AuthResponse } from 'types/user'
 
 export const refreshTokenInterceptor = async (error: AxiosError) => {
   if (error.response?.status === NetworkStatus.INTERNAL) {

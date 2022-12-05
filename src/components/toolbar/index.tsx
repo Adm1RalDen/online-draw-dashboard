@@ -1,44 +1,41 @@
 import {
-  ArrowDownRightIcon,
   ArrowDownTrayIcon,
   ArrowLeftOnRectangleIcon,
   ChevronLeftIcon,
-  ChevronRightIcon,
-  PencilIcon
+  ChevronRightIcon
 } from '@heroicons/react/24/outline'
-import { MouseEvent, useContext } from 'react'
+import { MouseEvent } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { ColorInput } from 'components/input/color'
 
-import CircleIcon from 'public/assets/circle.svg'
-import EraserIcon from 'public/assets/eraser.svg'
-import SquareIcon from 'public/assets/square.svg'
-
+import { DrawTools } from 'const/enums'
 import { EXIT_SOCKET } from 'const/sockets'
+import { usePaint } from 'hooks/usePaint'
 import { useSocket } from 'hooks/useSocket'
 import { useAppSelector } from 'store'
-import { userDataSelector } from 'store/selectors/user.selector'
+import { userIdSelector } from 'store/selectors/user.selector'
 
-import { PaintContext } from 'context/paintContext'
+import { createBlobFile } from 'utils/encodeBase64'
 
-import { ToolsTypes } from 'types/canvas'
-
+import { TOOLS_LIST } from './const'
 import { DrawToolsWrapper, SnapshotButtonsWrapper, StyledToolbar, ToolButton } from './styles'
 
 export const Toolbar = () => {
-  const { setToolhandler, tool, changeFillStyle, handleRedo, handleReset, snapshot } =
-    useContext(PaintContext)
+  const id = useAppSelector(userIdSelector)
+
+  const { setToolhandler, changeFillStyle, handleRedo, handleReset, snapshot, tool } = usePaint()
   const { roomId } = useParams()
-  const { id } = useAppSelector(userDataSelector)
   const { socket } = useSocket()
 
-  const handleChangeFillStyle = (e: React.ChangeEvent<HTMLInputElement>) =>
-    changeFillStyle(e.target.value)
+  const handleChangeFillStyle = ({ target }: React.ChangeEvent<HTMLInputElement>) =>
+    changeFillStyle(target.value)
 
-  const handleChangeTool = (e: MouseEvent) => {
-    if ((e.target as HTMLElement).tagName === 'BUTTON') {
-      setToolhandler((e.target as HTMLButtonElement).dataset.tool as ToolsTypes)
+  const handleChangeTool = ({ target }: MouseEvent) => {
+    if (target instanceof HTMLButtonElement) {
+      if (target.dataset.tool) {
+        setToolhandler(target.dataset.tool as DrawTools)
+      }
     }
   }
 
@@ -51,34 +48,23 @@ export const Toolbar = () => {
 
   const handleSavePhoto = async () => {
     if (snapshot) {
-      const res = await fetch(snapshot)
-      const blob = await res.blob()
-      const file = new File([blob], 'image', { type: 'image/png' })
+      const fileName = 'draw-online'
+      const file = await createBlobFile(snapshot, fileName)
       const a = document.createElement('a')
       a.href = URL.createObjectURL(file)
-      a.download = 'image.png'
+      a.download = fileName
       a.click()
     }
   }
 
   return (
     <StyledToolbar>
-      <DrawToolsWrapper onClickCapture={handleChangeTool}>
-        <ToolButton data-tool='pen' active={tool === 'pen'}>
-          <PencilIcon />
-        </ToolButton>
-        <ToolButton data-tool='square' active={tool === 'square'}>
-          <SquareIcon />
-        </ToolButton>
-        <ToolButton data-tool='circle' active={tool === 'circle'}>
-          <CircleIcon />
-        </ToolButton>
-        <ToolButton data-tool='eraser' active={tool === 'eraser'}>
-          <EraserIcon />
-        </ToolButton>
-        <ToolButton data-tool='line' active={tool === 'line'}>
-          <ArrowDownRightIcon />
-        </ToolButton>
+      <DrawToolsWrapper onClick={handleChangeTool}>
+        {TOOLS_LIST.map((elem) => (
+          <ToolButton key={elem.id} data-tool={elem.name} active={tool === elem.name}>
+            {elem.icon}
+          </ToolButton>
+        ))}
         <ColorInput name='color' onChange={handleChangeFillStyle} />
       </DrawToolsWrapper>
 

@@ -23,7 +23,7 @@ import { capitalizeFirstLetter } from 'utils/capitalizeFirstLetter'
 import { noopFunction } from 'utils/noop'
 import { Portal } from 'utils/portal'
 
-import { AuthResponse } from 'types'
+import { AuthResponse } from 'types/user'
 
 import { GoogleLoginComponent } from '../googleLogin'
 import { AuthButton, Title } from '../styles'

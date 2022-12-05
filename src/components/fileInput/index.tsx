@@ -1,13 +1,20 @@
 import { ArrowUpTrayIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { ChangeEvent, FC, useRef, useState } from 'react'
 
-import { FileTypes } from 'const/enums'
+import { Colors, FileTypes } from 'const/enums'
 
 import { checkFileType } from 'utils/checkFileType'
 import { isValidFileSize } from 'utils/isValidFileSize'
 
+import { FunctionWithParams } from 'types'
+
 import { FileInputInfoWrapper, FileInputLabel, FileInputWrapper, StyledFileInput } from './styles'
-import { FileInputProps } from './types'
+
+interface FileInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
+  name: string
+  onChange: FunctionWithParams<ChangeEvent<HTMLInputElement> | null>
+  colorInfo?: Colors
+}
 
 export const FileInput: FC<FileInputProps> = ({ onChange, colorInfo, ...others }) => {
   const inputRef = useRef<HTMLInputElement>(null)

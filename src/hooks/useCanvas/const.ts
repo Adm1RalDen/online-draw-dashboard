@@ -1,15 +1,8 @@
 import { Circle, Eraser, Line, Pen, Square } from 'canvas_classes'
 
-import { SocketApp } from 'types/socket'
+import { DrawTools } from 'const/enums'
 
-import { ToolsEnum } from './types'
-
-type Props = {
-  tool: string
-  canvasRef: React.MutableRefObject<HTMLCanvasElement>
-  socket: SocketApp
-  roomId: string
-}
+import { handleSetToolParams } from './types'
 
 export const setCanvasWidth = () => {
   return document.body.clientWidth >= 1400 ? 1190 : document.body.clientWidth - 210
@@ -19,23 +12,23 @@ export const setCanvasHeight = () => {
   return document.body.clientHeight - 150
 }
 
-export const handleSetTool = (data: Props) => {
+export const handleSetTool = (data: handleSetToolParams) => {
   const { canvasRef, roomId, socket, tool } = data
 
   switch (tool) {
-    case ToolsEnum.pen:
+    case DrawTools.PEN:
       new Pen(canvasRef, socket, roomId)
       break
-    case ToolsEnum.square:
+    case DrawTools.SQUARE:
       new Square(canvasRef, socket, roomId)
       break
-    case ToolsEnum.circle:
+    case DrawTools.CIRCLE:
       new Circle(canvasRef, socket, roomId)
       break
-    case ToolsEnum.eraser:
+    case DrawTools.ERASER:
       new Eraser(canvasRef, socket, roomId)
       break
-    case ToolsEnum.line:
+    case DrawTools.LINE:
       new Line(canvasRef, socket, roomId)
       break
     default:

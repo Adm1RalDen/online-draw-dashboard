@@ -1,5 +1,4 @@
 type jsonParseType = {
-  // eslint-disable-next-line no-unused-vars
   <T>(str: string): null | T
 }
 

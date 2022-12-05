@@ -1,19 +1,11 @@
+import { DrawTools } from 'const/enums'
 import { DRAW_SOCKET, FINISH_DRAW_SOCKET } from 'const/sockets'
-import { ToolsEnum } from 'hooks/useCanvas/types'
 
+import { DrawLineParams } from 'types/canvas'
 import { SocketApp } from 'types/socket'
 
 import { Tool } from './tool.class'
 
-type DrawOnlineProps = {
-  ctx: CanvasRenderingContext2D
-  x1: number
-  y1: number
-  x2: number
-  y2: number
-  strokeStyle: string
-  lineWidth: number
-}
 export class Line extends Tool {
   private mouseDown = false
   private saved = ''
@@ -35,7 +27,7 @@ export class Line extends Tool {
     this.mouseDown = false
     if (this.ctx) {
       this.socket.emit(DRAW_SOCKET, {
-        tool: ToolsEnum.line,
+        tool: DrawTools.LINE,
         roomId: this.id,
         x1: this.x1,
         y1: this.y1,
@@ -82,7 +74,7 @@ export class Line extends Tool {
     }
   }
 
-  static drawOnline(data: DrawOnlineProps) {
+  static drawOnline(data: DrawLineParams) {
     const { ctx, lineWidth, strokeStyle, x1, x2, y1, y2 } = data
 
     if (ctx) {

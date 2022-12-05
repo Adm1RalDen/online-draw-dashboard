@@ -20,24 +20,12 @@ export const ImageCropEditWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   gap: 10px;
 
-  & > div {
+  & > div:first-of-type {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: ${({ theme }) => theme.spacing.base};
     gap: 20px;
-  }
-
-  & > svg {
-    position: absolute;
-    top: 12px;
-    right: 15px;
-    cursor: pointer;
-    transition: all 0.1s;
-
-    &:hover {
-      fill: ${({ theme }) => theme.colors.royalBlue};
-    }
   }
 `
 

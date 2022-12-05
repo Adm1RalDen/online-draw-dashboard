@@ -2,26 +2,25 @@ import { NavigateFunction } from 'react-router-dom'
 
 import { SocketApp } from 'types/socket'
 
-export enum ToolsEnum {
-  pen = 'pen',
-  square = 'square',
-  circle = 'circle',
-  eraser = 'eraser',
-  line = 'line'
-}
-
 export interface DrawConnectionProps {
   socket: SocketApp
   canvasRef: React.MutableRefObject<HTMLCanvasElement>
   roomId: string
   name: string
   userId: string
-  setSnapshotList: React.Dispatch<React.SetStateAction<string[]>>
-  navigate: NavigateFunction
+  snapshotIndex: number
   fillStyle: string
   strokeStyle: string
   lineWidth: number
   snapshotList: string[]
+  navigate: NavigateFunction
+  setSnapshotList: React.Dispatch<React.SetStateAction<string[]>>
   setSnapshotIndex: React.Dispatch<React.SetStateAction<number>>
-  snapshotIndex: number
+}
+
+export interface handleSetToolParams {
+  tool: string
+  canvasRef: React.MutableRefObject<HTMLCanvasElement>
+  socket: SocketApp
+  roomId: string
 }

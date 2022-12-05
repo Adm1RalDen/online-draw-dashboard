@@ -1,6 +1,6 @@
 import { themes } from 'styles/themes'
 
-import { AuthorizedUser } from 'types'
+import { AuthorizedUser } from 'types/user'
 
 import { InitialStateTypes } from './types'
 

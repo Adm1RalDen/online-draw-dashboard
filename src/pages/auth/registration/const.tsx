@@ -1,4 +1,4 @@
-import { UserRegistrationFormData } from 'types'
+import { UserRegistrationFormData } from 'types/user'
 
 enum FieldsEnum {
   EMAIL = 'email',

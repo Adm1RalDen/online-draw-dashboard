@@ -1,4 +1,4 @@
-import { VerifyRequestData } from 'types'
+import { VerifyRequestData } from 'types/user'
 
 import { ServiceName } from '../types'
 

@@ -1,16 +1,11 @@
+import { DrawTools } from 'const/enums'
 import { DRAW_SOCKET, FINISH_DRAW_SOCKET } from 'const/sockets'
-import { ToolsEnum } from 'hooks/useCanvas/types'
 
+import { DrawEraserParams } from 'types/canvas'
 import { SocketApp } from 'types/socket'
 
 import { Tool } from './tool.class'
 
-type DrawOnlineProps = {
-  roomId?: string
-  ctx: CanvasRenderingContext2D
-  x1: number
-  y1: number
-}
 export class Eraser extends Tool {
   private mouseDown = false
   private x1 = 0
@@ -40,7 +35,7 @@ export class Eraser extends Tool {
   private onMouseMove(e: MouseEvent) {
     if (this.ctx && this.mouseDown) {
       this.socket.emit(DRAW_SOCKET, {
-        tool: ToolsEnum.eraser,
+        tool: DrawTools.ERASER,
         roomId: this.id,
         x1: this.x1,
         y1: this.y1
@@ -56,7 +51,7 @@ export class Eraser extends Tool {
     this.mouseDown = false
   }
 
-  static draw(data: DrawOnlineProps) {
+  static draw(data: DrawEraserParams) {
     const { ctx, x1, y1 } = data
     if (ctx) {
       ctx.beginPath()

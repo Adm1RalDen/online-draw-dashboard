@@ -1,4 +1,4 @@
-import { AuthResponse, VerifyRequestData } from 'types'
+import { AuthResponse, VerifyRequestData } from 'types/user'
 
 import { apiSlice } from '../api'
 import { confirmCreating2FaQueryObj } from '../queriesObjects/confirmCreating2Fa'

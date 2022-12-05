@@ -1,22 +1,10 @@
-import React, { createContext } from 'react'
+import { createContext } from 'react'
+
+import { DrawTools } from 'const/enums'
 
 import { noopFunction } from 'utils/noop'
 
-import { FunctionWithParams } from 'types'
-import { ToolsTypes } from 'types/canvas'
-
-type PaintContextTypes = {
-  canvasRef: React.Ref<HTMLCanvasElement>
-  tool: ToolsTypes
-  snapshot: string | null
-  setToolhandler: FunctionWithParams<ToolsTypes>
-  changeFillStyle: FunctionWithParams<string>
-  changeStrokeStyle: FunctionWithParams<string>
-  changeLineWidth: FunctionWithParams<number>
-  handleReset: VoidFunction
-  handleRedo: VoidFunction
-  handleSnapshot: VoidFunction
-}
+import { PaintContextTypes } from 'types/canvas'
 
 export const PaintContext = createContext<PaintContextTypes>({
   setToolhandler: noopFunction,
@@ -27,6 +15,6 @@ export const PaintContext = createContext<PaintContextTypes>({
   handleRedo: noopFunction,
   handleSnapshot: noopFunction,
   canvasRef: null,
-  tool: 'pen',
+  tool: DrawTools.PEN,
   snapshot: null
 })

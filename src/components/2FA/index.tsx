@@ -14,7 +14,8 @@ import { decreseAttemptsLeftCountAction } from 'store/slices/twoFa.slice'
 import { checkForNumbersInString } from 'utils/checkForNumbersInString'
 import { noopFunction } from 'utils/noop'
 
-import { AuthResponse, FunctionWithParams } from 'types'
+import { FunctionWithParams } from 'types'
+import { AuthResponse } from 'types/user'
 
 import {
   User2FAButton,

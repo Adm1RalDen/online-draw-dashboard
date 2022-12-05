@@ -1,17 +1,11 @@
+import { DrawTools } from 'const/enums'
 import { DRAW_SOCKET, FINISH_DRAW_SOCKET } from 'const/sockets'
-import { ToolsEnum } from 'hooks/useCanvas/types'
 
+import { DrawPenParams } from 'types/canvas'
 import { SocketApp } from 'types/socket'
 
 import { Tool } from './tool.class'
 
-type OnlineDrawProps = {
-  ctx: CanvasRenderingContext2D
-  x1: number
-  y1: number
-  strokeStyle: string
-  lineWidth: number
-}
 export class Pen extends Tool {
   private mouseDown = false
 
@@ -40,7 +34,7 @@ export class Pen extends Tool {
   private onMouseMove(e: MouseEvent) {
     if (this.mouseDown && this.ctx) {
       this.socket.emit(DRAW_SOCKET, {
-        tool: ToolsEnum.pen,
+        tool: DrawTools.PEN,
         roomId: this.id,
         x1: e.offsetX,
         y1: e.offsetY,
@@ -56,7 +50,7 @@ export class Pen extends Tool {
     ctx.stroke()
   }
 
-  static drawOnline(data: OnlineDrawProps) {
+  static drawOnline(data: DrawPenParams) {
     const { ctx, lineWidth, strokeStyle, x1, y1 } = data
     if (ctx) {
       ctx.strokeStyle = strokeStyle

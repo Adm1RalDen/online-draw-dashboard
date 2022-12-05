@@ -19,7 +19,6 @@ export interface UserReducerInitialTypes {
     backgroundFon: string
     originalAvatar: string
     name: string
-    role: string
     email: string
     country: string
     city: string
