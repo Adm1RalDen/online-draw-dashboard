@@ -3,7 +3,7 @@ export interface FunctionWithParams<T> {
 }
 
 export interface ChildrenProps {
-  children: React.ReactNode
+  children: JSX.Element
 }
 
 export interface ServerResponseError {

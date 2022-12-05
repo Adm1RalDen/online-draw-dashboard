@@ -1,6 +1,7 @@
 import axios, { AxiosError } from 'axios'
 
-import { API_URL, getHeaders, setRefreshToken } from 'api/const'
+import { API_URL } from 'api/const'
+import { getHeaders, setRefreshToken } from 'api/utils'
 
 import { NetworkStatus } from 'const/enums'
 

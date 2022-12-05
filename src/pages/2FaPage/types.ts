@@ -1,4 +1,4 @@
-export type TwoFAUserDataType = {
+export interface TwoFAUserDataType {
   userId: string
   attemptsLeftCount: number
 }

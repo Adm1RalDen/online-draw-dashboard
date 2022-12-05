@@ -1,20 +1,14 @@
-import { NavigateFunction } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { JOIN_ROOM_ERROR_SOCKET, JOIN_ROOM_SUCCESS_SOCKET } from 'const/sockets'
 import { DRAW_ONLINE_URL } from 'const/urls'
 
-import { FunctionWithParams } from 'types'
 import { SocketApp } from 'types/socket'
 
-type Props = {
-  socket: SocketApp
-  navigate: NavigateFunction
-  setIsLoading: FunctionWithParams<boolean>
-}
+import { SetAccessPageConnectionParams } from './types'
 
-export const SetAccessPageConnection = (data: Props) => {
-  const { navigate, setIsLoading, socket } = data
+export const setAccessPageConnection = (data: SetAccessPageConnectionParams) => {
+  const { socket, navigate, setIsLoading } = data
 
   socket.on(JOIN_ROOM_SUCCESS_SOCKET, (id) => {
     navigate(`${DRAW_ONLINE_URL}/${id}`, { state: true })
@@ -27,7 +21,7 @@ export const SetAccessPageConnection = (data: Props) => {
   })
 }
 
-export const ClearAccessPageConnection = (socket: SocketApp) => {
+export const clearAccessPageConnection = (socket: SocketApp) => {
   socket.off(JOIN_ROOM_SUCCESS_SOCKET)
   socket.off(JOIN_ROOM_ERROR_SOCKET)
 }

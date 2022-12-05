@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion*/
 import { Tool } from 'canvas_classes'
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -7,20 +8,22 @@ import { useSocket } from 'hooks/useSocket'
 import { useAppSelector } from 'store'
 import { userDataSelector } from 'store/selectors/user.selector'
 
-import { handleSetTool, setCanvasHeight, setCanvasWidth } from './const'
-import { ClearDrawConnection, SetDrawConnection } from './methods/setDrawConnection'
+import { clearDrawConnection, setDrawConnection } from './methods/setDrawConnection'
 import { handleSnapshot, pushRedo, pushUndo } from './methods/snapshot'
+import { handleSetTool, setCanvasHeight, setCanvasWidth } from './utils'
 
 export const useCanvas = () => {
-  /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion*/
-  const canvasRef = useRef<HTMLCanvasElement>(null!)
-  const navigate = useNavigate()
-  const [tool, setTool] = useState<DrawTools>(DrawTools.PEN)
-  const [snapshotList, setSnapshotList] = useState<string[]>([])
   const [snapshotIndex, setSnapshotIndex] = useState(-1)
+  const [snapshotList, setSnapshotList] = useState<string[]>([])
+  const [tool, setTool] = useState<DrawTools>(DrawTools.PEN)
+
   const { socket } = useSocket()
   const { roomId = '' } = useParams()
   const { name, id } = useAppSelector(userDataSelector)
+
+  const canvasRef = useRef<HTMLCanvasElement>(null!)
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (canvasRef.current !== null) {
@@ -30,66 +33,67 @@ export const useCanvas = () => {
       handleSnapshot({
         snapshotIndex,
         snapshotList,
-        setSnapshotIndex,
-        setSnapshotList,
-        canvasRef
-      })
-      handleSetTool({ canvasRef, roomId, socket, tool })
-      SetDrawConnection({
-        userId: id,
-        socket,
         canvasRef,
-        roomId: roomId as string,
+        setSnapshotList,
+        setSnapshotIndex
+      })
+
+      handleSetTool({ canvasRef, roomId, socket, tool })
+
+      setDrawConnection({
+        strokeStyle: Tool.strokeStyle,
+        fillStyle: Tool.fillStyle,
+        lineWidth: Tool.lineWidth,
+        snapshotIndex,
+        snapshotList,
+        userId: id,
+        canvasRef,
+        socket,
+        roomId,
         name,
         navigate,
-        fillStyle: Tool.fillStyle,
-        strokeStyle: Tool.strokeStyle,
-        lineWidth: Tool.lineWidth,
         setSnapshotList,
-        snapshotList,
-        setSnapshotIndex,
-        snapshotIndex
+        setSnapshotIndex
       })
     }
-    return () => {
-      ClearDrawConnection(socket)
-    }
+
+    return () => clearDrawConnection(socket)
     /* eslint-disable-next-line react-hooks/exhaustive-deps*/
   }, [])
 
   useEffect(() => {
-    handleSetTool({ canvasRef, roomId: roomId as string, socket, tool })
+    handleSetTool({ canvasRef, roomId, socket, tool })
   }, [tool, canvasRef, roomId, socket])
 
-  const setToolhandler = (tool: DrawTools) => setTool(tool)
   const changeFillStyle = (color: string) =>
     Tool.changeFillStyle(canvasRef.current.getContext('2d'), color)
   const changeStrokeStyle = (color: string) =>
     Tool.changeStrokeStyle(canvasRef.current.getContext('2d'), color)
   const changeLineWidth = (size: number) =>
     Tool.changeLineWidth(canvasRef.current.getContext('2d'), size)
+
   const handleReset = () =>
     pushUndo(canvasRef.current.getContext('2d'), snapshotList, snapshotIndex, setSnapshotIndex)
   const handleRedo = () =>
     pushRedo(canvasRef.current.getContext('2d'), snapshotList, snapshotIndex, setSnapshotIndex)
 
   return {
+    snapshot: snapshotList[snapshotIndex] || null,
     canvasRef,
     tool,
-    setToolhandler,
-    changeFillStyle,
-    changeStrokeStyle,
-    changeLineWidth,
-    handleReset,
     handleRedo,
+    handleReset,
+    changeFillStyle,
+    changeLineWidth,
+    changeStrokeStyle,
+    setToolhandler: setTool,
     handleSnapshot: () =>
       handleSnapshot({
         snapshotIndex,
         snapshotList,
-        setSnapshotIndex,
+        canvasRef,
         setSnapshotList,
-        canvasRef
-      }),
-    snapshot: snapshotList[snapshotIndex] || null
+        setSnapshotIndex
+      })
   }
 }

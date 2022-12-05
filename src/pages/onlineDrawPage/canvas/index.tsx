@@ -6,49 +6,49 @@ import { SettingsBar } from 'components/settings'
 import { Toolbar } from 'components/toolbar'
 
 import { EXIT_SOCKET } from 'const/sockets'
-import { useCanvas } from 'hooks/useCanvas/useCanvas.hook'
+import { useCanvas } from 'hooks/useCanvas'
 import { useSocket } from 'hooks/useSocket'
 import { useAppSelector } from 'store'
-import { userDataSelector } from 'store/selectors/user.selector'
+import { userIdSelector } from 'store/selectors/user.selector'
 
 import { PaintContext } from 'context/paintContext'
 
 import { RoomUsers } from '../roomUsers'
 import { CanvasSection, Layout } from './styles'
 
-type ParamsProps = {
-  roomId: string
-}
-
 export const OnlineCanvas = () => {
-  const data = useCanvas()
-  const user = useAppSelector(userDataSelector)
-  const { roomId } = useParams<ParamsProps>()
+  const { roomId = '' } = useParams()
   const { socket } = useSocket()
+
+  const id = useAppSelector(userIdSelector)
+  const data = useCanvas()
 
   const handleTabClosing = useCallback(
     (e: BeforeUnloadEvent) => {
       e.preventDefault()
+
       socket.emit(EXIT_SOCKET, {
-        roomId: roomId as string,
-        userId: user.id
+        roomId,
+        userId: id
       })
+
       e.returnValue = ''
       return ''
     },
-    [socket, roomId, user.id]
+    [socket, roomId, id]
   )
 
   useEffect(() => {
     window.addEventListener('beforeunload', handleTabClosing)
+
     return () => {
       window.removeEventListener('beforeunload', handleTabClosing)
       socket.emit(EXIT_SOCKET, {
-        roomId: roomId as string,
-        userId: user.id
+        roomId: roomId,
+        userId: id
       })
     }
-  }, [handleTabClosing, socket, roomId, user.id])
+  }, [handleTabClosing, socket, roomId, id])
 
   return (
     <CanvasSection>

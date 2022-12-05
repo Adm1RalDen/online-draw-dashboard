@@ -8,25 +8,25 @@ import { useSocket } from 'hooks/useSocket'
 import { useAppSelector } from 'store'
 import { userDataSelector } from 'store/selectors/user.selector'
 
-import { FunctionWithParams } from 'types'
+import { ChangeStateAction } from 'types'
 
 import { RoomInput, RoomInputWrapper, RoomWrapper, SubmitButton } from '../styles'
-import { initialValues, onSubmit, validationSchema } from './const'
+import { initialValues } from './const'
+import { onSubmit, validationSchema } from './utils'
 
-type ComponentProps = {
+interface ComponentProps {
   isLoading: boolean
-  setIsLoading: FunctionWithParams<boolean>
+  setIsLoading: ChangeStateAction<boolean>
 }
 
 export const CreateRoomComponent: FC<ComponentProps> = ({ isLoading, setIsLoading }) => {
-  const user = useAppSelector(userDataSelector)
+  const { id, name } = useAppSelector(userDataSelector)
   const { socket } = useSocket()
 
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: (data) =>
-      onSubmit({ ...data, userId: user.id, userName: user.name }, setIsLoading, socket)
+    onSubmit: (data) => onSubmit({ ...data, userId: id, userName: name }, socket, setIsLoading)
   })
 
   return (

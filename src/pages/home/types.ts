@@ -1,3 +1,9 @@
+import { NavigateFunction } from 'react-router-dom'
+
+import { ChangeStateAction, FunctionWithParams } from 'types'
+import { ActiveRoom } from 'types/rooms'
+import { SocketApp } from 'types/socket'
+
 export interface CreateRoom {
   userId: string
   userName: string
@@ -27,4 +33,17 @@ export interface ChatError {
 export interface ChatType {
   method: 'GET_CHAT' | 'MESSAGE' | 'ERROR'
   data: ChatMessageType[] | ChatMessageType | ChatError
+}
+
+export interface SetRoomsConnectionParams {
+  setActiveRooms: FunctionWithParams<ActiveRoom[]>
+  setUserRooms: FunctionWithParams<ActiveRoom[]>
+  navigate: NavigateFunction
+  setIsLoading: ChangeStateAction<boolean>
+  socket: SocketApp
+  userId: string
+}
+
+export interface AccessPermittedParams {
+  (id: string, navigate: NavigateFunction, setIsLoading: ChangeStateAction<boolean>): void
 }

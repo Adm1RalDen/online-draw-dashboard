@@ -6,26 +6,27 @@ import { Heading3 } from 'styles/typography/styles'
 
 import { useSocket } from 'hooks/useSocket'
 import { useAppSelector } from 'store'
-import { userInfoSelector } from 'store/selectors/user.selector'
+import { userDataSelector } from 'store/selectors/user.selector'
 
 import { FunctionWithParams } from 'types'
 
 import { RoomInput, RoomInputWrapper, RoomWrapper, SubmitButton } from '../styles'
-import { initialValues, onSubmit, validationSchema } from './const'
+import { initialValues } from './const'
+import { onSubmit, validationSchema } from './utils'
 
-type Props = {
+interface EnterInRoomProps {
   isLoading: boolean
   setIsLoading: FunctionWithParams<boolean>
 }
 
-export const EnterInRoomComponent: FC<Props> = ({ isLoading, setIsLoading }) => {
+export const EnterInRoomComponent: FC<EnterInRoomProps> = ({ isLoading, setIsLoading }) => {
+  const { id, name } = useAppSelector(userDataSelector)
   const { socket } = useSocket()
-  const user = useAppSelector(userInfoSelector)
+
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: (data) =>
-      onSubmit({ ...data, userId: user.data.id, userName: user.data.name }, socket, setIsLoading)
+    onSubmit: (data) => onSubmit({ ...data, userId: id, userName: name }, socket, setIsLoading)
   })
 
   return (

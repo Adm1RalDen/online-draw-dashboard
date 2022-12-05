@@ -10,7 +10,6 @@ import { useSocket } from 'hooks/useSocket'
 import { useAppSelector } from 'store'
 import { userDataSelector } from 'store/selectors/user.selector'
 
-import { ClearAccessPageConnection, SetAccessPageConnection } from './const'
 import {
   ConfirmAccessPage,
   ConfirmAccessPageButton,
@@ -18,28 +17,32 @@ import {
   ConfirmAccessPageInputWrapper,
   ConfirmAccessPageMain
 } from './styles'
+import { clearAccessPageConnection, setAccessPageConnection } from './utils'
 
 export const PrivateRoom = () => {
-  const [roomPassword, setPassword] = useState('')
-  const user = useAppSelector(userDataSelector)
   const [isLoading, setIsLoading] = useState(false)
-  const navigate = useNavigate()
-  const { roomId } = useParams()
+  const [roomPassword, setPassword] = useState('')
+
+  const { id, name } = useAppSelector(userDataSelector)
+  const { roomId = '' } = useParams()
   const { socket } = useSocket()
 
+  const navigate = useNavigate()
+
   useEffect(() => {
-    SetAccessPageConnection({ navigate, setIsLoading, socket })
-    return () => ClearAccessPageConnection(socket)
+    setAccessPageConnection({ socket, navigate, setIsLoading })
+    return () => clearAccessPageConnection(socket)
   }, [navigate, socket])
 
   const handleEnter = async () => {
     if (roomId) {
       setIsLoading(true)
+
       socket.emit(JOIN_ROOM_SOCKET, {
-        roomId,
+        userName: name,
         roomPassword,
-        userId: user.id,
-        userName: user.name
+        userId: id,
+        roomId
       })
     }
   }

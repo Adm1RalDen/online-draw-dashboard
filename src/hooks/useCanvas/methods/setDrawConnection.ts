@@ -19,11 +19,14 @@ import { SocketApp } from 'types/socket'
 
 import { DrawConnectionProps } from '../types'
 
-export const SetDrawConnection = (data: DrawConnectionProps) => {
-  const { canvasRef, name, navigate, roomId, socket, userId } = data
+export const setDrawConnection = (data: DrawConnectionProps) => {
+  const { canvasRef, name, roomId, socket, userId, navigate } = data
+
   const ctx = canvasRef.current.getContext('2d')
 
   socket.emit(GET_SNAPSHOT_SOCKET, { roomId, userId, socketId: socket.id })
+  socket.emit(CONNECTION_DRAW_SOCKET, { userName: name, roomId })
+
   socket.on(SEND_SNAPSHOT_SOCKET, (ownerId, recipient) => {
     if (canvasRef.current && ownerId === userId) {
       const img = canvasRef.current.toDataURL()
@@ -41,7 +44,6 @@ export const SetDrawConnection = (data: DrawConnectionProps) => {
     }
   })
 
-  socket.emit(CONNECTION_DRAW_SOCKET, { userName: name, roomId })
   socket.on(CONNECTION_DRAW_SOCKET, (data) => {
     toast.success(`${data} ${USER_JOINED}`)
   })
@@ -49,6 +51,7 @@ export const SetDrawConnection = (data: DrawConnectionProps) => {
   socket.on(FINISH_DRAW_SOCKET, () => {
     ctx?.beginPath()
   })
+
   socket.on(CASE_EXIT_SOCKET, () => {
     navigate(HOME_URL)
   })
@@ -78,7 +81,7 @@ export const SetDrawConnection = (data: DrawConnectionProps) => {
   })
 }
 
-export const ClearDrawConnection = (socket: SocketApp) => {
+export const clearDrawConnection = (socket: SocketApp) => {
   socket.off(CONNECTION_DRAW_SOCKET)
   socket.off(FINISH_DRAW_SOCKET)
   socket.off(CASE_EXIT_SOCKET)
