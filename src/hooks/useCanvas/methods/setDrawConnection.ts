@@ -19,9 +19,14 @@ import { SocketApp } from 'types/socket'
 
 import { DrawConnectionProps } from '../types'
 
-export const setDrawConnection = (data: DrawConnectionProps) => {
-  const { canvasRef, name, roomId, socket, userId, navigate } = data
-
+export const setDrawConnection = ({
+  canvasRef,
+  name,
+  roomId,
+  socket,
+  userId,
+  navigate
+}: DrawConnectionProps) => {
   const ctx = canvasRef.current.getContext('2d')
 
   socket.emit(GET_SNAPSHOT_SOCKET, { roomId, userId, socketId: socket.id })

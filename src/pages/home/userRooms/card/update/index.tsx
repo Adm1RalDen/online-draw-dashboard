@@ -17,7 +17,7 @@ import {
   UpdateModalInput,
   UpdateModalWrapper
 } from './styles'
-import { handleUpdate } from './utils'
+import { handleUpdateCard } from './utils'
 
 interface UpdateCardProps {
   room: ActiveRoom
@@ -36,7 +36,11 @@ export const UpdateCard: FC<UpdateCardProps> = ({ room, userId, setEditMode, set
       roomPassword: room.roomPassword
     },
     enableReinitialize: true,
-    onSubmit: (data) => handleUpdate({ data, socket, room, userId, setIsLoading, setEditMode })
+    onSubmit: (data) => {
+      setIsLoading(true)
+      handleUpdateCard({ data, socket, room, userId })
+      setEditMode(false)
+    }
   })
 
   const changeEditMode = () => setEditMode(false)

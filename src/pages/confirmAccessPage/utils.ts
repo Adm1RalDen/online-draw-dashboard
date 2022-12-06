@@ -7,9 +7,11 @@ import { SocketApp } from 'types/socket'
 
 import { SetAccessPageConnectionParams } from './types'
 
-export const setAccessPageConnection = (data: SetAccessPageConnectionParams) => {
-  const { socket, navigate, setIsLoading } = data
-
+export const setAccessPageConnection = ({
+  socket,
+  navigate,
+  setIsLoading
+}: SetAccessPageConnectionParams) => {
   socket.on(JOIN_ROOM_SUCCESS_SOCKET, (id) => {
     navigate(`${DRAW_ONLINE_URL}/${id}`, { state: true })
     setIsLoading(false)

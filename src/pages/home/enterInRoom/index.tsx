@@ -4,15 +4,16 @@ import { FC } from 'react'
 import { ErrorSpan } from 'components/error-span'
 import { Heading3 } from 'styles/typography/styles'
 
+import { JOIN_ROOM_SOCKET } from 'const/sockets'
 import { useSocket } from 'hooks/useSocket'
 import { useAppSelector } from 'store'
-import { userDataSelector } from 'store/selectors/user.selector'
+import { userIdSelector, userNameSelector } from 'store/selectors/user.selector'
 
 import { FunctionWithParams } from 'types'
 
 import { RoomInput, RoomInputWrapper, RoomWrapper, SubmitButton } from '../styles'
 import { initialValues } from './const'
-import { onSubmit, validationSchema } from './utils'
+import { validationSchema } from './utils'
 
 interface EnterInRoomProps {
   isLoading: boolean
@@ -20,13 +21,18 @@ interface EnterInRoomProps {
 }
 
 export const EnterInRoomComponent: FC<EnterInRoomProps> = ({ isLoading, setIsLoading }) => {
-  const { id, name } = useAppSelector(userDataSelector)
+  const userId = useAppSelector(userIdSelector)
+  const userName = useAppSelector(userNameSelector)
+
   const { socket } = useSocket()
 
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: (data) => onSubmit({ ...data, userId: id, userName: name }, socket, setIsLoading)
+    onSubmit: (data) => {
+      setIsLoading(true)
+      socket.emit(JOIN_ROOM_SOCKET, { ...data, userId, userName })
+    }
   })
 
   return (

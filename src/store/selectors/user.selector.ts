@@ -7,3 +7,4 @@ export const userIsUserStateLoadedSelector = (state: RootState) => state.user.is
 export const userIsLoadingSelector = (state: RootState) => state.user.isLoading
 export const userIdSelector = (state: RootState) => state.user.data.id
 export const userIsAuthSelector = (state: RootState) => state.user.isAuth
+export const userNameSelector = (state: RootState) => state.user.data.name

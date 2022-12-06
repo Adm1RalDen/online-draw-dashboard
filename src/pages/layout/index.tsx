@@ -12,7 +12,7 @@ export const LayoutComponent = () => {
   const data = useCanvas()
 
   return (
-    <PaintContext.Provider value={{ ...data }}>
+    <PaintContext.Provider value={data}>
       <Layout>
         <Toolbar />
         <SettingsBar />

@@ -1,11 +1,11 @@
 import axios, { AxiosError } from 'axios'
 
 import { API_URL } from 'api/const'
-import { getHeaders, setRefreshToken } from 'api/utils'
+import { getHeaders } from 'api/utils'
 
 import { NetworkStatus } from 'const/enums'
 
-import { getToken, saveUserInStorage } from 'services/token.service'
+import { getRefreshToken, getToken, saveUserInStorage } from 'services/token.service'
 
 import { AuthResponse } from 'types/user'
 
@@ -21,7 +21,9 @@ export const refreshTokenInterceptor = async (error: AxiosError) => {
       if (token) {
         const refresh = await axios.post<AuthResponse>(
           `${API_URL}/user/refresh`,
-          setRefreshToken(),
+          {
+            refreshToken: getRefreshToken()
+          },
           getHeaders()
         )
 

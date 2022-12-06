@@ -12,35 +12,33 @@ import { ChildrenProps } from 'types'
 import { checkUserInRoom } from './utils'
 
 export const OnlineDrawPage: FC<ChildrenProps> = ({ children }) => {
-  const [access, setAccess] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
   const { socket } = useSocket()
   const { state } = useLocation()
   const { roomId = '' } = useParams()
 
-  const id = useAppSelector(userIdSelector)
+  const userId = useAppSelector(userIdSelector)
 
   const navigate = useNavigate()
 
   useEffect(() => {
     if (!state) {
+      setIsLoading(true)
       checkUserInRoom({
         socket,
         roomId,
-        userId: id,
-        navigate,
-        setAccess,
-        setIsLoading
+        userId,
+        navigate
+      }).finally(() => {
+        setIsLoading(true)
       })
-    } else {
-      setAccess(true)
     }
-  }, [navigate, setIsLoading, setAccess, roomId, socket, state, id])
+  }, [navigate, setIsLoading, roomId, socket, state, userId])
 
   if (isLoading) return <Loader position='absolute' />
 
-  if (!access) return <div>You have not access</div>
+  if (!state) return <div>You have not access</div>
 
   return children
 }

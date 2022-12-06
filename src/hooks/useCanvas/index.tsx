@@ -58,7 +58,6 @@ export const useCanvas = () => {
     }
 
     return () => clearDrawConnection(socket)
-    /* eslint-disable-next-line react-hooks/exhaustive-deps*/
   }, [])
 
   useEffect(() => {

@@ -3,24 +3,23 @@ import { UPDATE_USER_ROOM_SOCKET } from 'const/sockets'
 
 import { HandleUpdateParams } from './types'
 
-export const handleUpdate = (params: HandleUpdateParams) => {
-  const { room, userId, data, socket, setIsLoading, setEditMode } = params
+interface AcumTypes {
+  [key: string]: string | boolean
+}
 
-  setIsLoading(true)
-
+export const handleUpdateCard = ({ room, userId, data, socket }: HandleUpdateParams) => {
   const keys = Object.keys(data) as (keyof HandleUpdateParams['data'])[]
+
   const res = keys
     .filter((key) => data[key] !== room[key])
-    .reduce((acum: any, key: keyof HandleUpdateParams['data']) => {
+    .reduce((acum: AcumTypes, key) => {
       acum[key] = data[key]
       return acum
-    }, {} as HandleUpdateParams['data'])
+    }, {})
 
   socket.emit(UPDATE_USER_ROOM_SOCKET, {
     ...res,
     roomId: room._id,
     userId
   })
-
-  setEditMode(false)
 }

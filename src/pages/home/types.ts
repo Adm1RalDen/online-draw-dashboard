@@ -43,7 +43,3 @@ export interface SetRoomsConnectionParams {
   socket: SocketApp
   userId: string
 }
-
-export interface AccessPermittedParams {
-  (id: string, navigate: NavigateFunction, setIsLoading: ChangeStateAction<boolean>): void
-}

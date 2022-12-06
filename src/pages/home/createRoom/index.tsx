@@ -4,15 +4,16 @@ import { FC } from 'react'
 import { ErrorSpan } from 'components/error-span'
 import { Heading3 } from 'styles/typography/styles'
 
+import { CREATE_ROOM_SOCKET, GET_USER_ROOMS_SOCKET } from 'const/sockets'
 import { useSocket } from 'hooks/useSocket'
 import { useAppSelector } from 'store'
-import { userDataSelector } from 'store/selectors/user.selector'
+import { userIdSelector, userNameSelector } from 'store/selectors/user.selector'
 
 import { ChangeStateAction } from 'types'
 
 import { RoomInput, RoomInputWrapper, RoomWrapper, SubmitButton } from '../styles'
 import { initialValues } from './const'
-import { onSubmit, validationSchema } from './utils'
+import { validationSchema } from './utils'
 
 interface ComponentProps {
   isLoading: boolean
@@ -20,13 +21,19 @@ interface ComponentProps {
 }
 
 export const CreateRoomComponent: FC<ComponentProps> = ({ isLoading, setIsLoading }) => {
-  const { id, name } = useAppSelector(userDataSelector)
   const { socket } = useSocket()
+
+  const userId = useAppSelector(userIdSelector)
+  const userName = useAppSelector(userNameSelector)
 
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: (data) => onSubmit({ ...data, userId: id, userName: name }, socket, setIsLoading)
+    onSubmit: (data) => {
+      setIsLoading(true)
+      socket.emit(CREATE_ROOM_SOCKET, { ...data, userName, userId })
+      socket.emit(GET_USER_ROOMS_SOCKET, { userId })
+    }
   })
 
   return (

@@ -14,20 +14,9 @@ import {
 } from 'const/sockets'
 import { DRAW_ONLINE_URL } from 'const/urls'
 
-import { FunctionWithParams } from 'types'
 import { SocketApp } from 'types/socket'
 
-import { AccessPermittedParams, SetRoomsConnectionParams } from './types'
-
-const accessPermitted: AccessPermittedParams = (id, navigate, setIsLoading) => {
-  setIsLoading(false)
-  navigate(`${DRAW_ONLINE_URL}/${id}`, { state: true })
-}
-
-const accessUnPermitted = (error: string, setIsLoading: FunctionWithParams<boolean>) => {
-  setIsLoading(false)
-  toast.error(error)
-}
+import { SetRoomsConnectionParams } from './types'
 
 export const setRoomsConnection = (data: SetRoomsConnectionParams) => {
   const { socket, userId, setActiveRooms, navigate, setUserRooms, setIsLoading } = data
@@ -39,8 +28,16 @@ export const setRoomsConnection = (data: SetRoomsConnectionParams) => {
   socket.on(GET_USER_ROOMS_SOCKET, setUserRooms)
   socket.on(UPDATE_USER_ROOM_SUCCESS_SOCKET, () => setIsLoading(false))
   socket.on(DELETE_USER_ROOM_SUCCESS_SOCKET, () => setIsLoading(false))
-  socket.on(CREATE_ERROR_SOCKET, (e) => accessUnPermitted(e, setIsLoading))
-  socket.on(CREATE_SUCCESS_SOCKET, (id) => accessPermitted(id, navigate, setIsLoading))
+
+  socket.on(CREATE_ERROR_SOCKET, (error) => {
+    setIsLoading(false)
+    toast.error(error)
+  })
+
+  socket.on(CREATE_SUCCESS_SOCKET, (id) => {
+    setIsLoading(false)
+    navigate(`${DRAW_ONLINE_URL}/${id}`, { state: true })
+  })
 
   socket.on(UPDATE_USER_ROOM_ERROR_SOCKET, (error) => {
     setIsLoading(false)
@@ -53,11 +50,13 @@ export const setRoomsConnection = (data: SetRoomsConnectionParams) => {
   })
 
   socket.on(JOIN_ROOM_SUCCESS_SOCKET, (id) => {
-    accessPermitted(id, navigate, setIsLoading)
+    setIsLoading(false)
+    navigate(`${DRAW_ONLINE_URL}/${id}`, { state: true })
   })
 
-  socket.on(JOIN_ROOM_ERROR_SOCKET, (e) => {
-    accessUnPermitted(e, setIsLoading)
+  socket.on(JOIN_ROOM_ERROR_SOCKET, (error) => {
+    setIsLoading(false)
+    toast.error(error)
   })
 }
 
