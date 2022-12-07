@@ -20,7 +20,7 @@ export const OnlineCanvas = () => {
   const { roomId = '' } = useParams()
   const { socket } = useSocket()
 
-  const id = useAppSelector(userIdSelector)
+  const userId = useAppSelector(userIdSelector)
   const data = useCanvas()
 
   const handleTabClosing = useCallback(
@@ -29,13 +29,13 @@ export const OnlineCanvas = () => {
 
       socket.emit(EXIT_SOCKET, {
         roomId,
-        userId: id
+        userId
       })
 
       e.returnValue = ''
       return ''
     },
-    [socket, roomId, id]
+    [socket, roomId, userId]
   )
 
   useEffect(() => {
@@ -44,15 +44,15 @@ export const OnlineCanvas = () => {
     return () => {
       window.removeEventListener('beforeunload', handleTabClosing)
       socket.emit(EXIT_SOCKET, {
-        roomId: roomId,
-        userId: id
+        roomId,
+        userId
       })
     }
-  }, [handleTabClosing, socket, roomId, id])
+  }, [handleTabClosing, socket, roomId, userId])
 
   return (
     <CanvasSection>
-      <PaintContext.Provider value={{ ...data }}>
+      <PaintContext.Provider value={data}>
         <Layout>
           <Toolbar />
           <SettingsBar />

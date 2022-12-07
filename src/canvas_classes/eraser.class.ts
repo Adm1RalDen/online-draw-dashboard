@@ -1,3 +1,5 @@
+import { colors } from 'styles/colors'
+
 import { DrawTools } from 'const/enums'
 import { DRAW_SOCKET, FINISH_DRAW_SOCKET } from 'const/sockets'
 
@@ -11,15 +13,15 @@ export class Eraser extends Tool {
   private x1 = 0
   private y1 = 0
 
-  constructor(canvas: React.MutableRefObject<HTMLCanvasElement>, socket: SocketApp, id: string) {
+  constructor(canvas: HTMLCanvasElement, socket: SocketApp, id: string) {
     super(canvas, socket, id)
     this.listen()
   }
 
   private listen() {
-    this.canvas.current.onmousedown = this.onMouseDown.bind(this)
-    this.canvas.current.onmousemove = this.onMouseMove.bind(this)
-    this.canvas.current.onmouseup = this.onMouseUp.bind(this)
+    this.canvas.onmousedown = this.onMouseDown.bind(this)
+    this.canvas.onmousemove = this.onMouseMove.bind(this)
+    this.canvas.onmouseup = this.onMouseUp.bind(this)
   }
 
   private onMouseDown(e: MouseEvent) {
@@ -40,6 +42,7 @@ export class Eraser extends Tool {
         x1: this.x1,
         y1: this.y1
       })
+
       Eraser.draw({ ctx: this.ctx, x1: this.x1, y1: this.y1 })
     }
 
@@ -51,12 +54,11 @@ export class Eraser extends Tool {
     this.mouseDown = false
   }
 
-  static draw(data: DrawEraserParams) {
-    const { ctx, x1, y1 } = data
+  static draw({ ctx, x1, y1 }: DrawEraserParams) {
     if (ctx) {
       ctx.beginPath()
       ctx.arc(x1, y1, 20, 0, Math.PI * 2)
-      ctx.fillStyle = '#fff'
+      ctx.fillStyle = colors.white
       ctx.fill()
       ctx.fillStyle = this.fillStyle
     }

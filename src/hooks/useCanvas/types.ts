@@ -4,23 +4,16 @@ import { SocketApp } from 'types/socket'
 
 export interface DrawConnectionProps {
   socket: SocketApp
-  canvasRef: React.MutableRefObject<HTMLCanvasElement>
+  canvas: HTMLCanvasElement
   roomId: string
-  name: string
+  userName: string
   userId: string
-  snapshotIndex: number
-  fillStyle: string
-  strokeStyle: string
-  lineWidth: number
-  snapshotList: string[]
   navigate: NavigateFunction
-  setSnapshotList: React.Dispatch<React.SetStateAction<string[]>>
-  setSnapshotIndex: React.Dispatch<React.SetStateAction<number>>
 }
 
 export interface handleSetToolParams {
   tool: string
-  canvasRef: React.MutableRefObject<HTMLCanvasElement>
+  canvas: HTMLCanvasElement
   socket: SocketApp
   roomId: string
 }

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion*/
 import { Tool } from 'canvas_classes'
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -6,7 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { DrawTools } from 'const/enums'
 import { useSocket } from 'hooks/useSocket'
 import { useAppSelector } from 'store'
-import { userDataSelector } from 'store/selectors/user.selector'
+import { userIdSelector, userNameSelector } from 'store/selectors/user.selector'
 
 import { clearDrawConnection, setDrawConnection } from './methods/setDrawConnection'
 import { handleSnapshot, pushRedo, pushUndo } from './methods/snapshot'
@@ -19,80 +18,82 @@ export const useCanvas = () => {
 
   const { socket } = useSocket()
   const { roomId = '' } = useParams()
-  const { name, id } = useAppSelector(userDataSelector)
 
-  const canvasRef = useRef<HTMLCanvasElement>(null!)
+  const userId = useAppSelector(userIdSelector)
+  const userName = useAppSelector(userNameSelector)
 
+  const canvasRef = useRef<HTMLCanvasElement>(null)
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (canvasRef.current !== null) {
-      canvasRef.current.width = setCanvasWidth()
-      canvasRef.current.height = setCanvasHeight()
+    const canvas = canvasRef.current
+
+    if (canvas) {
+      canvas.width = setCanvasWidth()
+      canvas.height = setCanvasHeight()
 
       handleSnapshot({
-        snapshotIndex,
         snapshotList,
-        canvasRef,
+        canvas,
         setSnapshotList,
         setSnapshotIndex
       })
-
-      handleSetTool({ canvasRef, roomId, socket, tool })
 
       setDrawConnection({
-        strokeStyle: Tool.strokeStyle,
-        fillStyle: Tool.fillStyle,
-        lineWidth: Tool.lineWidth,
-        snapshotIndex,
-        snapshotList,
-        userId: id,
-        canvasRef,
+        canvas,
+        userId,
         socket,
         roomId,
-        name,
-        navigate,
-        setSnapshotList,
-        setSnapshotIndex
+        userName,
+        navigate
       })
+
+      handleSetTool({ canvas, roomId, socket, tool })
     }
 
     return () => clearDrawConnection(socket)
   }, [])
 
   useEffect(() => {
-    handleSetTool({ canvasRef, roomId, socket, tool })
+    if (canvasRef.current) {
+      handleSetTool({ canvas: canvasRef.current, roomId, socket, tool })
+    }
   }, [tool, canvasRef, roomId, socket])
 
-  const changeFillStyle = (color: string) =>
-    Tool.changeFillStyle(canvasRef.current.getContext('2d'), color)
-  const changeStrokeStyle = (color: string) =>
-    Tool.changeStrokeStyle(canvasRef.current.getContext('2d'), color)
-  const changeLineWidth = (size: number) =>
-    Tool.changeLineWidth(canvasRef.current.getContext('2d'), size)
+  const handleReset = () => {
+    if (canvasRef.current) {
+      pushUndo(canvasRef.current.getContext('2d'), snapshotList, snapshotIndex, setSnapshotIndex)
+    }
+  }
 
-  const handleReset = () =>
-    pushUndo(canvasRef.current.getContext('2d'), snapshotList, snapshotIndex, setSnapshotIndex)
-  const handleRedo = () =>
-    pushRedo(canvasRef.current.getContext('2d'), snapshotList, snapshotIndex, setSnapshotIndex)
+  const handleRedo = () => {
+    if (canvasRef.current) {
+      pushRedo(canvasRef.current.getContext('2d'), snapshotList, snapshotIndex, setSnapshotIndex)
+    }
+  }
 
-  return {
-    snapshot: snapshotList[snapshotIndex] || null,
-    canvasRef,
-    tool,
-    handleRedo,
-    handleReset,
-    changeFillStyle,
-    changeLineWidth,
-    changeStrokeStyle,
-    setToolhandler: setTool,
-    handleSnapshot: () =>
+  const makeSnapshot = () => {
+    if (canvasRef.current) {
       handleSnapshot({
-        snapshotIndex,
         snapshotList,
-        canvasRef,
+        canvas: canvasRef.current,
         setSnapshotList,
         setSnapshotIndex
       })
+    }
+  }
+
+  return {
+    snapshot: snapshotList[snapshotIndex] || null,
+    ref: canvasRef,
+    canvas: canvasRef.current,
+    tool,
+    handleRedo,
+    handleReset,
+    setToolhandler: setTool,
+    handleSnapshot: makeSnapshot,
+    changeFillStyle: Tool.changeFillStyle,
+    changeLineWidth: Tool.changeLineWidth,
+    changeStrokeStyle: Tool.changeStrokeStyle
   }
 }
