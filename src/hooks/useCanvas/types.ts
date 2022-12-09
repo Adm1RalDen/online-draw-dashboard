@@ -1,5 +1,7 @@
 import { NavigateFunction } from 'react-router-dom'
 
+import { DrawTools } from 'const/enums'
+
 import { SocketApp } from 'types/socket'
 
 export interface DrawConnectionProps {
@@ -19,7 +21,7 @@ export interface DrawConnectionProps {
 }
 
 export interface handleSetToolParams {
-  tool: string
+  tool: DrawTools
   canvasRef: React.MutableRefObject<HTMLCanvasElement>
   socket: SocketApp
   roomId: string
