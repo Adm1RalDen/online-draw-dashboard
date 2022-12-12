@@ -7,7 +7,7 @@ import { useSocket } from 'hooks/useSocket'
 import { useAppSelector } from 'store'
 import { userDataSelector } from 'store/selectors/user.selector'
 
-import { handleSetTool, setCanvasHeight, setCanvasWidth } from './const'
+import { draw, setCanvasHeight, setCanvasWidth } from './const'
 import { ClearDrawConnection, SetDrawConnection } from './methods/setDrawConnection'
 import { handleSnapshot, pushRedo, pushUndo } from './methods/snapshot'
 
@@ -34,7 +34,9 @@ export const useCanvas = () => {
         setSnapshotList,
         canvasRef
       })
-      handleSetTool({ canvasRef, roomId, socket, tool })
+
+      new draw[tool](canvasRef, socket, roomId)
+
       SetDrawConnection({
         userId: id,
         socket,
@@ -58,7 +60,7 @@ export const useCanvas = () => {
   }, [])
 
   useEffect(() => {
-    handleSetTool({ canvasRef, roomId: roomId as string, socket, tool })
+    new draw[tool](canvasRef, socket, roomId)
   }, [tool, canvasRef, roomId, socket])
 
   const setToolhandler = (tool: DrawTools) => setTool(tool)
