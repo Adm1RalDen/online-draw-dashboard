@@ -5,8 +5,6 @@ import { SocketApp } from 'types/socket'
 export class Tool {
   protected id
   protected ctx
-  protected width = 1200
-  protected height = 550
   protected socket
   protected canvas
   static lineWidth = 1
@@ -18,8 +16,6 @@ export class Tool {
     this.socket = socket
     this.id = id
     this.ctx = canvas.getContext('2d')
-    this.width = canvas.width
-    this.height = canvas.height
   }
 
   static changeFillStyle(ctx: CanvasRenderingContext2D | null, color: string) {

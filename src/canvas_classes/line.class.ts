@@ -66,8 +66,8 @@ export class Line extends Tool {
   private draw(e: MouseEvent, img: HTMLImageElement) {
     if (this.ctx && this.mouseDown) {
       this.ctx.beginPath()
-      this.ctx.clearRect(0, 0, this.width, this.height)
-      this.ctx.drawImage(img, 0, 0, this.width, this.height)
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+      this.ctx.drawImage(img, 0, 0, this.canvas.width, this.canvas.height)
       this.ctx.moveTo(this.x1, this.y1)
       this.ctx.lineTo(e.offsetX, e.offsetY)
       this.ctx.stroke()

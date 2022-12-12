@@ -71,8 +71,8 @@ export class Circle extends Tool {
 
     if (this.ctx) {
       this.ctx.beginPath()
-      this.ctx.clearRect(0, 0, this.width, this.height)
-      this.ctx.drawImage(img, 0, 0, this.width, this.height)
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+      this.ctx.drawImage(img, 0, 0, this.canvas.width, this.canvas.height)
       this.ctx.arc(this.x1, this.y1, c / 2, 0, 2 * Math.PI)
       this.ctx.fill()
       this.ctx.stroke()

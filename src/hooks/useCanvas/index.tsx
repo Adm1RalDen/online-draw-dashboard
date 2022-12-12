@@ -8,7 +8,6 @@ import { useAppSelector } from 'store'
 import { userIdSelector, userNameSelector } from 'store/selectors/user.selector'
 
 import { clearDrawConnection, setDrawConnection } from './methods/setDrawConnection'
-import { handleSnapshot, pushRedo, pushUndo } from './methods/snapshot'
 import { handleSetTool, setCanvasHeight, setCanvasWidth } from './utils'
 
 export const useCanvas = () => {
@@ -32,13 +31,7 @@ export const useCanvas = () => {
       canvas.width = setCanvasWidth()
       canvas.height = setCanvasHeight()
 
-      handleSnapshot({
-        snapshotList,
-        canvas,
-        setSnapshotList,
-        setSnapshotIndex
-      })
-
+      makeSnapshot()
       setDrawConnection({
         canvas,
         userId,
@@ -60,27 +53,40 @@ export const useCanvas = () => {
     }
   }, [tool, canvasRef, roomId, socket])
 
-  const handleReset = () => {
-    if (canvasRef.current) {
-      pushUndo(canvasRef.current.getContext('2d'), snapshotList, snapshotIndex, setSnapshotIndex)
-    }
+  function handleReset() {
+    setSnapshotIndex((index) => {
+      if (index > 0 && index < 10 && canvasRef.current) {
+        Tool.setSnapshot(canvasRef.current.getContext('2d'), snapshotList[index - 1])
+        return index - 1
+      }
+
+      return index
+    })
   }
 
-  const handleRedo = () => {
-    if (canvasRef.current) {
-      pushRedo(canvasRef.current.getContext('2d'), snapshotList, snapshotIndex, setSnapshotIndex)
-    }
+  function handleRedo() {
+    setSnapshotIndex((index) => {
+      if (index < snapshotList.length - 1 && canvasRef.current) {
+        Tool.setSnapshot(canvasRef.current.getContext('2d'), snapshotList[index + 1])
+        return index + 1
+      }
+
+      return index
+    })
   }
 
-  const makeSnapshot = () => {
-    if (canvasRef.current) {
-      handleSnapshot({
-        snapshotList,
-        canvas: canvasRef.current,
-        setSnapshotList,
-        setSnapshotIndex
-      })
-    }
+  function makeSnapshot() {
+    setSnapshotList((prev) => {
+      if (canvasRef.current) {
+        if (prev.length < 10) {
+          setSnapshotIndex((index) => index + 1)
+        }
+
+        return (prev.length > 10 ? prev.slice(1, 10) : prev).concat([canvasRef.current.toDataURL()])
+      }
+
+      return prev
+    })
   }
 
   return {
