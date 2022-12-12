@@ -10,7 +10,7 @@ import { userDataSelector } from 'store/selectors/user.selector'
 
 import { clearDrawConnection, setDrawConnection } from './methods/setDrawConnection'
 import { handleSnapshot, pushRedo, pushUndo } from './methods/snapshot'
-import { handleSetTool, setCanvasHeight, setCanvasWidth } from './utils'
+import { draw, setCanvasHeight, setCanvasWidth } from './utils'
 
 export const useCanvas = () => {
   const [snapshotIndex, setSnapshotIndex] = useState(-1)
@@ -33,12 +33,12 @@ export const useCanvas = () => {
       handleSnapshot({
         snapshotIndex,
         snapshotList,
-        canvasRef,
+        setSnapshotIndex,
         setSnapshotList,
-        setSnapshotIndex
+        canvasRef
       })
 
-      handleSetTool({ canvasRef, roomId, socket, tool })
+      new draw[tool](canvasRef, socket, roomId)
 
       setDrawConnection({
         strokeStyle: Tool.strokeStyle,
@@ -61,7 +61,7 @@ export const useCanvas = () => {
   }, [])
 
   useEffect(() => {
-    handleSetTool({ canvasRef, roomId, socket, tool })
+    new draw[tool](canvasRef, socket, roomId)
   }, [tool, canvasRef, roomId, socket])
 
   const changeFillStyle = (color: string) =>

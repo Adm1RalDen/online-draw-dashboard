@@ -40,7 +40,7 @@ export class Eraser extends Tool {
         x1: this.x1,
         y1: this.y1
       })
-      Eraser.draw({ ctx: this.ctx, x1: this.x1, y1: this.y1 })
+      Eraser.drawOnline({ ctx: this.ctx, x1: this.x1, y1: this.y1 })
     }
 
     this.x1 = e.offsetX
@@ -51,7 +51,7 @@ export class Eraser extends Tool {
     this.mouseDown = false
   }
 
-  static draw(data: DrawEraserParams) {
+  static drawOnline(data: DrawEraserParams) {
     const { ctx, x1, y1 } = data
     if (ctx) {
       ctx.beginPath()

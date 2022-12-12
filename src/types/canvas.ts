@@ -19,8 +19,8 @@ export interface DrawCircleParams {
   ctx: CanvasRenderingContext2D
   x1: number
   y1: number
-  a: number
-  b: number
+  x2: number
+  y2: number
   fillStyle: string | CanvasGradient | CanvasPattern
   strokeStyle: string | CanvasGradient | CanvasPattern
   lineWidth: number
@@ -61,12 +61,14 @@ export interface DrawSquareParams {
   lineWidth: number
 }
 
+type ResponseType<T, D> = Omit<T, 'ctx'> & { tool: D }
+
 export type SocketDrawResponse =
-  | (Omit<DrawCircleParams, 'ctx'> & { tool: DrawTools.CIRCLE })
-  | (Omit<DrawEraserParams, 'ctx'> & { tool: DrawTools.ERASER })
-  | (Omit<DrawLineParams, 'ctx'> & { tool: DrawTools.LINE })
-  | (Omit<DrawPenParams, 'ctx'> & { tool: DrawTools.PEN })
-  | (Omit<DrawSquareParams, 'ctx'> & { tool: DrawTools.SQUARE })
+  | ResponseType<DrawCircleParams, DrawTools.CIRCLE>
+  | ResponseType<DrawEraserParams, DrawTools.ERASER>
+  | ResponseType<DrawLineParams, DrawTools.LINE>
+  | ResponseType<DrawPenParams, DrawTools.PEN>
+  | ResponseType<DrawSquareParams, DrawTools.SQUARE>
 
 export type SocketDrawRequest = SocketDrawResponse & {
   roomId: string
