@@ -1,8 +1,10 @@
-import { FormikProvider, useFormik } from 'formik'
+import { Form, FormikProvider, useFormik } from 'formik'
 import { FC, useEffect } from 'react'
 
 import { BackButton } from 'components/backButton'
+import { ButtonOutline } from 'components/button-outline'
 import { InputField } from 'components/field'
+import { FlexVrWrapper } from 'components/flex'
 import { Heading4 } from 'styles/typography/styles'
 
 import { InputTypes, NotifyType } from 'const/enums'
@@ -40,12 +42,6 @@ export const EnableStep: FC<StepsProps> = ({ handleDeclineStep, handleIncreaseSt
   const disabledButton = (!formik.dirty && !formik.isValid) || isLoading
 
   useEffect(() => {
-    if (!hasLetterSent) {
-      sendLetter()
-    }
-  }, [sendLetter, hasLetterSent])
-
-  useEffect(() => {
     if (sending2FaStatus.isSuccess) {
       handleIncreaseStep()
       dispatch(enable2Fa())
@@ -57,6 +53,7 @@ export const EnableStep: FC<StepsProps> = ({ handleDeclineStep, handleIncreaseSt
   useNotify(sending2FaStatus.isError, getRtkRequestError(sending2FaStatus.error), NotifyType.ERROR)
 
   const handleSubmit = () => formik.handleSubmit()
+  const handleSendLetter = () => sendLetter()
 
   const handleChangeCodes = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (checkForNumbersInString(e.target.value, 6)) {
@@ -71,15 +68,22 @@ export const EnableStep: FC<StepsProps> = ({ handleDeclineStep, handleIncreaseSt
       </Heading4>
 
       <FormikProvider value={formik}>
-        <form onSubmit={formik.handleSubmit}>
-          <InputField
-            type={InputTypes.TEXT}
-            name='emailCode'
-            label='Code from email'
-            onChange={handleChangeCodes}
-            value={formik.values.emailCode}
-            disabled={isLoading}
-          />
+        <Form>
+          <FlexVrWrapper>
+            <InputField
+              type={InputTypes.TEXT}
+              name='emailCode'
+              label='Code from email'
+              onChange={handleChangeCodes}
+              value={formik.values.emailCode}
+              disabled={isLoading}
+            />
+            {!hasLetterSent && (
+              <ButtonOutline type='button' disabled={isLoading} onClick={handleSendLetter}>
+                Send code
+              </ButtonOutline>
+            )}
+          </FlexVrWrapper>
           <InputField
             type={InputTypes.TEXT}
             name='secure2FACode'
@@ -88,7 +92,7 @@ export const EnableStep: FC<StepsProps> = ({ handleDeclineStep, handleIncreaseSt
             value={formik.values.secure2FACode}
             disabled={isLoading}
           />
-        </form>
+        </Form>
       </FormikProvider>
 
       <AuthentificatorButtonsWrapper>

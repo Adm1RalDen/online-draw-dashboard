@@ -10,6 +10,7 @@ import { SETTINGS_SECURITY_URL } from 'const/urls'
 import { useAppSelector } from 'store'
 import { userIsUse2FaSelector } from 'store/selectors/user.selector'
 
+import { AMOUNT_STEPS } from './const'
 import { AuthentificatorSteps } from './steps'
 import { SuccessQrCodeStep } from './steps/success'
 import { AuthentificatorStepsPanel } from './stepsPanel'
@@ -34,7 +35,7 @@ export const EnableAuthentificator = () => {
   }
 
   const handleIncreaseStep = () => {
-    if (currentStep < 5) {
+    if (currentStep < AMOUNT_STEPS) {
       setCurrentStep((prev) => prev + 1)
     }
   }
@@ -42,7 +43,7 @@ export const EnableAuthentificator = () => {
   return (
     <EnableAuthentificatorSection>
       <Container>
-        {isUse2FA && currentStep < 5 ? (
+        {isUse2FA && currentStep < AMOUNT_STEPS ? (
           <SuccessEnableAuthentificatorWrapper>
             <SuccessQrCodeStep />
           </SuccessEnableAuthentificatorWrapper>

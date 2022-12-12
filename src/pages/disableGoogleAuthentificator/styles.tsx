@@ -29,14 +29,6 @@ export const SuccessWrapper = styled.div`
   text-align: center;
 `
 
-export const DisableAuthentificatorForm = styled.form`
-  padding: 5px;
-
-  & > button {
-    margin-top: 15px;
-  }
-`
-
 export const SuccessIconWrapper = styled.div`
   & > svg {
     width: 50px;
