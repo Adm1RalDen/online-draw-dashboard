@@ -48,8 +48,8 @@ export class Circle extends Tool {
         tool: DrawTools.CIRCLE,
         x1: this.x1,
         y1: this.y1,
-        a: e.offsetY - this.y1,
-        b: e.offsetY - this.y1,
+        x2: e.offsetY - this.y1,
+        y2: e.offsetY - this.y1,
         fillStyle: this.ctx.fillStyle,
         strokeStyle: this.ctx.strokeStyle,
         lineWidth: this.ctx.lineWidth
@@ -79,11 +79,11 @@ export class Circle extends Tool {
     }
   }
 
-  static drawOnline({ a, b, ctx, fillStyle, lineWidth, strokeStyle, x1, y1 }: DrawCircleParams) {
+  static drawOnline({ x1, y1, x2, y2, ctx, fillStyle, lineWidth, strokeStyle }: DrawCircleParams) {
     if (ctx) {
-      const c = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2))
-
       ctx.beginPath()
+      const c = Math.sqrt(Math.pow(x2, 2) + Math.pow(y2, 2))
+
       ctx.fillStyle = fillStyle
       ctx.strokeStyle = strokeStyle
       ctx.lineWidth = lineWidth

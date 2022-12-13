@@ -1,7 +1,6 @@
-import { Circle, Eraser, Line, Pen, Square } from 'canvas_classes'
 import { toast } from 'react-toastify'
 
-import { DrawTools } from 'const/enums'
+import { draw } from 'const/canvas'
 import { USER_JOINED } from 'const/messages'
 import {
   CASE_EXIT_SOCKET,
@@ -14,10 +13,8 @@ import {
 } from 'const/sockets'
 import { HOME_URL } from 'const/urls'
 
-import { DrawPenParams, SocketDrawResponse } from 'types/canvas'
+import { DrawConnectionProps } from 'types/hooks'
 import { SocketApp } from 'types/socket'
-
-import { DrawConnectionProps } from '../types'
 
 export const setDrawConnection = ({
   userName,
@@ -63,25 +60,9 @@ export const setDrawConnection = ({
 
   socket.on(DRAW_SOCKET, (data) => {
     if (ctx) {
-      switch (data.tool) {
-        case DrawTools.PEN:
-          Pen.drawOnline({ ctx, ...data })
-          break
-        case DrawTools.SQUARE:
-          Square.drawOnline({ ctx, ...data })
-          break
-        case DrawTools.CIRCLE:
-          Circle.drawOnline({ ctx, ...data })
-          break
-        case DrawTools.ERASER:
-          Eraser.draw({ ctx, ...data })
-          break
-        case DrawTools.LINE:
-          Line.drawOnline({ ctx, ...data })
-          break
-        default:
-          Pen.drawOnline({ ctx, ...(data as SocketDrawResponse) } as DrawPenParams)
-      }
+      const drawTool = draw[data.tool].drawOnline
+
+      drawTool({ ctx, ...data } as Parameters<keyof typeof drawTool>)
     }
   })
 }

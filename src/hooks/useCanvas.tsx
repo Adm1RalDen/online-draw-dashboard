@@ -2,13 +2,15 @@ import { Tool } from 'canvas_classes'
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
+import { draw } from 'const/canvas'
 import { DrawTools } from 'const/enums'
 import { useSocket } from 'hooks/useSocket'
 import { useAppSelector } from 'store'
 import { userIdSelector, userNameSelector } from 'store/selectors/user.selector'
 
-import { clearDrawConnection, setDrawConnection } from './methods/setDrawConnection'
-import { handleSetTool, setCanvasHeight, setCanvasWidth } from './utils'
+import { getCanvasHeight } from 'utils/getCanvasHeight'
+import { getCanvasWidth } from 'utils/getCanvasWidth'
+import { clearDrawConnection, setDrawConnection } from 'utils/setDrawConnection'
 
 export const useCanvas = () => {
   const [snapshotIndex, setSnapshotIndex] = useState(-1)
@@ -28,8 +30,10 @@ export const useCanvas = () => {
     const canvas = canvasRef.current
 
     if (canvas) {
-      canvas.width = setCanvasWidth()
-      canvas.height = setCanvasHeight()
+      canvas.width = getCanvasWidth()
+      canvas.height = getCanvasHeight()
+
+      new draw[tool](canvasRef.current, socket, roomId)
 
       makeSnapshot()
       setDrawConnection({
@@ -40,8 +44,6 @@ export const useCanvas = () => {
         userName,
         navigate
       })
-
-      handleSetTool({ canvas, roomId, socket, tool })
     }
 
     return () => clearDrawConnection(socket)
@@ -49,13 +51,15 @@ export const useCanvas = () => {
 
   useEffect(() => {
     if (canvasRef.current) {
-      handleSetTool({ canvas: canvasRef.current, roomId, socket, tool })
+      new draw[tool](canvasRef.current, socket, roomId)
     }
-  }, [tool, canvasRef, roomId, socket])
+  }, [tool, roomId, socket])
+
+  const SNAPSHOTS_LIMIT = 10
 
   function handleReset() {
     setSnapshotIndex((index) => {
-      if (index > 0 && index < 10 && canvasRef.current) {
+      if (index > 0 && index < SNAPSHOTS_LIMIT && canvasRef.current) {
         Tool.setSnapshot(canvasRef.current.getContext('2d'), snapshotList[index - 1])
         return index - 1
       }
@@ -78,11 +82,13 @@ export const useCanvas = () => {
   function makeSnapshot() {
     setSnapshotList((prev) => {
       if (canvasRef.current) {
-        if (prev.length < 10) {
+        if (prev.length < SNAPSHOTS_LIMIT) {
           setSnapshotIndex((index) => index + 1)
         }
 
-        return (prev.length > 10 ? prev.slice(1, 10) : prev).concat([canvasRef.current.toDataURL()])
+        return (prev.length > SNAPSHOTS_LIMIT ? prev.slice(1, SNAPSHOTS_LIMIT) : prev).concat([
+          canvasRef.current.toDataURL()
+        ])
       }
 
       return prev
