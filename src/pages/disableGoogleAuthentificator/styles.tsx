@@ -11,7 +11,8 @@ export const DisableAuthentificatorSection = styled.section`
 export const DisableAuthentificatorWrapper = styled.div`
   width: 400px;
   height: 300px;
-  padding: 30px 10px;
+  position: relative;
+  padding: ${({ theme: { spacing } }) => `${spacing.lg} ${spacing.s}`};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -26,14 +27,6 @@ export const SuccessWrapper = styled.div`
   flex-direction: column;
   justify-content: space-around;
   text-align: center;
-`
-
-export const DisableAuthentificatorForm = styled.form`
-  padding: 5px;
-
-  & > button {
-    margin-top: 15px;
-  }
 `
 
 export const SuccessIconWrapper = styled.div`

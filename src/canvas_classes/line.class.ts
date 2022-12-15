@@ -1,41 +1,33 @@
+import { DrawTools } from 'const/enums'
 import { DRAW_SOCKET, FINISH_DRAW_SOCKET } from 'const/sockets'
-import { ToolsEnum } from 'hooks/useCanvas/types'
 
+import { DrawLineParams } from 'types/canvas'
 import { SocketApp } from 'types/socket'
 
 import { Tool } from './tool.class'
 
-type DrawOnlineProps = {
-  ctx: CanvasRenderingContext2D
-  x1: number
-  y1: number
-  x2: number
-  y2: number
-  strokeStyle: string
-  lineWidth: number
-}
 export class Line extends Tool {
   private mouseDown = false
   private saved = ''
   private x1 = 0
   private y1 = 0
 
-  constructor(canvas: React.MutableRefObject<HTMLCanvasElement>, socket: SocketApp, id: string) {
+  constructor(canvas: HTMLCanvasElement, socket: SocketApp, id: string) {
     super(canvas, socket, id)
     this.listen()
   }
 
   private listen() {
-    this.canvas.current.onmousedown = this.onMouseDown.bind(this)
-    this.canvas.current.onmousemove = this.onMouseMove.bind(this)
-    this.canvas.current.onmouseup = this.onMouseUp.bind(this)
+    this.canvas.onmousedown = this.onMouseDown.bind(this)
+    this.canvas.onmousemove = this.onMouseMove.bind(this)
+    this.canvas.onmouseup = this.onMouseUp.bind(this)
   }
 
   private onMouseUp(e: MouseEvent) {
     this.mouseDown = false
     if (this.ctx) {
       this.socket.emit(DRAW_SOCKET, {
-        tool: ToolsEnum.line,
+        tool: DrawTools.LINE,
         roomId: this.id,
         x1: this.x1,
         y1: this.y1,
@@ -56,7 +48,7 @@ export class Line extends Tool {
 
   private onMouseDown(e: MouseEvent) {
     this.mouseDown = true
-    this.saved = this.canvas.current.toDataURL()
+    this.saved = this.canvas.toDataURL()
     this.x1 = e.offsetX
     this.y1 = e.offsetY
   }
@@ -74,17 +66,15 @@ export class Line extends Tool {
   private draw(e: MouseEvent, img: HTMLImageElement) {
     if (this.ctx && this.mouseDown) {
       this.ctx.beginPath()
-      this.ctx.clearRect(0, 0, this.width, this.height)
-      this.ctx.drawImage(img, 0, 0, this.width, this.height)
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+      this.ctx.drawImage(img, 0, 0, this.canvas.width, this.canvas.height)
       this.ctx.moveTo(this.x1, this.y1)
       this.ctx.lineTo(e.offsetX, e.offsetY)
       this.ctx.stroke()
     }
   }
 
-  static drawOnline(data: DrawOnlineProps) {
-    const { ctx, lineWidth, strokeStyle, x1, x2, y1, y2 } = data
-
+  static drawOnline({ ctx, lineWidth, strokeStyle, x1, x2, y1, y2 }: DrawLineParams) {
     if (ctx) {
       ctx.beginPath()
       ctx.strokeStyle = strokeStyle

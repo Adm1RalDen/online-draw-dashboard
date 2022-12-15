@@ -17,7 +17,7 @@ import { userLogoutThunk } from 'store/thunks/user/authorization.thunk'
 
 import { getRefreshToken } from 'services/token.service'
 
-import { AuthResponse } from 'types'
+import { AuthResponse } from 'types/user'
 
 import { ServiceName } from './types'
 

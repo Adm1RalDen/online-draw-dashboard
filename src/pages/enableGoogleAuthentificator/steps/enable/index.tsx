@@ -1,42 +1,61 @@
-import { useFormik } from 'formik'
+import { Form, FormikProvider, useFormik } from 'formik'
 import { FC, useEffect } from 'react'
 
 import { BackButton } from 'components/backButton'
-import { Input } from 'components/input'
-import { Heading4, Label, Paragraph } from 'styles/typography/styles'
+import { ButtonOutline } from 'components/button-outline'
+import { InputField } from 'components/field'
+import { FlexVrWrapper } from 'components/flex'
+import { Heading4 } from 'styles/typography/styles'
 
-import { ErrorMessages, NotifyType } from 'const/enums'
+import { InputTypes, NotifyType } from 'const/enums'
 import { useNotify } from 'hooks/useNotify'
-import { useConfirmCreating2FaMutation, useSendCodeOnEmailQuery } from 'store/rtk/services/twoFa'
+import { useAppDispatch, useAppSelector } from 'store'
+import { useConfirmCreating2FaMutation, useSendCodeOnEmailMutation } from 'store/rtk/services/twoFa'
+import { twoFaHasLetterSentSelector } from 'store/selectors/twoFa.selector'
+import { enable2Fa } from 'store/slices/user.slice'
 
 import { checkForNumbersInString } from 'utils/checkForNumbersInString'
+import { getRtkRequestError } from 'utils/getRtkRequestError'
 
 import { AuthentificatorButtonsWrapper, AuthentificatorNextButton } from '../styles'
 import { StepsProps } from '../types'
-import { initialValues, validationSchema } from './const'
+import { FAILED_SENT_CODE, SUCCESS_SENT_CODE, initialValues } from './const'
+import { validationSchema } from './utils'
 
 export const EnableStep: FC<StepsProps> = ({ handleDeclineStep, handleIncreaseStep }) => {
-  const [submit2FaData, { isSuccess, isLoading, isError }] = useConfirmCreating2FaMutation()
-  useSendCodeOnEmailQuery()
+  const [send2FaData, sending2FaStatus] = useConfirmCreating2FaMutation()
+  const [sendLetter, sendingLetterStatus] = useSendCodeOnEmailMutation()
+
+  const hasLetterSent = useAppSelector(twoFaHasLetterSentSelector)
+
+  const dispatch = useAppDispatch()
 
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: submit2FaData
+    validateOnBlur: false,
+    validateOnChange: true,
+    onSubmit: send2FaData
   })
 
-  useEffect(() => {
-    if (isSuccess) {
-      handleIncreaseStep()
-    }
-  }, [isSuccess, handleIncreaseStep])
+  const isLoading = sending2FaStatus.isLoading || sendingLetterStatus.isLoading
+  const disabledButton = (!formik.dirty && !formik.isValid) || isLoading
 
-  useNotify(isError, ErrorMessages.OCCURED_ERROR, NotifyType.ERROR)
+  useEffect(() => {
+    if (sending2FaStatus.isSuccess) {
+      handleIncreaseStep()
+      dispatch(enable2Fa())
+    }
+  }, [sending2FaStatus.isSuccess, handleIncreaseStep, dispatch])
+
+  useNotify(sendingLetterStatus.isError, FAILED_SENT_CODE, NotifyType.ERROR)
+  useNotify(sendingLetterStatus.isSuccess, SUCCESS_SENT_CODE, NotifyType.SUCCESS)
+  useNotify(sending2FaStatus.isError, getRtkRequestError(sending2FaStatus.error), NotifyType.ERROR)
 
   const handleSubmit = () => formik.handleSubmit()
-  const handleChangeCodes = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault()
+  const handleSendLetter = () => sendLetter()
 
+  const handleChangeCodes = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (checkForNumbersInString(e.target.value, 6)) {
       formik.handleChange(e)
     }
@@ -48,35 +67,37 @@ export const EnableStep: FC<StepsProps> = ({ handleDeclineStep, handleIncreaseSt
         Enable Authentificator to <br /> confirm your account
       </Heading4>
 
-      <form onSubmit={formik.handleSubmit} autoComplete='off'>
-        <Label htmlFor='emailCode'>Code from email</Label>
-        <Input
-          type='text'
-          name='emailCode'
-          onChange={handleChangeCodes}
-          disabled={isLoading}
-          value={formik.values.emailCode}
-        />
-
-        <Label htmlFor='secure2FACode'>Code from Authentificator</Label>
-        <Input
-          type='text'
-          name='secure2FACode'
-          disabled={isLoading}
-          onChange={handleChangeCodes}
-          value={formik.values.secure2FACode}
-        />
-      </form>
-
-      {isError && <Paragraph>{ErrorMessages.OCCURED_ERROR}</Paragraph>}
+      <FormikProvider value={formik}>
+        <Form>
+          <FlexVrWrapper>
+            <InputField
+              type={InputTypes.TEXT}
+              name='emailCode'
+              label='Code from email'
+              onChange={handleChangeCodes}
+              value={formik.values.emailCode}
+              disabled={isLoading}
+            />
+            {!hasLetterSent && (
+              <ButtonOutline type='button' disabled={isLoading} onClick={handleSendLetter}>
+                Send code
+              </ButtonOutline>
+            )}
+          </FlexVrWrapper>
+          <InputField
+            type={InputTypes.TEXT}
+            name='secure2FACode'
+            label='Code from Authentificator'
+            onChange={handleChangeCodes}
+            value={formik.values.secure2FACode}
+            disabled={isLoading}
+          />
+        </Form>
+      </FormikProvider>
 
       <AuthentificatorButtonsWrapper>
-        <BackButton onClick={handleDeclineStep} />
-        <AuthentificatorNextButton
-          type='button'
-          onClick={handleSubmit}
-          disabled={(!formik.dirty && !formik.isValid) || isLoading}
-        >
+        <BackButton onClick={handleDeclineStep} disabled={isLoading} />
+        <AuthentificatorNextButton type='submit' onClick={handleSubmit} disabled={disabledButton}>
           {isLoading ? 'loading...' : 'next'}
         </AuthentificatorNextButton>
       </AuthentificatorButtonsWrapper>

@@ -1,43 +1,33 @@
+import { DrawTools } from 'const/enums'
 import { DRAW_SOCKET, FINISH_DRAW_SOCKET } from 'const/sockets'
-import { ToolsEnum } from 'hooks/useCanvas/types'
 
+import { DrawSquareParams } from 'types/canvas'
 import { SocketApp } from 'types/socket'
 
 import { Tool } from './tool.class'
 
-type DrawOnlineProps = {
-  ctx: CanvasRenderingContext2D
-  x1: number
-  y1: number
-  width: number
-  height: number
-  fillStyle: string
-  strokeStyle: string
-  lineWidth: number
-}
-
 export class Square extends Tool {
   private mouseDown = false
+  private saved = ''
   private x1 = 0
   private y1 = 0
-  private saved = ''
 
-  constructor(canvas: React.MutableRefObject<HTMLCanvasElement>, socket: SocketApp, id: string) {
+  constructor(canvas: HTMLCanvasElement, socket: SocketApp, id: string) {
     super(canvas, socket, id)
     this.listen()
   }
 
   private listen() {
-    this.canvas.current.onmousedown = this.onMouseDown.bind(this)
-    this.canvas.current.onmousemove = this.onMouseMove.bind(this)
-    this.canvas.current.onmouseup = this.onMouseUp.bind(this)
+    this.canvas.onmousedown = this.onMouseDown.bind(this)
+    this.canvas.onmousemove = this.onMouseMove.bind(this)
+    this.canvas.onmouseup = this.onMouseUp.bind(this)
   }
 
   private onMouseDown(e: MouseEvent) {
     this.mouseDown = true
     this.x1 = e.offsetX
     this.y1 = e.offsetY
-    this.saved = this.canvas.current.toDataURL()
+    this.saved = this.canvas.toDataURL()
   }
 
   private onMouseMove(e: MouseEvent) {
@@ -62,7 +52,7 @@ export class Square extends Tool {
     this.mouseDown = false
     if (this.ctx) {
       this.socket.emit(DRAW_SOCKET, {
-        tool: ToolsEnum.square,
+        tool: DrawTools.SQUARE,
         roomId: this.id,
         x1: this.x1,
         y1: this.y1,
@@ -84,7 +74,7 @@ export class Square extends Tool {
 
   static draw(
     ctx: CanvasRenderingContext2D | null,
-    canvas: React.MutableRefObject<HTMLCanvasElement>,
+    canvas: HTMLCanvasElement,
     x1: number,
     y1: number,
     widht: number,
@@ -93,15 +83,15 @@ export class Square extends Tool {
   ) {
     if (ctx) {
       ctx.beginPath()
-      ctx.clearRect(0, 0, canvas.current.width, canvas.current.height)
-      ctx.drawImage(img, 0, 0, canvas.current.width, canvas.current.height)
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
       ctx.rect(x1, y1, widht, height)
       ctx.fill()
       ctx.stroke()
     }
   }
 
-  static drawOnline(data: DrawOnlineProps) {
+  static drawOnline(data: DrawSquareParams) {
     const { ctx, fillStyle, height, lineWidth, strokeStyle, width, x1, y1 } = data
 
     if (ctx) {

@@ -2,55 +2,73 @@ import { Socket } from 'socket.io-client'
 
 import { ChatMessageType, CreateRoom } from 'pages/home/types'
 
-import { AuthorizedUser, DrawData } from 'types'
+import { FunctionWithParams } from 'types'
+import { AuthorizedUser } from 'types/user'
 
+import { SocketDrawRequest, SocketDrawResponse } from './canvas'
 import { ActiveRoom } from './rooms'
 
-interface UpdateUserRoom extends Partial<Omit<AuthorizedUser, 'id' | 'role' | 'email'>> {
+interface UpdateUserRoom extends Partial<Omit<AuthorizedUser, 'id' | 'email'>> {
   userId: string
   roomId: string
 }
 
+interface RequestData {
+  userId: string
+  roomId: string
+  roomPassword: string
+  userName: string
+  img: string
+  recipient: string
+  message: string
+  name: string
+  socketId: string
+}
+
+export interface WSContextTypes {
+  socket: SocketApp
+}
+
 export interface ClientToServerEvents {
-  CREATE: (data: CreateRoom) => void
-  EXIT: (data: { roomId: string; userId: string }) => void
-  JOIN: (data: { roomId: string; roomPassword: string; userId: string; userName: string }) => void
-  DRAW: (data: DrawData) => void
-  FINISH_DRAW: (data: { roomId: string }) => void
+  CREATE: FunctionWithParams<CreateRoom>
+  EXIT: FunctionWithParams<Pick<RequestData, 'roomId' | 'userId'>>
+  JOIN: FunctionWithParams<Pick<RequestData, 'roomId' | 'roomPassword' | 'userId' | 'userName'>>
+  DRAW: FunctionWithParams<SocketDrawRequest>
+  FINISH_DRAW: FunctionWithParams<Pick<RequestData, 'roomId'>>
   GET_ROOMS: VoidFunction
-  GET_USER_ROOMS: (data: { userId: string }) => void
-  GET_SNAPSHOT: (data: { roomId: string; userId: string; socketId: string }) => void
-  SEND_SNAPSHOT: (data: { img: string; recipient: string }) => void
-  CONNECTION_DRAW: (data: { userName: string; roomId: string }) => void
+  GET_USER_ROOMS: FunctionWithParams<Pick<RequestData, 'userId'>>
+  GET_SNAPSHOT: FunctionWithParams<Pick<RequestData, 'roomId' | 'userId' | 'socketId'>>
+  SEND_SNAPSHOT: FunctionWithParams<Pick<RequestData, 'img' | 'recipient'>>
+  CONNECTION_DRAW: FunctionWithParams<Pick<RequestData, 'userName' | 'roomId'>>
   GET_CHAT: VoidFunction
-  GET_ROOM: (roomId: string) => void
-  CHAT_MESSAGE: (data: { userId: string; name: string; message: string }) => void
-  DELETE_USER_ROOM: (data: { userId: string; roomId: string; roomPassword: string }) => void
-  UPDATE_USER_ROOM: (data: UpdateUserRoom) => void
-  JOIN_ACCESS: (data: { roomId: string; userId: string }) => void
+  GET_ROOM: FunctionWithParams<string>
+  CHAT_MESSAGE: FunctionWithParams<Pick<RequestData, 'userId' | 'name' | 'message'>>
+  DELETE_USER_ROOM: FunctionWithParams<Pick<RequestData, 'userId' | 'roomId' | 'roomPassword'>>
+  UPDATE_USER_ROOM: FunctionWithParams<UpdateUserRoom>
+  JOIN_ACCESS: FunctionWithParams<Pick<RequestData, 'roomId' | 'userId'>>
 }
 
 export interface ServerToClientEvents {
-  SET_SNAPSHOT: (img: string) => void
+  SET_SNAPSHOT: FunctionWithParams<string>
   SEND_SNAPSHOT: (ownerId: string, recipient: string) => void
-  CONNECTION_DRAW: (userName: string) => void
+  CONNECTION_DRAW: FunctionWithParams<string>
   FINISH_DRAW: VoidFunction
   CASE_EXIT: VoidFunction
-  DRAW: (data: DrawData) => void
-  GET_ROOMS: (data: ActiveRoom[]) => void
-  CREATE_SUCCESS: (id: string) => void
-  CREATE_ERROR: (e: string) => void
-  JOIN_SUCCESS: (id: string) => void
-  JOIN_ERROR: (e: string) => void
-  GET_USER_ROOMS: (data: ActiveRoom[]) => void
-  DELETE_USER_ROOM_ERROR: (e: string) => void
+  DRAW: FunctionWithParams<SocketDrawResponse>
+  GET_ROOMS: FunctionWithParams<ActiveRoom[]>
+  CREATE_SUCCESS: FunctionWithParams<string>
+  CREATE_ERROR: FunctionWithParams<string>
+  JOIN_SUCCESS: FunctionWithParams<string>
+  JOIN_ERROR: FunctionWithParams<string>
+  GET_USER_ROOMS: FunctionWithParams<ActiveRoom[]>
+  DELETE_USER_ROOM_ERROR: FunctionWithParams<string>
   DELETE_USER_ROOM_SUCCESS: VoidFunction
   UPDATE_USER_ROOM_SUCCESS: VoidFunction
-  UPDATE_USER_ROOM_ERROR: (e: string) => void
-  CHAT_ERROR: (data: string) => void
-  GET_CHAT: (data: ChatMessageType[]) => void
-  CHAT_MESSAGE: (data: ChatMessageType) => void
-  GET_ROOM: (data: Omit<ActiveRoom, 'roomPassword'>) => void
+  UPDATE_USER_ROOM_ERROR: FunctionWithParams<string>
+  CHAT_ERROR: FunctionWithParams<string>
+  GET_CHAT: FunctionWithParams<ChatMessageType[]>
+  CHAT_MESSAGE: FunctionWithParams<ChatMessageType>
+  GET_ROOM: FunctionWithParams<Omit<ActiveRoom, 'roomPassword'>>
 }
 
 export type SocketApp = Socket<ServerToClientEvents, ClientToServerEvents>

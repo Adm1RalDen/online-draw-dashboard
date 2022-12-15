@@ -1,23 +1,21 @@
+import { colors } from 'styles/colors'
+
 import { SocketApp } from 'types/socket'
 
 export class Tool {
-  protected canvas
-  protected ctx
-  protected width = 1200
-  protected height = 550
-  protected socket
   protected id
-  static strokeStyle = '#000'
-  static fillStyle = '#000'
+  protected ctx
+  protected socket
+  protected canvas
   static lineWidth = 1
+  static strokeStyle = colors.black
+  static fillStyle = colors.black
 
-  constructor(canvas: React.MutableRefObject<HTMLCanvasElement>, socket: SocketApp, id: string) {
+  constructor(canvas: HTMLCanvasElement, socket: SocketApp, id: string) {
     this.canvas = canvas
     this.socket = socket
     this.id = id
-    this.ctx = canvas.current.getContext('2d')
-    this.width = canvas.current.width
-    this.height = canvas.current.height
+    this.ctx = canvas.getContext('2d')
   }
 
   static changeFillStyle(ctx: CanvasRenderingContext2D | null, color: string) {

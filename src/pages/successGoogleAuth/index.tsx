@@ -8,7 +8,7 @@ import { HOME_URL } from 'const/urls'
 import { saveUserInStorage } from 'services/token.service'
 import { jsonParse } from 'utils/jsonParse'
 
-import { SavedUserObject } from 'types'
+import { SavedUserObject } from 'types/user'
 
 export const SuccessGoogleAuth = () => {
   const [searchParams] = useSearchParams()

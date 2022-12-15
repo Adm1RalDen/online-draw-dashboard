@@ -1,12 +1,13 @@
 import axios, { AxiosError } from 'axios'
 
-import { API_URL, getHeaders, setRefreshToken } from 'api/const'
+import { API_URL } from 'api/const'
+import { getHeaders } from 'api/utils'
 
 import { NetworkStatus } from 'const/enums'
 
-import { getToken, saveUserInStorage } from 'services/token.service'
+import { getRefreshToken, getToken, saveUserInStorage } from 'services/token.service'
 
-import { AuthResponse } from 'types'
+import { AuthResponse } from 'types/user'
 
 export const refreshTokenInterceptor = async (error: AxiosError) => {
   if (error.response?.status === NetworkStatus.INTERNAL) {
@@ -20,7 +21,9 @@ export const refreshTokenInterceptor = async (error: AxiosError) => {
       if (token) {
         const refresh = await axios.post<AuthResponse>(
           `${API_URL}/user/refresh`,
-          setRefreshToken(),
+          {
+            refreshToken: getRefreshToken()
+          },
           getHeaders()
         )
 

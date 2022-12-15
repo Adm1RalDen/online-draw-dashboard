@@ -1,5 +1,6 @@
-import { AuthorizedUser, FunctionWithParams } from 'types'
+import { FunctionWithParams } from 'types'
 import { SocketApp } from 'types/socket'
+import { AuthorizedUser } from 'types/user'
 
 import { ChatMessageType } from '../types'
 

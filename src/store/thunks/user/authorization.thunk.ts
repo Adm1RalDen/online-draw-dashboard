@@ -20,7 +20,7 @@ import {
 import { cryptoSha256 } from 'utils/cryptoPassord'
 import { errorHandler } from 'utils/errorHandler'
 
-import { AuthResponse, User2FALoginResponse } from 'types'
+import { AuthResponse, User2FALoginResponse } from 'types/user'
 
 export const updateAuthStatusThunk = createAsyncThunk(
   `${USER_SLICE_NAME}/updateAuthStatus-thunk`,

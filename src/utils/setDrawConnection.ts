@@ -1,6 +1,6 @@
-import { Circle, Eraser, Line, Pen, Square } from 'canvas_classes'
 import { toast } from 'react-toastify'
 
+import { draw } from 'const/canvas'
 import { USER_JOINED } from 'const/messages'
 import {
   CASE_EXIT_SOCKET,
@@ -13,18 +13,25 @@ import {
 } from 'const/sockets'
 import { HOME_URL } from 'const/urls'
 
+import { DrawConnectionProps } from 'types/hooks'
 import { SocketApp } from 'types/socket'
 
-import { DrawConnectionProps, ToolsEnum } from '../types'
-
-export const SetDrawConnection = (data: DrawConnectionProps) => {
-  const { canvasRef, name, navigate, roomId, socket, userId } = data
-  const ctx = canvasRef.current.getContext('2d')
+export const setDrawConnection = ({
+  userName,
+  canvas,
+  roomId,
+  socket,
+  userId,
+  navigate
+}: DrawConnectionProps) => {
+  const ctx = canvas.getContext('2d')
 
   socket.emit(GET_SNAPSHOT_SOCKET, { roomId, userId, socketId: socket.id })
+  socket.emit(CONNECTION_DRAW_SOCKET, { userName, roomId })
+
   socket.on(SEND_SNAPSHOT_SOCKET, (ownerId, recipient) => {
-    if (canvasRef.current && ownerId === userId) {
-      const img = canvasRef.current.toDataURL()
+    if (ownerId === userId) {
+      const img = canvas.toDataURL()
       socket.emit(SEND_SNAPSHOT_SOCKET, { img, recipient })
     }
   })
@@ -39,7 +46,6 @@ export const SetDrawConnection = (data: DrawConnectionProps) => {
     }
   })
 
-  socket.emit(CONNECTION_DRAW_SOCKET, { userName: name, roomId })
   socket.on(CONNECTION_DRAW_SOCKET, (data) => {
     toast.success(`${data} ${USER_JOINED}`)
   })
@@ -47,37 +53,21 @@ export const SetDrawConnection = (data: DrawConnectionProps) => {
   socket.on(FINISH_DRAW_SOCKET, () => {
     ctx?.beginPath()
   })
+
   socket.on(CASE_EXIT_SOCKET, () => {
     navigate(HOME_URL)
   })
 
   socket.on(DRAW_SOCKET, (data) => {
     if (ctx) {
-      switch (data.tool) {
-        case ToolsEnum.pen:
-          Pen.drawOnline({ ctx, ...data })
-          break
-        case ToolsEnum.square:
-          Square.drawOnline({ ctx, ...data })
-          break
-        case ToolsEnum.circle:
-          Circle.drawOnline({ ctx, ...data })
-          break
-        case ToolsEnum.eraser:
-          Eraser.draw({ ctx, ...data })
-          break
-        case ToolsEnum.line:
-          Line.drawOnline({ ctx, ...data })
-          break
-        default:
-          Pen.drawOnline({ ctx, ...data })
-          break
-      }
+      const drawTool = draw[data.tool].drawOnline
+
+      drawTool({ ctx, ...data } as Parameters<keyof typeof drawTool>)
     }
   })
 }
 
-export const ClearDrawConnection = (socket: SocketApp) => {
+export const clearDrawConnection = (socket: SocketApp) => {
   socket.off(CONNECTION_DRAW_SOCKET)
   socket.off(FINISH_DRAW_SOCKET)
   socket.off(CASE_EXIT_SOCKET)

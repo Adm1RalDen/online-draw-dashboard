@@ -20,7 +20,7 @@ export const AuthentificatorSteps: FC<StepsProps> = (props) => {
       case 4:
         return <EnableStep {...props} />
       case 5:
-        return <SuccessQrCodeStep {...props} />
+        return <SuccessQrCodeStep />
       default:
         return <DownloadAppStep {...props} />
     }

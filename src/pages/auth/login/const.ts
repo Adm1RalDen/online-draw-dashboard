@@ -1,6 +1,6 @@
 import { InputTypes } from 'const/enums'
 
-import { UserLoginFormData } from 'types'
+import { UserLoginFormData } from 'types/user'
 
 export const initialValues: UserLoginFormData = {
   email: '',
