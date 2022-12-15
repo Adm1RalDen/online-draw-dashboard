@@ -1,19 +1,3 @@
-import { themes } from 'styles/themes'
-
-import { AuthorizedUser } from 'types/user'
-
-import { InitialStateTypes } from './types'
-
-export const setInitialValues = (data: AuthorizedUser): InitialStateTypes => ({
-  name: data.name,
-  country: data.country,
-  city: data.city,
-  color: data.color || themes.colors.black,
-  gender: data.gender,
-  date: data.date,
-  biography: data.biography || ''
-})
-
 export const accountFieldsData = [
   {
     key: 'userName',

@@ -22,14 +22,19 @@ import { TOOLS_LIST } from './const'
 import { DrawToolsWrapper, SnapshotButtonsWrapper, StyledToolbar, ToolButton } from './styles'
 
 export const Toolbar = () => {
-  const id = useAppSelector(userIdSelector)
-
-  const { setToolhandler, changeFillStyle, handleRedo, handleReset, snapshot, tool } = usePaint()
-  const { roomId } = useParams()
+  const { roomId = '' } = useParams()
   const { socket } = useSocket()
 
-  const handleChangeFillStyle = ({ target }: React.ChangeEvent<HTMLInputElement>) =>
-    changeFillStyle(target.value)
+  const userId = useAppSelector(userIdSelector)
+
+  const { setToolhandler, changeFillStyle, handleRedo, handleReset, snapshot, tool, canvas } =
+    usePaint()
+
+  const handleChangeFillStyle = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+    if (canvas) {
+      changeFillStyle(canvas.getContext('2d'), target.value)
+    }
+  }
 
   const handleChangeTool = ({ target }: MouseEvent) => {
     if (target instanceof HTMLButtonElement) {
@@ -41,8 +46,8 @@ export const Toolbar = () => {
 
   const handleExitFromRoom = () => {
     socket.emit(EXIT_SOCKET, {
-      roomId: roomId || '',
-      userId: id
+      roomId,
+      userId
     })
   }
 
@@ -51,6 +56,7 @@ export const Toolbar = () => {
       const fileName = 'draw-online'
       const file = await createBlobFile(snapshot, fileName)
       const a = document.createElement('a')
+
       a.href = URL.createObjectURL(file)
       a.download = fileName
       a.click()

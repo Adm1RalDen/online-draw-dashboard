@@ -1,5 +1,6 @@
 import { toast } from 'react-toastify'
 
+import { draw } from 'const/canvas'
 import { USER_JOINED } from 'const/messages'
 import {
   CASE_EXIT_SOCKET,
@@ -12,19 +13,25 @@ import {
 } from 'const/sockets'
 import { HOME_URL } from 'const/urls'
 
+import { DrawConnectionProps } from 'types/hooks'
 import { SocketApp } from 'types/socket'
 
-import { draw } from '../const'
-import { DrawConnectionProps } from '../types'
-
-export const SetDrawConnection = (data: DrawConnectionProps) => {
-  const { canvasRef, name, navigate, roomId, socket, userId } = data
-  const ctx = canvasRef.current.getContext('2d')
+export const setDrawConnection = ({
+  userName,
+  canvas,
+  roomId,
+  socket,
+  userId,
+  navigate
+}: DrawConnectionProps) => {
+  const ctx = canvas.getContext('2d')
 
   socket.emit(GET_SNAPSHOT_SOCKET, { roomId, userId, socketId: socket.id })
+  socket.emit(CONNECTION_DRAW_SOCKET, { userName, roomId })
+
   socket.on(SEND_SNAPSHOT_SOCKET, (ownerId, recipient) => {
-    if (canvasRef.current && ownerId === userId) {
-      const img = canvasRef.current.toDataURL()
+    if (ownerId === userId) {
+      const img = canvas.toDataURL()
       socket.emit(SEND_SNAPSHOT_SOCKET, { img, recipient })
     }
   })
@@ -39,7 +46,6 @@ export const SetDrawConnection = (data: DrawConnectionProps) => {
     }
   })
 
-  socket.emit(CONNECTION_DRAW_SOCKET, { userName: name, roomId })
   socket.on(CONNECTION_DRAW_SOCKET, (data) => {
     toast.success(`${data} ${USER_JOINED}`)
   })
@@ -47,6 +53,7 @@ export const SetDrawConnection = (data: DrawConnectionProps) => {
   socket.on(FINISH_DRAW_SOCKET, () => {
     ctx?.beginPath()
   })
+
   socket.on(CASE_EXIT_SOCKET, () => {
     navigate(HOME_URL)
   })
@@ -60,7 +67,7 @@ export const SetDrawConnection = (data: DrawConnectionProps) => {
   })
 }
 
-export const ClearDrawConnection = (socket: SocketApp) => {
+export const clearDrawConnection = (socket: SocketApp) => {
   socket.off(CONNECTION_DRAW_SOCKET)
   socket.off(FINISH_DRAW_SOCKET)
   socket.off(CASE_EXIT_SOCKET)

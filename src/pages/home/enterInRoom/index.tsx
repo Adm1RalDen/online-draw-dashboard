@@ -4,28 +4,35 @@ import { FC } from 'react'
 import { ErrorSpan } from 'components/error-span'
 import { Heading3 } from 'styles/typography/styles'
 
+import { JOIN_ROOM_SOCKET } from 'const/sockets'
 import { useSocket } from 'hooks/useSocket'
 import { useAppSelector } from 'store'
-import { userInfoSelector } from 'store/selectors/user.selector'
+import { userIdSelector, userNameSelector } from 'store/selectors/user.selector'
 
 import { FunctionWithParams } from 'types'
 
 import { RoomInput, RoomInputWrapper, RoomWrapper, SubmitButton } from '../styles'
-import { initialValues, onSubmit, validationSchema } from './const'
+import { initialValues } from './const'
+import { validationSchema } from './utils'
 
-type Props = {
+interface EnterInRoomProps {
   isLoading: boolean
   setIsLoading: FunctionWithParams<boolean>
 }
 
-export const EnterInRoomComponent: FC<Props> = ({ isLoading, setIsLoading }) => {
+export const EnterInRoomComponent: FC<EnterInRoomProps> = ({ isLoading, setIsLoading }) => {
+  const userId = useAppSelector(userIdSelector)
+  const userName = useAppSelector(userNameSelector)
+
   const { socket } = useSocket()
-  const user = useAppSelector(userInfoSelector)
+
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: (data) =>
-      onSubmit({ ...data, userId: user.data.id, userName: user.data.name }, socket, setIsLoading)
+    onSubmit: (data) => {
+      setIsLoading(true)
+      socket.emit(JOIN_ROOM_SOCKET, { ...data, userId, userName })
+    }
   })
 
   return (

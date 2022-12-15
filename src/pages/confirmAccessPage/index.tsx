@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import { Input } from 'components/input'
@@ -10,7 +10,6 @@ import { useSocket } from 'hooks/useSocket'
 import { useAppSelector } from 'store'
 import { userDataSelector } from 'store/selectors/user.selector'
 
-import { ClearAccessPageConnection, SetAccessPageConnection } from './const'
 import {
   ConfirmAccessPage,
   ConfirmAccessPageButton,
@@ -18,34 +17,38 @@ import {
   ConfirmAccessPageInputWrapper,
   ConfirmAccessPageMain
 } from './styles'
+import { clearAccessPageConnection, setAccessPageConnection } from './utils'
 
 export const PrivateRoom = () => {
-  const [roomPassword, setPassword] = useState('')
-  const user = useAppSelector(userDataSelector)
   const [isLoading, setIsLoading] = useState(false)
-  const navigate = useNavigate()
-  const { roomId } = useParams()
+
+  const { id, name } = useAppSelector(userDataSelector)
+  const { roomId = '' } = useParams()
   const { socket } = useSocket()
 
+  const passwordRef = useRef<HTMLInputElement | null>(null)
+
+  const navigate = useNavigate()
+
   useEffect(() => {
-    SetAccessPageConnection({ navigate, setIsLoading, socket })
-    return () => ClearAccessPageConnection(socket)
+    setAccessPageConnection({ socket, navigate, setIsLoading })
+    return () => clearAccessPageConnection(socket)
   }, [navigate, socket])
 
   const handleEnter = async () => {
     if (roomId) {
       setIsLoading(true)
+
       socket.emit(JOIN_ROOM_SOCKET, {
-        roomId,
-        roomPassword,
-        userId: user.id,
-        userName: user.name
+        userName: name,
+        roomPassword: passwordRef.current?.value || '',
+        userId: id,
+        roomId
       })
     }
   }
 
   const handleHomeNavigate = () => navigate(HOME_URL)
-  const handleSetPassword = (e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)
 
   return (
     <ConfirmAccessPage>
@@ -56,12 +59,7 @@ export const PrivateRoom = () => {
           <>
             <ConfirmAccessPageInputWrapper>
               <p>Please confirm room password</p>
-              <Input
-                type='password'
-                placeholder='Room password'
-                value={roomPassword}
-                onChange={handleSetPassword}
-              />
+              <Input ref={passwordRef} type='password' placeholder='Room password' />
             </ConfirmAccessPageInputWrapper>
             <ConfirmAccessPageButtonsWrapper>
               <ConfirmAccessPageButton onClick={handleEnter}>Enter</ConfirmAccessPageButton>

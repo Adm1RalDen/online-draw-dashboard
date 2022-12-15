@@ -5,7 +5,7 @@ import { Loader } from 'components/loader'
 
 import { reCaptchaConfig } from 'const/reCaptcha'
 import { useAppSelector } from 'store'
-import { userInfoSelector } from 'store/selectors/user.selector'
+import { userIsLoadingSelector } from 'store/selectors/user.selector'
 
 import { Portal } from 'utils/portal'
 
@@ -15,8 +15,8 @@ import { AuthContainer, AuthSection, AuthWrapper, Logo } from './styles'
 import { ChangeAuthWay } from './сhangeAuthWay'
 
 export const AuthPage = () => {
-  const { isLoading } = useAppSelector(userInfoSelector)
   const [isLogin, setIsLogin] = useState(true)
+  const isLoading = useAppSelector(userIsLoadingSelector)
 
   return (
     <GoogleReCaptchaProvider {...reCaptchaConfig}>

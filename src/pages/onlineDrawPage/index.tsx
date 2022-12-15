@@ -5,42 +5,40 @@ import { Loader } from 'components/loader'
 
 import { useSocket } from 'hooks/useSocket'
 import { useAppSelector } from 'store'
-import { userDataSelector } from 'store/selectors/user.selector'
+import { userIdSelector } from 'store/selectors/user.selector'
 
 import { ChildrenProps } from 'types'
 
-import { checkUserInRoom } from './const'
-
-type ParamsProps = {
-  roomId: string
-}
+import { checkUserInRoom } from './utils'
 
 export const OnlineDrawPage: FC<ChildrenProps> = ({ children }) => {
-  const user = useAppSelector(userDataSelector)
-  const { roomId } = useParams<ParamsProps>()
-  const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(false)
-  const [access, setAccess] = useState(false)
+
   const { socket } = useSocket()
   const { state } = useLocation()
+  const { roomId = '' } = useParams()
+
+  const userId = useAppSelector(userIdSelector)
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (!state) {
+      setIsLoading(true)
       checkUserInRoom({
-        navigate,
-        roomId: roomId as string,
-        setIsLoading,
-        userId: user.id,
-        setAccess,
-        socket
+        socket,
+        roomId,
+        userId,
+        navigate
+      }).finally(() => {
+        setIsLoading(true)
       })
-    } else {
-      setAccess(true)
     }
-  }, [navigate, roomId, setIsLoading, user.id, setAccess, socket, state])
+  }, [navigate, setIsLoading, roomId, socket, state, userId])
 
   if (isLoading) return <Loader position='absolute' />
-  if (!access) return <div>You have not access</div>
 
-  return <>{children}</>
+  if (!state) return <div>You have not access</div>
+
+  return children
 }

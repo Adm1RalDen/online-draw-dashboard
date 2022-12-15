@@ -10,7 +10,6 @@ import { Portal } from 'utils/portal'
 import { FunctionWithParams } from 'types'
 import { ActiveRoom } from 'types/rooms'
 
-import { onSubmit } from './const'
 import {
   UpdateModalButtonsWrapper,
   UpdateModalCheckbox,
@@ -18,16 +17,18 @@ import {
   UpdateModalInput,
   UpdateModalWrapper
 } from './styles'
+import { handleUpdateCard } from './utils'
 
-type Props = {
+interface UpdateCardProps {
   room: ActiveRoom
   userId: string
   setEditMode: FunctionWithParams<boolean>
   setIsLoading: FunctionWithParams<boolean>
 }
 
-export const UpdateCard: FC<Props> = ({ room, setEditMode, userId, setIsLoading }) => {
+export const UpdateCard: FC<UpdateCardProps> = ({ room, userId, setEditMode, setIsLoading }) => {
   const { socket } = useSocket()
+
   const formik = useFormik({
     initialValues: {
       roomName: room.roomName,
@@ -35,8 +36,13 @@ export const UpdateCard: FC<Props> = ({ room, setEditMode, userId, setIsLoading 
       roomPassword: room.roomPassword
     },
     enableReinitialize: true,
-    onSubmit: (data) => onSubmit({ data, socket, setIsLoading, room, userId, setEditMode })
+    onSubmit: (data) => {
+      setIsLoading(true)
+      handleUpdateCard({ data, socket, room, userId })
+      setEditMode(false)
+    }
   })
+
   const changeEditMode = () => setEditMode(false)
 
   return (

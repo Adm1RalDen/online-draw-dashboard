@@ -8,26 +8,26 @@ import { Tool } from './tool.class'
 
 export class Square extends Tool {
   private mouseDown = false
+  private saved = ''
   private x1 = 0
   private y1 = 0
-  private saved = ''
 
-  constructor(canvas: React.MutableRefObject<HTMLCanvasElement>, socket: SocketApp, id: string) {
+  constructor(canvas: HTMLCanvasElement, socket: SocketApp, id: string) {
     super(canvas, socket, id)
     this.listen()
   }
 
   private listen() {
-    this.canvas.current.onmousedown = this.onMouseDown.bind(this)
-    this.canvas.current.onmousemove = this.onMouseMove.bind(this)
-    this.canvas.current.onmouseup = this.onMouseUp.bind(this)
+    this.canvas.onmousedown = this.onMouseDown.bind(this)
+    this.canvas.onmousemove = this.onMouseMove.bind(this)
+    this.canvas.onmouseup = this.onMouseUp.bind(this)
   }
 
   private onMouseDown(e: MouseEvent) {
     this.mouseDown = true
     this.x1 = e.offsetX
     this.y1 = e.offsetY
-    this.saved = this.canvas.current.toDataURL()
+    this.saved = this.canvas.toDataURL()
   }
 
   private onMouseMove(e: MouseEvent) {
@@ -74,7 +74,7 @@ export class Square extends Tool {
 
   static draw(
     ctx: CanvasRenderingContext2D | null,
-    canvas: React.MutableRefObject<HTMLCanvasElement>,
+    canvas: HTMLCanvasElement,
     x1: number,
     y1: number,
     widht: number,
@@ -83,8 +83,8 @@ export class Square extends Tool {
   ) {
     if (ctx) {
       ctx.beginPath()
-      ctx.clearRect(0, 0, canvas.current.width, canvas.current.height)
-      ctx.drawImage(img, 0, 0, canvas.current.width, canvas.current.height)
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
       ctx.rect(x1, y1, widht, height)
       ctx.fill()
       ctx.stroke()

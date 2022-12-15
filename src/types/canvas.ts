@@ -2,14 +2,16 @@ import { DrawTools } from 'const/enums'
 
 import { FunctionWithParams } from 'types'
 
+type ChangeStyle<T = string> = (ctx: CanvasRenderingContext2D | null, color: T) => void
 export interface PaintContextTypes {
-  canvasRef: React.Ref<HTMLCanvasElement>
+  canvas: HTMLCanvasElement | null
+  ref: React.RefObject<HTMLCanvasElement>
   tool: DrawTools
   snapshot: string | null
   setToolhandler: FunctionWithParams<DrawTools>
-  changeFillStyle: FunctionWithParams<string>
-  changeStrokeStyle: FunctionWithParams<string>
-  changeLineWidth: FunctionWithParams<number>
+  changeFillStyle: ChangeStyle
+  changeStrokeStyle: ChangeStyle
+  changeLineWidth: ChangeStyle<number>
   handleReset: VoidFunction
   handleRedo: VoidFunction
   handleSnapshot: VoidFunction

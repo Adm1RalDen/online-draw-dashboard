@@ -64,6 +64,6 @@
     "react/jsx-no-comment-textnodes": "error",
     "react/display-name": "error",
     "@typescript-eslint/no-non-null-assertion": "error",
-    "react-hooks/exhaustive-deps": "warn"
+    "react-hooks/exhaustive-deps": "off"
   }
 }
