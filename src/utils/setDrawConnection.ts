@@ -1,5 +1,6 @@
 import { toast } from 'react-toastify'
 
+import { draw } from 'const/canvas'
 import { USER_JOINED } from 'const/messages'
 import {
   CASE_EXIT_SOCKET,
@@ -12,27 +13,25 @@ import {
 } from 'const/sockets'
 import { HOME_URL } from 'const/urls'
 
+import { DrawConnectionProps } from 'types/hooks'
 import { SocketApp } from 'types/socket'
 
-import { DrawConnectionProps } from '../types'
-import { draw } from '../utils'
-
 export const setDrawConnection = ({
-  canvasRef,
-  name,
+  userName,
+  canvas,
   roomId,
   socket,
   userId,
   navigate
 }: DrawConnectionProps) => {
-  const ctx = canvasRef.current.getContext('2d')
+  const ctx = canvas.getContext('2d')
 
   socket.emit(GET_SNAPSHOT_SOCKET, { roomId, userId, socketId: socket.id })
-  socket.emit(CONNECTION_DRAW_SOCKET, { userName: name, roomId })
+  socket.emit(CONNECTION_DRAW_SOCKET, { userName, roomId })
 
   socket.on(SEND_SNAPSHOT_SOCKET, (ownerId, recipient) => {
-    if (canvasRef.current && ownerId === userId) {
-      const img = canvasRef.current.toDataURL()
+    if (ownerId === userId) {
+      const img = canvas.toDataURL()
       socket.emit(SEND_SNAPSHOT_SOCKET, { img, recipient })
     }
   })

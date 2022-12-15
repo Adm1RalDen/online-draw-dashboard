@@ -14,7 +14,8 @@ export const PaintContext = createContext<PaintContextTypes>({
   handleReset: noopFunction,
   handleRedo: noopFunction,
   handleSnapshot: noopFunction,
-  canvasRef: null,
+  ref: { current: null },
   tool: DrawTools.PEN,
+  canvas: null,
   snapshot: null
 })
