@@ -71,3 +71,11 @@ export enum Gender {
   MALE = 'male',
   WOMAN = 'woman'
 }
+
+export enum DrawTools {
+  PEN = 'pen',
+  LINE = 'line',
+  ERASER = 'eraser',
+  CIRCLE = 'circle',
+  SQUARE = 'square'
+}

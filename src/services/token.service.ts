@@ -1,6 +1,6 @@
 import jwtDecode from 'jwt-decode'
 
-import { SavedUserObject } from 'types'
+import { SavedUserObject } from 'types/user'
 
 const USER = 'user'
 const REFRESH = 'refresh'

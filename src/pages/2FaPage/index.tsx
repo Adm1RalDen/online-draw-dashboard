@@ -12,7 +12,7 @@ import { decodeFromBase64 } from 'utils/decodeFromBase64'
 import { jsonParse } from 'utils/jsonParse'
 import { Portal } from 'utils/portal'
 
-import { AuthResponse } from 'types'
+import { AuthResponse } from 'types/user'
 
 import { TwoFactorPageSection } from './styles'
 import { TwoFAUserDataType } from './types'

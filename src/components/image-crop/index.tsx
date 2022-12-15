@@ -2,6 +2,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import { FC, useState } from 'react'
 import Avatar from 'react-avatar-edit'
 
+import { AbsoluteIconWrapper } from 'components/absolute-icon-wrapper'
 import { Button } from 'components/button'
 import { colors } from 'styles/colors'
 
@@ -94,7 +95,9 @@ export const ImageCrop: FC<ImageCropProps> = ({
               </Button>
             </div>
 
-            <XMarkIcon onClick={handleCloseEditor} />
+            <AbsoluteIconWrapper>
+              <XMarkIcon onClick={handleCloseEditor} />
+            </AbsoluteIconWrapper>
           </ImageCropEditWrapper>
         </Portal>
       )}

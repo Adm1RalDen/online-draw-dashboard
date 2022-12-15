@@ -1,14 +1,13 @@
-import { useContext } from 'react'
+import { usePaint } from 'hooks/usePaint'
 
-import { PaintContext } from '../../context/paintContext'
 import { CanvasWrapper } from './styles'
 
 export const Canvas = () => {
-  const { canvasRef, handleSnapshot } = useContext(PaintContext)
+  const { ref, handleSnapshot } = usePaint()
 
   return (
     <CanvasWrapper>
-      <canvas onMouseUp={handleSnapshot} ref={canvasRef}></canvas>
+      <canvas onMouseUp={handleSnapshot} ref={ref}></canvas>
     </CanvasWrapper>
   )
 }

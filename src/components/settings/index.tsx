@@ -1,21 +1,29 @@
-import { useContext } from 'react'
-
 import { ColorInput } from 'components/input/color'
+import { Label } from 'styles/typography/styles'
 
-import { PaintContext } from '../../context/paintContext'
+import { usePaint } from 'hooks/usePaint'
+
 import { Input, StyledSettings } from './styles'
 
 export const SettingsBar = () => {
-  const { changeStrokeStyle, changeLineWidth } = useContext(PaintContext)
-  const handleChangeLineWidth = (e: React.ChangeEvent<HTMLInputElement>) =>
-    changeLineWidth(Number(e.target.value))
-  const handleChangeStrokeStyle = (e: React.ChangeEvent<HTMLInputElement>) =>
-    changeStrokeStyle(e.target.value)
+  const { canvas, changeStrokeStyle, changeLineWidth } = usePaint()
+
+  const handleChangeLineWidth = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+    if (canvas) {
+      changeLineWidth(canvas.getContext('2d'), Number(target.value))
+    }
+  }
+
+  const handleChangeStrokeStyle = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+    if (canvas) {
+      changeStrokeStyle(canvas.getContext('2d'), target.value)
+    }
+  }
 
   return (
     <StyledSettings>
       <div>
-        <label htmlFor='borderSize'>Border size</label>
+        <Label htmlFor='borderSize'>Border size</Label>
         <Input
           min={1}
           type='number'
@@ -25,8 +33,9 @@ export const SettingsBar = () => {
           onChange={handleChangeLineWidth}
         />
       </div>
+
       <div>
-        <label htmlFor='borderColor'>Border color</label>
+        <Label htmlFor='borderColor'>Border color</Label>
         <ColorInput id='borderColor' name='borderColor' onChange={handleChangeStrokeStyle} />
       </div>
     </StyledSettings>

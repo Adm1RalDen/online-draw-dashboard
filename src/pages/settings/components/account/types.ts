@@ -1,6 +1,6 @@
 import { AppDispatch } from 'store'
 
-import { AuthorizedUser } from 'types'
+import { AuthorizedUser } from 'types/user'
 
 export interface SubmitParams {
   updatedUserData: InitialStateTypes

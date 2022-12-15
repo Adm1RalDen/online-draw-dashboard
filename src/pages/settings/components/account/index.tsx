@@ -14,19 +14,21 @@ import { useAppDispatch, useAppSelector } from 'store'
 import { userDataSelector } from 'store/selectors/user.selector'
 
 import { AccountSettingsAvatar } from './avatar'
-import { accountFieldsData, setInitialValues } from './const'
+import { accountFieldsData } from './const'
 import {
   AccountSettingsFlexWrapper,
   AccountSettingsForm,
   AccountSettingsSection,
   AccountSettingsSubmitButton
 } from './styles'
-import { handleSubmit, validationSchema } from './utils'
+import { handleSubmit, setInitialValues, validationSchema } from './utils'
 
 export const AccountSettings = () => {
-  const userData = useAppSelector(userDataSelector)
   const [originalAvatar, setOriginalAvatar] = useState('')
   const [cropedAvatar, setCropedAvatar] = useState('')
+
+  const userData = useAppSelector(userDataSelector)
+
   const dispatch = useAppDispatch()
 
   const handleSavePictures = (croped: string, originalImage: string) => {

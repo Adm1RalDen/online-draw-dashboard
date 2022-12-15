@@ -1,9 +1,13 @@
 import * as yup from 'yup'
 
+import { themes } from 'styles/themes'
+
 import { ErrorMessages } from 'const/enums'
 import { updateUserProfileThunk } from 'store/thunks/user/user.thunk'
 
 import { createBlobFile } from 'utils/encodeBase64'
+
+import { AuthorizedUser } from 'types/user'
 
 import { InitialStateTypes, SubmitParams } from './types'
 
@@ -51,3 +55,13 @@ export const handleSubmit = async (params: SubmitParams) => {
     dispatch(updateUserProfileThunk(formData))
   }
 }
+
+export const setInitialValues = (data: AuthorizedUser): InitialStateTypes => ({
+  name: data.name,
+  country: data.country,
+  city: data.city,
+  color: data.color || themes.colors.black,
+  gender: data.gender,
+  date: data.date,
+  biography: data.biography || ''
+})

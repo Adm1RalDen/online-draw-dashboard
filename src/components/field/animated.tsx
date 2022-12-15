@@ -2,16 +2,9 @@ import { useField } from 'formik'
 import { FC } from 'react'
 
 import { AnimatedInput } from 'components/animatedInput'
+import { AnimatedInputProps } from 'components/animatedInput/types'
 
-import { InputTypes } from 'const/enums'
-
-interface AnimatedInputFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  type: InputTypes
-  label: string
-  name: string
-}
-
-export const AnimatedInputField: FC<AnimatedInputFieldProps> = (props) => {
+export const AnimatedInputField: FC<Omit<AnimatedInputProps, 'error'>> = (props) => {
   const [field, meta] = useField(props)
 
   const isError = meta.error && meta.touched

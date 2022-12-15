@@ -1,29 +1,23 @@
+import { DrawTools } from 'const/enums'
 import { DRAW_SOCKET, FINISH_DRAW_SOCKET } from 'const/sockets'
-import { ToolsEnum } from 'hooks/useCanvas/types'
 
+import { DrawPenParams } from 'types/canvas'
 import { SocketApp } from 'types/socket'
 
 import { Tool } from './tool.class'
 
-type OnlineDrawProps = {
-  ctx: CanvasRenderingContext2D
-  x1: number
-  y1: number
-  strokeStyle: string
-  lineWidth: number
-}
 export class Pen extends Tool {
   private mouseDown = false
 
-  constructor(canvas: React.MutableRefObject<HTMLCanvasElement>, socket: SocketApp, id: string) {
+  constructor(canvas: HTMLCanvasElement, socket: SocketApp, id: string) {
     super(canvas, socket, id)
     this.listen()
   }
 
   private listen() {
-    this.canvas.current.onmousedown = this.onMouseDown.bind(this)
-    this.canvas.current.onmousemove = this.onMouseMove.bind(this)
-    this.canvas.current.onmouseup = this.onMouseUp.bind(this)
+    this.canvas.onmousedown = this.onMouseDown.bind(this)
+    this.canvas.onmousemove = this.onMouseMove.bind(this)
+    this.canvas.onmouseup = this.onMouseUp.bind(this)
   }
 
   private onMouseUp() {
@@ -40,7 +34,7 @@ export class Pen extends Tool {
   private onMouseMove(e: MouseEvent) {
     if (this.mouseDown && this.ctx) {
       this.socket.emit(DRAW_SOCKET, {
-        tool: ToolsEnum.pen,
+        tool: DrawTools.PEN,
         roomId: this.id,
         x1: e.offsetX,
         y1: e.offsetY,
@@ -56,8 +50,7 @@ export class Pen extends Tool {
     ctx.stroke()
   }
 
-  static drawOnline(data: OnlineDrawProps) {
-    const { ctx, lineWidth, strokeStyle, x1, y1 } = data
+  static drawOnline({ ctx, lineWidth, strokeStyle, x1, y1 }: DrawPenParams) {
     if (ctx) {
       ctx.strokeStyle = strokeStyle
       ctx.lineWidth = lineWidth
