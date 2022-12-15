@@ -18,10 +18,10 @@ import { CanvasSection, Layout } from './styles'
 
 export const OnlineCanvas = () => {
   const { roomId = '' } = useParams()
-  const { socket } = useSocket()
 
-  const userId = useAppSelector(userIdSelector)
   const data = useCanvas()
+  const socket = useSocket()
+  const userId = useAppSelector(userIdSelector)
 
   const handleTabClosing = useCallback(
     (e: BeforeUnloadEvent) => {

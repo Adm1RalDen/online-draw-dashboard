@@ -25,10 +25,6 @@ interface RequestData {
   socketId: string
 }
 
-export interface WSContextTypes {
-  socket: SocketApp
-}
-
 export interface ClientToServerEvents {
   CREATE: FunctionWithParams<CreateRoom>
   EXIT: FunctionWithParams<Pick<RequestData, 'roomId' | 'userId'>>
@@ -39,7 +35,7 @@ export interface ClientToServerEvents {
   GET_USER_ROOMS: FunctionWithParams<Pick<RequestData, 'userId'>>
   GET_SNAPSHOT: FunctionWithParams<Pick<RequestData, 'roomId' | 'userId' | 'socketId'>>
   SEND_SNAPSHOT: FunctionWithParams<Pick<RequestData, 'img' | 'recipient'>>
-  CONNECTION_DRAW: FunctionWithParams<Pick<RequestData, 'userName' | 'roomId'>>
+  CONNECTION_DRAW: FunctionWithParams<Pick<RequestData, 'userName' | 'roomId' | 'userId'>>
   GET_CHAT: VoidFunction
   GET_ROOM: FunctionWithParams<string>
   CHAT_MESSAGE: FunctionWithParams<Pick<RequestData, 'userId' | 'name' | 'message'>>

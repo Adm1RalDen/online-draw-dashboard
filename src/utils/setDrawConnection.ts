@@ -27,7 +27,7 @@ export const setDrawConnection = ({
   const ctx = canvas.getContext('2d')
 
   socket.emit(GET_SNAPSHOT_SOCKET, { roomId, userId, socketId: socket.id })
-  socket.emit(CONNECTION_DRAW_SOCKET, { userName, roomId })
+  socket.emit(CONNECTION_DRAW_SOCKET, { userName, roomId, userId })
 
   socket.on(SEND_SNAPSHOT_SOCKET, (ownerId, recipient) => {
     if (ownerId === userId) {

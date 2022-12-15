@@ -14,10 +14,10 @@ import { checkUserInRoom } from './utils'
 export const OnlineDrawPage: FC<ChildrenProps> = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false)
 
-  const { socket } = useSocket()
   const { state } = useLocation()
   const { roomId = '' } = useParams()
 
+  const socket = useSocket()
   const userId = useAppSelector(userIdSelector)
 
   const navigate = useNavigate()

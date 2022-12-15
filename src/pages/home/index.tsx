@@ -40,12 +40,17 @@ export const HomePage = () => {
   const [isLoading, setIsLoading] = useState(false)
 
   const { id, name } = useAppSelector(userDataSelector)
-  const { socket } = useSocket()
+
+  const socket = useSocket()
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const handleLogOut = () => dispatch(userLogoutThunk())
+  const handleLogOut = () => {
+    dispatch(userLogoutThunk())
+    socket.disconnect()
+  }
+
   const handleNavigateSettings = () => navigate(SETTINGS_URL)
 
   useEffect(() => {
