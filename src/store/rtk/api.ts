@@ -17,6 +17,7 @@ import { userLogoutThunk } from 'store/thunks/user/authorization.thunk'
 
 import { getRefreshToken } from 'services/token.service'
 
+import { ServerResponseError } from 'types'
 import { AuthResponse } from 'types/user'
 
 import { ServiceName } from './types'
@@ -32,11 +33,11 @@ const baseQuery = fetchBaseQuery({
   }
 })
 
-const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
-  args,
-  api,
-  extraOptions
-) => {
+const baseQueryWithReauth: BaseQueryFn<
+  string | FetchArgs,
+  unknown,
+  FetchBaseQueryError | ServerResponseError
+> = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions)
 
   if (result.error?.status === NetworkStatus.UNAUTHORITHED) {
@@ -55,7 +56,6 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
       result = await baseQuery(args, api, extraOptions)
     } else {
       api.dispatch(userLogoutThunk())
-      result.error.data
     }
   }
 
