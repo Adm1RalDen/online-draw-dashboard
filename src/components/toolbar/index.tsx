@@ -23,8 +23,8 @@ import { DrawToolsWrapper, SnapshotButtonsWrapper, StyledToolbar, ToolButton } f
 
 export const Toolbar = () => {
   const { roomId = '' } = useParams()
-  const { socket } = useSocket()
 
+  const socket = useSocket()
   const userId = useAppSelector(userIdSelector)
 
   const { setToolhandler, changeFillStyle, handleRedo, handleReset, snapshot, tool, canvas } =

@@ -9,9 +9,11 @@ import { UserDataInRoom } from 'types/user'
 import { RoomUserBlock, RoomUsersBlock } from './styles'
 
 export const RoomUsers = () => {
-  const { socket } = useSocket()
-  const { roomId = '' } = useParams()
   const [users, setUsers] = useState<UserDataInRoom[]>([])
+
+  const { roomId = '' } = useParams()
+
+  const socket = useSocket()
 
   useEffect(() => {
     socket.emit(GET_ROOM_SOCKET, roomId)
@@ -22,7 +24,7 @@ export const RoomUsers = () => {
 
   return (
     <RoomUsersBlock>
-      {users.length &&
+      {users.length > 0 &&
         users.map((user) => <RoomUserBlock key={user.userId}>{user.userName}</RoomUserBlock>)}
     </RoomUsersBlock>
   )

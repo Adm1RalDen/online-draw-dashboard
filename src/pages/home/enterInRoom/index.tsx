@@ -23,8 +23,7 @@ interface EnterInRoomProps {
 export const EnterInRoomComponent: FC<EnterInRoomProps> = ({ isLoading, setIsLoading }) => {
   const userId = useAppSelector(userIdSelector)
   const userName = useAppSelector(userNameSelector)
-
-  const { socket } = useSocket()
+  const socket = useSocket()
 
   const formik = useFormik({
     initialValues,

@@ -24,8 +24,8 @@ export const PrivateRoom = () => {
 
   const { id, name } = useAppSelector(userDataSelector)
   const { roomId = '' } = useParams()
-  const { socket } = useSocket()
 
+  const socket = useSocket()
   const passwordRef = useRef<HTMLInputElement | null>(null)
 
   const navigate = useNavigate()

@@ -25,6 +25,7 @@ export class Pen extends Tool {
     this.socket.emit(FINISH_DRAW_SOCKET, {
       roomId: this.id
     })
+    this.ctx?.beginPath()
   }
 
   private onMouseDown() {

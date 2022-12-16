@@ -20,14 +20,13 @@ import { UserDashboard } from 'pages/settings/components/dashboard'
 import { SecuritySettings } from 'pages/settings/components/security'
 import { SuccessGoogleAuth } from 'pages/successGoogleAuth'
 
+import { useConnection } from 'hooks/useConnection'
 import { useAppSelector } from 'store'
 import { userIsAuthSelector } from 'store/selectors/user.selector'
 
 import { WsContext } from 'context/ws.context'
 
-import { socket } from './utils/socket'
-
-const setRoutes = (isAuth: boolean) =>
+const getRoutes = (isAuth: boolean) =>
   isAuth
     ? [
         { path: '/', element: <HomePage /> },
@@ -80,10 +79,11 @@ const setRoutes = (isAuth: boolean) =>
 
 export const Router = () => {
   const isAuth = useAppSelector(userIsAuthSelector)
-  const routes = useRoutes(setRoutes(isAuth))
+  const socket = useConnection(isAuth)
+  const routes = useRoutes(getRoutes(Boolean(isAuth && socket)))
 
-  if (isAuth) {
-    return <WsContext.Provider value={{ socket }}>{routes}</WsContext.Provider>
+  if (isAuth && socket) {
+    return <WsContext.Provider value={socket}>{routes}</WsContext.Provider>
   }
 
   return routes

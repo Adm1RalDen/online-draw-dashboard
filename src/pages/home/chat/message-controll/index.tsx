@@ -15,7 +15,8 @@ export const MessageControll: FC<MessageControllProps> = ({
   isLoadingChat
 }) => {
   const [message, setMessage] = useState('')
-  const { socket } = useSocket()
+
+  const socket = useSocket()
   const inputRef = useRef<HTMLInputElement>(null)
 
   const handleSendMessage = () => {

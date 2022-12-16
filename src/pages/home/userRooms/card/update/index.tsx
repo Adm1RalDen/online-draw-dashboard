@@ -27,7 +27,7 @@ interface UpdateCardProps {
 }
 
 export const UpdateCard: FC<UpdateCardProps> = ({ room, userId, setEditMode, setIsLoading }) => {
-  const { socket } = useSocket()
+  const socket = useSocket()
 
   const formik = useFormik({
     initialValues: {

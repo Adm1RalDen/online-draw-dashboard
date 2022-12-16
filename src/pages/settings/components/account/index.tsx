@@ -10,6 +10,7 @@ import { TextEditor } from 'components/textEditor'
 import { Heading3, Label } from 'styles/typography/styles'
 
 import { Gender, InputTypes } from 'const/enums'
+import { useSocket } from 'hooks/useSocket'
 import { useAppDispatch, useAppSelector } from 'store'
 import { userDataSelector } from 'store/selectors/user.selector'
 
@@ -28,6 +29,7 @@ export const AccountSettings = () => {
   const [cropedAvatar, setCropedAvatar] = useState('')
 
   const userData = useAppSelector(userDataSelector)
+  const socket = useSocket()
 
   const dispatch = useAppDispatch()
 
@@ -48,6 +50,7 @@ export const AccountSettings = () => {
         cropedAvatar,
         originalAvatar,
         userData,
+        socket,
         dispatch
       })
   })

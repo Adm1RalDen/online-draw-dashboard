@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 
 import { Logo } from 'components/logo'
 
+import { useSocket } from 'hooks/useSocket'
 import { useAppDispatch } from 'store'
 import { userLogoutThunk } from 'store/thunks/user/authorization.thunk'
 
@@ -10,7 +11,9 @@ import { SETTINGS_PAGE_NAVIGATION_LIST } from './const'
 import { SettingsPageSideBarItem, SettingsPageSideBarWrapper } from './styles'
 
 export const SettingsPageSideBar = () => {
+  const socket = useSocket()
   const location = useLocation()
+
   const dispatch = useAppDispatch()
 
   const checkIsActiveLink = (link: string) => {
@@ -18,7 +21,10 @@ export const SettingsPageSideBar = () => {
     return reg.test(location.pathname)
   }
 
-  const handleLogOut = () => dispatch(userLogoutThunk())
+  const handleLogOut = () => {
+    dispatch(userLogoutThunk())
+    socket.disconnect()
+  }
 
   return (
     <SettingsPageSideBarWrapper>

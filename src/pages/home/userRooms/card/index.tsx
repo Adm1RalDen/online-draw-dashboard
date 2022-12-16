@@ -21,7 +21,8 @@ type Props = {
 export const UserRoomCard: FC<Props> = ({ room, userId, userName, isLoading, setIsLoading }) => {
   const [active, setActive] = useState(false)
   const [editMode, setEditMode] = useState(false)
-  const { socket } = useSocket()
+
+  const socket = useSocket()
 
   const handleEditMode = () => setEditMode((prev) => !prev)
   const handleActiveMode = () => setActive((prev) => !prev)

@@ -21,8 +21,7 @@ interface ComponentProps {
 }
 
 export const CreateRoomComponent: FC<ComponentProps> = ({ isLoading, setIsLoading }) => {
-  const { socket } = useSocket()
-
+  const socket = useSocket()
   const userId = useAppSelector(userIdSelector)
   const userName = useAppSelector(userNameSelector)
 

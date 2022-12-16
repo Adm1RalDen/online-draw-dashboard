@@ -3,6 +3,7 @@ import * as yup from 'yup'
 import { themes } from 'styles/themes'
 
 import { ErrorMessages } from 'const/enums'
+import { GET_UPDATED_CHAT_SOCKET } from 'const/sockets'
 import { updateUserProfileThunk } from 'store/thunks/user/user.thunk'
 
 import { createBlobFile } from 'utils/encodeBase64'
@@ -25,7 +26,7 @@ export const validationSchema = yup.object().shape({
 })
 
 export const handleSubmit = async (params: SubmitParams) => {
-  const { userData, updatedUserData, cropedAvatar, originalAvatar, dispatch } = params
+  const { userData, updatedUserData, cropedAvatar, originalAvatar, socket, dispatch } = params
 
   const keys = Object.keys(updatedUserData) as (keyof InitialStateTypes)[]
 
@@ -52,7 +53,11 @@ export const handleSubmit = async (params: SubmitParams) => {
 
     formData.append('id', userData.id)
 
-    dispatch(updateUserProfileThunk(formData))
+    dispatch(updateUserProfileThunk(formData)).then(() => {
+      if ((cropedAvatar && cropedAvatar !== userData.avatar) || changedKeys.includes('name')) {
+        socket.emit(GET_UPDATED_CHAT_SOCKET)
+      }
+    })
   }
 }
 

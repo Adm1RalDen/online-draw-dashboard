@@ -4,7 +4,7 @@ import { Loader } from 'components/loader'
 
 import { useSocket } from 'hooks/useSocket'
 import { useAppSelector } from 'store'
-import { userInfoSelector } from 'store/selectors/user.selector'
+import { userDataSelector } from 'store/selectors/user.selector'
 
 import { ChatMessageType } from '../types'
 import { DEFAULT_IMAGE } from './const'
@@ -19,9 +19,9 @@ export const Chat = () => {
   const [isLoadingChat, setIsLoadingChat] = useState(true)
   const [isLoadingMessage, setIsLoadingMessage] = useState(false)
 
-  const { data } = useAppSelector(userInfoSelector)
-  const { socket } = useSocket()
+  const socket = useSocket()
   const chatRef = useRef<HTMLDivElement>(null)
+  const data = useAppSelector(userDataSelector)
 
   useEffect(() => {
     connectToChat({

@@ -17,9 +17,9 @@ export const useCanvas = () => {
   const [snapshotList, setSnapshotList] = useState<string[]>([])
   const [tool, setTool] = useState<DrawTools>(DrawTools.PEN)
 
-  const { socket } = useSocket()
   const { roomId = '' } = useParams()
 
+  const socket = useSocket()
   const userId = useAppSelector(userIdSelector)
   const userName = useAppSelector(userNameSelector)
 
