@@ -20,9 +20,11 @@ export interface EnterInRoomType {
 
 export interface ChatMessageType {
   _id: string
-  userId: string
-  avatar: string
-  name: string
+  user: {
+    avatar: string
+    name: string
+    _id: string
+  }
   message: string
 }
 

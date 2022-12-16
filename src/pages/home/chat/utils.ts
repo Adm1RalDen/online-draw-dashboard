@@ -5,24 +5,22 @@ import { SocketApp } from 'types/socket'
 import { ChatConnectionParams } from './types'
 
 export const connectToChat = (data: ChatConnectionParams) => {
-  const { setIsLoadingChat, setMessages, id, setIsLoadingMessage, setError, socket } = data
+  const { setIsLoadingChat, setMessages, setIsLoadingMessage, setError, id, socket } = data
 
   socket.emit(GET_CHAT_SOCKET)
   socket.on(CHAT_ERROR_SOCKET, (data) => setError(data))
 
   socket.on(GET_CHAT_SOCKET, (data) => {
     setIsLoadingChat(false)
-    setMessages(() => {
-      return data.length > 100 ? [...data.slice(data.length - 100)] : [...data]
-    })
+    setMessages(() => (data.length > 100 ? data.slice(data.length - 100) : data))
   })
 
   socket.on(CHAT_MESSAGE_SOCKET, (data) => {
-    if (data.userId === id) setIsLoadingMessage(false)
+    if (data.user._id === id) setIsLoadingMessage(false)
 
-    setMessages((pre) => {
-      return pre.length > 100 ? [...pre.slice(pre.length - 100), data] : [...pre, data]
-    })
+    setMessages((pre) =>
+      pre.length > 100 ? pre.slice(pre.length - 100).concat(data) : [...pre, data]
+    )
   })
 }
 

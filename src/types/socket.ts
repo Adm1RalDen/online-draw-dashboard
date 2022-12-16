@@ -42,6 +42,7 @@ export interface ClientToServerEvents {
   DELETE_USER_ROOM: FunctionWithParams<Pick<RequestData, 'userId' | 'roomId' | 'roomPassword'>>
   UPDATE_USER_ROOM: FunctionWithParams<UpdateUserRoom>
   JOIN_ACCESS: FunctionWithParams<Pick<RequestData, 'roomId' | 'userId'>>
+  GET_UPDATED_CHAT: VoidFunction
 }
 
 export interface ServerToClientEvents {

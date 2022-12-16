@@ -1,5 +1,6 @@
 import { AppDispatch } from 'store'
 
+import { SocketApp } from 'types/socket'
 import { AuthorizedUser } from 'types/user'
 
 export interface SubmitParams {
@@ -7,6 +8,7 @@ export interface SubmitParams {
   userData: AuthorizedUser
   cropedAvatar: string
   originalAvatar: string
+  socket: SocketApp
   dispatch: AppDispatch
 }
 
