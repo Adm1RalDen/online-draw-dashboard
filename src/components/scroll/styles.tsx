@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const StyledScroll = styled.div`
   &::-webkit-scrollbar {
-    width: 5px;
+    width: 3px;
   }
 
   &::-webkit-scrollbar-thumb {

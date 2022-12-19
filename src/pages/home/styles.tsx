@@ -2,38 +2,31 @@ import styled from 'styled-components'
 
 import { Button } from 'components/button'
 import { ButtonImage } from 'components/button-image'
-import { Input } from 'components/input'
+import { Container } from 'components/container'
 import { StyledScroll } from 'components/scroll/styles'
 
-const SubmitButton = styled(Button)`
-  margin-top: 10px;
+export const SubmitButton = styled(Button)`
+  margin-top: ${({ theme }) => theme.spacing.s};
   outline: none;
   border: none;
 
   &:disabled {
     background-color: ${({ theme }) => theme.colors.darkCyan};
-    &:disabled {
-      cursor: not-allowed;
-    }
+    cursor: not-allowed;
   }
 `
-
-const LogOutButton = styled(ButtonImage)``
-const UserCabinetButton = styled(ButtonImage)`
-  margin-right: 5px;
+export const UserCabinetButton = styled(ButtonImage)`
+  margin-right: ${({ theme }) => theme.spacing.tiny}; ;
 `
 
-const HomePageSection = styled.section`
+export const HomePageSection = styled.section`
   min-height: 100vh;
-  background-color: ${({ theme }) => theme.colors.greenBackground};
 `
 
-const HomePageWrapper = styled.div`
+export const HomePageWrapper = styled(Container)`
   display: grid;
   height: 95vh;
-  gap: 20px;
-  margin: 0 auto;
-  max-width: 1400px;
+  gap: ${({ theme }) => theme.spacing.sm};
   padding: 2vh 0px 0px 0px;
   grid-template: 50px 1fr 1fr / 1fr 3fr 2fr;
   grid-template-areas:
@@ -42,16 +35,16 @@ const HomePageWrapper = styled.div`
     'activeRooms myRooms chat';
 
   & > div {
-    border-radius: 10px;
+    border-radius: 5px;
   }
 `
 
-const HomeHeader = styled.header`
+export const HomeHeader = styled.header`
   grid-area: header;
   box-shadow: 0px 0px 2px 1px ${({ theme }) => theme.colors.lightGreen};
   background-color: ${({ theme }) => theme.colors.darkSlateGray};
   padding: ${({ theme }) => theme.spacing.tiny};
-  border-radius: 10px;
+  border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -59,77 +52,35 @@ const HomeHeader = styled.header`
 
   & > div {
     border-radius: 5px;
-    padding: 2px 6px;
+    padding: ${({ theme }) => theme.spacing.tiny};
   }
 `
 
-const ActiveRoomsWrapper = styled(StyledScroll)`
+export const ActiveRoomsWrapper = styled(StyledScroll)`
   grid-area: activeRooms;
-  overflow: auto;
+  overflow: hidden auto;
   box-shadow: 0px 0px 2px 1px ${({ theme }) => theme.colors.lightGreen};
   padding: ${({ theme }) => theme.spacing.s};
   background-color: ${({ theme }) => theme.colors.darkSlateGray};
-
-  & > h3,
-  p {
-    color: ${({ theme }) => theme.colors.white};
-    font-weight: 400;
-  }
-  & > h3 {
-    font-size: ${({ theme }) => theme.fontSizes.middleUp};
-    margin-bottom: 15px;
-  }
 `
 
-const Wrapper = styled.div`
+export const HomeWrapper = styled.div`
   grid-area: wrapper;
-  padding: 20px;
+  padding: ${({ theme }) => theme.spacing.sm};
   box-shadow: 0px 0px 2px 1px ${({ theme }) => theme.colors.darkSlateGray};
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: ${({ theme }) => theme.spacing.sm};
 
   & > div:last-child {
-    margin-top: 20px;
+    margin-top: ${({ theme }) => theme.spacing.sm};
   }
 `
 
-const ChatWrapper = styled(ActiveRoomsWrapper)`
+export const ChatWrapper = styled(ActiveRoomsWrapper)`
   grid-area: chat;
-  background-color: ${({ theme }) => theme.colors.darkSlateGray};
-`
 
-const RoomWrapper = styled.div`
-  border-radius: 10px;
-  & > form {
-    padding-top: 5px;
-  }
   & > h3 {
-    color: ${({ theme }) => theme.colors.white};
+    margin-bottom: ${({ theme }) => theme.spacing.s};
   }
 `
-
-const RoomInput = styled(Input)`
-  width: 100%;
-  height: 35px;
-  margin-top: 5px;
-  border-radius: 5px;
-`
-const RoomInputWrapper = styled.div`
-  position: relative;
-`
-
-export {
-  HomePageSection,
-  HomePageWrapper,
-  ActiveRoomsWrapper,
-  ChatWrapper,
-  Wrapper,
-  RoomWrapper,
-  HomeHeader,
-  SubmitButton,
-  RoomInput,
-  LogOutButton,
-  UserCabinetButton,
-  RoomInputWrapper
-}
