@@ -1,3 +1,4 @@
+import { SocketWrapper } from 'hoc/socket'
 import { useEffect } from 'react'
 
 import { Loader } from 'components/loader'
@@ -17,5 +18,10 @@ export const App = () => {
   }, [dispatch])
 
   if (!isUserStateLoaded) return <Loader position='absolute' />
-  return <Router />
+
+  return (
+    <SocketWrapper>
+      <Router />
+    </SocketWrapper>
+  )
 }
