@@ -24,6 +24,10 @@ export const ActiveRoomWrapper = styled.div<{ isCurrentUserRoom: boolean }>`
     box-shadow: 0px 0px 3px 1px ${({ theme }) => theme.colors.whiteSmoke};
   }
 
+  & > * {
+    pointer-events: none;
+  }
+
   & > h4 {
     overflow: hidden;
     white-space: nowrap;
