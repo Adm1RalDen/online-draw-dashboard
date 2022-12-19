@@ -66,6 +66,7 @@ export interface ServerToClientEvents {
   GET_CHAT: FunctionWithParams<ChatMessageType[]>
   CHAT_MESSAGE: FunctionWithParams<ChatMessageType>
   GET_ROOM: FunctionWithParams<Omit<ActiveRoom, 'roomPassword'>>
+  REDIRECT_TO_ACTIVE_ROOM: FunctionWithParams<string>
 }
 
 export type SocketApp = Socket<ServerToClientEvents, ClientToServerEvents>
