@@ -5,7 +5,7 @@ import { ButtonImage } from 'components/button-image'
 import { Container } from 'components/container'
 import { StyledScroll } from 'components/scroll/styles'
 
-export const SubmitButton = styled(Button)`
+export const SubmitButton = styled(Button).attrs(() => ({ type: 'submit' }))`
   margin-top: ${({ theme }) => theme.spacing.s};
   outline: none;
   border: none;

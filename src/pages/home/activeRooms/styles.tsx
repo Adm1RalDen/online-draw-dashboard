@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+import { textOverflow } from 'styles/custom'
+
 export const ActiveRoomWrapper = styled.div<{ isCurrentUserRoom: boolean }>`
   display: grid;
   align-items: center;
@@ -25,8 +27,6 @@ export const ActiveRoomWrapper = styled.div<{ isCurrentUserRoom: boolean }>`
   }
 
   & > h4 {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    ${textOverflow};
   }
 `

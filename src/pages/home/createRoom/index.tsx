@@ -58,7 +58,7 @@ export const CreateRoomComponent: FC<ComponentProps> = ({ isLoading, setIsLoadin
             disabled={isLoading}
           />
 
-          <SubmitButton type='submit' disabled={isLoading || (!formik.dirty && !formik.isValid)}>
+          <SubmitButton disabled={isLoading || (!formik.dirty && !formik.isValid)}>
             Create room
           </SubmitButton>
         </Form>
