@@ -28,10 +28,11 @@ import { resetPasswordValidationSchema } from '../utils'
 
 export const ResetPasswordContent = () => {
   const [handleResetPassword, { isLoading, isSuccess, error, isError }] = useResetPasswordMutation()
+
   const [isReady, setIsReady] = useState(false)
+  const [searchParams] = useSearchParams()
 
   const navigate = useNavigate()
-  const [searchParams] = useSearchParams()
 
   const formik = useFormik({
     initialValues: resetPasswordInitialValues,
@@ -74,17 +75,17 @@ export const ResetPasswordContent = () => {
             <Heading3>Reset password</Heading3>
             <Paragraph>Create your new password and confirm it</Paragraph>
             <InputField
+              id='password'
               name='password'
               type={InputTypes.PASSWORD}
               placeholder='Password'
-              value={formik.values.password}
               disabled={isLoading}
             />
             <InputField
+              id='confirmPassword'
               name='confirmPassword'
               type={InputTypes.PASSWORD}
               placeholder='Confirm password'
-              value={formik.values.confirmPassword}
               disabled={isLoading}
             />
             <ResetPasswordButtonsWrapper>

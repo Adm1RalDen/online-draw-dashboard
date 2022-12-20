@@ -3,6 +3,7 @@ import { InputTypes } from 'const/enums'
 import { RadioButtonsProps } from '../radioButtons/types'
 
 export interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  id: string
   name: string
   label?: string
   subtitle?: string

@@ -10,7 +10,7 @@ export const InputField: FC<TextInputFieldProps> = ({ subtitle, label, onChange,
   const [field, { error, touched }] = useField(props)
 
   return (
-    <FieldWrapper label={label} subtitle={subtitle} name={props.name}>
+    <FieldWrapper label={label} subtitle={subtitle} id={props.id}>
       <Input
         isError={error && touched}
         {...props}

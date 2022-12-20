@@ -1,4 +1,4 @@
-import { FormikProvider, useFormik } from 'formik'
+import { Form, FormikProvider, useFormik } from 'formik'
 import { useCallback } from 'react'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 import { Link } from 'react-router-dom'
@@ -20,7 +20,6 @@ import { cancelUser2faAction } from 'store/slices/user.slice'
 import { loginThunk, saveUserDataThunk } from 'store/thunks/user/authorization.thunk'
 
 import { capitalizeFirstLetter } from 'utils/capitalizeFirstLetter'
-import { noopFunction } from 'utils/noop'
 import { Portal } from 'utils/portal'
 
 import { AuthResponse } from 'types/user'
@@ -43,7 +42,7 @@ export const LoginComponent = () => {
     validationSchema: loginValidationSchema,
     validateOnBlur: true,
     validateOnChange: true,
-    onSubmit: noopFunction
+    onSubmit: handleSubmit
   })
 
   const onSuccessCallback = (data: AuthResponse) => dispatch(saveUserDataThunk(data))
@@ -54,7 +53,7 @@ export const LoginComponent = () => {
     [dispatch]
   )
 
-  const handleSubmit = useCallback(async () => {
+  async function handleSubmit() {
     if (!executeRecaptcha) {
       return toast.error(ErrorMessages.INVALID_RECAPTCHA)
     }
@@ -72,15 +71,16 @@ export const LoginComponent = () => {
           setAttemptsLeftCount(res.attemptsLeftCount)
         }
       })
-  }, [executeRecaptcha, dispatch, setAttemptsLeftCount, formik])
+  }
 
   return (
     <>
       <Title>Login</Title>
       <FormikProvider value={formik}>
-        <form onSubmit={formik.handleSubmit}>
+        <Form>
           {LoginFileds.map((field) => (
             <AnimatedInputField
+              id={field}
               key={field}
               label={capitalizeFirstLetter(field)}
               name={field}
@@ -90,10 +90,10 @@ export const LoginComponent = () => {
           ))}
           <Link to={RESET_PASSWORD_URL}>Forgot password</Link>
           <GoogleLoginComponent />
-          <AuthButton type='button' disabled={!formik.isValid || isLoading} onClick={handleSubmit}>
+          <AuthButton type='submit' disabled={!formik.isValid || isLoading}>
             Sing in
           </AuthButton>
-        </form>
+        </Form>
       </FormikProvider>
       {isUse2FA && (
         <Portal>

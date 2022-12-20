@@ -12,7 +12,7 @@ export const ColorInputField: FC<InputFieldProps> = ({ label, subtitle, ...props
   const [field] = useField(props)
 
   return (
-    <FieldWrapper label={label} subtitle={subtitle} name={props.name}>
+    <FieldWrapper label={label} subtitle={subtitle} id={props.id}>
       <ColorInput {...props} {...field} type={InputTypes.COLOR} />
     </FieldWrapper>
   )

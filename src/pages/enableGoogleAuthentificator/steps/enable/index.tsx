@@ -71,11 +71,11 @@ export const EnableStep: FC<StepsProps> = ({ handleDeclineStep, handleIncreaseSt
         <Form>
           <FlexVrWrapper>
             <InputField
+              id='emailCode'
               type={InputTypes.TEXT}
               name='emailCode'
               label='Code from email'
               onChange={handleChangeCodes}
-              value={formik.values.emailCode}
               disabled={isLoading}
             />
             {!hasLetterSent && (
@@ -85,11 +85,11 @@ export const EnableStep: FC<StepsProps> = ({ handleDeclineStep, handleIncreaseSt
             )}
           </FlexVrWrapper>
           <InputField
+            id='secure2FACode'
             type={InputTypes.TEXT}
             name='secure2FACode'
             label='Code from Authentificator'
             onChange={handleChangeCodes}
-            value={formik.values.secure2FACode}
             disabled={isLoading}
           />
         </Form>

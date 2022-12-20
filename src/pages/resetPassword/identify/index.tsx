@@ -55,10 +55,10 @@ export const ResetPasswordIdentify = () => {
               account.
             </Paragraph>
             <InputField
+              id='email'
               name='email'
               type={InputTypes.EMAIL}
               placeholder='Email'
-              value={formik.values.email}
               disabled={isLoading}
             />
             <ResetPasswordButtonsWrapper>
