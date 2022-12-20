@@ -11,9 +11,11 @@ export interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElem
 
 export interface TextInputFieldProps extends InputFieldProps {
   type: InputTypes.EMAIL | InputTypes.PASSWORD | InputTypes.TEXT
+  maxWidth?: boolean
 }
 
 export interface RadioButtonsFieldProps extends RadioButtonsProps {
+  id: string
   label?: string
   subtitle?: string
 }

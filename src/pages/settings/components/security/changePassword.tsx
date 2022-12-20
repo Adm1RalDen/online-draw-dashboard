@@ -1,9 +1,9 @@
-import { FormikProvider, useFormik } from 'formik'
+import { Form, FormikProvider, useFormik } from 'formik'
 
+import { InputField } from 'components/field'
 import {
   SettingsHeading3,
   SettingsPageContantWrapper,
-  SettingsPageField,
   SettingsSubmitButton
 } from 'pages/settings/styles'
 
@@ -27,16 +27,30 @@ export const SecurityChangePassword = () => {
     <SettingsPageContantWrapper>
       <SettingsHeading3>Change Password</SettingsHeading3>
       <FormikProvider value={formik}>
-        <form onSubmit={formik.handleSubmit}>
-          <SettingsPageField name='oldPassword' type={InputTypes.PASSWORD} label='Old password' />
-          <SettingsPageField name='newPassword' type={InputTypes.PASSWORD} label='New Password' />
-          <SettingsPageField
+        <Form>
+          <InputField
+            maxWidth
+            id='oldPassword'
+            name='oldPassword'
+            type={InputTypes.PASSWORD}
+            label='Old password'
+          />
+          <InputField
+            maxWidth
+            id='newPassword'
+            name='newPassword'
+            type={InputTypes.PASSWORD}
+            label='New Password'
+          />
+          <InputField
+            maxWidth
+            id='confirmPassword'
             name='confirmPassword'
             type={InputTypes.PASSWORD}
             label='Confirm new password'
           />
           <SettingsSubmitButton type='submit'>Update password</SettingsSubmitButton>
-        </form>
+        </Form>
       </FormikProvider>
     </SettingsPageContantWrapper>
   )

@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 
-export const Input = styled.input<{ isError?: boolean | string }>`
+export const Input = styled.input<{ isError?: boolean | string; maxWidth?: boolean }>`
+  ${({ maxWidth }) => maxWidth && 'max-width: 300px'};
   width: 100%;
   height: 35px;
   padding: ${({ theme: { spacing } }) => `0 ${spacing.lg} 0 ${spacing.s}`};

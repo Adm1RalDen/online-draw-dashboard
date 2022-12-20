@@ -73,6 +73,7 @@ export const AccountSettings = () => {
           <AccountSettingsFlexWrapper>
             <DateInputField id='date' name='date' label='Date of birthday' />
             <RadioButtonsField
+              id='gender'
               name='gender'
               onChange={formik.handleChange}
               values={[Gender.MALE, Gender.WOMAN]}
