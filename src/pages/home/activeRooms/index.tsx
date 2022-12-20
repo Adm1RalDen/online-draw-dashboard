@@ -1,8 +1,11 @@
-import { useMemo } from 'react'
+import { FC, MouseEvent, useMemo } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { ColorCircle } from 'components/color-circle'
 import { colors } from 'styles/colors'
 import { Heading4, Heading5, Paragraph } from 'styles/typography/styles'
+
+import { CHECK_ROOM_PASSWORD_URL } from 'const/urls'
 
 import { jsonParse } from 'utils/jsonParse'
 
@@ -15,7 +18,9 @@ type ActiveRoomsProps = {
   userId: string
 }
 
-export const ActiveRooms = ({ activeRooms, userId }: ActiveRoomsProps) => {
+export const ActiveRooms: FC<ActiveRoomsProps> = ({ activeRooms, userId }) => {
+  const navigate = useNavigate()
+
   const sortedActiveRooms = useMemo(() => {
     const arrCopied = jsonParse<ActiveRoom[]>(JSON.stringify(activeRooms))
 
@@ -24,10 +29,23 @@ export const ActiveRooms = ({ activeRooms, userId }: ActiveRoomsProps) => {
 
   if (!sortedActiveRooms?.length) return <Paragraph color={colors.white}>no active rooms</Paragraph>
 
+  const handleNavigate = ({ target }: MouseEvent<HTMLDivElement>) => {
+    if (target instanceof HTMLDivElement) {
+      if (target.dataset?.id) {
+        navigate(`${CHECK_ROOM_PASSWORD_URL}/${target.dataset.id}`)
+      }
+    }
+  }
+
   return (
     <>
       {sortedActiveRooms.map((room) => (
-        <ActiveRoomWrapper key={room._id} isCurrentUserRoom={room.owner === userId}>
+        <ActiveRoomWrapper
+          key={room._id}
+          isCurrentUserRoom={room.owner === userId}
+          onClick={handleNavigate}
+          data-id={room._id}
+        >
           <ColorCircle color={colors.green} />
           <Heading4>{room.roomName}</Heading4>
           <Heading5>

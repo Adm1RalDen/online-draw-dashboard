@@ -38,7 +38,7 @@ const getRoutes = (isAuth: boolean) =>
             </OnlineDrawPage>
           )
         },
-        { path: '/checkRoompassword/:roomId', element: <PrivateRoom /> },
+        { path: '/check-room-password/:roomId', element: <PrivateRoom /> },
         { path: '/server-error', element: <ServerErrorPage /> },
         { path: '/authorization', element: <Navigate to='/' /> },
         { path: '/auth/google/twoFactor', element: <Navigate to='/' /> },

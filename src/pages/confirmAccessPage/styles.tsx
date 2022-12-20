@@ -1,44 +1,31 @@
 import styled from 'styled-components'
 
-import { Button } from 'components/button'
 import { FlexContainer } from 'components/flex-container'
 
-const ConfirmAccessPage = styled(FlexContainer)`
-  height: 100vh;
-  background-color: ${({ theme }) => theme.colors.greenBackground};
+export const ConfirmAccessPage = styled(FlexContainer)`
+  min-height: 100vh;
 `
 
-const ConfirmAccessPageButton = styled(Button)`
-  flex-basis: 50%;
-`
+export const ConfirmAccessPageButtonsWrapper = styled.div`
+  display: flex;
+  margin-top: ${({ theme }) => theme.spacing.sm};
+  gap: ${({ theme }) => theme.spacing.tiny};
 
-const ConfirmAccessPageInputWrapper = styled.div`
-  & > p {
-    font-size: ${({ theme }) => theme.fontSizes.middle};
-    text-align: center;
-    color: ${({ theme }) => theme.colors.white};
-    margin: 15px 0px;
+  & > button {
+    flex-basis: 50%;
   }
 `
 
-const ConfirmAccessPageButtonsWrapper = styled.div`
-  display: flex;
-  margin-top: 20px;
-  gap: 5px;
-`
-
-const ConfirmAccessPageMain = styled.div`
+export const ConfirmAccessPageWrapper = styled.div`
   border: 2px solid ${({ theme }) => theme.colors.gray};
-  border-radius: 10px;
-  padding: 10px;
+  border-radius: 5px;
+  padding: ${({ theme }) => theme.spacing.sm};
   width: 350px;
-  height: 185px;
-`
 
-export {
-  ConfirmAccessPage,
-  ConfirmAccessPageMain,
-  ConfirmAccessPageInputWrapper,
-  ConfirmAccessPageButtonsWrapper,
-  ConfirmAccessPageButton
-}
+  & > p {
+    color: ${({ theme }) => theme.colors.white};
+    margin: ${({ theme }) => theme.spacing.base} 0;
+    text-align: center;
+    font-size: 1.1em;
+  }
+`
