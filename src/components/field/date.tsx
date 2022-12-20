@@ -12,7 +12,7 @@ export const DateInputField: FC<InputFieldProps> = ({ label, subtitle, ...props 
   const [field] = useField(props)
 
   return (
-    <FieldWrapper label={label} subtitle={subtitle} name={props.name}>
+    <FieldWrapper label={label} subtitle={subtitle} id={props.id}>
       <DateInput {...props} {...field} type={InputTypes.DATE} />
     </FieldWrapper>
   )

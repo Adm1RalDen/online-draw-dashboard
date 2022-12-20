@@ -52,20 +52,20 @@ export const DisableAuthentificatorForm: FC<DisableFormProps> = ({
     <FormikProvider value={formik}>
       <Heading2>Disable Google Authentificator</Heading2>
 
-      <Form onSubmit={formik.handleSubmit}>
+      <Form>
         <InputField
+          id='password'
           label='Password'
           name='password'
           type={InputTypes.PASSWORD}
           disabled={isLoading}
-          value={formik.values.password}
         />
         <InputField
+          id='secure2FACode'
           label='Code from Authentificator'
           name='secure2FACode'
           type={InputTypes.TEXT}
           disabled={isLoading}
-          value={formik.values.secure2FACode}
           onChange={handleChange}
         />
         <Button type='submit' disabled={(!formik.dirty && !formik.isValid) || isLoading}>

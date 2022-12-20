@@ -8,12 +8,12 @@ export interface InputWrapperProps {
   label?: string
   subtitle?: string
   children: JSX.Element
-  name: string
+  id: string
 }
 
-export const FieldWrapper: FC<InputWrapperProps> = ({ label, subtitle, children, name }) => (
+export const FieldWrapper: FC<InputWrapperProps> = ({ label, subtitle, children, id }) => (
   <StyledFieldWrapper>
-    {label && <Label htmlFor={name}>{label}</Label>}
+    {label && <Label htmlFor={id}>{label}</Label>}
     {children}
     {subtitle && <Span>{subtitle}</Span>}
   </StyledFieldWrapper>

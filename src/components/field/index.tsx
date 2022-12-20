@@ -6,12 +6,19 @@ import { Input } from 'components/input'
 import { FieldWrapper } from './field-wrapper'
 import { TextInputFieldProps } from './types'
 
-export const InputField: FC<TextInputFieldProps> = ({ subtitle, label, onChange, ...props }) => {
+export const InputField: FC<TextInputFieldProps> = ({
+  subtitle,
+  label,
+  maxWidth = false,
+  onChange,
+  ...props
+}) => {
   const [field, { error, touched }] = useField(props)
 
   return (
-    <FieldWrapper label={label} subtitle={subtitle} name={props.name}>
+    <FieldWrapper label={label} subtitle={subtitle} id={props.id}>
       <Input
+        maxWidth={maxWidth}
         isError={error && touched}
         {...props}
         {...field}

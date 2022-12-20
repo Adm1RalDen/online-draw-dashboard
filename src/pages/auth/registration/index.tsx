@@ -1,5 +1,4 @@
-import { FormikProvider, useFormik } from 'formik'
-import { useCallback } from 'react'
+import { Form, FormikProvider, useFormik } from 'formik'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 import { toast } from 'react-toastify'
 
@@ -11,7 +10,6 @@ import { userIsLoadingSelector } from 'store/selectors/user.selector'
 import { userRegistrationThunk } from 'store/thunks/user/authorization.thunk'
 
 import { capitalizeFirstLetter } from 'utils/capitalizeFirstLetter'
-import { noopFunction } from 'utils/noop'
 import { setInputTypes } from 'utils/setInputTypes'
 
 import { AuthButton, Title } from '../styles'
@@ -29,10 +27,10 @@ export const RegistrationComponent = () => {
     validationSchema: registrationValidationSchema,
     validateOnBlur: true,
     validateOnChange: true,
-    onSubmit: noopFunction
+    onSubmit: handleSubmit
   })
 
-  const handleSubmit = useCallback(async () => {
+  async function handleSubmit() {
     if (!executeRecaptcha) {
       return toast.error(ErrorMessages.INVALID_RECAPTCHA)
     }
@@ -44,26 +42,26 @@ export const RegistrationComponent = () => {
     }
 
     dispatch(userRegistrationThunk({ ...formik.values, captcha }))
-  }, [executeRecaptcha, dispatch, formik])
+  }
 
   return (
     <>
       <Title>Registration</Title>
       <FormikProvider value={formik}>
-        <form onSubmit={formik.handleSubmit}>
+        <Form>
           {RegistrationFileds.map((field) => (
             <AnimatedInputField
+              id={field}
               key={field}
-              label={capitalizeFirstLetter(field)}
               name={field}
+              label={capitalizeFirstLetter(field)}
               type={setInputTypes(field)}
-              value={formik.values[field]}
             />
           ))}
-          <AuthButton disabled={!formik.isValid || isLoading} onClick={handleSubmit} type='button'>
+          <AuthButton disabled={!formik.isValid || isLoading} type='submit'>
             Sign up
           </AuthButton>
-        </form>
+        </Form>
       </FormikProvider>
     </>
   )

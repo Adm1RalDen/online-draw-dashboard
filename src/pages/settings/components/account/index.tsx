@@ -71,15 +71,16 @@ export const AccountSettings = () => {
           ))}
 
           <AccountSettingsFlexWrapper>
-            <DateInputField name='date' label='Date of birthday' />
+            <DateInputField id='date' name='date' label='Date of birthday' />
             <RadioButtonsField
+              id='gender'
               name='gender'
               onChange={formik.handleChange}
               values={[Gender.MALE, Gender.WOMAN]}
               defaultValue={formik.values.gender}
               label='Gender'
             />
-            <ColorInputField name='color' label='Favorite color' />
+            <ColorInputField id='color' name='color' label='Favorite color' />
           </AccountSettingsFlexWrapper>
 
           <StyledFieldWrapper>
