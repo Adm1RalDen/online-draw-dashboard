@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { ColorCircle } from 'components/color-circle'
 import { colors } from 'styles/colors'
-import { Heading4, Heading5 } from 'styles/typography/styles'
+import { Heading4, Heading5, Paragraph } from 'styles/typography/styles'
 
 import { CHECK_ROOM_PASSWORD_URL } from 'const/urls'
 
@@ -22,13 +22,12 @@ export const ActiveRooms: FC<ActiveRoomsProps> = ({ activeRooms, userId }) => {
   const navigate = useNavigate()
 
   const sortedActiveRooms = useMemo(() => {
-    const str = JSON.stringify(activeRooms)
-    const arr = jsonParse<ActiveRoom[]>(str)
+    const arrCopied = jsonParse<ActiveRoom[]>(JSON.stringify(activeRooms))
 
-    return arr?.sort((a) => (a.owner === userId ? -1 : 0))
+    return arrCopied?.sort((a) => (a.owner === userId ? -1 : 0))
   }, [activeRooms])
 
-  if (!sortedActiveRooms) return <p>no active rooms</p>
+  if (!sortedActiveRooms?.length) return <Paragraph color={colors.white}>no active rooms</Paragraph>
 
   const handleNavigate = ({ target }: MouseEvent<HTMLDivElement>) => {
     if (target instanceof HTMLDivElement) {

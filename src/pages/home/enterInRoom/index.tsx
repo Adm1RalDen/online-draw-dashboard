@@ -57,7 +57,7 @@ export const EnterInRoomComponent: FC<EnterInRoomProps> = ({ isLoading, setIsLoa
             disabled={isLoading}
           />
 
-          <SubmitButton type='submit' disabled={isLoading || (!formik.dirty && !formik.isValid)}>
+          <SubmitButton disabled={isLoading || (!formik.dirty && !formik.isValid)}>
             Enter in room
           </SubmitButton>
         </Form>
