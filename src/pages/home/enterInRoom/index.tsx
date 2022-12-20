@@ -1,9 +1,11 @@
-import { useFormik } from 'formik'
+import { Form, FormikProvider, useFormik } from 'formik'
 import { FC } from 'react'
 
-import { ErrorSpan } from 'components/error-span'
+import { InputField } from 'components/field'
+import { colors } from 'styles/colors'
 import { Heading3 } from 'styles/typography/styles'
 
+import { InputTypes } from 'const/enums'
 import { JOIN_ROOM_SOCKET } from 'const/sockets'
 import { useSocket } from 'hooks/useSocket'
 import { useAppSelector } from 'store'
@@ -11,7 +13,7 @@ import { userIdSelector, userNameSelector } from 'store/selectors/user.selector'
 
 import { FunctionWithParams } from 'types'
 
-import { RoomInput, RoomInputWrapper, RoomWrapper, SubmitButton } from '../styles'
+import { SubmitButton } from '../styles'
 import { initialValues } from './const'
 import { validationSchema } from './utils'
 
@@ -28,6 +30,8 @@ export const EnterInRoomComponent: FC<EnterInRoomProps> = ({ isLoading, setIsLoa
   const formik = useFormik({
     initialValues,
     validationSchema,
+    validateOnChange: false,
+    validateOnBlur: false,
     onSubmit: (data) => {
       setIsLoading(true)
       socket.emit(JOIN_ROOM_SOCKET, { ...data, userId, userName })
@@ -35,36 +39,29 @@ export const EnterInRoomComponent: FC<EnterInRoomProps> = ({ isLoading, setIsLoa
   })
 
   return (
-    <RoomWrapper>
-      <Heading3>Join to room</Heading3>
-      <form onSubmit={formik.handleSubmit}>
-        <RoomInputWrapper>
-          <RoomInput
-            isError={!!formik.errors.roomId}
-            type='text'
+    <>
+      <Heading3 color={colors.white}>Join to room</Heading3>
+      <FormikProvider value={formik}>
+        <Form onSubmit={formik.handleSubmit}>
+          <InputField
+            type={InputTypes.TEXT}
             name='roomId'
             placeholder='Room id'
-            value={formik.values.roomId}
-            onChange={formik.handleChange}
             disabled={isLoading}
           />
-          {formik.errors.roomId && <ErrorSpan title={formik.errors.roomId} />}
-        </RoomInputWrapper>
-        <div>
-          <RoomInput
-            isError={false}
-            type='password'
+
+          <InputField
+            type={InputTypes.PASSWORD}
             name='roomPassword'
             placeholder='Room password'
-            value={formik.values.roomPassword}
-            onChange={formik.handleChange}
             disabled={isLoading}
           />
-        </div>
-        <SubmitButton type='submit' disabled={isLoading || !formik.dirty || !formik.isValid}>
-          Enter in room
-        </SubmitButton>
-      </form>
-    </RoomWrapper>
+
+          <SubmitButton disabled={isLoading || (!formik.dirty && !formik.isValid)}>
+            Enter in room
+          </SubmitButton>
+        </Form>
+      </FormikProvider>
+    </>
   )
 }

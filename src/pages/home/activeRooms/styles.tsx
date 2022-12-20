@@ -1,25 +1,36 @@
 import styled from 'styled-components'
 
-const Room = styled.div`
-  color: ${({ theme }) => theme.colors.white};
-  padding: 10px 10px 10px 20px;
-  background-color: ${({ theme }) => theme.colors.darkSlateGray};
-  box-shadow: 1px 2px 3px 2px ${({ theme }) => theme.colors.darkCyan};
-  text-align: center;
-  border-radius: 5px;
-  margin-top: 10px;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
+import { textOverflow } from 'styles/custom'
 
-  & > div {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    margin-right: 10px;
-    background-color: ${({ theme }) => theme.colors.green};
-    border-radius: 50%;
+export const ActiveRoomWrapper = styled.div<{ isCurrentUserRoom: boolean }>`
+  display: grid;
+  align-items: center;
+  grid-template-columns: 10px 1fr auto;
+  gap: ${({ theme }) => theme.spacing.s};
+  color: ${({ theme }) => theme.colors.white};
+  padding: ${({ theme }) => theme.spacing.s};
+  margin-top: ${({ theme }) => theme.spacing.s};
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.1s;
+
+  background-color: ${({ isCurrentUserRoom, theme: { colors } }) =>
+    isCurrentUserRoom ? colors.greenLiteBackground : colors.darkSlateGray};
+  box-shadow: 0px 0px 3px 1px
+    ${({ isCurrentUserRoom, theme: { colors } }) =>
+      isCurrentUserRoom ? colors.lightGray : colors.greenLiteBackground};
+
+  &:hover {
+    transform: scale(102%);
+    background-color: ${({ theme }) => theme.colors.darkCyan};
+    box-shadow: 0px 0px 3px 1px ${({ theme }) => theme.colors.whiteSmoke};
+  }
+
+  & > * {
+    pointer-events: none;
+  }
+
+  & > h4 {
+    ${textOverflow};
   }
 `
-
-export { Room }

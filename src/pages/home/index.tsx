@@ -2,15 +2,17 @@ import { ArrowLeftOnRectangleIcon, UserIcon } from '@heroicons/react/24/outline'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import { ButtonImage } from 'components/button-image'
 import { Loader } from 'components/loader'
 import { Logo } from 'components/logo'
 import { Popper } from 'components/popper'
+import { colors } from 'styles/colors'
 import { Heading3 } from 'styles/typography/styles'
 
 import { SETTINGS_URL } from 'const/urls'
 import { useSocket } from 'hooks/useSocket'
 import { useAppDispatch, useAppSelector } from 'store'
-import { userDataSelector } from 'store/selectors/user.selector'
+import { userIdSelector, userNameSelector } from 'store/selectors/user.selector'
 import { userLogoutThunk } from 'store/thunks/user/authorization.thunk'
 
 import { Portal } from 'utils/portal'
@@ -27,9 +29,8 @@ import {
   HomeHeader,
   HomePageSection,
   HomePageWrapper,
-  LogOutButton,
-  UserCabinetButton,
-  Wrapper
+  HomeWrapper,
+  UserCabinetButton
 } from './styles'
 import { UserRooms } from './userRooms'
 import { clearRoomsConnection, setRoomsConnection } from './utils'
@@ -39,7 +40,8 @@ export const HomePage = () => {
   const [userRooms, setUserRooms] = useState<ActiveRoom[]>([])
   const [isLoading, setIsLoading] = useState(false)
 
-  const { id, name } = useAppSelector(userDataSelector)
+  const userId = useAppSelector(userIdSelector)
+  const userName = useAppSelector(userNameSelector)
 
   const socket = useSocket()
 
@@ -55,7 +57,7 @@ export const HomePage = () => {
 
   useEffect(() => {
     setRoomsConnection({
-      userId: id,
+      userId,
       socket,
       navigate,
       setIsLoading,
@@ -64,7 +66,7 @@ export const HomePage = () => {
     })
 
     return () => clearRoomsConnection(socket)
-  }, [socket, id, navigate, setActiveRooms, setIsLoading, setUserRooms])
+  }, [])
 
   return (
     <>
@@ -77,33 +79,33 @@ export const HomePage = () => {
                 <UserIcon />
               </UserCabinetButton>
               <Popper onAgree={handleLogOut} title='Are you shure to handle leave from app?'>
-                <LogOutButton>
+                <ButtonImage>
                   <ArrowLeftOnRectangleIcon />
-                </LogOutButton>
+                </ButtonImage>
               </Popper>
             </div>
           </HomeHeader>
 
           <ActiveRoomsWrapper>
-            <Heading3>Active rooms</Heading3>
-            <ActiveRooms activeRooms={activeRooms} userId={id} />
+            <Heading3 color={colors.white}>Active rooms</Heading3>
+            <ActiveRooms activeRooms={activeRooms} userId={userId} />
           </ActiveRoomsWrapper>
 
-          <Wrapper>
+          <HomeWrapper>
             <CreateRoomComponent isLoading={isLoading} setIsLoading={setIsLoading} />
             <EnterInRoomComponent isLoading={isLoading} setIsLoading={setIsLoading} />
-          </Wrapper>
+          </HomeWrapper>
 
           <UserRooms
             userRooms={userRooms}
-            userId={id}
-            userName={name}
+            userId={userId}
+            userName={userName}
             isLoading={isLoading}
             setIsLoading={setIsLoading}
           />
 
           <ChatWrapper>
-            <Heading3>Chat</Heading3>
+            <Heading3 color={colors.white}>Chat</Heading3>
             <Chat />
           </ChatWrapper>
         </HomePageWrapper>

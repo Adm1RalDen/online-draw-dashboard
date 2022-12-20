@@ -1,9 +1,11 @@
-import { useFormik } from 'formik'
+import { Form, FormikProvider, useFormik } from 'formik'
 import { FC } from 'react'
 
-import { ErrorSpan } from 'components/error-span'
+import { InputField } from 'components/field'
+import { colors } from 'styles/colors'
 import { Heading3 } from 'styles/typography/styles'
 
+import { InputTypes } from 'const/enums'
 import { CREATE_ROOM_SOCKET, GET_USER_ROOMS_SOCKET } from 'const/sockets'
 import { useSocket } from 'hooks/useSocket'
 import { useAppSelector } from 'store'
@@ -11,7 +13,7 @@ import { userIdSelector, userNameSelector } from 'store/selectors/user.selector'
 
 import { ChangeStateAction } from 'types'
 
-import { RoomInput, RoomInputWrapper, RoomWrapper, SubmitButton } from '../styles'
+import { SubmitButton } from '../styles'
 import { initialValues } from './const'
 import { validationSchema } from './utils'
 
@@ -28,6 +30,8 @@ export const CreateRoomComponent: FC<ComponentProps> = ({ isLoading, setIsLoadin
   const formik = useFormik({
     initialValues,
     validationSchema,
+    validateOnChange: false,
+    validateOnBlur: false,
     onSubmit: (data) => {
       setIsLoading(true)
       socket.emit(CREATE_ROOM_SOCKET, { ...data, userName, userId })
@@ -36,36 +40,29 @@ export const CreateRoomComponent: FC<ComponentProps> = ({ isLoading, setIsLoadin
   })
 
   return (
-    <RoomWrapper>
-      <Heading3>Create room</Heading3>
-      <form onSubmit={formik.handleSubmit}>
-        <RoomInputWrapper>
-          <RoomInput
-            type='text'
+    <>
+      <Heading3 color={colors.white}>Create room</Heading3>
+      <FormikProvider value={formik}>
+        <Form onSubmit={formik.handleSubmit}>
+          <InputField
+            type={InputTypes.TEXT}
             name='roomName'
             placeholder='Room name'
-            value={formik.values.roomName}
-            onChange={formik.handleChange}
             disabled={isLoading}
-            isError={!!formik.errors.roomName}
           />
-          {formik.errors.roomName && <ErrorSpan title={formik.errors.roomName} />}
-        </RoomInputWrapper>
-        <div>
-          <RoomInput
-            isError={false}
-            type='password'
+
+          <InputField
+            type={InputTypes.PASSWORD}
             name='roomPassword'
             placeholder='Room password'
-            value={formik.values.roomPassword}
-            onChange={formik.handleChange}
             disabled={isLoading}
           />
-        </div>
-        <SubmitButton type='submit' disabled={isLoading || !formik.dirty || !formik.isValid}>
-          Create room
-        </SubmitButton>
-      </form>
-    </RoomWrapper>
+
+          <SubmitButton disabled={isLoading || (!formik.dirty && !formik.isValid)}>
+            Create room
+          </SubmitButton>
+        </Form>
+      </FormikProvider>
+    </>
   )
 }
